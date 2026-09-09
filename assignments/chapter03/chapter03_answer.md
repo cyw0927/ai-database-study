@@ -34,24 +34,24 @@ GitHub 계정 또는 별칭:
 
 | 항목 | 작성 내용 |
 | --- | --- |
-| 운영체제 |  |
-| PostgreSQL 버전 |  |
-| DBeaver 버전 |  |
-| Host | 비밀정보가 아니라면 기록, 아니면 `localhost`/`마스킹` |
-| Port |  |
-| Database |  |
-| Username | 필요하면 마스킹 |
+| 운영체제 | Windows |
+| PostgreSQL 버전 | PostgreSQL 18.4 |
+| DBeaver 버전 | 26.20 |
+| Host | localhost |
+| Port | 5432 |
+| Database | postgres |
+| Username | postgres |
 
 > 비밀번호는 기록하지 않습니다.
 
 ## 1-2. PostgreSQL과 DBeaver 역할 설명
 
 ```text
-PostgreSQL은:
+PostgreSQL은: 데이터를 저장하고 SQL을 처리하는 DBMS(DataBase Management System)
 
-DBeaver는:
+DBeaver는: PostgreSQL 서버에 접속해 데이터베이스를 보고 SQL을 실행하는 클라이언트 프로그램
 
-두 프로그램의 차이는:
+두 프로그램의 차이는: PostgreSQL은 서버 쪽 프로그램이고 DBeaver는 그 PostgreSQL에 접속해서 명령을 내리는 도구다
 ```
 
 ---
@@ -60,12 +60,12 @@ DBeaver는:
 
 ## 2-1. DBeaver 연결 결과
 
-- [ ] PostgreSQL 연결 유형 선택
-- [ ] Host 확인
-- [ ] Port 확인
-- [ ] Database 확인
-- [ ] Username 확인
-- [ ] Test Connection 성공
+- [X] PostgreSQL 연결 유형 선택
+- [X] Host 확인
+- [X] Port 확인
+- [X] Database 확인
+- [X] Username 확인
+- [X] Test Connection 성공
 
 ### 연결 성공 화면
 
@@ -77,6 +77,9 @@ assignments/chapter03/images/step02_connection.png
 
 `여기에 연결 성공 화면을 삽입하세요.`
 
+![DBeaver 연결 성공](./images/step02_connection.png)
+
+
 ## 2-2. 첫 SQL 실행
 
 ```sql
@@ -86,18 +89,19 @@ SELECT 1 + 1 AS result;
 실행 전 예상:
 
 ```text
-
+2
 ```
 
 실제 결과:
 
 ```text
-
+2
 ```
 
 이 결과가 의미하는 것:
 
 ```text
+postgreSQL이 정상 작동되고 있다
 
 ```
 
@@ -121,32 +125,37 @@ SHOW TimeZone;
 
 | 확인 항목 | 실제 결과 | 내가 이해한 의미 |
 | --- | --- | --- |
-| `version()` |  |  |
-| `current_database()` |  |  |
-| `current_user` |  |  |
-| `current_schema()` |  |  |
-| `search_path` |  |  |
-| `transaction_read_only` |  |  |
-| `TimeZone` |  |  |
+| `version()` | PostgreSQL 18.4 | 현재 PostgreSQL 서버의 버전이다 |
+| `current_database()` | postgres | 현재 세션이 접속해 있는 데이터베이스 이름이다 |
+| `current_user` | postgres | 현재 PostgreSQL에 접속한 사용자 계정이다 |
+| `current_schema()` | public | 현재 기본적으로 사용되는 스키마를 확인한다 |
+| `search_path` | public, "$user" | 테이블 이름에 스키마를 생략했을 때 PostgreSQL이 검색하는 스키마 순서다 |
+| `transaction_read_only` | off | 현재 세션이 읽기 전용 상태가 아니라는 뜻이다 |
+| `TimeZone` | Asia/Seoul | 현재 PostgreSQL 세션의 시간대 설정이다 |
 
 ## 3-2. 반드시 설명할 것
 
 ### DBeaver 연결 이름과 `current_database()`는 왜 같은 개념이 아닌가요?
 
 ```text
+DBeaver의 연결 이름은 사용자가 보기 편하려고 쉽게 붙힌 이름이고, 
+current data base는 postgreSQL 서버가 실제 접속중이라고 알려주는 데이터베이스 이름이다. 
+따라서 연결 이름만 가지고 현재 데이터베이스를 판단하며 안된다
 
 ```
 
 ### `current_schema()`와 `search_path`는 어떤 관계가 있나요?
 
 ```text
-
+search_path는 스키마 이름을 생략했을때 PostgreSQL이 어떤 스키마부터 찾을 지 정한 순서고
+current_schema()는 그 검색 경로에서 현재 기본적으로 사용되는 스키마를 보여준다
 ```
 
 ### `transaction_read_only = off`라는 결과만으로 모든 테이블을 만들 권한이 있다고 단정할 수 있나요?
 
 ```text
-
+아니다, off는 현재 세션이 읽기 전용이 아니라고만 보여주는 의미다.
+실제 테이블 편집권한은 해당 데이터베이스와 스키마에 대한 권한을 별도 확인해야한다
 ```
 
 ## 3-3. 증거 화면
@@ -158,6 +167,8 @@ assignments/chapter03/images/step03_location_check.png
 ```
 
 `여기에 현재 DB/사용자/스키마/search_path 결과 화면을 삽입하세요.`
+
+![search_path location check](./images/step03_location_check.png)
 
 ---
 
@@ -172,24 +183,26 @@ SELECT current_database();
 실제 결과:
 
 ```text
+ai_database_book
 
 ```
 
-- [ ] 결과가 `ai_database_book`이다.
-- [ ] 다른 DB라면 올바른 연결로 전환했다.
+- [X] 결과가 `ai_database_book`이다.
+- [X] 다른 DB라면 올바른 연결로 전환했다.
 
 ## 4-2. 연결을 바꾼 뒤 다시 검증
 
 ```text
-전환 전 데이터베이스:
-전환 후 데이터베이스:
-전환 여부를 판단한 근거:
+전환 전 데이터베이스: postgres
+전환 후 데이터베이스: ai_database_book
+전환 여부를 판단한 근거: SELECT current_database(); 확인 결과 ai_database_book으로 전환된걸 확인했다
 ```
 
 ### 화면에서 보이는 연결 이름만 믿지 않고 SQL을 다시 실행해야 하는 이유
 
 ```text
-
+DBeaver에 표시되는 연결 이름은 사용자가 붙인 이름일 수 있기 때문에 실제 접속 중인 데이터베이스와 다를 수 있다
+따라서 SELECT current_database();를 실행해 PostgreSQL 서버가 반환하는 실제 데이터베이스 이름을 확인해야 한다
 ```
 
 ---
@@ -207,22 +220,23 @@ SELECT 'C' AS step;
 ## 5-1. 한 문장 실행
 
 ```text
-내가 실행한 문장:
-실제 결과:
+내가 실행한 문장: SELECT 'A' AS step
+실제 결과: A
 ```
 
 ## 5-2. 선택 영역 실행
 
 ```text
-선택한 문장:
-실제 결과:
+선택한 문장:SELECT 'A' AS step;
+SELECT 'B' AS step;
+실제 결과: A,B가 각각 실행됐고 DBeaver에 별도의 탭으로 표시되었다
 ```
 
 ## 5-3. 전체 스크립트 실행
 
 ```text
-실제 결과:
-결과 탭 또는 실행 순서에서 관찰한 점:
+실제 결과: A,B,C가 각각 실행됐다
+결과 탭 또는 실행 순서에서 관찰한 점: 모두 다 별도의 탭으로 표시됐다
 ```
 
 ## 5-4. 결과 해석
@@ -230,8 +244,13 @@ SELECT 'C' AS step;
 ```text
 한 문장 실행과 전체 스크립트 실행의 차이:
 
+한 문장 실행은 선택한 SQL 한 문장만 실행하지만,
+전체 스크립트 실행은 작성된 여러 SQL 문장이 모두 실행될 수 있다.
+
 변경 SQL에서 실행 범위를 잘못 선택하면 위험한 이유:
 ```
+SELECT만 실행하려고 했는데 UPDATE나 DELETE 같은 SQL까지 함께 실행하면
+원하지 않는 데이터 수정이나 삭제가 발생할 수 있기 때문이다.
 
 ### 증거 화면
 
@@ -242,6 +261,8 @@ assignments/chapter03/images/step05_execution_scope.png
 ```
 
 `여기에 실행 범위 비교 화면을 삽입하세요.`
+
+![SQL별도실행](./images/step05_execution.png)
 
 ---
 
