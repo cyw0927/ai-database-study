@@ -280,42 +280,44 @@ code/chapter03/setup_validate_local.sql
 실행 결과에서 확인한 항목:
 
 ```text
-PostgreSQL 버전:
-현재 DB:
-현재 사용자:
-현재 스키마:
-search_path:
-읽기 전용 여부:
-TimeZone:
-1 + 1 결과:
-public 스키마 존재 여부:
-public USAGE 권한:
-public CREATE 권한:
+PostgreSQL 버전: PostgreSQL 18.4
+현재 DB: ai_database_book
+현재 사용자: postgres
+현재 스키마: public
+search_path: public, "$user"
+읽기 전용 여부: off
+TimeZone: Asia/Seoul
+1 + 1 결과: 2
+public 스키마 존재 여부: true
+public USAGE 권한: true
+public CREATE 권한: true
 ```
 
 ### 이 파일을 여러 번 실행해도 비교적 안전한 이유
 
 ```text
-
+setup_check.sql은 SELECT와 SHOW처럼 정보를 조회하는 SQL 위주로 구성되어 있고,
+INSERT, UPDATE, DELETE, DROP 같은 데이터 변경 명령이 없기 때문에
+여러 번 실행해도 기존 데이터에 영향을 주지 않아 비교적 안전하다.
 ```
 
 ## 6-2. `setup_validate_local.sql`
 
 ```text
-실행 결과:
-PASS / FAIL:
+실행 결과: Chapter 03 recommended local environment validation passed
+PASS / FAIL: PASS
 ```
 
 실패했다면 실패 항목:
 
 ```text
-
+없음
 ```
 
 그 실패가 실제 문제인지 환경 차이인지 판단한 근거:
 
 ```text
-
+검증조건을 모두 통과했으니 값은 정상이다
 ```
 
 ---
@@ -336,16 +338,22 @@ SELEC 1;
 
 ```text
 오류 메시지 핵심 문장:
+SELEC 1;에서 SQL 문법 오류가 발생했다.
 
 내가 먼저 생각한 원인 1:
+PostgreSQL 서버에 문제가 생긴 것일 수 있다고 생각했다.
 
 내가 먼저 생각한 원인 2:
+SELECT 문법을 잘못 입력했을 수 있다고 생각했다.
 
 실제로 확인한 방법:
+오류 메시지에서 SELEC와 syntax 관련 내용을 확인하고 SQL 문장을 다시 살펴봤다
 
 실제 원인:
+SELECT에서 마지막 T를 빠뜨린 SQL 문법 오류였다
 
 수정한 내용:
+SELEC 1;을 SELECT 1;로 수정했다
 ```
 
 ## 7-2. 수정 후 재검증
@@ -356,7 +364,10 @@ SELECT current_database();
 ```
 
 ```text
-재검증 결과:
+재검증 결과: SELECT 1은 정상적으로 1을 반환
+SELECT current_database(); 결과는 ai_database_book으로 확인
+문법 오류 수정후 정상상태로 복구 완료
+
 ```
 
 ## 7-3. 오류를 유형으로 분류
@@ -366,14 +377,14 @@ SELECT current_database();
 - [ ] Port 문제
 - [ ] Database 문제
 - [ ] Username/인증 문제
-- [ ] SQL 문법 문제
+- [X] SQL 문법 문제
 - [ ] 권한 문제
 - [ ] 기타
 
 선택 이유:
 
 ```text
-
+서버는 정상적으로 작동했고 오타때문에 발생했기 때문
 ```
 
 ---
@@ -385,39 +396,48 @@ SELECT current_database();
 비밀번호·개인정보·전체 접속 URL은 제거하고 기록합니다.
 
 ```text
+PostgreSQL이랑 DBeaver만지다가 오류가 떳어 
+왜 떳는지 너가 한번 읽어보고 분석해봐
+나 잘 모르니까 쉽게 쉽게 설명해줘
 
+내가 직접할거니까 확인방법과 수정방법좀 말해줘
+답은 바로 말하지 말고
+
+이상한 프로그램 깔거나 지우라는 말도 하지마
 ```
 
 ## 8-2. AI 답변 검토
 
 | AI가 제안한 확인 방법 | 실제로 확인했는가? | 결과 | 수용 / 수정 / 거절 |
 | --- | --- | --- | --- |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| SQL 문법 확인 | 예 | `SELEC`에서 `T`가 빠진 것을 확인함 | 수용 |
+| `SELECT 1;`로 수정 후 실행 | 예 | 정상적으로 1이 출력됨 | 수용 |
+| 현재 데이터베이스 확인 | 예 | `ai_database_book`으로 정상 연결됨 | 수용 |
 
 ### AI가 오류 원인을 너무 빨리 단정한 부분이 있었나요?
 
 ```text
+이번 실수는 너무 명백한 오타라서 크게 그런 부분은 없었다
 
 ```
 
 ### 오류 메시지와 실제 환경 중 무엇을 확인해서 최종 판단했나요?
 
 ```text
-
+오류가 난 문장을 다시 확인했고, 오타수정후 재실행 해봤다
 ```
 
 ### AI 활용에서 가장 유용했던 점
 
 ```text
-
+어디가 잘못됐는지 순서를 쉽게 알려주었다
 ```
 
 ### AI 답변을 그대로 실행하지 않고 확인해야 하는 이유
 
 ```text
-
+AI로 말해주면 바로 답을 알 수 있어 학습이 안되고
+로컬 환경과 AI 인식환경이 다를 수 있어 환경이 호환되는지 확인하고 실행해야 한다
 ```
 
 ---
@@ -427,9 +447,10 @@ SELECT current_database();
 앞에서 선택한 개인 서비스가 PostgreSQL을 사용한다고 가정합니다.
 
 ```text
-서비스 이름:
+서비스 이름: 개인 예산관리 시스템
 
 사용할 데이터베이스 이름 후보:
+ai_database
 
 사용할 스키마 이름 후보:
 
