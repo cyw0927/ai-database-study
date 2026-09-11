@@ -75,26 +75,26 @@ code/chapter04/01_create_students.sql
 ## 2-3. 실행 후 확인
 
 ```text
-테이블 생성 성공 여부:
-실제 행 수:
-DBeaver에서 확인한 위치:
+테이블 생성 성공 여부: 성공
+실제 행 수: 0
+DBeaver에서 확인한 위치: ai_database_book > Schemas > public > Tables > students
 ```
 
 ### 각 열의 역할
 
 | 열 | 타입 | NULL 가능? | 역할 |
 | --- | --- | --- | --- |
-| id |  |  |  |
-| name |  |  |  |
-| email |  |  |  |
-| major |  |  |  |
-| grade |  |  |  |
-| created_at |  |  |  |
+| id | int4 | 불가능 | 학생 데이터를 구분하는 고유 번호 |
+| name | varchar(100) | 불가능 | 학생 이름 |
+| email | varchar(255) | 불가능 | 학생 이메일 |
+| major | varchar(100) | 가능 | 학생 전공 |
+| grade | int4 | 가능 | 학생 학년 |
+| created_at | timestamp | 불가능 | 데이터 생성 시간을 자동으로 저장 |
 
 ### `id`를 학번이나 학생 수로 해석하면 안 되는 이유
 
 ```text
-
+id는 자동 생성되는 고유 pk일 뿐 학번 학생과 무관하다
 ```
 
 ### 증거 화면
@@ -106,7 +106,7 @@ assignments/chapter04/images/step02_table.png
 ```
 
 `여기에 테이블 구조 확인 화면을 삽입하세요.`
-
+![students 테이블 구조](images/step02_table.png)
 ---
 
 # 3. 샘플 데이터 6명 입력
@@ -114,9 +114,9 @@ assignments/chapter04/images/step02_table.png
 ## 3-1. 실행 전 예상
 
 ```text
-현재 행 수:
-실행 후 예상 행 수:
-예상되는 NULL 포함 학생:
+현재 행 수: 0
+실행 후 예상 행 수: 6
+예상되는 NULL 포함 학생: 0
 ```
 
 ## 3-2. 실행 파일
