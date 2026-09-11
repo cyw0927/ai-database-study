@@ -128,24 +128,24 @@ code/chapter04/02_insert_students.sql
 ## 3-3. 실제 결과
 
 ```text
-실제 행 수:
-이준호 grade:
-박서연 존재 여부:
-윤서진 major:
-윤서진 grade:
+실제 행 수: 6
+이준호 grade: 3
+박서연 존재 여부: 존재
+윤서진 major: NULL
+윤서진 grade: NULL
 ```
 
 ### 예상과 실제 비교
 
 ```text
-예상과 실제가 일치했는가:
-다르다면 이유:
+예상과 실제가 일치했는가: X
+다르다면 이유: NULL 값이 없을거라 예상했지만 윤서진의 전공과 학년이 NULL처리 됐다
 ```
 
 ### `created_at` 값이 여러 행에서 같을 수 있는 이유
 
 ```text
-
+여러 학생을 동시에 입력했기 때문에 같을 수 있다
 ```
 
 ---
@@ -156,55 +156,60 @@ code/chapter04/02_insert_students.sql
 
 | 번호 | 조회 문제 | 예상 행 수 | 실제 행 수 | 일치? | 다르면 이유 |
 | ---: | --- | ---: | ---: | --- | --- |
-| 1 | 전체 학생 |  |  |  |  |
-| 2 | 이름·이메일만 조회 |  |  |  |  |
-| 3 | 특정 전공 |  |  |  |  |
-| 4 | 특정 학년 이상 |  |  |  |  |
-| 5 | 두 전공 중 하나 |  |  |  |  |
-| 6 | `grade IS NULL` |  |  |  |  |
-| 7 | 전공 `DISTINCT` |  |  |  |  |
-| 8 | 정렬 후 상위 3명 |  |  |  |  |
+| 1 | 전체 학생 | 6 | 6 | O | |
+| 2 | 이름·이메일만 조회 | 6 | 6 | O | |
+| 3 | 특정 전공 | 1 | 1 | O | |
+| 4 | 특정 학년 이상 | ? | ? | ? | |
+| 5 | 두 전공 중 하나 | ? | ? | ? | |
+| 6 | grade IS NULL | 1 | 1 | O | |
+| 7 | 전공 DISTINCT | 4 | 4 | O | |
+| 8 | 정렬 후 상위 3명 | 3 | 3 | O | |
 
 ## 4-1. 내가 직접 작성한 SQL 2개
 
 ```sql
 -- SQL 1
-
+SELECT name, major
+FROM public.students
+WHERE major = '데이터사이언스'
 ```
 
 ```text
-이 SQL의 한 행 의미:
-예상 행 수:
-실제 행 수:
+이 SQL의 한 행 의미: 데이터사이언스 전공 학생의 이름과 전공
+예상 행 수: 1
+실제 행 수: 1
 ```
 
 ```sql
 -- SQL 2
+SELECT name, grade
+FROM public.students
+WHERE grede = '4'
 
 ```
 
 ```text
-이 SQL의 한 행 의미:
-예상 행 수:
-실제 행 수:
+이 SQL의 한 행 의미: 4학년 학생 이름과 전공
+예상 행 수: 1
+실제 행 수: 1
 ```
 
 ## 4-2. `= NULL` 대신 `IS NULL`을 사용하는 이유
 
 ```text
-
+NULL은 일반적인 값이 아니라 값이 없다는 의미이기 때문에 `=`로 비교하지 않고 `IS NULL`을 사용해야한다
 ```
 
 ## 4-3. `ORDER BY` 없이 결과 순서를 믿으면 안 되는 이유
 
 ```text
-
+정력 기능없이는 데이터가 어떤 순서로 조회된다는 보장이 없다
 ```
 
 ## 4-4. `DISTINCT`가 원본 데이터를 삭제하는 기능인가요?
 
 ```text
-
+아니요. 'distinct'는 조회결과에 중복된 값을 한번만 보여주는 기능이다.
 ```
 
 ### 증거 화면
@@ -216,7 +221,7 @@ assignments/chapter04/images/step04_select.png
 ```
 
 `여기에 SELECT 핵심 결과 화면을 삽입하세요.`
-
+![SELECT 실행화면](images/step02_table.png)
 ---
 
 # 5. 내 가상 학생 2명 추가
@@ -227,39 +232,44 @@ assignments/chapter04/images/step04_select.png
 
 ```text
 학생 A
-이름:
-이메일:
-전공:
-학년:
+이름: 조조
+이메일: jojo@naver.com
+전공: 정치외교학
+학년: 3
 
 학생 B
-이름:
-이메일:
-전공:
-학년 또는 NULL:
+이름: 유비
+이메일: yb@hanmail.net
+전공: 철학
+학년 또는 NULL: 3
 
-현재 행 수:
-추가 후 예상 행 수:
+현재 행 수: 6
+추가 후 예상 행 수: 8
 ```
 
 ## 5-2. 내가 실행한 INSERT
 
 ```sql
+INSERT INTO public.students (name, email, major, grade)
+VALUES
+    ('조조', 'jojo@naver.com', '정치외교학', 3),
+    ('유비', 'yb@hanmail.net', '철학', 3)
+RETURNING id, name, major, grade;
 
 ```
 
 ## 5-3. 실제 결과
 
 ```text
-RETURNING 또는 확인 SELECT 결과:
-실제 전체 행 수:
-예상과 일치 여부:
+RETURNING 또는 확인 SELECT 결과: 조조 id7, 유비 id8
+실제 전체 행 수: 8
+예상과 일치 여부: 일치
 ```
 
 ### 내가 일부 값을 NULL로 둔 이유 또는 NULL을 사용하지 않은 이유
 
 ```text
-
+두 학생 다 전공과 학년을 입력했기 때문에 NULL을 사용하지 않음
 ```
 
 ---
@@ -271,36 +281,43 @@ RETURNING 또는 확인 SELECT 결과:
 ## 6-1. 먼저 대상 확인 SELECT
 
 ```sql
-
+SELECT *
+FROM public.students
+WHERE id = 8;
 ```
 
 ```text
-예상 대상 행 수:
-실제 대상 행 수:
+예상 대상 행 수: 1
+실제 대상 행 수: 1
 ```
 
 ## 6-2. UPDATE
 
 ```sql
-
+UPDATE public.students
+SET major = '섬유공학'
+WHERE id = 8
+RETURNING id, name, major, grade;
 ```
 
 ```text
-예상 영향 행 수:
-실제 영향 행 수:
-RETURNING 결과:
+예상 영향 행 수: 1
+실제 영향 행 수: 1
+RETURNING 결과: id 8, 유비, 섬유공학, 3
 ```
 
 ## 6-3. UPDATE 후 재조회
 
 ```sql
-
+select *
+from public.students
+where id = 8;
 ```
 
 ### `WHERE` 없는 UPDATE를 실행하면 위험한 이유
 
 ```text
-
+where 조건이 없으면 특정 학생 한명이 아니라 테이블의 모든 행이 수정된다
 ```
 
 ### 증거 화면
@@ -313,6 +330,7 @@ assignments/chapter04/images/step06_update.png
 
 `여기에 UPDATE 전/후 결과 화면을 삽입하세요.`
 
+![update](images/step06_update.png)
 ---
 
 # 7. 안전한 DELETE
@@ -322,40 +340,46 @@ assignments/chapter04/images/step06_update.png
 ## 7-1. 삭제 전 확인
 
 ```sql
-
+SELECT *
+FROM public.students
+WHERE id = 7;
 ```
 
 ```text
-예상 대상 행 수:
-실제 대상 행 수:
+예상 대상 행 수: 1
+실제 대상 행 수: 1
 ```
 
 ## 7-2. DELETE
 
 ```sql
-
+DELETE FROM public.students
+WHERE id = 7
+RETURNING id, name, email;
 ```
 
 ```text
-예상 영향 행 수:
-실제 영향 행 수:
-RETURNING 결과:
+예상 영향 행 수: 1
+실제 영향 행 수: 1
+RETURNING 결과: id 7, 조조, jojo@naver.com
 ```
 
 ## 7-3. 삭제 후 재조회
 
 ```sql
-
+SELECT *
+FROM public.students
+WHERE id = 7;
 ```
 
 ```text
-삭제 후 같은 조건의 SELECT 결과 행 수:
+삭제 후 같은 조건의 SELECT 결과 행 수: 0
 ```
 
 ### `DELETE` 성공 메시지만 보고 끝내지 않고 다시 SELECT해야 하는 이유
 
 ```text
-
+원하는 행이 정확히 삭제되었는지 알 수 없기 때문에 다시 확인해야 한다
 ```
 
 ---
@@ -365,9 +389,9 @@ RETURNING 결과:
 `04_update_delete_students.sql`을 본문 시작 상태에서 실행했다면 다음을 확인합니다.
 
 ```text
-최종 학생 수:
-이준호 grade:
-박서연 존재 여부:
+최종 학생 수: 5
+이준호 grade: 4
+박서연 존재 여부: 있음
 ```
 
 본문 기준 기대 상태와 비교합니다.
@@ -381,7 +405,8 @@ RETURNING 결과:
 ### 내 실제 결과가 기준과 다르다면 원인
 
 ```text
-
+7장까지 진행된 상태 (임의로 학생을 추가된 상황)으로 돌렸더니 에러 발생
+리셋 코드 작동후 다시 creat -> insert -> update_delete 실행하니 동일하게 나옴
 ```
 
 ---
@@ -395,14 +420,15 @@ RETURNING 결과:
 내가 사용한 SQL:
 
 ```sql
-
+INSERT INTO public.students (name, email, major, grade)
+VALUES ('제갈량', 'junho@example.com', '기상학', 2);
 ```
 
 ```text
-오류 메시지 핵심 단서:
-왜 실패해야 맞는가:
-어떤 규칙이 작동했는가:
-실패 후 기존 데이터가 어떻게 유지되었는가:
+오류 메시지 핵심 단서:  duplicate key value violates unique 
+왜 실패해야 맞는가: 이메일 중복
+어떤 규칙이 작동했는가: email 열의 unique 조건
+실패 후 기존 데이터가 어떻게 유지되었는가: 중복데이턴는 추가되지 않음
 ```
 
 ## 9-2. 이름 `NULL` 입력 `NOT NULL` 오류
@@ -410,19 +436,20 @@ RETURNING 결과:
 내가 사용한 SQL:
 
 ```sql
-
+INSERT INTO public.students (name, email, major, grade)
+VALUES (Null, 'jerry@example.com', '식품영양학', 2);
 ```
 
 ```text
-오류 메시지 핵심 단서:
-왜 실패해야 맞는가:
-어떤 규칙이 작동했는가:
+오류 메시지 핵심 단서: "name" 칼럼(해당 릴레이션 "students")의 null 값이 not null 제약조건을 위반했습니다.
+왜 실패해야 맞는가: name에는 반드시 값이 있어야 한다
+어떤 규칙이 작동했는가: name열의 not null 제약조건
 ```
 
 ### 실패한 INSERT 뒤 자동 생성 `id` 번호에 빈 구간이 생길 수 있어도 문제라고 단정할 수 없는 이유
 
 ```text
-
+insert를 실행할 때 마다 하나씩 소비될 수도 있기 때문
 ```
 
 ### 증거 화면
@@ -436,6 +463,8 @@ assignments/chapter04/images/step09_constraint_error.png
 `여기에 제약조건 오류 화면을 삽입하세요.`
 
 ---
+![에러](images/step09_constraint_error.png)
+![에러](images/step09_constraint_error2.png)
 
 # 10. `verify_students.sql`로 최종 상태 확인
 
@@ -446,17 +475,17 @@ code/chapter04/verify_students.sql
 ```
 
 ```text
-현재 전체 학생 수:
-NULL 개수:
-이준호 grade:
-박서연 존재 여부:
-현재 데이터 상태에서 예상과 다른 부분:
+현재 전체 학생 수: 5
+NULL 개수: major 1개, grade 1개
+이준호 grade: 4
+박서연 존재 여부: 없음
+현재 데이터 상태에서 예상과 다른 부분: 없음
 ```
 
 ### 검증 SQL을 따로 두면 좋은 이유
 
 ```text
-
+현재데이터가 예상한 결과와 맞는지 확인할수있다
 ```
 
 ---
@@ -468,33 +497,36 @@ NULL 개수:
 ## 11-1. 내가 작성한 SQL
 
 ```sql
-
+UPDATE public.students
+SET grade = 3
+WHERE email = 'junho@example.com'
+RETURNING id, name, email, grade;
 ```
 
 ## 11-2. AI에게 전달한 핵심 요청
 
 ```text
-
+SQL이 이준호만 수정해주는지 확인해주고, 3학년으로 제대로 수정하는지 확인해달라고 했다
 ```
 
 ## 11-3. AI 검토 결과
 
 | AI 제안 | 수용 / 수정 / 거절 | 실제 검증 결과 | 나의 이유 |
 | --- | --- | --- | --- |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| WHERE 조건으로 이준호만 선택되는지 확인하기 | 수용 | 이준호 1명만 수정됨 | 다른 학생까지 수정되는 것을 막기 위해 |
+| grade가 3으로 변경되는지 확인하기 | 수용 | grade가 3으로 변경됨 | 원하는 값으로 수정되었는지 확인하기 위해 |
+| RETURNING으로 수정 결과 확인하기 | 수용 | 수정된 이준호 정보가 바로 출력됨 | 수정 결과를 바로 확인할 수 있기 때문 |
 
 ### AI가 예상한 영향 행 수와 실제 결과가 같았나요?
 
 ```text
-
+같았다. 이준호 1명만 수정될 것으로 예상했고 실제로도 1행만 수정되었다
 ```
 
 ### AI 답변을 실행 전에 검토해야 하는 이유
 
 ```text
-
+AI가 작성하거나 검토한 SQL도 조건이나 대상이 잘못될 수 있기 때문에 실행 전에 직접 확인해야 한다
 ```
 
 ---
