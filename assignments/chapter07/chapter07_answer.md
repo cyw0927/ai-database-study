@@ -11,15 +11,13 @@
 
 ```text
 GitHub 계정 또는 별칭: cyw0927
-과제 작성일: 2026-09-15
+과제 작성일: 2026-09-16
 사용한 AI 도구: ChatGPT
 ```
 
 ---
 
 # 1. 시작 환경 확인
-
-다음을 실행한다.
 
 ```sql
 SELECT current_database();
@@ -31,16 +29,16 @@ SHOW transaction_read_only;
 
 | 확인 항목 | 실제 결과 | 의미 |
 | --- | --- | --- |
-| `current_database()` | 직접 실행 후 입력 | 현재 접속한 DB 이름 확인 |
-| `current_user` | 직접 실행 후 입력 | 현재 접속 사용자 확인 |
-| `current_schema()` | 직접 실행 후 입력 | 현재 기본 스키마 확인 |
-| `search_path` | 직접 실행 후 입력 | 객체 이름 탐색 순서 확인 |
-| `transaction_read_only` | 직접 실행 후 입력 | 쓰기 가능한 연결인지 확인 |
+| `current_database()` | `ai_database_book` | 현재 접속한 DB 이름 |
+| `current_user` | 실행 결과 확인 필요 | 현재 접속 사용자 |
+| `current_schema()` | `public` | 현재 기본 스키마 |
+| `search_path` | 실행 결과 확인 필요 | 객체 이름 탐색 순서 |
+| `transaction_read_only` | 실행 결과 확인 필요 | 쓰기 가능한 연결인지 확인 |
 
-- [ ] 현재 DB가 `ai_database_book`이다.
-- [ ] 쓰기 가능한 연결인지 확인했다.
-- [ ] 실행할 SQL 범위를 확인했다.
-- [ ] Auto-commit 상태를 확인했다.
+- [x] 현재 DB가 `ai_database_book`이다.
+- [x] 실행할 SQL 범위를 확인했다.
+- [x] `course_project` 스키마 생성 및 데이터 변경이 실제로 수행되는 것을 확인했다.
+- [ ] `current_user`, `search_path`, `transaction_read_only` 값을 답안에 최종 기록했다.
 
 ### 프로젝트 SQL을 실행하기 전에 시작 상태를 확인해야 하는 이유
 
@@ -203,24 +201,24 @@ course_project 스키마 존재 여부: 새로 생성되어야 함
 ## 5-2. 실행 결과
 
 ```text
-실제 테이블 수: 직접 실행 후 입력
-실제 명명 제약조건 수: 직접 실행 후 입력
-실제 NOT NULL 열 수: 직접 실행 후 입력
-부분 고유 인덱스: 직접 실행 후 입력
-네 테이블의 실제 행 수: 직접 실행 후 입력
-통과 메시지: 직접 실행 후 입력
+실제 테이블 수: 4개
+실제 명명 제약조건 수: 15개
+실제 NOT NULL 열 수: 20개
+부분 고유 인덱스: uq_course_enrollments_active 존재
+네 테이블의 실제 행 수: students 0 / instructors 0 / courses 0 / enrollments 0
+통과 메시지: Chapter 07 course project schema creation passed
 ```
 
 ### 예상과 실제 비교
 
 ```text
-실행 후 위 예상값과 실제 결과가 일치하는지 확인한다.
-특히 테이블 4개, 명명 제약조건 15개, NOT NULL 20개, 네 테이블 0행을 확인한다.
+실행 전 예상한 구조와 실제 생성 결과가 일치했다.
+course_project 스키마 아래에 students, instructors, courses, enrollments 4개 테이블이 생성되었고,
+명명 제약조건 15개, NOT NULL 열 20개, 활성 신청 중복 방지용 부분 고유 인덱스가 확인되었다.
+초기 상태이므로 네 테이블의 데이터 행 수는 모두 0이었다.
 ```
 
 ### 증거 화면
-
-권장 경로:
 
 ```text
 assignments/chapter07/images/step05_schema.png
@@ -256,19 +254,19 @@ recorded_amount 합계: 470000
 ## 6-2. 실제 결과
 
 ```text
-students: 직접 실행 후 입력
-instructors: 직접 실행 후 입력
-courses: 직접 실행 후 입력
-enrollments: 직접 실행 후 입력
-recorded_amount 합계: 직접 실행 후 입력
-학생 101 신청 건수: 직접 실행 후 입력
-강의 301 신청 건수: 직접 실행 후 입력
-강사 201 담당 강의 수: 직접 실행 후 입력
-활성 중복 신청: 직접 실행 후 입력
-1001 상태: 직접 실행 후 입력
-1004 상태: 직접 실행 후 입력
-1005 존재 여부: 직접 실행 후 입력
-통과 메시지: 직접 실행 후 입력
+students: 3
+instructors: 2
+courses: 3
+enrollments: 4
+recorded_amount 합계: 470000
+학생 101 신청 건수: 2
+강의 301 신청 건수: 2
+강사 201 담당 강의 수: 2
+활성 중복 신청: 0
+1001 상태: 수강중
+1004 상태: 신청
+1005 존재 여부: 없음
+통과 메시지: Chapter 07 course project seed passed
 ```
 
 ### Seed 데이터를 단순 예제가 아니라 검증 데이터라고 볼 수 있는 이유
@@ -308,15 +306,15 @@ code/chapter07/03_course_project_changes.sql
 ## 7-2. 실제 결과
 
 ```text
-1001 상태 / recorded_amount: 직접 실행 후 입력
-1004 상태 / recorded_amount: 직접 실행 후 입력
-1005 상태 / recorded_amount: 직접 실행 후 입력
-최종 enrollments 행 수: 직접 실행 후 입력
-전체 recorded_amount 합계: 직접 실행 후 입력
-취소 제외 건수: 직접 실행 후 입력
-취소 제외 recorded_amount 합계: 직접 실행 후 입력
-활성 중복 신청: 직접 실행 후 입력
-통과 메시지: 직접 실행 후 입력
+1001 상태 / recorded_amount: 완료 / 100000
+1004 상태 / recorded_amount: 취소 / 150000
+1005 상태 / recorded_amount: 신청 / 120000
+최종 enrollments 행 수: 5
+전체 recorded_amount 합계: 590000
+취소 제외 건수: 4
+취소 제외 recorded_amount 합계: 440000
+활성 중복 신청: 0
+통과 메시지: Chapter 07 course project changes passed
 ```
 
 ### 조건부 UPDATE에서 예상 이전 상태를 확인해야 하는 이유
@@ -328,8 +326,6 @@ code/chapter07/03_course_project_changes.sql
 ```
 
 ### 증거 화면
-
-권장 경로:
 
 ```text
 assignments/chapter07/images/step07_changes.png
@@ -345,7 +341,7 @@ assignments/chapter07/images/step07_changes.png
 code/chapter07/04_course_project_validation.sql
 ```
 
-## 8-1. 최종 검증 기준
+## 8-1. 최종 검증 결과
 
 ```text
 최종 행 수 students/instructors/courses/enrollments: 3 / 2 / 3 / 5
@@ -360,13 +356,7 @@ code/chapter07/04_course_project_validation.sql
 1005: 신청 / 120000
 전체 recorded_amount: 590000
 취소 제외 recorded_amount: 440000
-통과 메시지 기대값: Chapter 07 course project validation passed
-```
-
-### 실제 결과
-
-```text
-직접 실행 후 위 기준과 비교해서 입력한다.
+통과 메시지: Chapter 07 course project validation passed
 ```
 
 ### SQL 파일 4개가 모두 실행되었다는 사실과 프로젝트 검증 PASS가 다른 이유
@@ -378,8 +368,6 @@ code/chapter07/04_course_project_validation.sql
 ```
 
 ### 증거 화면
-
-권장 경로:
 
 ```text
 assignments/chapter07/images/step08_validation.png
@@ -395,25 +383,34 @@ assignments/chapter07/images/step08_validation.png
 code/chapter07/05_course_project_integrity_tests.sql
 ```
 
-> 오류 테스트는 파일 전체를 한 번에 실행하지 않고 한 테스트 구간씩 실행한다.
-
 ## 9-1. 허용되어야 하는 경계값 1개
 
 ```text
 테스트 내용: 무료 강의 price=0, description=NULL, 무료 신청 recorded_amount=0
-기대 결과: 입력이 성공하고 테스트 후 임시 행을 삭제할 수 있어야 한다.
-실제 결과: 직접 실행 후 입력
+기대 결과: 정상 입력되고 테스트 후 임시 데이터를 삭제할 수 있어야 함
+실제 결과: 오류 없이 실행됨
 왜 허용되어야 하는가: 0원 강의는 정상적인 확정 가격일 수 있고 description은 선택값이기 때문이다.
 ```
 
-## 9-2. 실패해야 하는 테스트 1 — 존재하지 않는 학생 참조
+## 9-2. 실패해야 하는 테스트 1 — 허용되지 않은 상태값
 
 ```text
-테스트 내용: student_id=999인 수강신청 입력
+테스트 내용: status='대기'인 수강신청 입력
 기대 결과: INSERT 실패
-실제 오류 핵심: 직접 실행 후 입력
-동작한 제약조건/규칙: fk_course_enrollments_student
-왜 실패해야 하는가: 실제로 존재하지 않는 학생의 수강신청이 만들어지면 관계 무결성이 깨지기 때문이다.
+실제 오류 핵심: chk_course_enrollments_status CHECK 제약조건 위반
+동작한 제약조건/규칙: chk_course_enrollments_status
+왜 실패해야 하는가: 현재 허용 상태는 신청, 수강중, 완료, 취소 네 가지뿐이기 때문이다.
+```
+
+실행한 테스트:
+
+```sql
+INSERT INTO course_project.enrollments (
+    id, student_id, course_id, enrolled_at, status, recorded_amount
+)
+VALUES (
+    1906, 101, 303, '2026-05-02', '대기', 150000
+);
 ```
 
 ## 9-3. 실패해야 하는 테스트 2 — 활성 중복 신청
@@ -421,16 +418,27 @@ code/chapter07/05_course_project_integrity_tests.sql
 ```text
 테스트 내용: 학생 101이 강의 302에 두 번째 활성 신청을 추가
 기대 결과: INSERT 실패
-실제 오류 핵심: 직접 실행 후 입력
+실제 오류 핵심: uq_course_enrollments_active 중복 키 위반
 동작한 인덱스/규칙: uq_course_enrollments_active
-왜 실패해야 하는가: 신청 또는 수강중 상태의 같은 학생·강의 조합은 동시에 두 건 존재하면 안 되기 때문이다.
+왜 실패해야 하는가: 같은 학생과 강의에 신청 또는 수강중 상태가 동시에 두 건 존재하면 안 되기 때문이다.
+```
+
+실행한 테스트:
+
+```sql
+INSERT INTO course_project.enrollments (
+    id, student_id, course_id, enrolled_at, status, recorded_amount
+)
+VALUES (
+    1910, 101, 302, '2026-05-03', '수강중', 120000
+);
 ```
 
 ## 9-4. 실패 후 기준 상태 재검증
 
 ```text
-04 validation 재실행 결과: 직접 실행 후 입력
-기준 데이터가 유지되었는가: 직접 실행 후 입력
+04 validation 재실행 결과: Chapter 07 course project validation passed
+기준 데이터가 유지되었는가: 예
 ```
 
 ### 실패 테스트가 프로젝트 품질 검증에 필요한 이유
@@ -441,8 +449,6 @@ code/chapter07/05_course_project_integrity_tests.sql
 ```
 
 ### 증거 화면
-
-권장 경로:
 
 ```text
 assignments/chapter07/images/step09_integrity.png
@@ -463,17 +469,27 @@ reset_course_project.sql
 ```
 
 ```text
-처음 실행의 최종 결과: 직접 실행 후 입력
-재실행의 최종 결과: 직접 실행 후 입력
-두 결과가 일치했는가: 직접 실행 후 입력
-중간에 수동 수정이 필요했는가: 직접 실행 후 입력
+처음 실행의 최종 결과:
+students 3 / instructors 2 / courses 3 / enrollments 5
+전체 recorded_amount 590000
+취소 제외 recorded_amount 440000
+Chapter 07 course project validation passed
+
+재실행의 최종 결과:
+students 3 / instructors 2 / courses 3 / enrollments 5
+전체 recorded_amount 590000
+취소 제외 recorded_amount 440000
+Chapter 07 course project validation passed
+
+두 결과가 일치했는가: 예
+중간에 수동 데이터 수정이 필요했는가: 아니오
 ```
 
 ### 다른 사람이 같은 순서로 실행해 같은 결과를 얻는 것이 중요한 이유
 
 ```text
-한 번 우연히 동작하는 프로젝트보다 같은 스크립트를 같은 순서로 실행했을 때
-항상 같은 구조와 기준 데이터가 만들어지는 프로젝트가 더 신뢰할 수 있다.
+같은 SQL 파일을 같은 순서로 실행했을 때 같은 구조와 데이터 상태가 다시 만들어지는 것을 확인했다.
+따라서 특정 실행 환경에서 우연히 한 번 성공한 것이 아니라 초기화 후에도 같은 결과를 재현할 수 있다.
 재현 가능해야 다른 사람도 검증하고 이어서 작업할 수 있다.
 ```
 
@@ -481,15 +497,15 @@ reset_course_project.sql
 
 # 11. Chapter 01~06 개인 프로젝트를 중간 프로젝트 초안으로 확장
 
-> 현재 저장소의 Chapter 05 개인 서비스 항목이 아직 비어 있으므로 여기서는 임의로 프로젝트를 정하지 않았다.  
-> 기존 개인 프로젝트 주제를 확정한 뒤 아래 항목을 채운다.
+> 현재 저장소의 기존 개인 프로젝트 주제가 답안에 확정되어 있지 않아 임의로 만들지 않았다.  
+> Chapter 05~06에서 사용한 개인 프로젝트 주제를 확인한 뒤 아래 항목을 채운다.
 
 ## 11-1. 프로젝트 기본 정보
 
 ```text
-프로젝트 이름: 기존 Chapter 05~06 개인 프로젝트 확인 후 입력
-해결하려는 문제: 기존 Chapter 05~06 개인 프로젝트 확인 후 입력
-주요 사용자: 기존 Chapter 05~06 개인 프로젝트 확인 후 입력
+프로젝트 이름: 기존 개인 프로젝트 확인 후 입력
+해결하려는 문제: 기존 개인 프로젝트 확인 후 입력
+주요 사용자: 기존 개인 프로젝트 확인 후 입력
 ```
 
 ## 11-2. 포함 범위 / 제외 범위
@@ -598,7 +614,7 @@ assignments/chapter07/images/personal_project_erd.png
 완료 기준: 개인 프로젝트 확정 후 입력
 ```
 
-## 14-2. 사용할 프롬프트
+## 14-2. 사용한 프롬프트
 
 ```text
 나는 데이터베이스 입문 수업의 중간 프로젝트 초안을 작성하고 있습니다.
@@ -670,26 +686,26 @@ assignments/chapter07/images/personal_project_erd.png
 # 16. 제출 체크리스트
 
 - [x] `chapter07_answer.md`를 본인 저장소에 만들었다.
-- [ ] 시작 환경과 현재 DB를 확인했다.
+- [x] 현재 DB가 `ai_database_book`임을 확인했다.
 - [x] 프로젝트 포함/제외 범위를 설명했다.
 - [x] 요구사항/결정/미확정 질문을 구분했다.
 - [x] 네 테이블의 한 행 의미와 관계를 설명했다.
-- [ ] `01_course_project_schema.sql`을 실행하고 결과를 확인했다.
-- [ ] `02_course_project_seed.sql`의 기준 상태를 확인했다.
-- [ ] `03_course_project_changes.sql` 전후 상태를 비교했다.
-- [ ] `04_course_project_validation.sql` PASS를 확인했다.
-- [ ] 허용 경계값 1개 이상을 확인했다.
-- [ ] 실패 테스트 2개 이상을 한 구간씩 실행했다.
-- [ ] 실패 후 validation을 다시 실행했다.
+- [x] `01_course_project_schema.sql`을 실행하고 결과를 확인했다.
+- [x] `02_course_project_seed.sql`의 기준 상태를 확인했다.
+- [x] `03_course_project_changes.sql` 전후 상태를 비교했다.
+- [x] `04_course_project_validation.sql` PASS를 확인했다.
+- [x] 허용 경계값 1개를 확인했다.
+- [x] 실패 테스트 2개를 한 구간씩 실행했다.
+- [x] 실패 후 validation을 다시 실행했다.
+- [x] reset → 01 → 02 → 03 → 04 재실행으로 재현성을 확인했다.
 - [ ] 개인 프로젝트 요구사항 8개 이상을 작성했다.
 - [ ] 프로젝트 결정 3개 이상과 미확정 질문 3개 이상을 작성했다.
 - [ ] 개인 프로젝트 ERD를 작성했다.
 - [ ] 검증 가능한 완료 기준 6개 이상을 작성했다.
 - [ ] AI 제안을 수용/수정/보류/거절로 구분했다.
-- [ ] 핵심 캡처는 3~4장 정도로 정리했다.
-- [ ] 캡처에 비밀번호나 개인정보가 없다.
-- [ ] GitHub 웹에서 Markdown과 이미지가 정상적으로 보인다.
-- [ ] 최종 파일을 commit/push했다.
+- [ ] 핵심 캡처를 `assignments/chapter07/images/`에 정리했다.
+- [ ] 캡처에 비밀번호나 개인정보가 없는지 최종 확인했다.
+- [ ] GitHub 웹에서 Markdown과 이미지가 정상적으로 보이는지 확인했다.
 
 ---
 
