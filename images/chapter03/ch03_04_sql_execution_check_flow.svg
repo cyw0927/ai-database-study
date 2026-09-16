@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" viewBox="0 0 1200 960" role="img" aria-labelledby="title desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="title">SQL로 실습 환경 확인하기</title>
+  <desc id="desc">ai_database_book 연결에서 setup_check.sql을 실행해 서버, 데이터베이스, 스키마 검색 경로, 사용자, 읽기 전용 상태, 시간대와 요약 결과를 확인한 뒤 권장 로컬 환경 자동 확인 파일로 이동하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .box{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .sql{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .decision{fill:#fffceb;stroke:#d6a600;stroke-width:2}
+      .bad{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+      .ok{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .name{font-size:18px;font-weight:700;text-anchor:middle}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}
+      .mono{font-size:15px;font-weight:700;text-anchor:middle;font-family:Consolas,D2Coding,"Courier New",monospace;fill:#0f2d5c}
+      .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .loop{stroke:#d64545;stroke-width:2.3;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+      .label{font-size:16px;font-weight:700;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="1200" height="960" fill="#fff"/>
+  <text x="600" y="48" class="title">SQL로 실습 환경 확인하기</text>
+
+  <rect x="410" y="78" width="380" height="60" rx="14" class="box"/>
+  <text x="600" y="115" class="name">ai_database_book 연결 선택</text>
+
+  <rect x="410" y="165" width="380" height="60" rx="14" class="box"/>
+  <text x="600" y="202" class="name">setup_check.sql 실행</text>
+
+  <rect x="350" y="252" width="500" height="82" rx="14" class="sql"/>
+  <text x="600" y="283" class="mono">version · current_database</text>
+  <text x="600" y="311" class="sub">서버 버전과 현재 데이터베이스 확인</text>
+
+  <rect x="350" y="365" width="500" height="82" rx="14" class="sql"/>
+  <text x="600" y="396" class="mono">current_schema · search_path</text>
+  <text x="600" y="424" class="sub">현재 스키마와 검색 순서 확인</text>
+
+  <rect x="330" y="478" width="540" height="82" rx="14" class="sql"/>
+  <text x="600" y="509" class="mono">current_user · transaction_read_only</text>
+  <text x="600" y="537" class="sub">접속 사용자와 쓰기 가능 상태 확인</text>
+
+  <rect x="350" y="591" width="500" height="82" rx="14" class="sql"/>
+  <text x="600" y="622" class="mono">TimeZone · CURRENT_TIMESTAMP</text>
+  <text x="600" y="650" class="sub">세션 시간대와 날짜·시간 값 확인</text>
+
+  <rect x="330" y="704" width="540" height="82" rx="14" class="sql"/>
+  <text x="600" y="735" class="mono">한 행 요약 결과</text>
+  <text x="600" y="763" class="sub">DB · public · USAGE · read-only · 계산 결과</text>
+
+  <rect x="390" y="817" width="420" height="68" rx="14" class="decision"/>
+  <text x="600" y="847" class="name">기본 결과를 확인했는가?</text>
+  <text x="600" y="871" class="sub">DB·권한·쓰기 상태를 확인</text>
+
+  <rect x="70" y="900" width="310" height="50" rx="12" class="bad"/>
+  <text x="225" y="931" class="name">연결·권한·설정 재확인</text>
+
+  <rect x="820" y="900" width="310" height="50" rx="12" class="ok"/>
+  <text x="975" y="931" class="name">자동 확인 파일로 이동</text>
+
+  <path d="M600 138V165" class="line"/>
+  <path d="M600 225V252" class="line"/>
+  <path d="M600 334V365" class="line"/>
+  <path d="M600 447V478" class="line"/>
+  <path d="M600 560V591" class="line"/>
+  <path d="M600 673V704" class="line"/>
+  <path d="M600 786V817" class="line"/>
+  <path d="M500 885L380 925" class="loop"/>
+  <text x="430" y="908" class="label" fill="#b42323">아니요</text>
+  <path d="M700 885L820 925" class="line"/>
+  <text x="770" y="908" class="label" fill="#166534">예</text>
+</svg>

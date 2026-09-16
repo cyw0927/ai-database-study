@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1060" role="img" aria-labelledby="title desc">
+  <title id="title">AI 보안·백업 명령 검토 흐름</title>
+  <desc id="desc">AI가 제안한 PostgreSQL 역할·권한 명령과 백업·복원 명령을 환경, 대상 범위, 최소 권한, 위험 옵션과 비밀 정보 기준으로 검토하고, 권한 명령은 테스트 환경에서 유효 권한을 확인하며 백업 명령은 별도 데이터베이스에 실제 복원하여 검증한 뒤 사람이 최종 승인하거나 실패 시 실행을 차단하고 수정하는 흐름</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#334155" />
+    </marker>
+    <marker id="retry-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#be185d" />
+    </marker>
+  </defs>
+
+  <style>
+    text {
+      font-family: "Malgun Gothic", "NanumSquare", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif;
+      fill: #0f172a;
+    }
+    .mono { font-family: Consolas, D2Coding, "Noto Sans Mono CJK KR", Menlo, monospace; }
+    .title { font-size: 36px; font-weight: 700; text-anchor: middle; fill: #0f2d5c; }
+    .subtitle { font-size: 19px; text-anchor: middle; fill: #475569; }
+    .box { stroke-width: 2.1; rx: 14; }
+    .ai { fill: #f5f3ff; stroke: #8b5cf6; }
+    .common { fill: #eef6ff; stroke: #3b82f6; }
+    .perm { fill: #fff7ed; stroke: #f97316; }
+    .backup { fill: #ecfeff; stroke: #0891b2; }
+    .verify { fill: #fff8eb; stroke: #f59e0b; }
+    .safe { fill: #ecfdf5; stroke: #22c55e; }
+    .block { fill: #fdf2f8; stroke: #db2777; }
+    .record { fill: #f8fafc; stroke: #64748b; }
+    .head { font-size: 21px; font-weight: 700; text-anchor: middle; }
+    .body { font-size: 17px; text-anchor: middle; fill: #334155; }
+    .code { font-size: 17px; font-weight: 700; text-anchor: middle; fill: #1d4ed8; }
+    .small { font-size: 16px; text-anchor: middle; fill: #475569; }
+    .arrow { stroke: #334155; stroke-width: 2.3; fill: none; marker-end: url(#arrow); }
+    .retry { stroke: #be185d; stroke-width: 2.3; fill: none; stroke-dasharray: 8 6; marker-end: url(#retry-arrow); }
+    .decision { fill: #fff7df; stroke: #d97706; stroke-width: 2.3; }
+    .label { font-size: 19px; font-weight: 700; text-anchor: middle; }
+    .bad-label { font-size: 18px; font-weight: 700; text-anchor: middle; fill: #be185d; }
+  </style>
+
+  <rect width="1200" height="1060" fill="#ffffff" />
+  <text x="600" y="48" class="title">AI 보안·백업 명령 검토 흐름</text>
+  <text x="600" y="82" class="subtitle">AI가 만든 GRANT·REVOKE와 백업·복원 명령은 실행 전후 검증과 사람 승인이 필요합니다.</text>
+
+  <!-- Entry and common review -->
+  <rect x="80" y="125" width="240" height="116" class="box ai" />
+  <text x="200" y="162" class="head">AI 명령 초안</text>
+  <text x="200" y="194" class="code mono">GRANT · REVOKE</text>
+  <text x="200" y="218" class="code mono">pg_dump · pg_restore</text>
+
+  <rect x="400" y="125" width="280" height="116" class="box common" />
+  <text x="540" y="158" class="head">목적·명령 유형 확인</text>
+  <text x="540" y="190" class="body">권한 명령인지</text>
+  <text x="540" y="214" class="body">백업·복원 명령인지 구분</text>
+
+  <rect x="760" y="125" width="330" height="116" class="box common" />
+  <text x="925" y="156" class="head">공통 사전 검토</text>
+  <text x="925" y="188" class="body">환경·대상·범위 확인</text>
+  <text x="925" y="212" class="body">위험 옵션·비밀·파일 위치 차단</text>
+
+  <path d="M320 183 L395 183" class="arrow" />
+  <path d="M680 183 L755 183" class="arrow" />
+
+  <!-- Permission branch -->
+  <rect x="80" y="325" width="460" height="330" class="box perm" />
+  <text x="310" y="364" class="head">역할·권한 명령 검토</text>
+
+  <rect x="115" y="395" width="390" height="76" class="box perm" />
+  <text x="310" y="423" class="head">최소 권한·위험 속성</text>
+  <text x="310" y="448" class="body">SUPERUSER · CREATEDB · CREATEROLE 차단</text>
+  <text x="310" y="469" class="body">ALL PRIVILEGES 사용 금지</text>
+
+  <rect x="115" y="492" width="390" height="76" class="box perm" />
+  <text x="310" y="520" class="head">권한 경로 검토</text>
+  <text x="310" y="548" class="body">테이블·컬럼·시퀀스 · PUBLIC·멤버십·소유권</text>
+
+  <rect x="115" y="589" width="390" height="46" class="box verify" />
+  <text x="310" y="619" class="body">관리자 테스트 환경에서 필요한 문장만 선택 실행</text>
+
+  <!-- Backup branch -->
+  <rect x="660" y="325" width="460" height="330" class="box backup" />
+  <text x="890" y="364" class="head">백업·복원 명령 검토</text>
+
+  <rect x="695" y="395" width="390" height="76" class="box backup" />
+  <text x="890" y="423" class="head">범위·형식·출력 경로</text>
+  <text x="890" y="451" class="body">저장소 밖 보호 경로 · 비밀번호·접속 URL 금지</text>
+
+  <rect x="695" y="492" width="390" height="76" class="box backup" />
+  <text x="890" y="520" class="head">owner·ACL·전역 역할</text>
+  <text x="890" y="548" class="body">--no-owner · --no-privileges · globals 별도 검토</text>
+
+  <rect x="695" y="589" width="390" height="46" class="box verify" />
+  <text x="890" y="619" class="body">원본 DB가 아닌 별도 복원 DB 준비</text>
+
+  <path d="M925 241 L925 285 L310 285 L310 320" class="arrow" />
+  <path d="M925 241 L925 320" class="arrow" />
+
+  <!-- Verification branch outputs -->
+  <rect x="95" y="705" width="430" height="98" class="box verify" />
+  <text x="310" y="738" class="head">유효 권한 검증</text>
+  <text x="310" y="768" class="code mono">has_*_privilege · pg_has_role</text>
+  <text x="310" y="790" class="small">허용 작업 성공 · 금지 작업 실패 확인</text>
+
+  <rect x="675" y="705" width="430" height="98" class="box verify" />
+  <text x="890" y="738" class="head">별도 DB 복원·검증</text>
+  <text x="890" y="768" class="code mono">pg_restore --list · SHA-256 · exit-on-error</text>
+  <text x="890" y="790" class="small">05_restore_validation.sql로 구조·데이터·권한 확인</text>
+
+  <path d="M310 655 L310 700" class="arrow" />
+  <path d="M890 655 L890 700" class="arrow" />
+
+  <!-- Decision -->
+  <path d="M600 845 L745 915 L600 985 L455 915 Z" class="decision" />
+  <text x="600" y="908" class="head">검증 기준을</text>
+  <text x="600" y="936" class="head">통과했는가?</text>
+
+  <path d="M310 803 L310 830 L560 830 L585 850" class="arrow" />
+  <path d="M890 803 L890 830 L640 830 L615 850" class="arrow" />
+
+  <rect x="830" y="855" width="270" height="86" class="box safe" />
+  <text x="965" y="890" class="head">사람 최종 승인</text>
+  <text x="965" y="920" class="body">제한된 범위로 반영</text>
+
+  <rect x="830" y="970" width="270" height="70" class="box record" />
+  <text x="965" y="997" class="head">사후 확인·기록</text>
+  <text x="965" y="1024" class="body">실행 근거·검증 결과 보존</text>
+
+  <rect x="90" y="875" width="280" height="114" class="box block" />
+  <text x="230" y="910" class="head">실행 차단·수정</text>
+  <text x="230" y="940" class="body">명령 실행하지 않음</text>
+  <text x="230" y="966" class="body">원인 기록 후 재검증</text>
+
+  <path d="M745 915 L825 900" class="arrow" />
+  <text x="785" y="895" class="label">예</text>
+  <path d="M965 941 L965 965" class="arrow" />
+  <path d="M455 915 L375 915" class="retry" />
+  <text x="415" y="895" class="bad-label">아니요</text>
+  <path d="M230 875 L230 835 L38 835 L38 270 L925 270 L925 245" class="retry" />
+  <text x="560" y="255" class="bad-label">수정 후 공통 검토부터 재검증</text>
+</svg>

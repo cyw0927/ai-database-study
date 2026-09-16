@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">JOIN과 집계로 분석 결과 만들기</title>
+  <desc id="desc">분석 질문에서 테이블과 관계, JOIN, WHERE, GROUP BY, 집계 함수, 전체 건수와 합계 검산으로 이어지는 SQL 분석 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14;ry:14}.blue{fill:#eff6ff;stroke:#3b82f6}.green{fill:#f0fdf4;stroke:#22c55e}.yellow{fill:#fffbeb;stroke:#f59e0b}.cyan{fill:#ecfeff;stroke:#06b6d4}.ok{fill:#ecfdf5;stroke:#16a34a}.head{font-size:16px;font-weight:700;text-anchor:middle}.body{font-size:12.5px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.5;rx:12}
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#fff"/>
+  <text x="600" y="48" class="title">JOIN과 집계로 분석 결과 만들기</text>
+  <text x="600" y="76" class="sub">분석 단위를 잃지 않도록 JOIN 전후 행 수와 집계 합계를 확인합니다.</text>
+
+  <rect x="35" y="190" width="140" height="120" class="card blue"/>
+  <text x="105" y="226" class="head">분석 질문</text>
+  <text x="105" y="258" class="body">대상 · 기간</text>
+  <text x="105" y="282" class="body">기대 결과</text>
+
+  <rect x="205" y="190" width="140" height="120" class="card blue"/>
+  <text x="275" y="226" class="head">테이블·관계</text>
+  <text x="275" y="258" class="body">PK · FK</text>
+  <text x="275" y="282" class="body">JOIN 경로</text>
+
+  <rect x="375" y="190" width="140" height="120" class="card green"/>
+  <text x="445" y="226" class="head">JOIN</text>
+  <text x="445" y="258" class="body">INNER · LEFT</text>
+  <text x="445" y="282" class="body">행 수 확인</text>
+
+  <rect x="545" y="190" width="140" height="120" class="card yellow"/>
+  <text x="615" y="226" class="head">WHERE</text>
+  <text x="615" y="258" class="body">기간 · 상태</text>
+  <text x="615" y="282" class="body">취소 포함 기준</text>
+
+  <rect x="715" y="190" width="140" height="120" class="card cyan"/>
+  <text x="785" y="226" class="head">GROUP BY</text>
+  <text x="785" y="258" class="body">월 · 상태 · 강의</text>
+  <text x="785" y="282" class="body">분석 단위 확정</text>
+
+  <rect x="885" y="190" width="140" height="120" class="card green"/>
+  <text x="955" y="226" class="head">집계 함수</text>
+  <text x="955" y="258" class="body">COUNT · SUM</text>
+  <text x="955" y="282" class="body">AVG · DISTINCT</text>
+
+  <rect x="1045" y="190" width="120" height="120" class="card ok"/>
+  <text x="1105" y="226" class="head">검산</text>
+  <text x="1105" y="258" class="body">건수 합계</text>
+  <text x="1105" y="282" class="body">금액 합계</text>
+
+  <path d="M175 250 H205" class="line"/>
+  <path d="M345 250 H375" class="line"/>
+  <path d="M515 250 H545" class="line"/>
+  <path d="M685 250 H715" class="line"/>
+  <path d="M855 250 H885" class="line"/>
+  <path d="M1025 250 H1045" class="line"/>
+
+  <rect x="205" y="405" width="790" height="115" class="note"/>
+  <text x="600" y="440" class="head">집계 전후 확인할 질문</text>
+  <text x="600" y="473" class="body">한 행은 무엇인가? · JOIN으로 행이 늘었는가? · COUNT 대상은 부모인가 자식인가?</text>
+  <text x="600" y="497" class="body">상태별·월별 건수 합계가 전체 24건과 같은가?</text>
+
+  <rect x="330" y="560" width="540" height="48" class="card yellow"/>
+  <text x="600" y="590" class="head">COUNT(*)와 COUNT(child.id), COUNT(DISTINCT ...)의 의미를 구분합니다.</text>
+</svg>

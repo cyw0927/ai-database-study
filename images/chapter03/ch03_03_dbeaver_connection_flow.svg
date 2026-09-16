@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">DBeaver에서 PostgreSQL 연결하기</title>
+  <desc id="desc">DBeaver 실행부터 PostgreSQL 선택, 연결 정보 입력, Test Connection, 연결 저장, 현재 데이터베이스 확인까지의 순서</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .box{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .input{fill:#fff;stroke:#64748b;stroke-width:2}
+      .decision{fill:#fffceb;stroke:#d6a600;stroke-width:2}
+      .retry{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+      .ok{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .memo{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}
+      .name{font-size:18px;font-weight:700;text-anchor:middle}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}
+      .mono{font-size:14px;font-weight:700;text-anchor:middle;font-family:Consolas,D2Coding,"Courier New",monospace;fill:#0f2d5c}
+      .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .loop{stroke:#d64545;stroke-width:2.3;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+      .label{font-size:16px;font-weight:700;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="1200" height="760" fill="#fff"/>
+  <text x="600" y="48" class="title">DBeaver에서 PostgreSQL 연결하기</text>
+
+  <rect x="430" y="85" width="340" height="58" rx="14" class="box"/><text x="600" y="121" class="name">DBeaver 실행</text>
+  <rect x="430" y="175" width="340" height="58" rx="14" class="box"/><text x="600" y="211" class="name">New Database Connection</text>
+  <rect x="430" y="265" width="340" height="58" rx="14" class="box"/><text x="600" y="301" class="name">PostgreSQL 선택</text>
+  <rect x="390" y="355" width="420" height="76" rx="14" class="input"/>
+  <text x="600" y="385" class="name">연결 정보 입력</text>
+  <text x="600" y="412" class="sub">Host · Port · Database · Username · Password</text>
+  <rect x="430" y="463" width="340" height="58" rx="14" class="box"/><text x="600" y="499" class="name">Test Connection</text>
+  <rect x="430" y="553" width="340" height="68" rx="14" class="decision"/>
+  <text x="600" y="582" class="name">연결 성공?</text>
+  <text x="600" y="606" class="sub">실패하면 값과 서버 상태 확인</text>
+
+  <rect x="130" y="553" width="230" height="68" rx="14" class="retry"/>
+  <text x="245" y="582" class="name">재시도</text>
+  <text x="245" y="606" class="sub">연결값·서버 상태 확인</text>
+  <rect x="840" y="553" width="230" height="68" rx="14" class="ok"/>
+  <text x="955" y="582" class="name">연결 저장</text>
+  <text x="955" y="606" class="sub">성공한 설정 보관</text>
+  <rect x="840" y="655" width="230" height="58" rx="14" class="ok"/>
+  <text x="955" y="681" class="name">현재 DB 확인</text>
+  <text x="955" y="704" class="mono">SELECT current_database();</text>
+
+  <rect x="835" y="355" width="250" height="76" rx="14" class="memo"/>
+  <text x="960" y="385" class="name">보조 메모</text>
+  <text x="960" y="409" class="sub">처음 연결은 postgres DB 가능</text>
+  <text x="960" y="428" class="sub">클라우드는 SSL 필요 가능</text>
+
+  <path d="M600 143V175" class="line"/><path d="M600 233V265" class="line"/>
+  <path d="M600 323V355" class="line"/><path d="M600 431V463" class="line"/>
+  <path d="M600 521V553" class="line"/>
+  <path d="M430 587H360" class="loop"/><text x="395" y="574" class="label" fill="#b42323">아니요</text>
+  <path d="M245 553V393H390" class="loop"/>
+  <path d="M770 587H840" class="line"/><text x="805" y="574" class="label" fill="#166534">예</text>
+  <path d="M955 621V655" class="line"/>
+</svg>

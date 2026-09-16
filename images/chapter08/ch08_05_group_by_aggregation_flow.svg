@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="100%" viewBox="0 0 1200 560">
+  <title id="title">GROUP BY로 상태별 행 묶기</title>
+  <desc id="desc">원본 5개의 수강신청 행이 status 값에 따라 신청, 수강중, 완료의 세 그룹으로 묶이고 COUNT 결과 3행으로 요약되는 과정을 보여 주는 도식이다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title { font: 700 28px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .box { stroke: #334155; stroke-width: 2; rx: 16; ry: 16; }
+      .head { font: 600 17px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .text { font: 14px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="title">GROUP BY로 상태별 행 묶기</text>
+  <rect x="80" y="120" width="220" height="210" class="box" fill="#dbeafe"/>
+  <text x="190" y="155" text-anchor="middle" class="head">원본 5행</text>
+  <text x="190" y="190" text-anchor="middle" class="text">신청</text>
+  <text x="190" y="220" text-anchor="middle" class="text">수강중</text>
+  <text x="190" y="250" text-anchor="middle" class="text">완료</text>
+  <text x="190" y="280" text-anchor="middle" class="text">신청</text>
+  <text x="190" y="310" text-anchor="middle" class="text">수강중</text>
+  <rect x="390" y="180" width="210" height="90" class="box" fill="#fed7aa"/>
+  <text x="495" y="215" text-anchor="middle" class="head">GROUP BY status</text>
+  <rect x="690" y="120" width="420" height="210" class="box" fill="#ffedd5"/>
+  <text x="900" y="155" text-anchor="middle" class="head">상태 그룹</text>
+  <text x="900" y="195" text-anchor="middle" class="text">신청 그룹 · 2행</text>
+  <text x="900" y="230" text-anchor="middle" class="text">수강중 그룹 · 2행</text>
+  <text x="900" y="265" text-anchor="middle" class="text">완료 그룹 · 1행</text>
+  <text x="900" y="300" text-anchor="middle" class="text">그룹 하나당 결과 한 행</text>
+  <line x1="300" y1="225" x2="390" y2="225" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="600" y1="225" x2="690" y2="225" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="430" y="390" width="340" height="100" class="box" fill="#dcfce7"/>
+  <text x="600" y="425" text-anchor="middle" class="head">상태별 결과 3행</text>
+  <text x="600" y="455" text-anchor="middle" class="text">신청 2 · 수강중 2 · 완료 1</text>
+  <line x1="900" y1="330" x2="770" y2="390" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+</svg>

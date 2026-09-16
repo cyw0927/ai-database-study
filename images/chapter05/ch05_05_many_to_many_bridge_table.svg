@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">N:M 관계를 연결 테이블로 풀기</title>
+  <desc id="desc">회원과 책의 다대다 관계를 loans 연결 테이블로 두 개의 일대다 관계로 구현한다.</desc>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#1f2937}
+    .m{font-family:Consolas,D2Coding,"Courier New",monospace}
+    .t{font-size:32px;font-weight:700}
+    .s{font-size:15px;fill:#4b5563}
+    .h{font-size:18px;font-weight:700}
+    .b{font-size:14px}
+    .pk{fill:#1d4ed8;font-weight:700}.fk{fill:#c2410c;font-weight:700}
+    .box{stroke:#64748b;stroke-width:2;rx:14}
+    .e{fill:#eaf3ff}.r{fill:#f2ecff}.q{fill:#fff6d8}.a{fill:#ecf9ef}
+    .line{stroke:#475569;stroke-width:2;fill:none}
+  </style>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="650" fill="#fff"/>
+  <text x="600" y="45" text-anchor="middle" class="t">N:M 관계를 연결 테이블로 풀기</text>
+  <text x="600" y="75" text-anchor="middle" class="s">관계 한 건마다 loans에 한 행을 생성합니다.</text>
+  <rect x="250" y="110" width="700" height="95" class="box q"/>
+  <text x="600" y="150" text-anchor="middle" class="h">개념 관계</text>
+  <text x="600" y="183" text-anchor="middle" class="h">members N ───── M books</text>
+  <line x1="600" y1="205" x2="600" y2="255" class="line" marker-end="url(#ar)"/>
+  <rect x="70" y="300" width="260" height="180" class="box e"/>
+  <text x="200" y="345" text-anchor="middle" class="h">members</text>
+  <text x="120" y="400" class="m b pk">PK id</text>
+  <text x="120" y="440" class="m b">name</text>
+  <rect x="470" y="260" width="260" height="270" class="box r"/>
+  <text x="600" y="305" text-anchor="middle" class="h">loans</text>
+  <text x="520" y="350" class="m b pk">PK id</text>
+  <text x="520" y="385" class="m b fk">FK member_id</text>
+  <text x="520" y="420" class="m b fk">FK book_id</text>
+  <text x="520" y="455" class="m b">borrowed_at</text>
+  <text x="520" y="490" class="m b">due_at · returned_at</text>
+  <rect x="870" y="300" width="260" height="180" class="box e"/>
+  <text x="1000" y="345" text-anchor="middle" class="h">books</text>
+  <text x="920" y="400" class="m b pk">PK id</text>
+  <text x="920" y="440" class="m b">title</text>
+  <line x1="330" y1="390" x2="470" y2="390" class="line" marker-end="url(#ar)"/>
+  <text x="365" y="365" text-anchor="middle" class="h">1</text>
+  <text x="435" y="365" text-anchor="middle" class="h">N</text>
+  <line x1="730" y1="390" x2="870" y2="390" class="line" marker-end="url(#ar)"/>
+  <text x="765" y="365" text-anchor="middle" class="h">N</text>
+  <text x="835" y="365" text-anchor="middle" class="h">1</text>
+  <rect x="170" y="565" width="860" height="55" class="box a"/>
+  <text x="600" y="598" text-anchor="middle" class="b">부모 컬럼에 여러 ID를 저장하지 않고, 두 FK를 가진 사건 행으로 기록합니다.</text>
+</svg>

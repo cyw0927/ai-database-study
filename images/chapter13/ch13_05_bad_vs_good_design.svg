@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 790" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">역할이 섞인 설계와 역할별로 분리한 설계 비교</title>
+  <desc id="desc">학생, 강의, 강사, 신청과 결제 데이터가 TEXT 컬럼 중심의 한 테이블에 섞인 구조를 역할별 테이블과 수평·수직 외래키 관계, 제약조건을 갖춘 구조로 개선하는 과정을 비교한다.</desc>
+  <style>
+    .ko { font-family: "NanumSquare", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: "Noto Sans Mono CJK KR", "NanumSquare", Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .subtitle { font-size: 14px; fill: #4b5563; }
+    .head { font-size: 17px; font-weight: 700; }
+    .table-head { font-size: 15px; font-weight: 700; }
+    .body { font-size: 14px; }
+    .small { font-size: 12px; fill: #475569; }
+    .field { font-size: 12.5px; }
+    .box { stroke: #64748b; stroke-width: 1.8; rx: 14; ry: 14; }
+    .req { fill: #eaf3ff; }
+    .human { fill: #fff6d8; }
+    .ok { fill: #eaf8ee; }
+    .bad { fill: #ffeaea; }
+    .meta { fill: #f8fafc; }
+    .line { stroke: #475569; stroke-width: 2; fill: none; marker-end: url(#arrow); stroke-linejoin: round; }
+    .relation { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); stroke-linejoin: round; }
+    .relation-label { font-size: 11px; font-weight: 700; fill: #334155; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="790" fill="#ffffff"/>
+  <text x="600" y="43" text-anchor="middle" class="ko title">역할이 섞인 설계와 역할별 분리 설계</text>
+  <text x="600" y="71" text-anchor="middle" class="ko subtitle">데이터 소유자, 관계와 검증 규칙을 분리해 변경 이유가 명확한 구조로 개선합니다.</text>
+
+  <!-- Bad design -->
+  <rect x="40" y="105" width="470" height="520" class="box bad"/>
+  <text x="275" y="140" text-anchor="middle" class="ko head">역할이 섞인 설계</text>
+
+  <rect x="75" y="165" width="400" height="285" class="box meta"/>
+  <text x="275" y="195" text-anchor="middle" class="mono table-head">ai_review_lab.bad_enrollments</text>
+  <text x="105" y="230" class="mono field">student_email TEXT</text>
+  <text x="105" y="260" class="mono field">course_price TEXT</text>
+  <text x="105" y="290" class="mono field">payment_status TEXT</text>
+  <text x="105" y="320" class="mono field">enrollment_status TEXT</text>
+  <text x="105" y="350" class="mono field">sensitive_value_plaintext TEXT</text>
+  <text x="105" y="380" class="mono field">created_at TEXT</text>
+  <text x="105" y="420" class="ko small">학생·강의·강사·신청·결제의 서로 다른 사실이 한 행에 혼합</text>
+
+  <rect x="75" y="475" width="400" height="110" class="box bad"/>
+  <text x="275" y="508" text-anchor="middle" class="ko body">
+    <tspan x="275">반복 데이터 · 타입과 상태값 검증 부족</tspan>
+    <tspan x="275" dy="24">FK 없음 · 문자형 금액·날짜 입력 가능</tspan>
+    <tspan x="275" dy="24">민감정보 평문 저장 위험</tspan>
+  </text>
+
+  <!-- Redesign -->
+  <path d="M510 365 H690" class="line"/>
+  <text x="600" y="341" text-anchor="middle" class="ko small">역할과 관계 재설계</text>
+
+  <!-- Good design -->
+  <rect x="690" y="105" width="470" height="520" class="box ok"/>
+  <text x="925" y="140" text-anchor="middle" class="ko head">역할별 분리와 관계 보장</text>
+
+  <rect x="720" y="165" width="170" height="95" class="box meta"/>
+  <text x="805" y="190" text-anchor="middle" class="mono table-head">instructors</text>
+  <text x="805" y="216" text-anchor="middle" class="mono field">id PK</text>
+  <text x="805" y="239" text-anchor="middle" class="mono field">email UNIQUE</text>
+
+  <rect x="950" y="155" width="180" height="115" class="box req"/>
+  <text x="1040" y="181" text-anchor="middle" class="mono table-head">courses</text>
+  <text x="1040" y="207" text-anchor="middle" class="mono field">instructor_id FK</text>
+  <text x="1040" y="230" text-anchor="middle" class="mono field">course_code UNIQUE</text>
+  <text x="1040" y="253" text-anchor="middle" class="mono field">price CHECK</text>
+
+  <rect x="720" y="330" width="170" height="95" class="box meta"/>
+  <text x="805" y="355" text-anchor="middle" class="mono table-head">students</text>
+  <text x="805" y="381" text-anchor="middle" class="mono field">id PK</text>
+  <text x="805" y="404" text-anchor="middle" class="mono field">email UNIQUE</text>
+
+  <rect x="950" y="315" width="180" height="135" class="box req"/>
+  <text x="1040" y="341" text-anchor="middle" class="mono table-head">enrollments</text>
+  <text x="1040" y="367" text-anchor="middle" class="mono field">student_id FK</text>
+  <text x="1040" y="390" text-anchor="middle" class="mono field">course_id FK</text>
+  <text x="1040" y="413" text-anchor="middle" class="mono field">status CHECK</text>
+  <text x="1040" y="436" text-anchor="middle" class="mono field">recorded_amount CHECK</text>
+
+  <rect x="950" y="500" width="180" height="105" class="box req"/>
+  <text x="1040" y="526" text-anchor="middle" class="mono table-head">payments</text>
+  <text x="1040" y="552" text-anchor="middle" class="mono field">enrollment_id FK</text>
+  <text x="1040" y="575" text-anchor="middle" class="mono field">payment_status CHECK</text>
+  <text x="1040" y="598" text-anchor="middle" class="mono field">payment_reference UNIQUE</text>
+
+  <!-- Orthogonal relationships -->
+  <path d="M890 212.5 H950" class="relation"/>
+  <text x="920" y="196" text-anchor="middle" class="ko relation-label">1:N</text>
+
+  <path d="M890 377.5 H950" class="relation"/>
+  <text x="920" y="361" text-anchor="middle" class="ko relation-label">1:N</text>
+
+  <path d="M1040 270 V315" class="relation"/>
+  <text x="1065" y="296" text-anchor="middle" class="ko relation-label">1:N</text>
+
+  <path d="M1040 450 V500" class="relation"/>
+  <text x="1071" y="478" text-anchor="middle" class="ko relation-label">1:0..1</text>
+
+  <!-- Conclusion -->
+  <text x="600" y="660" text-anchor="middle" class="ko small">비교 결과</text>
+  <path d="M600 670 V700" class="line"/>
+  <rect x="160" y="705" width="880" height="65" class="box human"/>
+  <text x="600" y="731" text-anchor="middle" class="ko head">
+    <tspan x="600">역할별 테이블 분리 + PK·FK로 관계 보장 + 타입·CHECK로 값 검증</tspan>
+    <tspan x="600" dy="24">민감정보 원문 대신 추적 가능한 payment_reference 저장</tspan>
+  </text>
+</svg>

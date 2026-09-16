@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 860" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">Document JSON 구조와 문서 경계</title>
+  <desc id="desc">강의 문서의 최상위 필드, 배열 필드와 중첩 객체를 구분하고, 함께 읽고 쓰는 문서 경계와 별도 참조를 검토하는 기준을 수평으로 연결한 도식</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Pretendard","Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:30px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:14px;text-anchor:middle;fill:#475569}
+      .head{font-size:18px;font-weight:800;text-anchor:middle}
+      .section{font-size:15px;font-weight:700;text-anchor:middle}
+      .body{font-size:13.5px;text-anchor:middle;fill:#334155}
+      .small{font-size:12px;text-anchor:middle;fill:#475569}
+      .code{font-size:13.5px;fill:#1e293b}
+      .key{fill:#1d4ed8;font-weight:700}
+      .str{fill:#15803d}
+      .bool{fill:#7c3aed;font-weight:700}
+      .card{stroke-width:2;rx:16;ry:16}
+      .principle{fill:#f8fafc;stroke:#94a3b8}
+      .document{fill:#eff6ff;stroke:#3b82f6}
+      .root{fill:#ffffff;stroke:#7fb3f5}
+      .array{fill:#fff7ed;stroke:#f97316}
+      .nested{fill:#f0fdf4;stroke:#22c55e}
+      .object{fill:#ffffff;stroke:#86efac;stroke-width:1.5;rx:12;ry:12}
+      .guide{fill:#f8fafc;stroke:#94a3b8}
+      .warning{fill:#fffbeb;stroke:#f59e0b}
+      .divider{stroke:#cbd5e1;stroke-width:1.4;stroke-dasharray:6 6}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <rect width="1200" height="860" fill="#ffffff"/>
+  <text x="600" y="46" class="title">Document JSON 구조와 문서 경계</text>
+  <text x="600" y="74" class="subtitle">관련 있어 보이는 모든 값을 넣는 것이 아니라, 함께 읽고 쓰는 단위로 문서 경계를 정합니다.</text>
+
+  <rect x="90" y="100" width="1020" height="66" class="card principle"/>
+  <text x="600" y="126" class="section">핵심 원칙</text>
+  <text x="600" y="150" class="body">문서 안에는 수명이 같고 함께 조회·수정되는 값을 포함하며, 공유 원본이나 계속 커지는 데이터는 별도 참조를 검토합니다.</text>
+
+  <!-- Course document -->
+  <rect x="40" y="195" width="710" height="505" class="card document"/>
+  <text x="395" y="228" class="head">course document</text>
+  <text x="395" y="253" class="small">강의 상세 화면에서 함께 읽는 JSON 문서 예시</text>
+  <text x="65" y="285" class="mono code">{</text>
+
+  <!-- Root fields -->
+  <rect x="70" y="275" width="650" height="112" class="card root"/>
+  <text x="395" y="302" class="section">최상위 필드</text>
+  <text x="100" y="329" class="mono code"><tspan class="key">"course_code"</tspan>: <tspan class="str">"DB-101"</tspan>,</text>
+  <text x="100" y="354" class="mono code"><tspan class="key">"title"</tspan>: <tspan class="str">"데이터베이스 입문"</tspan>,</text>
+  <text x="100" y="379" class="mono code"><tspan class="key">"level"</tspan>: <tspan class="str">"basic"</tspan>,</text>
+
+  <!-- Array field -->
+  <rect x="70" y="405" width="650" height="82" class="card array"/>
+  <text x="395" y="432" class="section">배열 필드</text>
+  <text x="100" y="463" class="mono code"><tspan class="key">"tags"</tspan>: [<tspan class="str">"SQL"</tspan>, <tspan class="str">"PostgreSQL"</tspan>, <tspan class="str">"DB"</tspan>],</text>
+
+  <!-- Nested objects -->
+  <rect x="70" y="505" width="650" height="165" class="card nested"/>
+  <text x="395" y="532" class="section">중첩 객체</text>
+
+  <rect x="90" y="550" width="290" height="96" class="object"/>
+  <text x="110" y="574" class="mono code"><tspan class="key">"instructor"</tspan>: {</text>
+  <text x="135" y="597" class="mono code"><tspan class="key">"name"</tspan>: <tspan class="str">"김강사"</tspan>,</text>
+  <text x="135" y="620" class="mono code"><tspan class="key">"specialty"</tspan>: <tspan class="str">"Database"</tspan></text>
+  <text x="110" y="640" class="mono code">},</text>
+
+  <rect x="410" y="550" width="290" height="96" class="object"/>
+  <text x="430" y="574" class="mono code"><tspan class="key">"options"</tspan>: {</text>
+  <text x="455" y="597" class="mono code"><tspan class="key">"online"</tspan>: <tspan class="bool">true</tspan>,</text>
+  <text x="455" y="620" class="mono code"><tspan class="key">"certificate"</tspan>: <tspan class="bool">true</tspan></text>
+  <text x="430" y="640" class="mono code">}</text>
+
+  <text x="65" y="684" class="mono code">}</text>
+
+  <!-- Structure guidance -->
+  <rect x="805" y="275" width="350" height="112" class="card guide"/>
+  <text x="980" y="304" class="head">최상위 필드</text>
+  <text x="980" y="334" class="body">문서를 직접 식별하거나 자주 조건에 사용하는 값</text>
+  <text x="980" y="360" class="small">검색 빈도가 높으면 필드 인덱스를 검토</text>
+  <path d="M720 331 H805" class="line"/>
+
+  <rect x="805" y="405" width="350" height="82" class="card warning"/>
+  <text x="980" y="433" class="head">배열 필드</text>
+  <text x="980" y="461" class="body">작고 크기가 제한된 반복값에 적합</text>
+  <text x="980" y="482" class="small">계속 증가하는 배열은 별도 저장을 검토</text>
+  <path d="M720 446 H805" class="line"/>
+
+  <rect x="805" y="505" width="350" height="165" class="card guide"/>
+  <text x="980" y="535" class="head">중첩 객체</text>
+  <text x="980" y="565" class="body">항상 함께 읽고 쓰며 문서와 수명이 같을 때 포함</text>
+  <line x1="835" y1="586" x2="1125" y2="586" class="divider"/>
+  <text x="980" y="614" class="body">여러 문서에서 공유하거나 독립적으로 자주 변경되면</text>
+  <text x="980" y="640" class="body">별도 원본과 참조 방식 검토</text>
+  <text x="980" y="660" class="small">강한 관계 무결성이 필요한 데이터도 분리 후보</text>
+  <path d="M720 588 H805" class="line"/>
+
+  <!-- Final principles -->
+  <rect x="100" y="735" width="1000" height="72" class="card principle"/>
+  <text x="600" y="764" class="head">문서 경계 = 함께 읽고 쓰는 단위</text>
+  <text x="600" y="791" class="body">강의 태그·옵션처럼 항상 함께 쓰는 값은 포함하고, 공유 강사 원본·독립 변경 데이터·무한 성장 배열은 참조를 검토합니다.</text>
+
+  <text x="600" y="840" class="small">유연한 스키마도 필드명·타입·필수 여부·버전·마이그레이션 규칙을 애플리케이션·검증 계층·DB 기능에서 관리해야 합니다.</text>
+</svg>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="100%"
+  viewBox="0 0 1200 650"
+  role="img"
+  aria-labelledby="title desc"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <title id="title">개발·운영 환경과 계정 분리</title>
+  <desc id="desc">개발 환경과 운영 환경을 각각 별도의 계정, 데이터, 설정 파일과 백업 정책으로 분리하고 중앙의 보호 원칙으로 공유를 차단하는 구조</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#334155"/>
+    </marker>
+    <style>
+      text {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+        fill: #0f172a;
+      }
+      .mono {
+        font-family: Consolas, D2Coding, "Courier New", monospace;
+      }
+      .title {
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .sub {
+        font-size: 14px;
+        fill: #475569;
+      }
+      .group {
+        stroke-width: 2;
+        rx: 18;
+        ry: 18;
+      }
+      .dev-group {
+        fill: #f0fdf4;
+        stroke: #22c55e;
+      }
+      .prod-group {
+        fill: #fff1f2;
+        stroke: #e11d48;
+      }
+      .rule-group {
+        fill: #fff7ed;
+        stroke: #f97316;
+      }
+      .card {
+        fill: #ffffff;
+        stroke: #94a3b8;
+        stroke-width: 1.7;
+        rx: 12;
+        ry: 12;
+      }
+      .head {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .body {
+        font-size: 13.5px;
+        fill: #334155;
+      }
+      .small {
+        font-size: 12.5px;
+        fill: #475569;
+      }
+      .flow {
+        stroke: #334155;
+        stroke-width: 2.2;
+        fill: none;
+        marker-end: url(#arrow);
+      }
+      .barrier {
+        stroke: #f97316;
+        stroke-width: 2.2;
+        stroke-dasharray: 8 7;
+        fill: none;
+      }
+      .note {
+        fill: #f8fafc;
+        stroke: #94a3b8;
+        stroke-width: 1.5;
+        rx: 12;
+        ry: 12;
+      }
+      .rule {
+        font-size: 13.5px;
+        font-weight: 700;
+        fill: #9a3412;
+      }
+      .tag {
+        font-size: 12px;
+        font-weight: 700;
+        fill: #c2410c;
+      }
+    </style>
+  </defs>
+
+  <rect width="1200" height="650" fill="#ffffff"/>
+
+  <text x="600" y="46" text-anchor="middle" class="title">개발·운영 환경과 계정 분리</text>
+  <text x="600" y="76" text-anchor="middle" class="sub">계정, 데이터, 설정 파일과 백업 경로를 분리해 개발 실수가 운영 환경으로 번지는 것을 막습니다.</text>
+
+  <!-- Development area -->
+  <rect x="70" y="115" width="380" height="420" class="group dev-group"/>
+  <text x="260" y="150" text-anchor="middle" class="head">개발 영역</text>
+  <text x="260" y="175" text-anchor="middle" class="small">테스트와 변경 작업을 위한 독립 환경</text>
+
+  <rect x="120" y="205" width="280" height="70" class="card"/>
+  <text x="260" y="233" text-anchor="middle" class="head">개발 환경</text>
+  <text x="260" y="258" text-anchor="middle" class="body">로컬·개발 서버</text>
+
+  <rect x="120" y="300" width="280" height="70" class="card"/>
+  <text x="260" y="328" text-anchor="middle" class="head">개발 전용 계정</text>
+  <text x="260" y="353" text-anchor="middle" class="body">운영 권한과 자격 증명 사용 금지</text>
+
+  <rect x="120" y="395" width="280" height="70" class="card"/>
+  <text x="260" y="423" text-anchor="middle" class="head">가짜·익명 데이터</text>
+  <text x="260" y="448" text-anchor="middle" class="body">실제 개인정보 대신 테스트 데이터 사용</text>
+
+  <path d="M260 275 V300" class="flow"/>
+  <path d="M260 370 V395" class="flow"/>
+
+  <!-- Separation rules -->
+  <rect x="485" y="155" width="230" height="340" class="group rule-group"/>
+  <text x="600" y="190" text-anchor="middle" class="head">분리 원칙</text>
+  <text x="600" y="217" text-anchor="middle" class="small">양쪽 환경 사이의 보호 경계</text>
+
+  <rect x="515" y="245" width="170" height="58" class="card"/>
+  <text x="600" y="280" text-anchor="middle" class="rule">계정 공유 금지</text>
+
+  <rect x="515" y="325" width="170" height="72" class="card"/>
+  <text x="600" y="354" text-anchor="middle" class="rule">운영 비밀정보</text>
+  <text x="600" y="378" text-anchor="middle" class="rule">커밋 금지</text>
+
+  <rect x="515" y="420" width="170" height="50" class="card"/>
+  <text x="600" y="451" text-anchor="middle" class="rule">실데이터 복사 제한</text>
+
+  <path d="M465 205 V470" class="barrier"/>
+  <path d="M735 205 V470" class="barrier"/>
+  <text x="470" y="190" text-anchor="end" class="tag">개발 경계</text>
+  <text x="730" y="190" text-anchor="start" class="tag">운영 경계</text>
+
+  <!-- Production area -->
+  <rect x="750" y="115" width="380" height="420" class="group prod-group"/>
+  <text x="940" y="150" text-anchor="middle" class="head">운영 영역</text>
+  <text x="940" y="175" text-anchor="middle" class="small">실제 사용자와 업무 데이터를 처리하는 환경</text>
+
+  <rect x="800" y="205" width="280" height="70" class="card"/>
+  <text x="940" y="233" text-anchor="middle" class="head">운영 환경</text>
+  <text x="940" y="258" text-anchor="middle" class="body">운영 서버·실제 서비스</text>
+
+  <rect x="800" y="300" width="280" height="70" class="card"/>
+  <text x="940" y="328" text-anchor="middle" class="head">운영 전용 계정</text>
+  <text x="940" y="353" text-anchor="middle" class="body">최소 권한과 접근 승인 적용</text>
+
+  <rect x="800" y="395" width="280" height="70" class="card"/>
+  <text x="940" y="423" text-anchor="middle" class="head">실제 데이터·백업</text>
+  <text x="940" y="448" text-anchor="middle" class="body">암호화·접근 통제·보관 정책 적용</text>
+
+  <path d="M940 275 V300" class="flow"/>
+  <path d="M940 370 V395" class="flow"/>
+
+  <!-- Bottom guidance -->
+  <rect x="150" y="565" width="900" height="52" class="note"/>
+  <text x="600" y="597" text-anchor="middle" class="head">개발 편의를 위해 운영 계정이나 실제 데이터를 재사용하지 않습니다.</text>
+</svg>

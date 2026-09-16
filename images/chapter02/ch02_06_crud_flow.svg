@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">CRUD와 SQL 명령어 흐름</title>
+  <desc id="desc">서비스 요청이 Create, Read, Update, Delete 작업으로 나뉘고 각각 INSERT, SELECT, UPDATE, DELETE SQL 명령으로 DBMS에서 실행되는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .stage{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .c{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .r{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .u{fill:#fff5df;stroke:#d89424;stroke-width:2}
+      .d{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+      .name{font-size:20px;font-weight:700;text-anchor:middle}
+      .sql{font-size:18px;font-weight:700;text-anchor:middle;fill:#0f2d5c;font-family:Consolas,D2Coding,"Courier New",monospace}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}
+      .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .join{stroke:#475569;stroke-width:2.4;fill:none}
+      .note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#fff"/>
+  <text x="600" y="48" class="title">CRUD와 SQL 명령어 흐름</text>
+
+  <rect x="475" y="90" width="250" height="64" rx="14" class="stage"/>
+  <text x="600" y="130" class="name">서비스 요청</text>
+  <path d="M600 154V200" class="line"/>
+
+  <rect x="120" y="205" width="210" height="120" rx="14" class="c"/>
+  <text x="225" y="238" class="name">Create</text>
+  <text x="225" y="268" class="sub">행 추가</text>
+  <text x="225" y="298" class="sql">INSERT</text>
+
+  <rect x="375" y="205" width="210" height="120" rx="14" class="r"/>
+  <text x="480" y="238" class="name">Read</text>
+  <text x="480" y="268" class="sub">행 조회</text>
+  <text x="480" y="298" class="sql">SELECT</text>
+
+  <rect x="630" y="205" width="210" height="120" rx="14" class="u"/>
+  <text x="735" y="238" class="name">Update</text>
+  <text x="735" y="268" class="sub">행 수정</text>
+  <text x="735" y="298" class="sql">UPDATE</text>
+
+  <rect x="885" y="205" width="210" height="120" rx="14" class="d"/>
+  <text x="990" y="238" class="name">Delete</text>
+  <text x="990" y="268" class="sub">행 삭제</text>
+  <text x="990" y="298" class="sql">DELETE</text>
+
+  <path d="M225 325V365H990" class="join"/>
+  <path d="M480 325V365" class="join"/>
+  <path d="M735 325V365" class="join"/>
+  <path d="M990 325V365" class="join"/>
+  <path d="M600 365V384" class="line"/>
+  <rect x="465" y="384" width="270" height="70" rx="14" class="stage"/>
+  <text x="600" y="426" class="name">DBMS에서 실행</text>
+  <path d="M600 454V500" class="line"/>
+  <rect x="445" y="505" width="310" height="64" rx="14" class="stage"/>
+  <text x="600" y="544" class="name">결과 또는 오류 확인</text>
+
+  <text x="600" y="598" class="note">CRUD의 Create는 INSERT이며, CREATE TABLE과는 다른 개념이다.</text>
+</svg>

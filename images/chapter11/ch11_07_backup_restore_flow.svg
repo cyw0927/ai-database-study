@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1240" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">백업 생성부터 복원 검증과 RPO·RTO 판정까지</title>
+  <desc id="desc">백업 범위와 복구 목표를 정의하고 pg_dump로 백업한 뒤 파일 보호, 아카이브 목록과 SHA-256을 확인한다. 원본과 분리된 복원 데이터베이스에서 오류 중단 옵션으로 복원하고 구조, 데이터, 제약조건, 시퀀스, 역할과 권한을 검증한 다음 RPO와 RTO 충족 여부를 판정하고 증거를 기록하는 흐름이다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"NanumSquare","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR","UnDotum",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:"Noto Sans Mono CJK KR","NanumSquare",Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:30px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:14px;text-anchor:middle;fill:#475569}
+      .head{font-size:18px;font-weight:800;text-anchor:middle}
+      .section{font-size:15px;font-weight:700;text-anchor:middle}
+      .body{font-size:13px;text-anchor:middle;fill:#334155}
+      .small{font-size:11.8px;text-anchor:middle;fill:#475569}
+      .step{font-size:12px;font-weight:700;text-anchor:middle;fill:#ffffff}
+      .label{font-size:12px;font-weight:700;text-anchor:middle}
+      .yes{fill:#15803d}.no{fill:#b45309}
+      .card{stroke-width:2;rx:16;ry:16}
+      .principle{fill:#f8fafc;stroke:#94a3b8}
+      .scope{fill:#eff6ff;stroke:#3b82f6}
+      .backup{fill:#faf5ff;stroke:#8b5cf6}
+      .evidence{fill:#fff7ed;stroke:#f97316}
+      .restore{fill:#f0fdf4;stroke:#22c55e}
+      .group{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.5;rx:18;ry:18}
+      .structure{fill:#eff6ff;stroke:#7fb3f5}
+      .data{fill:#f0fdf4;stroke:#86efac}
+      .integrity{fill:#fffbeb;stroke:#fcd34d}
+      .permission{fill:#faf5ff;stroke:#c4b5fd}
+      .detail{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.3;rx:10;ry:10}
+      .warning{fill:#fff1f2;stroke:#e11d48}
+      .decision{fill:#ffffff;stroke:#2563eb}
+      .success{fill:#eaf8ee;stroke:#16a34a}
+      .revise{fill:#fff7ed;stroke:#f97316}
+      .record{fill:#ecfeff;stroke:#06b6d4}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .connector{stroke:#94a3b8;stroke-width:1.7;fill:none;stroke-linejoin:round}
+      .loop{stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.3;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="1240" fill="#ffffff"/>
+  <text x="600" y="46" class="title">백업 생성부터 복원 검증까지</text>
+  <text x="600" y="74" class="subtitle">백업 파일이 존재한다는 사실보다 별도 환경에서 복원하고 업무 기준을 통과했다는 증거가 중요합니다.</text>
+
+  <rect x="90" y="100" width="1020" height="66" class="card principle"/>
+  <text x="600" y="126" class="section">핵심 원칙</text>
+  <text x="600" y="150" class="body">백업 성공·복원 성공·구조와 데이터 검증·권한 검증·RPO와 RTO 충족을 모두 확인해야 복구 가능한 백업으로 판정합니다.</text>
+
+  <!-- Main flow -->
+  <rect x="35" y="205" width="250" height="145" class="card scope"/>
+  <circle cx="65" cy="235" r="15" fill="#3b82f6"/>
+  <text x="65" y="240" class="step">1</text>
+  <text x="160" y="242" class="head">범위와 목표 정의</text>
+  <text x="160" y="273" class="body">security_lab 또는 전체 DB</text>
+  <text x="160" y="297" class="body">백업 형식·보존 위치·담당자</text>
+  <text x="160" y="322" class="mono body">RPO · RTO 목표</text>
+  <text x="160" y="341" class="small">복구해야 할 객체와 허용 손실·시간을 먼저 기록</text>
+
+  <rect x="330" y="205" width="250" height="145" class="card backup"/>
+  <circle cx="360" cy="235" r="15" fill="#8b5cf6"/>
+  <text x="360" y="240" class="step">2</text>
+  <text x="455" y="242" class="head">백업 생성·보호</text>
+  <text x="455" y="273" class="mono body">pg_dump -Fc</text>
+  <text x="455" y="297" class="body">저장·전송 암호화와 접근 통제</text>
+  <text x="455" y="322" class="body">보관 기간·삭제 절차</text>
+  <text x="455" y="341" class="small">비밀번호와 백업 파일은 저장소에 기록하지 않음</text>
+
+  <rect x="625" y="205" width="250" height="145" class="card evidence"/>
+  <circle cx="655" cy="235" r="15" fill="#f97316"/>
+  <text x="655" y="240" class="step">3</text>
+  <text x="750" y="242" class="head">파일 증거 확인</text>
+  <text x="750" y="273" class="mono body">pg_restore --list</text>
+  <text x="750" y="297" class="body">대상 객체·제약조건·시퀀스 목록</text>
+  <text x="750" y="322" class="body">파일 크기·생성 시각·SHA-256</text>
+  <text x="750" y="341" class="small">재전송 후에도 해시가 같은지 확인</text>
+
+  <rect x="920" y="205" width="245" height="145" class="card restore"/>
+  <circle cx="950" cy="235" r="15" fill="#22c55e"/>
+  <text x="950" y="240" class="step">4</text>
+  <text x="1042" y="242" class="head">별도 DB에 복원</text>
+  <text x="1042" y="273" class="body">원본과 분리된 복원 환경</text>
+  <text x="1042" y="297" class="mono body">--exit-on-error</text>
+  <text x="1042" y="322" class="mono body">ON_ERROR_STOP=1</text>
+  <text x="1042" y="341" class="small">시작·완료 시각과 종료 코드·경고를 기록</text>
+
+  <path d="M285 277.5 H330" class="line"/>
+  <path d="M580 277.5 H625" class="line"/>
+  <path d="M875 277.5 H920" class="line"/>
+
+  <!-- Restore warning -->
+  <rect x="170" y="390" width="860" height="74" class="card warning"/>
+  <text x="600" y="419" class="head">소유권과 권한은 백업 옵션에 따라 별도 복구 대상입니다.</text>
+  <text x="600" y="446" class="body"><tspan class="mono">--no-owner · --no-privileges</tspan> 사용 시 역할·소유권·ACL을 계획에 따라 다시 적용하고 실제 허용·거부 작업을 검증합니다.</text>
+  <path d="M1042 350 V373 H600 V390" class="line"/>
+
+  <!-- Verification matrix -->
+  <text x="600" y="515" class="head">5. 복원 결과를 네 영역으로 검증</text>
+  <line x1="35" y1="533" x2="1165" y2="533" class="divider"/>
+
+  <rect x="35" y="555" width="270" height="245" class="card structure"/>
+  <text x="170" y="588" class="head">구조 검증</text>
+  <text x="170" y="615" class="body">스키마·테이블·컬럼 존재</text>
+  <rect x="60" y="637" width="220" height="84" class="detail"/>
+  <text x="170" y="663" class="section">제약조건</text>
+  <text x="170" y="687" class="mono small">PK · FK · UNIQUE · CHECK</text>
+  <text x="170" y="748" class="body">예상하지 않은 객체와 누락 객체 확인</text>
+  <text x="170" y="775" class="small">아카이브 목록과 실제 복원 결과를 비교</text>
+
+  <rect x="325" y="555" width="270" height="245" class="card data"/>
+  <text x="460" y="588" class="head">데이터 검증</text>
+  <rect x="350" y="615" width="220" height="112" class="detail"/>
+  <text x="460" y="641" class="mono section">students = 3</text>
+  <text x="460" y="665" class="mono section">courses = 3</text>
+  <text x="460" y="689" class="mono section">enrollments = 3</text>
+  <text x="460" y="713" class="mono section">JOIN = 3</text>
+  <text x="460" y="752" class="body">기대값과 실제값을 표로 비교</text>
+  <text x="460" y="778" class="small">행 수만 아니라 대표 업무 조회 결과도 확인</text>
+
+  <rect x="615" y="555" width="270" height="245" class="card integrity"/>
+  <text x="750" y="588" class="head">무결성·생성 객체</text>
+  <rect x="640" y="615" width="220" height="112" class="detail"/>
+  <text x="750" y="641" class="section">고아 FK</text>
+  <text x="750" y="665" class="mono body">student = 0 · course = 0</text>
+  <text x="750" y="696" class="section">IDENTITY 시퀀스</text>
+  <text x="750" y="719" class="mono body">예상 3개 유지</text>
+  <text x="750" y="752" class="body">새 INSERT와 번호 생성도 시험</text>
+  <text x="750" y="778" class="small">구조 존재와 실제 동작을 함께 검증</text>
+
+  <rect x="905" y="555" width="260" height="245" class="card permission"/>
+  <text x="1035" y="588" class="head">역할·권한 검증</text>
+  <text x="1035" y="615" class="body">필요 역할·GRANT·ACL 재적용</text>
+  <rect x="930" y="637" width="210" height="84" class="detail"/>
+  <text x="1035" y="663" class="section">실행 테스트</text>
+  <text x="1035" y="687" class="body">SELECT·INSERT·status UPDATE 성공</text>
+  <text x="1035" y="711" class="body">DELETE·SCHEMA CREATE 거부</text>
+  <text x="1035" y="752" class="body">PUBLIC·소유권·멤버십 경로 확인</text>
+  <text x="1035" y="778" class="small">권한 목록과 실제 계정 동작을 함께 기록</text>
+
+  <path d="M600 464 V500" class="connector"/>
+
+  <!-- Decision -->
+  <path d="M600 800 V835" class="line"/>
+  <rect x="250" y="835" width="700" height="100" class="card decision"/>
+  <text x="600" y="868" class="head">백업·복원·구조·데이터·권한 검증이 통과하고</text>
+  <text x="600" y="897" class="head">실제 복구 시간과 데이터 시점이 RPO·RTO 목표를 충족하는가?</text>
+  <text x="600" y="920" class="small">명령 성공만으로 판정하지 않고 업무 기준과 측정 시간을 사용</text>
+
+  <path d="M600 935 V965" class="connector"/>
+  <path d="M600 965 H275 V990" class="line"/>
+  <path d="M600 965 H925 V990" class="line"/>
+  <text x="420" y="958" class="label no">아니요</text>
+  <text x="780" y="958" class="label yes">예</text>
+
+  <rect x="60" y="990" width="430" height="100" class="card revise"/>
+  <text x="275" y="1022" class="head">원인·절차 수정 후 재복원</text>
+  <text x="275" y="1049" class="body">범위·형식·권한·명령·검증 SQL·성능 병목 보완</text>
+  <text x="275" y="1074" class="small">원본이 아닌 새 복원 DB에서 동일 절차를 다시 실행</text>
+
+  <rect x="710" y="990" width="430" height="100" class="card success"/>
+  <text x="925" y="1022" class="head">복구 가능 판정</text>
+  <text x="925" y="1049" class="body">백업 성공 · 복원 성공 · 검증 성공 · 권한 검증 성공</text>
+  <text x="925" y="1074" class="small">복원 DB와 임시 파일의 정리·보존 정책까지 실행</text>
+
+  <path d="M120 990 V820 H210 V800" class="loop"/>
+  <text x="190" y="844" class="small">새 복원 DB에서 재시험</text>
+
+  <!-- Evidence record -->
+  <path d="M925 1090 V1115" class="line"/>
+  <rect x="150" y="1115" width="900" height="82" class="card record"/>
+  <text x="600" y="1146" class="head">복구 실행 증거와 다음 시험 기록</text>
+  <text x="600" y="1173" class="body">서버·도구 버전, 명령, 파일 해시, 시작·완료 시각, 종료 코드, 오류 해결, 검증 결과, 실제 RPO·RTO를 남깁니다.</text>
+  <text x="600" y="1195" class="small">담당자·다음 복원 시험 날짜·인수인계·백업 보관 및 삭제 상태까지 갱신</text>
+
+  <text x="600" y="1230" class="small">핵심: 복원해 보지 않은 백업은 복구 수단으로 확정하지 않으며, 정기적으로 별도 환경에서 같은 절차를 재현합니다.</text>
+</svg>

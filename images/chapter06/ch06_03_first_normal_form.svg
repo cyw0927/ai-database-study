@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">1정규형: 한 셀에 하나의 값</title>
+  <desc id="desc">borrowed_books 한 셀의 여러 책 제목을 한 대여당 한 행으로 나누어 각 셀에 하나의 값만 저장하는 1정규형 전후를 보여 준다.</desc>
+
+  <style>
+    .ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .sub { font-size: 15px; fill: #4b5563; }
+    .h { font-size: 18px; font-weight: 700; }
+    .b { font-size: 14px; }
+    .s { font-size: 12.5px; }
+    .box { stroke: #64748b; stroke-width: 1.7; rx: 14; ry: 14; }
+    .problem { fill: #fff1f1; }
+    .insert { fill: #fff6d8; }
+    .update { fill: #ffeaea; }
+    .delete { fill: #f3edff; }
+    .nf1 { fill: #eaf3ff; }
+    .nf2 { fill: #fff0df; }
+    .nf3 { fill: #f2ecff; }
+    .good { fill: #eaf8ee; }
+    .review { fill: #eaf3ff; }
+    .ai { fill: #f2ecff; }
+    .note { fill: #fff6d8; }
+    .pk { fill: #1d4ed8; font-weight: 700; }
+    .fk { fill: #c2410c; font-weight: 700; }
+    .line { stroke: #475569; stroke-width: 2; fill: none; }
+    .dash { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; }
+    .hot { fill: #b91c1c; font-weight: 700; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="580" fill="#ffffff"/>
+  <text x="600" y="44" text-anchor="middle" class="ko title">1정규형: 한 셀에 하나의 값</text>
+
+  <text x="600" y="72" text-anchor="middle" class="ko sub">업무상 독립적인 여러 값을 쉼표 목록이나 반복 컬럼에 넣지 않습니다.</text>
+  <rect x="70" y="125" width="430" height="230" class="box problem"/>
+  <text x="285" y="160" text-anchor="middle" class="ko h">1NF 적용 전</text>
+
+  <!-- 적용 전 표: 각 열의 중심을 분리해 긴 도서명이 회원명과 겹치지 않도록 배치 -->
+  <text x="135" y="210" text-anchor="middle" class="mono b">member_id</text>
+  <text x="270" y="210" text-anchor="middle" class="mono b">member_name</text>
+  <text x="405" y="210" text-anchor="middle" class="mono b">borrowed_books</text>
+
+  <text x="135" y="265" text-anchor="middle" class="mono b">1</text>
+  <text x="270" y="265" text-anchor="middle" class="ko b">김민지</text>
+  <text x="405" y="265" text-anchor="middle" class="ko s hot">데이터베이스 입문, SQL 기초</text>
+
+  <text x="285" y="325" text-anchor="middle" class="ko b">한 셀에 독립적인 책 두 권 저장</text>
+  <line x1="500" y1="240" x2="690" y2="240" class="line" marker-end="url(#arrow)"/>
+  <text x="595" y="220" text-anchor="middle" class="ko b">한 대여당 한 행</text>
+  <rect x="700" y="125" width="430" height="230" class="box nf1"/>
+  <text x="915" y="160" text-anchor="middle" class="ko h">1NF 적용 후</text>
+  <text x="740" y="205" class="mono b">member_id</text><text x="870" y="205" class="mono b">member_name</text><text x="1010" y="205" class="mono b">book_title</text>
+  <text x="775" y="255" class="mono b">1</text><text x="905" y="255" class="ko b">김민지</text><text x="1010" y="255" text-anchor="middle" class="ko b">데이터베이스 입문</text>
+  <text x="775" y="300" class="mono b">1</text><text x="905" y="300" class="ko b">김민지</text><text x="1010" y="300" text-anchor="middle" class="ko b">SQL 기초</text>
+  <rect x="125" y="415" width="950" height="105" class="box note"/>
+  <text x="600" y="448" text-anchor="middle" class="ko b">한 셀에는 업무상 독립적인 하나의 값</text>
+  <text x="600" y="478" text-anchor="middle" class="ko b">book1·book2 같은 반복 컬럼보다 같은 구조의 행을 추가</text>
+  <text x="600" y="508" text-anchor="middle" class="ko b">1NF를 만족해도 member_name과 book_title의 다른 중복은 남을 수 있음</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">WHERE 조건으로 대상 행 필터링하기</title>
+  <desc id="desc">WHERE major = '컴퓨터공학' 조건이 students의 각 행을 검사하고 TRUE인 행만 결과에 포함하는 과정을 보여 주는 도식</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}.title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    .row{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.8}.cond{fill:#fffceb;stroke:#d6a600;stroke-width:2}
+    .true{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}.false{fill:#f3f4f6;stroke:#94a3b8;stroke-width:2}.result{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+    .name{font-size:18px;font-weight:700;text-anchor:middle}.t{font-size:15px;text-anchor:middle}.tag{font-size:15px;font-weight:700;text-anchor:middle}
+    .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.sub{font-size:14px;text-anchor:middle;fill:#475569}.note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+  </style></defs>
+  <rect width="1200" height="700" fill="#fff"/><text x="600" y="48" class="title">WHERE 조건으로 대상 행 필터링하기</text>
+  <text x="240" y="105" class="name">students 행</text>
+  <rect x="95" y="130" width="290" height="52" rx="10" class="row"/><text x="240" y="162" class="t">김민지 · 컴퓨터공학</text>
+  <rect x="95" y="195" width="290" height="52" rx="10" class="row"/><text x="240" y="227" class="t">이준호 · 데이터사이언스</text>
+  <rect x="95" y="260" width="290" height="52" rx="10" class="row"/><text x="240" y="292" class="t">박서연 · 경영학</text>
+  <rect x="95" y="325" width="290" height="52" rx="10" class="row"/><text x="240" y="357" class="t">최현우 · 컴퓨터공학</text>
+  <rect x="445" y="210" width="310" height="82" rx="14" class="cond"/><text x="600" y="242" class="name">WHERE 조건</text><text x="600" y="270" class="tag">major = '컴퓨터공학'</text>
+  <path d="M385 253H445" class="line"/><path d="M755 253H815" class="line"/>
+  <text x="600" y="330" class="sub">WHERE는 각 행을 조건과 비교한다.</text>
+  <rect x="815" y="130" width="285" height="52" rx="10" class="true"/><text x="900" y="162" class="tag">TRUE</text><text x="1020" y="162" class="t">포함</text>
+  <rect x="815" y="195" width="285" height="52" rx="10" class="false"/><text x="900" y="227" class="tag">FALSE</text><text x="1020" y="227" class="t">제외</text>
+  <rect x="815" y="260" width="285" height="52" rx="10" class="false"/><text x="900" y="292" class="tag">FALSE</text><text x="1020" y="292" class="t">제외</text>
+  <rect x="815" y="325" width="285" height="52" rx="10" class="true"/><text x="900" y="357" class="tag">TRUE</text><text x="1020" y="357" class="t">포함</text>
+  <path d="M957 377V430" class="line"/>
+  <rect x="780" y="435" width="355" height="118" rx="14" class="result"/><text x="958" y="468" class="name">결과</text><text x="958" y="500" class="t">김민지</text><text x="958" y="530" class="t">최현우</text>
+  <text x="600" y="630" class="note">조건이 참인 행만 결과에 포함되며, SELECT의 WHERE는 원본 데이터를 변경하지 않는다.</text>
+</svg>

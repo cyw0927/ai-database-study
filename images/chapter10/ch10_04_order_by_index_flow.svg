@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">ORDER BY에서 인덱스가 사용되는 흐름</title>
+  <desc id="desc">ORDER BY title 쿼리에서 title 인덱스 후보가 있을 때 전체 행 반환과 LIMIT 일부 반환을 비교하고 EXPLAIN ANALYZE와 BUFFERS로 실제 계획을 검증하는 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .sub{font-size:15px;fill:#475569;text-anchor:middle}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;text-anchor:middle;fill:#334155}
+      .small{font-size:13px;text-anchor:middle;fill:#475569}
+      .code{font-family:Consolas,D2Coding,"Courier New",monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8}
+      .section{font-size:16px;font-weight:700;text-anchor:middle;fill:#334155}
+      .card{stroke-width:2;rx:14;ry:14}
+      .query{fill:#eff6ff;stroke:#2563eb}
+      .principle{fill:#f5f3ff;stroke:#8b5cf6}
+      .condition{fill:#ffffff;stroke:#7fb3f5}
+      .scan{fill:#fff7ed;stroke:#f97316}
+      .index{fill:#ecfdf5;stroke:#22c55e}
+      .verify{fill:#eaf3ff;stroke:#2563eb}
+      .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:14;ry:14}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.5;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="800" fill="#ffffff"/>
+  <text x="600" y="48" class="title">ORDER BY에서 인덱스가 사용되는 흐름</text>
+  <text x="600" y="78" class="sub">인덱스가 있어도 반환 범위와 비용에 따라 실행 계획은 달라집니다.</text>
+
+  <rect x="90" y="115" width="390" height="145" class="card query"/>
+  <text x="285" y="151" class="head">정렬 쿼리</text>
+  <text x="285" y="185" class="code">SELECT ... ORDER BY title</text>
+  <text x="285" y="218" class="body">정렬 대상 컬럼: title</text>
+  <text x="285" y="242" class="small">인덱스 후보: (title)</text>
+
+  <rect x="560" y="115" width="550" height="145" class="card principle"/>
+  <text x="835" y="151" class="head">옵티마이저 판단 원칙</text>
+  <text x="835" y="184" class="body">인덱스 존재만으로 Index Scan이 보장되지 않습니다.</text>
+  <text x="835" y="212" class="body">읽을 행 수와 정렬 비용을 포함한 전체 비용을 비교합니다.</text>
+  <text x="835" y="240" class="small">데이터 분포·통계·WHERE 조건·정렬 방향도 함께 영향</text>
+
+  <path d="M480 187H560" class="arrow"/>
+  <path d="M835 260V300" class="arrow"/>
+  <text x="600" y="318" class="section">반환 범위별 실행 계획 비교</text>
+  <line x1="90" y1="337" x2="1110" y2="337" class="divider"/>
+
+  <rect x="110" y="365" width="410" height="105" class="card condition"/>
+  <text x="315" y="399" class="head">전체 행 반환</text>
+  <text x="315" y="429" class="code">ORDER BY title</text>
+  <text x="315" y="454" class="small">LIMIT 없음 · 대부분의 행을 읽음</text>
+
+  <rect x="670" y="365" width="420" height="105" class="card scan"/>
+  <text x="880" y="399" class="head">Seq Scan + Sort 가능</text>
+  <text x="880" y="429" class="body">순차 읽기 후 정렬이 더 저렴할 수 있음</text>
+  <text x="880" y="454" class="small">인덱스 순서 읽기가 항상 유리한 것은 아님</text>
+  <path d="M520 417H670" class="arrow"/>
+
+  <rect x="110" y="500" width="410" height="105" class="card condition"/>
+  <text x="315" y="534" class="head">일부 행 반환</text>
+  <text x="315" y="564" class="code">ORDER BY title LIMIT 20</text>
+  <text x="315" y="589" class="small">정렬 순서의 앞부분만 필요</text>
+
+  <rect x="670" y="500" width="420" height="105" class="card index"/>
+  <text x="880" y="534" class="head">Index Scan 가능성 증가</text>
+  <text x="880" y="564" class="body">인덱스 순서에서 앞의 N건만 읽을 수 있음</text>
+  <text x="880" y="589" class="small">선택도와 테이블 접근 비용은 별도 확인</text>
+  <path d="M520 552H670" class="arrow"/>
+
+  <rect x="230" y="640" width="740" height="72" class="card verify"/>
+  <text x="600" y="669" class="head">EXPLAIN (ANALYZE, BUFFERS)로 검증</text>
+  <text x="600" y="697" class="body">Sort 노드 · 실제 행 수 · Buffers · 실행 시간 · 적용 전후 계획을 비교합니다.</text>
+  <path d="M315 605V625H600V640" class="arrow"/>
+  <path d="M880 605V625H600" class="arrow"/>
+
+  <rect x="180" y="735" width="840" height="52" class="note"/>
+  <text x="600" y="767" class="body">핵심: ORDER BY 인덱스는 정렬 제거 가능성을 제공하지만 최종 선택은 비용 기반 실행 계획으로 확인합니다.</text>
+</svg>

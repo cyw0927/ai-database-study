@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">요구사항부터 분석 결과까지 검증하기</title>
+  <desc id="desc">요구사항, ERD, DDL, 데이터베이스 검증, 분석 VIEW와 Python 결과를 비교하고 불일치 시 최초 지점으로 돌아가는 흐름</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker><style>
+  text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#111827}.t{font-size:29px;font-weight:800;text-anchor:middle}.s{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:13;ry:13}.b{fill:#eff6ff;stroke:#3b82f6}.g{fill:#f0fdf4;stroke:#22c55e}.p{fill:#faf5ff;stroke:#8b5cf6}.y{fill:#fffbeb;stroke:#f59e0b}.c{fill:#ecfeff;stroke:#06b6d4}.r{fill:#fff1f2;stroke:#f43f5e}.head{font-size:15px;font-weight:700;text-anchor:middle}.body{font-size:12px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.retry{stroke:#dc2626;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.tag{font-size:12px;font-weight:700;fill:#475569}
+  </style></defs>
+  <rect width="1200" height="760" fill="#fff"/>
+  <text x="600" y="46" class="t">요구사항부터 분석 결과까지 검증하기</text>
+  <text x="600" y="76" class="s">설계·SQL·Python 결과가 같은 기준을 설명해야 합니다.</text>
+
+  <rect x="30" y="145" width="130" height="90" class="card b"/><text x="95" y="178" class="head">REQ ID</text><text x="95" y="205" class="body">요구사항</text>
+  <rect x="185" y="145" width="130" height="90" class="card g"/><text x="250" y="178" class="head">ERD</text><text x="250" y="205" class="body">관계·카디널리티</text>
+  <rect x="340" y="145" width="130" height="90" class="card p"/><text x="405" y="178" class="head">DDL</text><text x="405" y="205" class="body">테이블·제약</text>
+  <rect x="495" y="145" width="145" height="90" class="card y"/><text x="567" y="178" class="head">메타데이터</text><text x="567" y="205" class="body">실제 구조 확인</text>
+  <rect x="665" y="145" width="130" height="90" class="card p"/><text x="730" y="178" class="head">seed</text><text x="730" y="205" class="body">기준 데이터</text>
+  <rect x="820" y="145" width="160" height="90" class="card y"/><text x="900" y="178" class="head">검증 SQL</text><text x="900" y="205" class="body">조회·반례·트랜잭션</text>
+  <rect x="1005" y="145" width="165" height="90" class="card c"/><text x="1087" y="178" class="head">분석 VIEW</text><text x="1087" y="205" class="body">질문 1건 단위</text>
+  <path d="M160 190 H185" class="line"/><path d="M315 190 H340" class="line"/><path d="M470 190 H495" class="line"/><path d="M640 190 H665" class="line"/><path d="M795 190 H820" class="line"/><path d="M980 190 H1005" class="line"/>
+
+  <rect x="755" y="340" width="220" height="100" class="card c"/><text x="865" y="375" class="head">Python·pandas 분석</text><text x="865" y="405" class="body">상태·월·학생별 집계</text>
+  <rect x="460" y="340" width="220" height="100" class="card y"/><text x="570" y="375" class="head">SQL·Python 비교</text><text x="570" y="405" class="body">행 수·건수·합계</text>
+  <polygon points="285,325 420,390 285,455 150,390" class="card y"/><text x="285" y="378" class="head">기준과 일치?</text><text x="285" y="407" class="body">예상값·실제값</text>
+  <rect x="55" y="550" width="250" height="95" class="card g"/><text x="180" y="584" class="head">검증 증거 기록</text><text x="180" y="614" class="body">analysis·final report</text>
+  <rect x="520" y="550" width="280" height="95" class="card r"/><text x="660" y="584" class="head">최초 불일치 지점 확인</text><text x="660" y="614" class="body">요구사항·설계·SQL·Python 수정</text>
+
+  <path d="M1087 235 V290 H865 V340" class="line"/><path d="M755 390 H680" class="line"/><path d="M460 390 H420" class="line"/>
+  <path d="M245 455 V510 H180 V550" class="line"/><text x="205" y="500" class="tag">예</text>
+  <path d="M325 455 V500 H660 V550" class="retry"/><text x="430" y="492" class="tag">아니요</text>
+  <path d="M660 550 V500 H1180 V115 H250 V145" class="retry"/>
+  <rect x="315" y="680" width="570" height="48" class="card b"/><text x="600" y="710" class="head">기준 예: 행 수 4·3·5·5·6·7 · VIEW 5행 · SQL·pandas 집계 일치</text>
+</svg>

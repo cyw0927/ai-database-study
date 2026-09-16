@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">pandas 데이터 분석 확장 흐름</title>
+  <desc id="desc">DataFrame을 불러온 뒤 행 수와 중복, 자료형을 확인하고 groupby와 agg, pivot_table, 시각화로 확장하며 SQL 기준값과 비교한 뒤 관찰과 한계를 기록하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}.mono{font-family:Consolas,D2Coding,"Courier New",monospace}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14}.input{fill:#ecfeff;stroke:#06b6d4}.check{fill:#fffbeb;stroke:#f59e0b}.python{fill:#faf5ff;stroke:#8b5cf6}.visual{fill:#eff6ff;stroke:#3b82f6}.verify{fill:#ecfdf5;stroke:#16a34a}.report{fill:#f0fdf4;stroke:#22c55e}.head{font-size:16px;font-weight:700;text-anchor:middle}.body{font-size:12.5px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.plain{stroke:#94a3b8;stroke-width:2;fill:none}.note{fill:#fff1f2;stroke:#f43f5e;stroke-width:1.7;rx:12}
+    </style>
+  </defs>
+  <rect width="1200" height="680" fill="#fff"/>
+  <text x="600" y="48" class="title">pandas 데이터 분석 확장 흐름</text>
+  <text x="600" y="76" class="sub">불러온 즉시 구조를 확인하고 집계값을 SQL 기준과 비교한 뒤 시각화합니다.</text>
+
+  <rect x="40" y="170" width="160" height="125" class="card input"/>
+  <text x="120" y="206" class="head">DataFrame</text>
+  <text x="120" y="239" class="body">CSV 또는 PostgreSQL</text>
+  <text x="120" y="265" class="body">분석 VIEW 24행</text>
+
+  <rect x="235" y="170" width="170" height="125" class="card check"/>
+  <text x="320" y="206" class="head">구조 확인</text>
+  <text x="320" y="239" class="body">행 수 · 중복</text>
+  <text x="320" y="265" class="body">날짜 · 숫자 자료형</text>
+
+  <rect x="440" y="170" width="150" height="125" class="card python"/>
+  <text x="515" y="206" class="head mono">groupby · agg</text>
+  <text x="515" y="239" class="body">상태 · 월 · 강의</text>
+  <text x="515" y="265" class="body">건수 · 합계 · 평균</text>
+
+  <rect x="625" y="170" width="150" height="125" class="card python"/>
+  <text x="700" y="206" class="head mono">pivot_table</text>
+  <text x="700" y="239" class="body">강의 × 상태</text>
+  <text x="700" y="265" class="body">재구조화</text>
+
+  <rect x="810" y="170" width="150" height="125" class="card visual"/>
+  <text x="885" y="206" class="head">시각화</text>
+  <text x="885" y="239" class="body">월별 추이</text>
+  <text x="885" y="265" class="body">축 · 단위 확인</text>
+
+  <rect x="995" y="170" width="165" height="125" class="card report"/>
+  <text x="1077.5" y="206" class="head">해석과 기록</text>
+  <text x="1077.5" y="239" class="body">관찰 · 해석</text>
+  <text x="1077.5" y="265" class="body">한계 · 다음 질문</text>
+
+  <path d="M200 232.5 H235" class="line"/>
+  <path d="M405 232.5 H440" class="line"/>
+  <path d="M590 232.5 H625" class="line"/>
+  <path d="M775 232.5 H810" class="line"/>
+  <path d="M960 232.5 H995" class="line"/>
+
+  <rect x="420" y="410" width="360" height="110" class="card verify"/>
+  <text x="600" y="447" class="head">SQL 기준값과 비교</text>
+  <text x="600" y="480" class="body">전체 24 · 상태 12·5·4·3 · 금액 3,210,000</text>
+  <text x="600" y="505" class="body">완료 평균 25일</text>
+
+  <path d="M515 295 V375 H540 V410" class="line"/>
+  <path d="M700 295 V375 H660 V410" class="line"/>
+  <path d="M780 465 H900 V335 H1077.5 V295" class="line"/>
+
+  <rect x="220" y="580" width="760" height="58" class="note"/>
+  <text x="600" y="606" class="head">dropna·drop_duplicates로 오류를 숨기지 않습니다.</text>
+  <text x="600" y="629" class="body">불일치가 있으면 원본·JOIN·기간·자료형부터 확인합니다.</text>
+</svg>

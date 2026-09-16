@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">Column-Family 조회 패턴과 파티션 구조</title>
+  <desc id="desc">학생 101의 특정 날짜 학습 이벤트를 시간순으로 읽는 목표 조회에서 출발해 student_id와 event_date를 파티션 키로, event_time을 정렬 키로 선택하고 파티션 내부 행을 시간순으로 범위 조회하는 구조를 보여준다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Pretendard","Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:30px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:14px;text-anchor:middle;fill:#475569}
+      .head{font-size:18px;font-weight:800;text-anchor:middle}
+      .section{font-size:15px;font-weight:700;text-anchor:middle}
+      .body{font-size:13px;text-anchor:middle;fill:#334155}
+      .small{font-size:11.8px;text-anchor:middle;fill:#475569}
+      .step{font-size:12px;font-weight:700;fill:#ffffff;text-anchor:middle}
+      .table-head{font-size:12px;font-weight:700;text-anchor:middle;fill:#334155}
+      .cell{font-size:12px;text-anchor:middle;fill:#334155}
+      .card{stroke-width:2;rx:16;ry:16}
+      .principle{fill:#f8fafc;stroke:#94a3b8}
+      .query{fill:#eff6ff;stroke:#3b82f6}
+      .partition{fill:#f0fdf4;stroke:#22c55e}
+      .sort{fill:#fffbeb;stroke:#f59e0b}
+      .range{fill:#faf5ff;stroke:#8b5cf6}
+      .check{fill:#fff7ed;stroke:#f97316}
+      .example{fill:#f8fafc;stroke:#64748b}
+      .header{fill:#eaf3ff;stroke:#7fb3f5;stroke-width:1.4;rx:10;ry:10}
+      .row{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.2;rx:8;ry:8}
+      .note{fill:#ecfeff;stroke:#06b6d4}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.2}
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="#ffffff"/>
+  <text x="600" y="46" class="title">Column-Family 조회 패턴과 파티션 구조</text>
+  <text x="600" y="74" class="subtitle">자유 검색을 먼저 기대하지 않고, 반드시 지원해야 할 조회 문장에서 키와 테이블 구조를 결정합니다.</text>
+
+  <rect x="90" y="100" width="1020" height="66" class="card principle"/>
+  <text x="600" y="126" class="section">핵심 원칙</text>
+  <text x="600" y="150" class="body">목표 조회 → 파티션 경계 → 파티션 내부 정렬 → 필요한 범위 읽기의 순서로 설계합니다.</text>
+
+  <!-- Horizontal design flow -->
+  <rect x="35" y="205" width="250" height="135" class="card query"/>
+  <circle cx="65" cy="235" r="15" fill="#3b82f6"/>
+  <text x="65" y="240" class="step">1</text>
+  <text x="160" y="242" class="head">목표 조회</text>
+  <text x="160" y="274" class="body">학생 101의 2026-07-13</text>
+  <text x="160" y="297" class="body">학습 이벤트를 시간순으로 읽기</text>
+  <text x="160" y="322" class="small">조회 문장을 먼저 고정</text>
+
+  <rect x="330" y="205" width="250" height="135" class="card partition"/>
+  <circle cx="360" cy="235" r="15" fill="#22c55e"/>
+  <text x="360" y="240" class="step">2</text>
+  <text x="455" y="242" class="head">Partition Key</text>
+  <text x="455" y="276" class="mono body">(student_id, event_date)</text>
+  <text x="455" y="300" class="body">한 번에 읽을 데이터 경계</text>
+  <text x="455" y="322" class="small">예: (101, 2026-07-13)</text>
+
+  <rect x="625" y="205" width="250" height="135" class="card sort"/>
+  <circle cx="655" cy="235" r="15" fill="#f59e0b"/>
+  <text x="655" y="240" class="step">3</text>
+  <text x="750" y="242" class="head">Sort Key</text>
+  <text x="750" y="276" class="mono body">event_time</text>
+  <text x="750" y="300" class="body">파티션 내부 시간순 정렬</text>
+  <text x="750" y="322" class="small">시간 범위 탐색 기준</text>
+
+  <rect x="920" y="205" width="245" height="135" class="card range"/>
+  <circle cx="950" cy="235" r="15" fill="#8b5cf6"/>
+  <text x="950" y="240" class="step">4</text>
+  <text x="1042" y="242" class="head">범위 조회</text>
+  <text x="1042" y="274" class="body">해당 파티션만 선택</text>
+  <text x="1042" y="297" class="body">필요한 시간 구간을 순서대로 읽기</text>
+  <text x="1042" y="322" class="small">전체 데이터 임의 검색이 아님</text>
+
+  <path d="M285 272.5 H330" class="line"/>
+  <path d="M580 272.5 H625" class="line"/>
+  <path d="M875 272.5 H920" class="line"/>
+
+  <!-- Design checks -->
+  <rect x="35" y="415" width="300" height="320" class="card check"/>
+  <text x="185" y="450" class="head">설계 확인</text>
+  <text x="185" y="477" class="small">키를 정한 뒤 운영 조건까지 검토</text>
+  <line x1="65" y1="495" x2="305" y2="495" class="divider"/>
+
+  <text x="185" y="528" class="section">파티션 크기</text>
+  <text x="185" y="551" class="body">한 학생·하루 데이터가 지나치게 크지 않은가?</text>
+
+  <text x="185" y="586" class="section">쓰기 집중과 핫스팟</text>
+  <text x="185" y="609" class="body">특정 키에 요청이 몰리지 않는가?</text>
+
+  <text x="185" y="644" class="section">중복·지연 이벤트</text>
+  <text x="185" y="667" class="body">event_id와 늦게 도착한 데이터 처리 규칙이 있는가?</text>
+
+  <text x="185" y="702" class="section">보존과 분석 전달</text>
+  <text x="185" y="725" class="body">보존 기간과 분석 시스템 전송 방법을 정했는가?</text>
+
+  <!-- Partition example -->
+  <rect x="380" y="415" width="785" height="320" class="card example"/>
+  <text x="772.5" y="450" class="head">Partition: (student_id=101, event_date=2026-07-13)</text>
+  <text x="772.5" y="476" class="small">같은 파티션 안에서 event_time 순서로 저장·조회되는 예</text>
+
+  <rect x="410" y="500" width="725" height="42" class="header"/>
+  <text x="480" y="526" class="table-head mono">event_time</text>
+  <text x="650" y="526" class="table-head mono">event_type</text>
+  <text x="835" y="526" class="table-head mono">course_id</text>
+  <text x="1035" y="526" class="table-head mono">position_seconds</text>
+
+  <rect x="410" y="552" width="725" height="38" class="row"/>
+  <text x="480" y="576" class="cell mono">09:00:00</text>
+  <text x="650" y="576" class="cell mono">video_start</text>
+  <text x="835" y="576" class="cell mono">DB-101</text>
+  <text x="1035" y="576" class="cell mono">0</text>
+
+  <rect x="410" y="598" width="725" height="38" class="row"/>
+  <text x="480" y="622" class="cell mono">09:15:20</text>
+  <text x="650" y="622" class="cell mono">click</text>
+  <text x="835" y="622" class="cell mono">DB-101</text>
+  <text x="1035" y="622" class="cell mono">300</text>
+
+  <rect x="410" y="644" width="725" height="38" class="row"/>
+  <text x="480" y="668" class="cell mono">09:30:10</text>
+  <text x="650" y="668" class="cell mono">quiz_submit</text>
+  <text x="835" y="668" class="cell mono">DB-101</text>
+  <text x="1035" y="668" class="cell mono">-</text>
+
+  <rect x="410" y="690" width="725" height="38" class="row"/>
+  <text x="480" y="714" class="cell mono">10:05:40</text>
+  <text x="650" y="714" class="cell mono">finish</text>
+  <text x="835" y="714" class="cell mono">DB-101</text>
+  <text x="1035" y="714" class="cell mono">1800</text>
+
+  <path d="M1042 340 V382 H772.5 V415" class="line"/>
+
+  <rect x="100" y="780" width="1000" height="72" class="card note"/>
+  <text x="600" y="809" class="head">조회 패턴이 추가되면 별도 구조가 필요할 수 있습니다.</text>
+  <text x="600" y="836" class="body">강의별 전체 이벤트처럼 다른 파티션 키가 필요한 조회는 별도 테이블·물질화 뷰·파생 파이프라인을 검토합니다.</text>
+
+  <text x="600" y="884" class="small">핵심: 하나의 Column-Family 테이블이 모든 조건을 빠르게 처리하는 것이 아니라, 미리 정의한 조회에 맞춰 데이터를 배치합니다.</text>
+</svg>

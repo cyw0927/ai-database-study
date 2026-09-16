@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">도서 대여 테이블 정규화 흐름</title>
+  <desc id="desc">library_records의 회원, 도서, 대여 컬럼을 각 사실의 주인인 members, books, loans로 분리하고 loans의 외래키로 관계를 연결하는 개념 흐름을 보여 준다.</desc>
+
+  <style>
+    .ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .sub { font-size: 15px; fill: #4b5563; }
+    .h { font-size: 18px; font-weight: 700; }
+    .b { font-size: 14px; }
+    .s { font-size: 12.5px; }
+    .box { stroke: #64748b; stroke-width: 1.7; rx: 14; ry: 14; }
+    .problem { fill: #fff1f1; }
+    .insert { fill: #fff6d8; }
+    .update { fill: #ffeaea; }
+    .delete { fill: #f3edff; }
+    .nf1 { fill: #eaf3ff; }
+    .nf2 { fill: #fff0df; }
+    .nf3 { fill: #f2ecff; }
+    .good { fill: #eaf8ee; }
+    .review { fill: #eaf3ff; }
+    .ai { fill: #f2ecff; }
+    .note { fill: #fff6d8; }
+    .pk { fill: #1d4ed8; font-weight: 700; }
+    .fk { fill: #c2410c; font-weight: 700; }
+    .line { stroke: #475569; stroke-width: 2; fill: none; }
+    .dash { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; }
+    .hot { fill: #b91c1c; font-weight: 700; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="44" text-anchor="middle" class="ko title">도서 대여 테이블 정규화 흐름</text>
+
+  <text x="600" y="72" text-anchor="middle" class="ko sub">정규화와 기존 운영 데이터의 실제 마이그레이션은 서로 다른 작업입니다.</text>
+  <rect x="65" y="115" width="390" height="450" class="box problem"/>
+  <text x="260" y="155" text-anchor="middle" class="mono h">library_records</text>
+  <text x="115" y="215" class="ko h">회원 정보</text><text x="115" y="250" class="mono b">member_name</text><text x="115" y="282" class="mono b">member_email</text>
+  <text x="115" y="345" class="ko h">도서 정보</text><text x="115" y="380" class="mono b">book_title</text><text x="115" y="412" class="mono b">author</text>
+  <text x="115" y="475" class="ko h">대여 정보</text><text x="115" y="510" class="mono b">loan_id · borrowed_at</text><text x="115" y="542" class="mono b">due_at · returned_at</text>
+  <line x1="455" y1="340" x2="585" y2="340" class="line" marker-end="url(#arrow)"/>
+  <text x="520" y="315" text-anchor="middle" class="ko b">사실의 주인별 분리</text>
+  <rect x="620" y="105" width="250" height="180" class="box nf1"/>
+  <text x="745" y="145" text-anchor="middle" class="mono h">members</text><text x="665" y="195" class="mono b pk">id PK</text><text x="665" y="230" class="mono b">name · email</text>
+  <rect x="620" y="330" width="250" height="255" class="box good"/>
+  <text x="745" y="370" text-anchor="middle" class="mono h">loans</text><text x="665" y="420" class="mono b pk">id PK</text><text x="665" y="455" class="mono b fk">member_id FK</text><text x="665" y="490" class="mono b fk">book_id FK</text><text x="665" y="525" class="mono b">borrowed_at · due_at</text><text x="665" y="560" class="mono b">returned_at</text>
+  <rect x="920" y="105" width="250" height="180" class="box nf1"/>
+  <text x="1045" y="145" text-anchor="middle" class="mono h">books</text><text x="965" y="195" class="mono b pk">id PK</text><text x="965" y="230" class="mono b">title · author</text>
+  <line x1="745" y1="285" x2="745" y2="330" class="dash" marker-end="url(#arrow)"/>
+  <path d="M1045 285 C 1045 430, 900 455, 870 455" class="dash" marker-end="url(#arrow)"/>
+  <text x="980" y="420" text-anchor="middle" class="ko s">FK로 관계 표현</text>
+  <rect x="140" y="640" width="920" height="80" class="box note"/>
+  <text x="600" y="670" text-anchor="middle" class="ko b">회원 정보는 members 한 곳, 도서 정보는 books 한 곳, 대여 사건은 loans에 저장</text>
+  <text x="600" y="700" text-anchor="middle" class="ko b">joined_at·published_year·isbn은 Chapter 05 추가 요구사항이며 정규화가 자동 생성한 값이 아님</text>
+</svg>

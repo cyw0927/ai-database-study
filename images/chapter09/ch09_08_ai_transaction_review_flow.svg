@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">AI 생성 트랜잭션 SQL 검토 흐름</title>
+  <desc id="desc">업무 단위 정의부터 AI 초안, 트랜잭션 경계, 대상과 실패 처리, 문장별 실행, COMMIT 전 검증을 거쳐 수정 또는 확정하는 흐름을 보여 준다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b91c1c"/>
+    </marker>
+    <style>.ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+.mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+.title { font-size: 28px; font-weight: 700; }
+.subtitle { font-size: 15px; fill: #4b5563; }
+.box-title { font-size: 18px; font-weight: 700; }
+.body { font-size: 14px; }
+.small { font-size: 12.5px; fill: #4b5563; }
+.card { stroke: #64748b; stroke-width: 1.8; rx: 14; ry: 14; }
+.start { fill: #eaf3ff; }
+.work { fill: #eef5ff; }
+.review { fill: #fff6d8; }
+.ok { fill: #eaf8ee; }
+.fail { fill: #ffeaea; }
+.rule { fill: #f2ecff; }
+.lock { fill: #fff0d9; }
+.line { stroke: #475569; stroke-width: 2.2; fill: none; }
+.dash { stroke: #b45309; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }
+.retry { stroke: #b91c1c; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }</style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="ko title"><tspan x="600" dy="0">AI 생성 트랜잭션 SQL 검토 흐름</tspan></text>
+  <text x="600" y="70" text-anchor="middle" class="ko subtitle"><tspan x="600" dy="0">AI SQL은 완성본이 아니라 업무 규칙으로 검증해야 할 초안입니다.</tspan></text>
+  <rect x="25" y="120" width="190" height="120" rx="14" ry="14" class="card work"/>
+  <text x="120" y="158" text-anchor="middle" class="ko box-title"><tspan x="120" dy="0">1. 업무 단위 정의</tspan></text>
+  <text x="120" y="198" text-anchor="middle" class="ko small"><tspan x="120" dy="0">신청·결제·좌석</tspan></text>
+  <rect x="245" y="120" width="190" height="120" rx="14" ry="14" class="card rule"/>
+  <text x="340" y="158" text-anchor="middle" class="ko box-title"><tspan x="340" dy="0">2. AI 생성 SQL</tspan></text>
+  <text x="340" y="198" text-anchor="middle" class="ko small"><tspan x="340" dy="0">검증 전 초안</tspan></text>
+  <rect x="465" y="120" width="190" height="120" rx="14" ry="14" class="card work"/>
+  <text x="560" y="158" text-anchor="middle" class="ko box-title"><tspan x="560" dy="0">3. 경계 확인</tspan></text>
+  <text x="560" y="198" text-anchor="middle" class="ko small"><tspan x="560" dy="0">BEGIN·COMMIT·ROLLBACK</tspan></text>
+  <rect x="685" y="120" width="190" height="120" rx="14" ry="14" class="card work"/>
+  <text x="780" y="158" text-anchor="middle" class="ko box-title"><tspan x="780" dy="0">4. 대상·조건·Lock</tspan></text>
+  <text x="780" y="198" text-anchor="middle" class="ko small"><tspan x="780" dy="0">학생·강의·좌석·금액</tspan></text>
+  <rect x="905" y="120" width="190" height="120" rx="14" ry="14" class="card work"/>
+  <text x="1000" y="158" text-anchor="middle" class="ko box-title"><tspan x="1000" dy="0">5. 실패 처리</tspan></text>
+  <text x="1000" y="198" text-anchor="middle" class="ko small"><tspan x="1000" dy="0">좌석 0·오류·불일치</tspan></text>
+  <line x1="215" y1="180" x2="245" y2="180" class="line" marker-end="url(#arrow)"/>
+  <line x1="435" y1="180" x2="465" y2="180" class="line" marker-end="url(#arrow)"/>
+  <line x1="655" y1="180" x2="685" y2="180" class="line" marker-end="url(#arrow)"/>
+  <line x1="875" y1="180" x2="905" y2="180" class="line" marker-end="url(#arrow)"/>
+  <rect x="240" y="330" width="260" height="95" rx="14" ry="14" class="card review"/>
+  <text x="370" y="367" text-anchor="middle" class="ko box-title"><tspan x="370" dy="0">6. 개인 실습 DB</tspan></text>
+  <text x="370" y="399" text-anchor="middle" class="ko body"><tspan x="370" dy="0">문장별 실행</tspan></text>
+  <rect x="700" y="330" width="260" height="95" rx="14" ry="14" class="card review"/>
+  <text x="830" y="367" text-anchor="middle" class="ko box-title"><tspan x="830" dy="0">7. COMMIT 전</tspan></text>
+  <text x="830" y="399" text-anchor="middle" class="ko body"><tspan x="830" dy="0">영향 행 수·결과 검증</tspan></text>
+  <path d="M 1000 240 V 285 H 370 V 330" class="line" marker-end="url(#arrow)"/>
+  <line x1="500" y1="378" x2="700" y2="378" class="line" marker-end="url(#arrow)"/>
+  <rect x="470" y="500" width="260" height="105" rx="14" ry="14" class="card review"/>
+  <text x="600" y="540" text-anchor="middle" class="ko box-title"><tspan x="600" dy="0">업무 규칙과 결과가</tspan><tspan x="600" dy="27">일치하는가?</tspan></text>
+  <path d="M 830 425 V 470 H 600 V 500" class="line" marker-end="url(#arrow)"/>
+  <rect x="170" y="660" width="260" height="70" rx="14" ry="14" class="card ok"/>
+  <text x="300" y="695" text-anchor="middle" class="ko box-title"><tspan x="300" dy="0">예 → COMMIT·근거 기록</tspan></text>
+  <rect x="770" y="660" width="260" height="70" rx="14" ry="14" class="card fail"/>
+  <text x="900" y="695" text-anchor="middle" class="ko box-title"><tspan x="900" dy="0">아니요 → ROLLBACK·수정</tspan></text>
+  <path d="M 540 605 V 635 H 300 V 660" class="line" marker-end="url(#arrow)"/>
+  <path d="M 660 605 V 635 H 900 V 660" class="line" marker-end="url(#arrow)"/>
+  <path d="M 900 660 V 465 H 575 V 240" class="retry" marker-end="url(#arrow-red)"/>
+  <text x="755" y="485" text-anchor="middle" class="ko small"><tspan x="755" dy="0">수정 후 재검증</tspan></text>
+</svg>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">Codex 변경·검증·재수정 루프</title>
+  <desc id="desc">오류 재현과 기대 결과, 비밀정보를 제거한 안전한 전달, 수정 범위 지정으로 입력을 준비한 뒤 Codex 최소 변경, 사람의 diff 검토, 같은 조건 재실행을 수행하고 업무 결과와 실행 증거가 완료 기준에 일치하는지 판단해 승인하거나 변경·검증 단계부터 다시 반복하는 직각 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"NanumSquare","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR","UnDotum",Arial,sans-serif;fill:#1f2937}
+      .mono{font-family:"Noto Sans Mono CJK KR","NanumSquare",Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:28px;font-weight:700;text-anchor:middle}
+      .subtitle{font-size:14px;fill:#4b5563;text-anchor:middle}
+      .section{font-size:17px;font-weight:700;text-anchor:middle}
+      .head{font-size:16px;font-weight:700;text-anchor:middle}
+      .body{font-size:13px;text-anchor:middle;fill:#334155}
+      .small{font-size:12px;text-anchor:middle;fill:#475569}
+      .step{font-size:12px;font-weight:700;fill:#ffffff;text-anchor:middle}
+      .label{font-size:12px;font-weight:700;text-anchor:middle}
+      .yes{fill:#15803d}
+      .no{fill:#b45309}
+      .box{stroke-width:1.8;rx:14;ry:14}
+      .group{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.5;rx:18;ry:18}
+      .note{fill:#f1f5f9;stroke:#94a3b8;stroke-width:1.5;rx:14;ry:14}
+      .req{fill:#eaf3ff;stroke:#2563eb}
+      .human{fill:#fff6d8;stroke:#ca8a04}
+      .codex{fill:#fff0dc;stroke:#f59e0b}
+      .ai{fill:#f3edff;stroke:#8b5cf6}
+      .meta{fill:#ffffff;stroke:#7fb3f5}
+      .decision{fill:#ffffff;stroke:#2563eb}
+      .ok{fill:#eaf8ee;stroke:#16a34a}
+      .bad{fill:#fff7ed;stroke:#f97316}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .loop{stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="#ffffff"/>
+  <text x="600" y="45" class="title">Codex 변경·검증·재수정 루프</text>
+  <text x="600" y="73" class="subtitle">오류가 사라졌는지만 보지 않고 변경 범위, diff와 실행 증거를 같은 조건에서 확인합니다.</text>
+
+  <rect x="100" y="95" width="1000" height="55" class="note"/>
+  <text x="600" y="119" class="head">핵심 원칙</text>
+  <text x="600" y="140" class="small">재현 가능한 입력 → 최소 변경 → 사람 검토 → 같은 조건 재실행 → 근거 기반 승인</text>
+
+  <!-- Phase 1 -->
+  <rect x="40" y="180" width="1120" height="180" class="group"/>
+  <text x="600" y="210" class="section">1단계 · 입력 준비</text>
+
+  <rect x="70" y="230" width="300" height="100" class="box req"/>
+  <circle cx="98" cy="258" r="15" fill="#2563eb"/>
+  <text x="98" y="263" class="step">1</text>
+  <text x="220" y="266" class="head">오류 재현과 기대 결과</text>
+  <text x="220" y="295" class="body">실패 SQL · 오류 메시지 · 기대 행 수</text>
+  <text x="220" y="317" class="small">재현 명령과 완료 기준을 함께 기록</text>
+
+  <rect x="450" y="230" width="300" height="100" class="box human"/>
+  <circle cx="478" cy="258" r="15" fill="#ca8a04"/>
+  <text x="478" y="263" class="step">2</text>
+  <text x="600" y="266" class="head">안전한 오류 전달</text>
+  <text x="600" y="295" class="body">비밀정보 제거 · 환경과 조건 명시</text>
+  <text x="600" y="317" class="small">실제 값 대신 재현 가능한 가상값 사용</text>
+
+  <rect x="830" y="230" width="300" height="100" class="box codex"/>
+  <circle cx="858" cy="258" r="15" fill="#f59e0b"/>
+  <text x="858" y="263" class="step">3</text>
+  <text x="980" y="266" class="head">수정 범위 지정</text>
+  <text x="980" y="295" class="body">대상 파일 · 금지 범위 · 완료 기준</text>
+  <text x="980" y="317" class="small">의도 밖 변경을 막는 경계 설정</text>
+
+  <path d="M370 280 H450" class="line"/>
+  <path d="M750 280 H830" class="line"/>
+
+  <path d="M600 360 V395" class="line"/>
+  <text x="638" y="384" class="small">실행 요청</text>
+
+  <!-- Phase 2 -->
+  <rect x="40" y="400" width="1120" height="190" class="group"/>
+  <text x="600" y="430" class="section">2단계 · 변경과 검증</text>
+
+  <rect x="70" y="455" width="300" height="105" class="box ai"/>
+  <circle cx="98" cy="483" r="15" fill="#8b5cf6"/>
+  <text x="98" y="488" class="step">4</text>
+  <text x="220" y="491" class="head">Codex 최소 변경</text>
+  <text x="220" y="520" class="body">원인과 직접 관련된 파일만 수정</text>
+  <text x="220" y="543" class="small">전체 재작성보다 작은 diff 우선</text>
+
+  <rect x="450" y="455" width="300" height="105" class="box human"/>
+  <circle cx="478" cy="483" r="15" fill="#ca8a04"/>
+  <text x="478" y="488" class="step">5</text>
+  <text x="600" y="491" class="head">사람이 파일별 diff 검토</text>
+  <text x="600" y="520" class="body">의도 밖 변경 · 보안 · 가정 확인</text>
+  <text x="600" y="543" class="small">변경 이유와 범위를 설명할 수 있어야 함</text>
+
+  <rect x="830" y="455" width="300" height="105" class="box meta"/>
+  <circle cx="858" cy="483" r="15" fill="#64748b"/>
+  <text x="858" y="488" class="step">6</text>
+  <text x="980" y="491" class="head">같은 조건으로 재실행</text>
+  <text x="980" y="520" class="body">SQL · 테스트 · 행 수 · 메타데이터</text>
+  <text x="980" y="543" class="small">수정 전후를 동일한 입력으로 비교</text>
+
+  <path d="M370 507.5 H450" class="line"/>
+  <path d="M750 507.5 H830" class="line"/>
+
+  <!-- Decision -->
+  <path d="M600 590 V625" class="line"/>
+  <rect x="350" y="625" width="500" height="90" class="box decision"/>
+  <text x="600" y="660" class="head">업무 결과와 실행 증거가</text>
+  <text x="600" y="688" class="head">완료 기준에 모두 일치하는가?</text>
+
+  <path d="M600 715 V742" fill="none" stroke="#475569" stroke-width="2"/>
+  <path d="M600 742 H270 V770" class="line"/>
+  <path d="M600 742 H930 V770" class="line"/>
+  <text x="430" y="735" class="label no">아니요</text>
+  <text x="770" y="735" class="label yes">예</text>
+
+  <rect x="70" y="770" width="400" height="80" class="box bad"/>
+  <text x="270" y="800" class="head">원인·프롬프트·수정 범위 보완</text>
+  <text x="270" y="828" class="body">가정과 실패 근거를 기록하고 4단계부터 다시 검증</text>
+
+  <rect x="730" y="770" width="400" height="80" class="box ok"/>
+  <text x="930" y="800" class="head">승인·증거 기록</text>
+  <text x="930" y="828" class="body">변경 이유 · diff · 실행 결과 · 남은 가정을 남긴 뒤 사람 승인</text>
+
+  <!-- Compact feedback -->
+  <path d="M120 770 V610 H220 V560" class="loop"/>
+  <text x="192" y="632" class="small">4단계부터 재수정</text>
+
+  <text x="600" y="882" class="small">핵심: Codex의 답변이 아니라 제한된 변경 범위, 사람이 확인한 diff와 동일 조건의 실행 결과를 승인 근거로 사용합니다.</text>
+</svg>

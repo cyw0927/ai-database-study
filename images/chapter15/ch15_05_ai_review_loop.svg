@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">AI 제안 검토·수정·재실행 루프</title>
+  <desc id="desc">AI가 제안한 ERD, SQL, Python과 문서를 diff로 확인하고 테스트 환경에서 SQL과 Python 결과를 비교한 뒤 사람이 승인하거나 수정하는 흐름</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker><marker id="retry" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#be123c"/></marker><style>
+  text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#111827}.t{font-size:29px;font-weight:800;text-anchor:middle}.s{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14;ry:14}.b{fill:#eff6ff;stroke:#3b82f6}.p{fill:#faf5ff;stroke:#8b5cf6}.y{fill:#fffbeb;stroke:#f59e0b}.c{fill:#ecfeff;stroke:#06b6d4}.g{fill:#f0fdf4;stroke:#22c55e}.r{fill:#fff1f2;stroke:#f43f5e}.head{font-size:16px;font-weight:700;text-anchor:middle}.body{font-size:12px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.3;fill:none;marker-end:url(#arrow)}.back{stroke:#be123c;stroke-width:2.3;fill:none;marker-end:url(#retry)}.tag{font-size:12px;font-weight:700;fill:#475569}
+  </style></defs>
+  <rect width="1200" height="820" fill="#fff"/>
+  <text x="600" y="46" class="t">AI 제안 검토·수정·재실행 루프</text>
+  <text x="600" y="76" class="s">AI 초안은 SQL과 Python 실행 증거를 통과한 뒤에만 사람이 승인합니다.</text>
+
+  <rect x="35" y="135" width="190" height="110" class="card b"/><text x="130" y="170" class="head">1. 목표·변경 범위</text><text x="130" y="201" class="body">허용·금지 파일 · 기대값</text>
+  <rect x="265" y="135" width="190" height="110" class="card p"/><text x="360" y="170" class="head">2. AI 변경 초안</text><text x="360" y="197" class="body">ERD · SQL · Python</text><text x="360" y="218" class="body">README · 보고서</text>
+  <rect x="495" y="135" width="190" height="110" class="card y"/><text x="590" y="170" class="head">3. diff·위험 확인</text><text x="590" y="197" class="body">DROP · CASCADE · 비밀</text><text x="590" y="218" class="body">임의 데이터 제거</text>
+  <rect x="725" y="135" width="190" height="110" class="card g"/><text x="820" y="170" class="head">4. 사람 사전 검토</text><text x="820" y="201" class="body">설계 근거 · 범위 · 보안</text>
+  <path d="M225 190 H265" class="line"/><path d="M455 190 H495" class="line"/><path d="M685 190 H725" class="line"/>
+
+  <rect x="880" y="320" width="240" height="105" class="card c"/><text x="1000" y="355" class="head">5. 테스트 DB SQL 실행</text><text x="1000" y="385" class="body">구조·행 수·반례·ROLLBACK</text>
+  <rect x="590" y="320" width="240" height="105" class="card c"/><text x="710" y="355" class="head">6. Python 분석 실행</text><text x="710" y="385" class="body">DataFrame·자료형·집계</text>
+  <rect x="300" y="320" width="240" height="105" class="card y"/><text x="420" y="355" class="head">7. SQL·Python 비교</text><text x="420" y="385" class="body">행 수·건수·합계 일치</text>
+  <path d="M820 245 V285 H1000 V320" class="line"/><path d="M880 372 H830" class="line"/><path d="M590 372 H540" class="line"/>
+
+  <polygon points="150,300 270,372 150,444 30,372" class="card y"/><text x="150" y="360" class="head">기준과 일치?</text><text x="150" y="391" class="body">요구사항·예상값</text>
+  <path d="M300 372 H270" class="line"/>
+
+  <rect x="70" y="535" width="300" height="105" class="card g"/><text x="220" y="570" class="head">8. 실행 증거 기록</text><text x="220" y="597" class="body">ai_review_report.md</text><text x="220" y="618" class="body">미실행 항목·한계</text>
+  <rect x="70" y="685" width="300" height="85" class="card g"/><text x="220" y="720" class="head">9. 사람 최종 승인</text><text x="220" y="748" class="body">승인 · 조건부 · 보류</text>
+  <path d="M110 444 V500 H220 V535" class="line"/><text x="80" y="493" class="tag">예</text><path d="M220 640 V685" class="line"/>
+
+  <rect x="580" y="555" width="360" height="110" class="card r"/><text x="760" y="590" class="head">원인 수정</text><text x="760" y="620" class="body">요구사항·ERD·SQL·Python·문서</text><text x="760" y="642" class="body">새 diff부터 다시 검토</text>
+  <path d="M190 444 V500 H760 V555" class="back"/><text x="380" y="493" class="tag">아니요</text>
+  <path d="M940 610 H1160 V105 H590 V135" class="back"/>
+</svg>

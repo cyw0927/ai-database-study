@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">안전한 UPDATE 실행 절차</title>
+  <desc id="desc">UPDATE를 실행하기 전 같은 WHERE로 SELECT하여 수정 대상을 확인하고, 실행 후 같은 WHERE로 다시 SELECT하여 변경 결과를 확인하는 안전 절차</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}.title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    .box{fill:#fff5df;stroke:#d89424;stroke-width:2}.select{fill:#eef5ff;stroke:#3174d0;stroke-width:2}.decision{fill:#fffceb;stroke:#d6a600;stroke-width:2}.ok{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}.bad{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+    .name{font-size:18px;font-weight:700;text-anchor:middle}.sub{font-size:14px;text-anchor:middle;fill:#475569}.mono{font-size:14px;font-weight:700;text-anchor:middle;font-family:Consolas,D2Coding,"Courier New",monospace;fill:#0f2d5c}
+    .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.loop{stroke:#d64545;stroke-width:2.3;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}.label{font-size:16px;font-weight:700;text-anchor:middle}.note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+  </style></defs>
+  <rect width="1200" height="760" fill="#fff"/><text x="600" y="48" class="title">안전한 UPDATE 실행 절차</text>
+  <rect x="405" y="82" width="390" height="76" rx="14" class="box"/><text x="600" y="111" class="name">1. 수정 조건 작성</text><text x="600" y="137" class="mono">SET grade = 3 · WHERE email = ...</text>
+  <path d="M600 158V198" class="line"/>
+  <rect x="405" y="203" width="390" height="70" rx="14" class="select"/><text x="600" y="231" class="name">2. 같은 WHERE로 먼저 SELECT</text><text x="600" y="256" class="sub">수정 대상과 현재 값 확인</text>
+  <path d="M600 273V313" class="line"/>
+  <rect x="405" y="318" width="390" height="66" rx="14" class="decision"/><text x="600" y="346" class="name">의도한 행이 맞는가?</text><text x="600" y="369" class="sub">대상이 아니면 실행 중단</text>
+  <rect x="115" y="318" width="230" height="66" rx="14" class="bad"/><text x="230" y="346" class="name">WHERE 수정</text><text x="230" y="369" class="sub">다시 SELECT</text>
+  <path d="M405 351H345" class="loop"/><text x="375" y="337" class="label" fill="#b42323">아니요</text><path d="M230 318V238H405" class="loop"/>
+  <path d="M600 384V432" class="line"/><text x="630" y="410" class="label" fill="#166534">예</text>
+  <rect x="405" y="437" width="390" height="66" rx="14" class="box"/><text x="600" y="475" class="name">3. UPDATE 실행</text>
+  <path d="M600 503V543" class="line"/>
+  <rect x="405" y="548" width="390" height="70" rx="14" class="select"/><text x="600" y="576" class="name">4. 같은 WHERE로 다시 SELECT</text><text x="600" y="601" class="sub">변경값과 다른 컬럼 유지 여부 확인</text>
+  <path d="M600 618V655" class="line"/>
+  <rect x="405" y="660" width="390" height="60" rx="14" class="ok"/><text x="600" y="696" class="name">예상 결과와 일치하면 완료</text>
+  <text x="600" y="744" class="note">WHERE가 없으면 전체 행이 수정될 수 있다. 가능하면 기본키나 UNIQUE 값으로 대상을 좁힌다.</text>
+</svg>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">PostgreSQL 데이터를 Python과 pandas로 읽기</title>
+  <desc id="desc">개발·테스트 PostgreSQL의 분석 VIEW를 읽기 전용 계정과 libpq 환경변수, SQLAlchemy URL.create와 psycopg를 통해 pandas DataFrame으로 읽고 컬럼·자료형·기간을 확인하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}.mono{font-family:Consolas,D2Coding,"Courier New",monospace}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14}.db{fill:#eff6ff;stroke:#3b82f6}.safe{fill:#ecfdf5;stroke:#16a34a}.env{fill:#fffbeb;stroke:#f59e0b}.code{fill:#faf5ff;stroke:#8b5cf6}.data{fill:#ecfeff;stroke:#06b6d4}.head{font-size:16px;font-weight:700;text-anchor:middle}.body{font-size:12.5px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.warn{fill:#fff1f2;stroke:#f43f5e;stroke-width:1.8;rx:12}.note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.5;rx:12}
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#fff"/>
+  <text x="600" y="48" class="title">PostgreSQL 데이터를 Python과 pandas로 읽기</text>
+  <text x="600" y="76" class="sub">비밀번호는 코드에 넣지 않고 libpq password file을 사용하며 읽기 전용 연결을 확인합니다.</text>
+
+  <rect x="25" y="180" width="160" height="140" class="card db"/>
+  <text x="105" y="215" class="head">PostgreSQL</text>
+  <text x="105" y="247" class="body mono">analysis_lab</text>
+  <text x="105" y="274" class="body">분석 VIEW</text>
+  <text x="105" y="299" class="body">기간 제한</text>
+
+  <rect x="215" y="180" width="160" height="140" class="card safe"/>
+  <text x="295" y="215" class="head">안전한 연결</text>
+  <text x="295" y="247" class="body">개발·테스트 DB</text>
+  <text x="295" y="274" class="body">읽기 전용</text>
+  <text x="295" y="299" class="body">DB·VIEW 확인</text>
+
+  <rect x="405" y="180" width="210" height="140" class="card env"/>
+  <text x="510" y="211" class="head">libpq 환경변수</text>
+  <text x="510" y="241" class="body mono">PGHOST · PGPORT</text>
+  <text x="510" y="266" class="body mono">PGDATABASE · PGUSER</text>
+  <text x="510" y="291" class="body mono">PGPASSFILE</text>
+
+  <rect x="645" y="180" width="170" height="140" class="card code"/>
+  <text x="730" y="215" class="head">연결 구성</text>
+  <text x="730" y="247" class="body mono">URL.create()</text>
+  <text x="730" y="274" class="body mono">SQLAlchemy</text>
+  <text x="730" y="299" class="body mono">psycopg</text>
+
+  <rect x="845" y="180" width="160" height="140" class="card code"/>
+  <text x="925" y="215" class="head mono">read_sql_query</text>
+  <text x="925" y="247" class="body">검증된 SELECT</text>
+  <text x="925" y="274" class="body">행 순서 명시</text>
+  <text x="925" y="299" class="body">같은 스냅샷</text>
+
+  <rect x="1035" y="180" width="140" height="140" class="card data"/>
+  <text x="1105" y="215" class="head">DataFrame</text>
+  <text x="1105" y="247" class="body">17개 컬럼</text>
+  <text x="1105" y="274" class="body">행 수 24</text>
+  <text x="1105" y="299" class="body">자료형·기간</text>
+
+  <path d="M185 250 H215" class="line"/>
+  <path d="M375 250 H405" class="line"/>
+  <path d="M615 250 H645" class="line"/>
+  <path d="M815 250 H845" class="line"/>
+  <path d="M1005 250 H1035" class="line"/>
+
+  <rect x="145" y="420" width="910" height="105" class="warn"/>
+  <text x="600" y="455" class="head">연결 전 확인</text>
+  <text x="600" y="486" class="body">비밀번호·전체 접속 URL 코드 직접 입력 금지 · 운영 DB 직접 연결 금지</text>
+  <text x="600" y="510" class="body">transaction_read_only 확인 · 분석 코드에서 UPDATE · DELETE · DROP 자동 실행 금지</text>
+
+  <rect x="240" y="565" width="720" height="48" class="note"/>
+  <text x="600" y="595" class="head">연결 성공보다 어떤 DB·VIEW·기간을 어떤 권한으로 읽는지 확인하는 것이 먼저입니다.</text>
+</svg>

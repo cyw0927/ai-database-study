@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">데이터베이스 필요 여부 판단 흐름</title>
+  <desc id="desc">동시 접근, 데이터 관계, 정확성, 반복 검색, 권한과 복구가 중요하면 관계형 데이터베이스를 우선 검토하고, 그렇지 않으면 스프레드시트나 파일을 검토하는 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .q{fill:#f8fafc;stroke:#64748b;stroke-width:2.2}
+      .db{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2.4}
+      .sheet{fill:#eef5ff;stroke:#3b82f6;stroke-width:2.4}
+      .file{fill:#eef9f1;stroke:#2f9a58;stroke-width:2.4}
+      .note{fill:#eef5ff;stroke:#4d86d7;stroke-width:2.2}
+      .head{font-size:21px;font-weight:700;text-anchor:middle}
+      .body{font-size:16px;text-anchor:middle;fill:#334155}
+      .kw{font-size:15px;font-weight:700;text-anchor:middle;fill:#5b34a2}
+      .label{font-size:15px;font-weight:700;text-anchor:middle;fill:#334155}
+      .result{font-size:23px;font-weight:700;text-anchor:middle}
+      .dbt{fill:#5b34a2}.sht{fill:#1f5fb8}.flt{fill:#1f7a42}
+      .line{stroke:#475569;stroke-width:2.3;fill:none;stroke-linecap:round;marker-end:url(#arrow)}
+      .plain{stroke:#475569;stroke-width:2.3;fill:none;stroke-linecap:round}
+      .note-text{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="720" fill="#fff"/>
+  <text x="600" y="48" class="title">데이터베이스 필요 여부 판단 흐름</text>
+
+  <rect x="320" y="82" width="560" height="150" rx="18" ry="18" class="q"/>
+  <text x="600" y="116" class="head">다음 요구가 중요하거나 반복적으로 발생하는가?</text>
+  <text x="380" y="154" class="kw">여러 사용자</text>
+  <text x="500" y="154" class="kw">데이터 관계</text>
+  <text x="620" y="154" class="kw">정확성·트랜잭션</text>
+  <text x="750" y="154" class="kw">반복 검색·집계</text>
+  <text x="600" y="192" class="kw">권한·백업·복구</text>
+
+  <line x1="600" y1="232" x2="600" y2="270" class="plain"/>
+  <line x1="360" y1="270" x2="840" y2="270" class="plain"/>
+  <line x1="840" y1="270" x2="840" y2="318" class="line"/>
+  <line x1="360" y1="270" x2="360" y2="318" class="line"/>
+  <text x="872" y="264" class="label">예</text>
+  <text x="328" y="264" class="label">아니요</text>
+
+  <rect x="650" y="318" width="380" height="96" rx="18" ry="18" class="db"/>
+  <text x="840" y="356" class="result dbt">관계형 데이터베이스 우선 검토</text>
+  <text x="840" y="386" class="body">PostgreSQL · MySQL</text>
+
+  <rect x="150" y="318" width="420" height="86" rx="18" ry="18" class="q"/>
+  <text x="360" y="351" class="head">사람이 표로 직접 편집·계산하는가?</text>
+  <text x="360" y="377" class="body">명단, 일정, 간단한 통계처럼 사람이 직접 다루는가?</text>
+
+  <line x1="360" y1="404" x2="360" y2="452" class="plain"/>
+  <line x1="220" y1="452" x2="500" y2="452" class="plain"/>
+  <line x1="220" y1="452" x2="220" y2="490" class="line"/>
+  <line x1="500" y1="452" x2="500" y2="490" class="line"/>
+  <text x="190" y="444" class="label">아니요</text>
+  <text x="530" y="444" class="label">예</text>
+
+  <rect x="90" y="490" width="260" height="86" rx="18" ry="18" class="file"/>
+  <text x="220" y="526" class="result flt">파일</text>
+  <text x="220" y="554" class="body">작고 단순한 데이터</text>
+
+  <rect x="390" y="490" width="260" height="86" rx="18" ry="18" class="sheet"/>
+  <text x="520" y="526" class="result sht">스프레드시트</text>
+  <text x="520" y="554" class="body">사람이 관리하는 표</text>
+
+  <rect x="160" y="630" width="880" height="42" rx="18" ry="18" class="note"/>
+  <text x="600" y="657" class="note-text">데이터 크기보다 운영 책임과 반복 업무를 기준으로 판단한다.</text>
+</svg>

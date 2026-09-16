@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="100%"
+  viewBox="0 0 1200 650"
+  role="img"
+  aria-labelledby="title desc"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <title id="title">실행 가능한 DB 작업 프롬프트의 구성</title>
+  <desc id="desc">배경과 목표, 확인된 요구사항, 미확정 규칙, 수정 범위, 출력 형식과 검증 기준을 명확한 DB 작업 요청으로 모아 검토 가능한 초안과 재현 가능한 결과로 발전시키는 구조</desc>
+
+  <style>
+    text {
+      font-family: "NanumSquare", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+      fill: #1f2937;
+    }
+    .mono {
+      font-family: "Noto Sans Mono CJK KR", Consolas, D2Coding, "Courier New", monospace;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 14px;
+      fill: #4b5563;
+    }
+    .head {
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .body {
+      font-size: 13px;
+      fill: #475569;
+    }
+    .small {
+      font-size: 12px;
+      fill: #475569;
+    }
+    .box {
+      stroke: #64748b;
+      stroke-width: 1.8;
+      rx: 14;
+      ry: 14;
+    }
+    .req {
+      fill: #eaf3ff;
+    }
+    .human {
+      fill: #fff6d8;
+    }
+    .codex {
+      fill: #fff0dc;
+    }
+    .meta {
+      fill: #f1f5f9;
+    }
+    .ai {
+      fill: #f3edff;
+    }
+    .ok {
+      fill: #eaf8ee;
+    }
+    .line {
+      stroke: #475569;
+      stroke-width: 2;
+      fill: none;
+      marker-end: url(#arrow);
+    }
+    .guide {
+      stroke: #94a3b8;
+      stroke-width: 1.6;
+      stroke-dasharray: 5 5;
+      fill: none;
+    }
+    .group-label {
+      font-size: 12.5px;
+      font-weight: 700;
+      fill: #64748b;
+    }
+  </style>
+
+  <defs>
+    <marker
+      id="arrow"
+      viewBox="0 0 10 10"
+      refX="9"
+      refY="5"
+      markerWidth="7"
+      markerHeight="7"
+      orient="auto"
+    >
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="650" fill="#ffffff" />
+
+  <text x="600" y="45" text-anchor="middle" class="title">실행 가능한 DB 작업 프롬프트의 구성</text>
+  <text x="600" y="73" text-anchor="middle" class="subtitle">요청 범위와 완료 기준이 명확해야 결과를 검토하고 다시 실행할 수 있습니다.</text>
+
+  <!-- Requirement inputs -->
+  <text x="210" y="112" text-anchor="middle" class="group-label">업무 맥락과 규칙</text>
+  <rect x="60" y="125" width="300" height="66" class="box req" />
+  <text x="210" y="164" text-anchor="middle" class="head">배경과 목표</text>
+
+  <rect x="60" y="220" width="300" height="66" class="box req" />
+  <text x="210" y="259" text-anchor="middle" class="head">확인된 요구사항</text>
+
+  <rect x="60" y="315" width="300" height="66" class="box human" />
+  <text x="210" y="354" text-anchor="middle" class="head">미확정 규칙</text>
+
+  <!-- Execution inputs -->
+  <text x="990" y="112" text-anchor="middle" class="group-label">실행 범위와 검증 조건</text>
+  <rect x="840" y="125" width="300" height="66" class="box codex" />
+  <text x="990" y="164" text-anchor="middle" class="head">수정 대상·금지 범위</text>
+
+  <rect x="840" y="220" width="300" height="66" class="box meta" />
+  <text x="990" y="259" text-anchor="middle" class="head">출력 형식</text>
+
+  <rect x="840" y="315" width="300" height="66" class="box ok" />
+  <text x="990" y="354" text-anchor="middle" class="head">검증·완료 기준</text>
+
+  <!-- Central request -->
+  <rect x="420" y="205" width="360" height="105" class="box ai" />
+  <text x="600" y="247" text-anchor="middle" class="head">명확한 DB 작업 요청</text>
+  <text x="600" y="278" text-anchor="middle" class="body">무엇을, 어디까지, 어떤 기준으로 완료할지 명시</text>
+
+  <!-- Left-side connectors: route outside the input boxes -->
+  <path d="M360 158 H395 V225 H420" class="line" />
+  <path d="M360 253 H420" class="line" />
+  <path d="M360 348 H395 V290 H420" class="line" />
+
+  <!-- Right-side connectors: route outside the input boxes -->
+  <path d="M840 158 H805 V225 H780" class="line" />
+  <path d="M840 253 H780" class="line" />
+  <path d="M840 348 H805 V290 H780" class="line" />
+
+  <!-- Review and execution results -->
+  <rect x="245" y="445" width="310" height="72" class="box human" />
+  <text x="400" y="477" text-anchor="middle" class="head">검토 가능한 초안</text>
+  <text x="400" y="500" text-anchor="middle" class="body">누락·가정·오류를 사람이 확인</text>
+
+  <rect x="645" y="445" width="310" height="72" class="box ok" />
+  <text x="800" y="477" text-anchor="middle" class="head">재현 가능한 결과</text>
+  <text x="800" y="500" text-anchor="middle" class="body">같은 입력과 절차로 다시 실행 가능</text>
+
+  <path d="M600 310 V405 H400 V445" class="line" />
+  <path d="M555 481 H645" class="line" />
+  <text x="600" y="466" text-anchor="middle" class="group-label">검토 후 실행</text>
+
+  <!-- Concrete example -->
+  <path d="M120 555 H1080" class="guide" />
+  <text x="600" y="586" text-anchor="middle" class="small">구체적인 범위와 수량, 금지 조건까지 포함하면 검증 기준이 분명해집니다.</text>
+  <text x="600" y="616" text-anchor="middle" class="mono small">PostgreSQL · Chapter 13 SQL 파일 · FK 4개 · JOIN 4행 · 다른 Chapter 수정 금지</text>
+</svg>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1100" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">AI 추천 NoSQL 선택 검토 흐름</title>
+  <desc id="desc">AI가 제안한 NoSQL 저장소를 현재 RDBMS와 JSONB 기준선, 시스템 역할, 조회와 쓰기 패턴, 일관성, 동기화, 운영 책임으로 검토하고 작은 PoC를 거쳐 단계적 적용 또는 보류를 결정하는 직각 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Pretendard","Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:30px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:14px;text-anchor:middle;fill:#475569}
+      .head{font-size:17px;font-weight:800;text-anchor:middle}
+      .section{font-size:14.5px;font-weight:700;text-anchor:middle}
+      .body{font-size:13px;text-anchor:middle;fill:#334155}
+      .small{font-size:11.8px;text-anchor:middle;fill:#475569}
+      .step{font-size:12px;font-weight:700;fill:#ffffff;text-anchor:middle}
+      .label{font-size:12px;font-weight:700;text-anchor:middle}
+      .yes{fill:#15803d}.no{fill:#b45309}
+      .card{stroke-width:2;rx:16;ry:16}
+      .principle{fill:#f8fafc;stroke:#94a3b8}
+      .draft{fill:#faf5ff;stroke:#8b5cf6}
+      .baseline{fill:#eff6ff;stroke:#3b82f6}
+      .review{fill:#fff7ed;stroke:#f97316}
+      .poc{fill:#ecfeff;stroke:#06b6d4}
+      .group{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.5;rx:16;ry:16}
+      .role{fill:#eff6ff;stroke:#7fb3f5}
+      .pattern{fill:#f0fdf4;stroke:#86efac}
+      .consistency{fill:#fffbeb;stroke:#fcd34d}
+      .compare{fill:#faf5ff;stroke:#c4b5fd}
+      .sync{fill:#fff7ed;stroke:#fdba74}
+      .ops{fill:#ecfeff;stroke:#67e8f9}
+      .decision{fill:#ffffff;stroke:#2563eb}
+      .apply{fill:#eaf8ee;stroke:#16a34a}
+      .hold{fill:#fff7ed;stroke:#f97316}
+      .record{fill:#f8fafc;stroke:#64748b}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .connector{stroke:#94a3b8;stroke-width:1.7;fill:none;stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.4;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="1100" fill="#ffffff"/>
+  <text x="600" y="46" class="title">AI 추천 NoSQL 선택 검토 흐름</text>
+  <text x="600" y="74" class="subtitle">AI의 추천은 선택 초안입니다. 현재 방식과 같은 기준으로 측정하고 운영 책임까지 확인합니다.</text>
+
+  <rect x="90" y="100" width="1020" height="66" class="card principle"/>
+  <text x="600" y="126" class="section">핵심 원칙</text>
+  <text x="600" y="150" class="body">저장소 이름이나 유행이 아니라 원본, 핵심 조회, 허용 가능한 불일치와 장애 복구 책임을 먼저 정의합니다.</text>
+
+  <!-- Horizontal review flow -->
+  <rect x="35" y="205" width="250" height="135" class="card draft"/>
+  <circle cx="65" cy="235" r="15" fill="#8b5cf6"/>
+  <text x="65" y="240" class="step">1</text>
+  <text x="160" y="242" class="head">AI 추천 초안 정리</text>
+  <text x="160" y="272" class="body">추천 저장소·적용 데이터</text>
+  <text x="160" y="296" class="body">기대 효과·제외 근거</text>
+  <text x="160" y="320" class="small">추천 문장을 검증 가능한 가정으로 변환</text>
+
+  <rect x="330" y="205" width="250" height="135" class="card baseline"/>
+  <circle cx="360" cy="235" r="15" fill="#3b82f6"/>
+  <text x="360" y="240" class="step">2</text>
+  <text x="455" y="242" class="head">현재 기준선 확인</text>
+  <text x="455" y="272" class="body">원본 PostgreSQL·JSONB</text>
+  <text x="455" y="296" class="body">가능한 범위와 실제 문제 측정</text>
+  <text x="455" y="320" class="small">현재 방식이 부족한 이유부터 증명</text>
+
+  <rect x="625" y="205" width="250" height="135" class="card review"/>
+  <circle cx="655" cy="235" r="15" fill="#f97316"/>
+  <text x="655" y="240" class="step">3</text>
+  <text x="750" y="242" class="head">같은 기준으로 검토</text>
+  <text x="750" y="272" class="body">역할·조회·일관성·동기화</text>
+  <text x="750" y="296" class="body">운영·복구 책임 비교</text>
+  <text x="750" y="320" class="small">추천안과 현재 방식을 동일한 표에 기록</text>
+
+  <rect x="920" y="205" width="245" height="135" class="card poc"/>
+  <circle cx="950" cy="235" r="15" fill="#06b6d4"/>
+  <text x="950" y="240" class="step">4</text>
+  <text x="1042" y="242" class="head">작은 PoC</text>
+  <text x="1042" y="272" class="body">대표 조회·쓰기·지연</text>
+  <text x="1042" y="296" class="body">오류·복구·운영 비용 비교</text>
+  <text x="1042" y="320" class="small">실제와 비슷한 분포와 실패 조건 사용</text>
+
+  <path d="M285 272.5 H330" class="line"/>
+  <path d="M580 272.5 H625" class="line"/>
+  <path d="M875 272.5 H920" class="line"/>
+
+  <!-- Review matrix -->
+  <path d="M750 340 V375" class="connector"/>
+  <text x="600" y="392" class="head">필수 검토 항목</text>
+  <line x1="35" y1="410" x2="1165" y2="410" class="divider"/>
+
+  <rect x="35" y="430" width="350" height="135" class="group role"/>
+  <text x="210" y="461" class="head">시스템 역할과 원본</text>
+  <text x="210" y="490" class="body">최종 판단 기준인 Source of Truth인가?</text>
+  <text x="210" y="516" class="body">캐시·이벤트·관계 인덱스처럼 재생성 가능한가?</text>
+  <text x="210" y="542" class="small">장애 시 어느 저장소를 신뢰할지 명시</text>
+
+  <rect x="425" y="430" width="350" height="135" class="group pattern"/>
+  <text x="600" y="461" class="head">조회·쓰기 패턴</text>
+  <text x="600" y="490" class="body">키·조건·정렬·관계 깊이와 빈도는 무엇인가?</text>
+  <text x="600" y="516" class="body">데이터 규모와 분포·핫스팟을 재현했는가?</text>
+  <text x="600" y="542" class="small">제품명이 아니라 구체적인 질의에서 출발</text>
+
+  <rect x="815" y="430" width="350" height="135" class="group consistency"/>
+  <text x="990" y="461" class="head">일관성·트랜잭션</text>
+  <text x="990" y="490" class="body">오래된 읽기·중복·갱신 지연을 얼마나 허용하는가?</text>
+  <text x="990" y="516" class="body">한 키·문서·파티션·다중 객체 중 작업 단위는?</text>
+  <text x="990" y="542" class="small">중간 실패와 충돌 처리 규칙까지 확인</text>
+
+  <rect x="35" y="590" width="350" height="135" class="group compare"/>
+  <text x="210" y="621" class="head">RDBMS·JSONB 비교</text>
+  <text x="210" y="650" class="body">현재 방식으로 해결하기 어려운 문제가 측정됐는가?</text>
+  <text x="210" y="676" class="body">JOIN·제약·트랜잭션 이점을 잃는 비용은?</text>
+  <text x="210" y="702" class="small">새 저장소 도입 자체를 목표로 삼지 않음</text>
+
+  <rect x="425" y="590" width="350" height="135" class="group sync"/>
+  <text x="600" y="621" class="head">동기화·실패 복구</text>
+  <text x="600" y="650" class="body">이중 쓰기 실패·재시도·중복 처리를 설계했는가?</text>
+  <text x="600" y="676" class="body">멱등성 키·대조·재처리·재구축 절차가 있는가?</text>
+  <text x="600" y="702" class="small">원본과 파생 저장소의 버전·갱신 시각 기록</text>
+
+  <rect x="815" y="590" width="350" height="135" class="group ops"/>
+  <text x="990" y="621" class="head">운영 책임과 비용</text>
+  <text x="990" y="650" class="body">배포·모니터링·권한·백업·복원 담당은 누구인가?</text>
+  <text x="990" y="676" class="body">장애 대응·보안·인프라 비용을 감당할 수 있는가?</text>
+  <text x="990" y="702" class="small">성능뿐 아니라 운영 복잡도도 PoC 결과에 포함</text>
+
+  <!-- Decision -->
+  <path d="M600 725 V755" class="line"/>
+  <rect x="270" y="755" width="660" height="88" class="card decision"/>
+  <text x="600" y="788" class="head">새 저장소의 이점이 측정되었고</text>
+  <text x="600" y="817" class="head">원본·동기화·운영 책임이 명확한가?</text>
+
+  <path d="M600 843 V870" class="connector"/>
+  <path d="M600 870 H275 V895" class="line"/>
+  <path d="M600 870 H925 V895" class="line"/>
+  <text x="420" y="863" class="label no">아니요</text>
+  <text x="780" y="863" class="label yes">예</text>
+
+  <rect x="60" y="895" width="430" height="82" class="card hold"/>
+  <text x="275" y="926" class="head">보류 또는 제외</text>
+  <text x="275" y="953" class="body">RDBMS·JSONB 유지 또는 요구사항과 추천 근거 재정의</text>
+
+  <rect x="710" y="895" width="430" height="82" class="card apply"/>
+  <text x="925" y="926" class="head">단계적 적용 후보</text>
+  <text x="925" y="953" class="body">범위 제한·관측 지표·롤백·재구축 계획과 함께 적용</text>
+
+  <path d="M275 977 V1000" class="line"/>
+  <path d="M925 977 V1000" class="line"/>
+  <rect x="150" y="1000" width="900" height="68" class="card record"/>
+  <text x="600" y="1027" class="head">결정과 증거 기록</text>
+  <text x="600" y="1052" class="body">추천 근거·기준선·PoC 측정값·제외 대안·남은 위험·운영 담당을 함께 남깁니다.</text>
+
+  <text x="600" y="1090" class="small">핵심: AI 추천의 그럴듯함이 아니라 현재 방식보다 나은 측정 근거와 실패 시 복구 가능한 운영 설계를 승인 기준으로 사용합니다.</text>
+</svg>

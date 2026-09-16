@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">수강신청·결제·좌석 변경 트랜잭션</title>
+  <desc id="desc">강의 행을 잠그고 좌석 UPDATE의 반환 행을 확인한 뒤 신청과 결제를 연결하고 COMMIT 전 검증하는 흐름을 보여 준다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b91c1c"/>
+    </marker>
+    <style>.ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+.mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+.title { font-size: 28px; font-weight: 700; }
+.subtitle { font-size: 15px; fill: #4b5563; }
+.box-title { font-size: 18px; font-weight: 700; }
+.body { font-size: 14px; }
+.small { font-size: 12.5px; fill: #4b5563; }
+.card { stroke: #64748b; stroke-width: 1.8; rx: 14; ry: 14; }
+.start { fill: #eaf3ff; }
+.work { fill: #eef5ff; }
+.review { fill: #fff6d8; }
+.ok { fill: #eaf8ee; }
+.fail { fill: #ffeaea; }
+.rule { fill: #f2ecff; }
+.lock { fill: #fff0d9; }
+.line { stroke: #475569; stroke-width: 2.2; fill: none; }
+.dash { stroke: #b45309; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }
+.retry { stroke: #b91c1c; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }</style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="ko title"><tspan x="600" dy="0">수강신청·결제·좌석 변경 트랜잭션</tspan></text>
+  <text x="600" y="70" text-anchor="middle" class="ko subtitle"><tspan x="600" dy="0">좌석 확보 성공을 확인한 뒤에만 신청과 결제를 추가합니다.</tspan></text>
+  <rect x="25" y="120" width="175" height="95" rx="14" ry="14" class="card work"/>
+  <text x="112" y="155" text-anchor="middle" class="ko box-title"><tspan x="112" dy="0">BEGIN</tspan></text>
+  <rect x="215" y="120" width="190" height="95" rx="14" ry="14" class="card work"/>
+  <text x="310" y="155" text-anchor="middle" class="ko box-title"><tspan x="310" dy="0">강의 행 Lock</tspan></text>
+  <text x="310" y="188" text-anchor="middle" class="ko body"><tspan x="310" dy="0">좌석 확인</tspan></text>
+  <rect x="425" y="120" width="190" height="95" rx="14" ry="14" class="card work"/>
+  <text x="520" y="155" text-anchor="middle" class="ko box-title"><tspan x="520" dy="0">좌석 UPDATE</tspan></text>
+  <text x="520" y="188" text-anchor="middle" class="ko body"><tspan x="520" dy="0">RETURNING</tspan></text>
+  <rect x="650" y="120" width="190" height="95" rx="14" ry="14" class="card review"/>
+  <text x="745" y="155" text-anchor="middle" class="ko box-title"><tspan x="745" dy="0">1행 반환?</tspan></text>
+  <line x1="200" y1="168" x2="215" y2="168" class="line" marker-end="url(#arrow)"/>
+  <line x1="405" y1="168" x2="425" y2="168" class="line" marker-end="url(#arrow)"/>
+  <line x1="615" y1="168" x2="650" y2="168" class="line" marker-end="url(#arrow)"/>
+  <rect x="900" y="110" width="270" height="115" rx="14" ry="14" class="card fail"/>
+  <text x="1035" y="150" text-anchor="middle" class="ko box-title"><tspan x="1035" dy="0">0행</tspan></text>
+  <text x="1035" y="183" text-anchor="middle" class="ko body"><tspan x="1035" dy="0">후속 INSERT 중단</tspan><tspan x="1035" dy="25">ROLLBACK</tspan></text>
+  <line x1="840" y1="168" x2="900" y2="168" class="line" marker-end="url(#arrow)"/>
+  <text x="870" y="150" text-anchor="middle" class="ko small"><tspan x="870" dy="0">아니요</tspan></text>
+  <rect x="95" y="330" width="230" height="100" rx="14" ry="14" class="card work"/>
+  <text x="210" y="370" text-anchor="middle" class="ko box-title"><tspan x="210" dy="0">수강신청 INSERT</tspan></text>
+  <text x="210" y="402" text-anchor="middle" class="mono body"><tspan x="210" dy="0">enrollments</tspan></text>
+  <rect x="405" y="330" width="230" height="100" rx="14" ry="14" class="card work"/>
+  <text x="520" y="370" text-anchor="middle" class="ko box-title"><tspan x="520" dy="0">결제 INSERT</tspan></text>
+  <text x="520" y="402" text-anchor="middle" class="mono body"><tspan x="520" dy="0">enrollment_id 연결</tspan></text>
+  <rect x="715" y="330" width="250" height="100" rx="14" ry="14" class="card review"/>
+  <text x="840" y="370" text-anchor="middle" class="ko box-title"><tspan x="840" dy="0">COMMIT 전 SELECT</tspan></text>
+  <text x="840" y="402" text-anchor="middle" class="ko body"><tspan x="840" dy="0">세 테이블 검증</tspan></text>
+  <path d="M 745 215 V 280 H 210 V 330" class="line" marker-end="url(#arrow)"/>
+  <text x="715" y="255" text-anchor="middle" class="ko small"><tspan x="715" dy="0">예</tspan></text>
+  <line x1="325" y1="380" x2="405" y2="380" class="line" marker-end="url(#arrow)"/>
+  <line x1="635" y1="380" x2="715" y2="380" class="line" marker-end="url(#arrow)"/>
+  <rect x="470" y="520" width="260" height="100" rx="14" ry="14" class="card review"/>
+  <text x="600" y="558" text-anchor="middle" class="ko box-title"><tspan x="600" dy="0">모든 결과가</tspan><tspan x="600" dy="26">정상인가?</tspan></text>
+  <line x1="840" y1="430" x2="700" y2="520" class="line" marker-end="url(#arrow)"/>
+  <rect x="240" y="660" width="230" height="70" rx="14" ry="14" class="card ok"/>
+  <text x="355" y="703" text-anchor="middle" class="ko box-title"><tspan x="355" dy="0">예 → COMMIT</tspan></text>
+  <rect x="730" y="660" width="230" height="70" rx="14" ry="14" class="card fail"/>
+  <text x="845" y="703" text-anchor="middle" class="ko box-title"><tspan x="845" dy="0">아니요 → ROLLBACK</tspan></text>
+  <path d="M 540 620 V 645 H 355 V 660" class="line" marker-end="url(#arrow)"/>
+  <path d="M 660 620 V 645 H 845 V 660" class="line" marker-end="url(#arrow)"/>
+</svg>

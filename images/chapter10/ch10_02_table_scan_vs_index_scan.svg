@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">Seq Scan과 Index Scan의 검색 경로</title>
+  <desc id="desc">조회 SQL을 PostgreSQL 플래너가 테이블 크기, 선택도, 통계와 예상 비용으로 비교한 뒤 Seq Scan 또는 Index Scan을 선택하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#334155"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .sub{font-size:15px;fill:#475569;text-anchor:middle}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;fill:#334155;text-anchor:middle}
+      .small{font-size:13px;fill:#475569;text-anchor:middle}
+      .box{stroke-width:2;rx:14;ry:14}
+      .query{fill:#eff6ff;stroke:#2563eb}
+      .planner{fill:#ffffff;stroke:#7fb3f5}
+      .scan{fill:#fff7ed;stroke:#f97316}
+      .index{fill:#ecfdf5;stroke:#22c55e}
+      .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:14;ry:14}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .branch{stroke:#334155;stroke-width:2.2;fill:none}
+    </style>
+  </defs>
+
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="600" y="48" class="title">Seq Scan과 Index Scan의 검색 경로</text>
+  <text x="600" y="78" class="sub">플래너는 실행 전에 두 경로의 예상 비용을 비교해 더 유리한 방법을 선택합니다.</text>
+
+  <rect x="65" y="190" width="235" height="150" class="box query"/>
+  <text x="182.5" y="228" class="head">조회 SQL</text>
+  <text x="182.5" y="265" class="body mono">WHERE email = ...</text>
+  <text x="182.5" y="300" class="small">검색 조건 전달</text>
+
+  <rect x="390" y="155" width="280" height="220" class="box planner"/>
+  <text x="530" y="193" class="head">플래너 비용 비교</text>
+  <text x="530" y="233" class="body">테이블 크기</text>
+  <text x="530" y="265" class="body">조건의 선택도</text>
+  <text x="530" y="297" class="body">통계 정보 · 예상 I/O 비용</text>
+  <text x="530" y="338" class="small">예상 비용이 낮은 실행 경로 선택</text>
+
+  <rect x="800" y="110" width="320" height="150" class="box scan"/>
+  <text x="960" y="148" class="head">Seq Scan</text>
+  <text x="960" y="184" class="body">테이블 전체 행을 순서대로 확인</text>
+  <text x="960" y="214" class="body">작은 테이블 또는 많은 행 반환에 적합</text>
+  <text x="960" y="240" class="small">인덱스가 있어도 선택될 수 있음</text>
+
+  <rect x="800" y="315" width="320" height="150" class="box index"/>
+  <text x="960" y="353" class="head">Index Scan</text>
+  <text x="960" y="389" class="body">인덱스에서 위치를 찾은 뒤 행에 접근</text>
+  <text x="960" y="419" class="body">적은 행을 선택하는 조건에 유리</text>
+  <text x="960" y="445" class="small">랜덤 접근 비용까지 함께 고려</text>
+
+  <path d="M300 265H390" class="arrow"/>
+  <path d="M670 265H735" class="branch"/>
+  <circle cx="735" cy="265" r="4.5" fill="#334155"/>
+  <path d="M735 265V185H800" class="arrow"/>
+  <path d="M735 265V390H800" class="arrow"/>
+
+  <rect x="245" y="495" width="710" height="48" class="note"/>
+  <text x="600" y="525" class="body">Seq Scan도 예상 비용이 더 낮다면 정상적이고 합리적인 선택입니다.</text>
+</svg>

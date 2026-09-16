@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="100%" viewBox="0 0 1200 560">
+  <title id="title">LEFT JOIN은 왼쪽 행을 모두 유지한다</title>
+  <desc id="desc">학생 기준 LEFT JOIN에서 일치 건수에 따라 결과가 총 6행이 되며 수강신청이 없는 학생은 오른쪽 컬럼이 NULL인 한 행으로 나타남을 보여 주는 도식이다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title { font: 700 28px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .box { stroke: #334155; stroke-width: 2; rx: 16; ry: 16; }
+      .head { font: 600 17px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .text { font: 14px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .null { font: 700 14px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #4b5563; }
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="title">LEFT JOIN은 왼쪽 행을 모두 유지한다</text>
+  <rect x="90" y="110" width="320" height="250" class="box" fill="#dbeafe"/>
+  <text x="250" y="145" text-anchor="middle" class="head">students 기준</text>
+  <text x="250" y="185" text-anchor="middle" class="text">김민지 · 일치 2건 -> 결과 2행</text>
+  <text x="250" y="220" text-anchor="middle" class="text">이준호 · 일치 2건 -> 결과 2행</text>
+  <text x="250" y="255" text-anchor="middle" class="text">박서연 · 일치 1건 -> 결과 1행</text>
+  <text x="250" y="290" text-anchor="middle" class="text">최현우 · 일치 0건 -> NULL 결과 1행</text>
+  <rect x="500" y="170" width="220" height="95" class="box" fill="#ede9fe"/>
+  <text x="610" y="205" text-anchor="middle" class="head">LEFT JOIN 결과</text>
+  <text x="610" y="238" text-anchor="middle" class="text">총 6행</text>
+  <rect x="800" y="110" width="300" height="170" class="box" fill="#e5e7eb"/>
+  <text x="950" y="145" text-anchor="middle" class="head">최현우 결과</text>
+  <text x="950" y="182" text-anchor="middle" class="text">student_name = 최현우</text>
+  <text x="950" y="217" text-anchor="middle" class="null">course_title = NULL</text>
+  <text x="950" y="252" text-anchor="middle" class="null">status = NULL</text>
+  <line x1="410" y1="220" x2="500" y2="220" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="720" y1="220" x2="800" y2="195" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="130" y="410" width="940" height="90" class="box" fill="#f8fafc"/>
+  <text x="600" y="445" text-anchor="middle" class="head">일치 행이 없으면 왼쪽 행은 유지되고, 오른쪽 테이블 컬럼이 NULL로 채워진다</text>
+  <text x="600" y="475" text-anchor="middle" class="text">수강신청이 없는 학생은 WHERE e.id IS NULL로 찾을 수 있고, 이 NULL은 JOIN 과정에서 생성된 결과값이다</text>
+</svg>

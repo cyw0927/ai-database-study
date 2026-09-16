@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1000" role="img" aria-labelledby="title desc" shape-rendering="geometricPrecision">
+  <title id="title">1:1, 1:N, N:M 관계 유형</title>
+  <desc id="desc">사용자와 프로필의 1:1 관계, 학생과 질문의 1:N 관계, 학생과 강의의 N:M 관계를 비교하여 각 관계에서 한 행이 몇 개의 행과 연결되는지 보여 주는 도식</desc>
+
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="135%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.09"/>
+    </filter>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .panel{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}
+      .tag-box{fill:#e8f2ff;stroke:#3174d0;stroke-width:1.8}
+      .tag{font-size:24px;font-weight:700;text-anchor:middle;dominant-baseline:middle;fill:#0f2d5c}
+      .subject-box{fill:#eef5ff;stroke:#3174d0;stroke-width:2.2}
+      .target-box{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2.2}
+      .entity{font-size:20px;font-weight:700;text-anchor:middle;fill:#172033}
+      .role{font-size:16px;font-weight:600;text-anchor:middle;fill:#475569}
+      .relation{stroke:#475569;stroke-width:3;fill:none;stroke-linecap:round}
+      .cardinality{font-size:20px;font-weight:800;text-anchor:middle;fill:#563596}
+      .description{font-size:17px;font-weight:700;text-anchor:middle;fill:#334155}
+      .support{font-size:14px;font-weight:600;text-anchor:middle;fill:#64748b}
+      .summary-box{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .summary{font-size:17px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+
+  <rect width="1200" height="1000" fill="#ffffff"/>
+  <text x="600" y="58" class="title">1:1, 1:N, N:M 관계 유형</text>
+
+  <!-- 1:1 -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="90" width="1060" height="220" rx="18" class="panel"/>
+  </g>
+  <rect x="100" y="118" width="112" height="50" rx="12" class="tag-box"/>
+  <text x="156" y="143" class="tag">1:1</text>
+
+  <rect x="245" y="145" width="240" height="92" rx="14" class="subject-box"/>
+  <text x="365" y="181" class="entity">users</text>
+  <text x="365" y="211" class="role">사용자</text>
+
+  <path d="M485 191 H715" class="relation"/>
+  <text x="520" y="177" class="cardinality">1</text>
+  <text x="680" y="177" class="cardinality">1</text>
+
+  <rect x="715" y="145" width="240" height="92" rx="14" class="target-box"/>
+  <text x="835" y="181" class="entity">profiles</text>
+  <text x="835" y="211" class="role">상세 프로필</text>
+
+  <text x="600" y="278" class="description">사용자 한 명과 상세 프로필 하나가 연결된다.</text>
+
+  <!-- 1:N -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="330" width="1060" height="220" rx="18" class="panel"/>
+  </g>
+  <rect x="100" y="358" width="112" height="50" rx="12" class="tag-box"/>
+  <text x="156" y="383" class="tag">1:N</text>
+
+  <rect x="245" y="385" width="240" height="92" rx="14" class="subject-box"/>
+  <text x="365" y="421" class="entity">students</text>
+  <text x="365" y="451" class="role">학생</text>
+
+  <path d="M485 431 H715" class="relation"/>
+  <text x="520" y="417" class="cardinality">1</text>
+  <text x="680" y="417" class="cardinality">N</text>
+
+  <rect x="715" y="385" width="240" height="92" rx="14" class="target-box"/>
+  <text x="835" y="421" class="entity">questions</text>
+  <text x="835" y="451" class="role">질문</text>
+
+  <text x="600" y="518" class="description">학생 한 명이 여러 질문을 작성할 수 있다.</text>
+
+  <!-- N:M -->
+  <g filter="url(#shadow)">
+    <rect x="70" y="570" width="1060" height="245" rx="18" class="panel"/>
+  </g>
+  <rect x="100" y="598" width="112" height="50" rx="12" class="tag-box"/>
+  <text x="156" y="623" class="tag">N:M</text>
+
+  <rect x="245" y="625" width="240" height="92" rx="14" class="subject-box"/>
+  <text x="365" y="661" class="entity">students</text>
+  <text x="365" y="691" class="role">학생</text>
+
+  <path d="M485 671 H715" class="relation"/>
+  <text x="520" y="657" class="cardinality">N</text>
+  <text x="680" y="657" class="cardinality">M</text>
+
+  <rect x="715" y="625" width="240" height="92" rx="14" class="target-box"/>
+  <text x="835" y="661" class="entity">courses</text>
+  <text x="835" y="691" class="role">강의</text>
+
+  <text x="600" y="752" class="description">학생은 여러 강의를 신청하고,</text>
+  <text x="600" y="781" class="description">강의에도 여러 학생이 등록될 수 있다.</text>
+  <text x="600" y="806" class="support">실제 데이터베이스 구현의 연결 테이블은 Chapter 05에서 다룬다.</text>
+
+  <rect x="120" y="850" width="960" height="105" rx="18" class="summary-box"/>
+  <text x="600" y="891" class="summary">1:1은 한 행과 한 행, 1:N은 한 행과 여러 행,</text>
+  <text x="600" y="925" class="summary">N:M은 양쪽의 여러 행이 서로 연결되는 관계다.</text>
+</svg>

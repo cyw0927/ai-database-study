@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">엔터티와 속성 구분하기</title>
+  <desc id="desc">회원과 책은 일반 엔터티, 대여 기록은 사건 엔터티, 이름과 제목과 날짜는 속성으로 구분한다.</desc>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#1f2937}
+    .t{font-size:32px;font-weight:700}
+    .s{font-size:15px;fill:#4b5563}
+    .h{font-size:18px;font-weight:700}
+    .b{font-size:14px}
+    .box{stroke:#64748b;stroke-width:2;rx:14}
+    .q{fill:#fff6d8}.e{fill:#eaf3ff}.r{fill:#f2ecff}.a{fill:#ecf9ef}
+  </style>
+  <rect width="1200" height="600" fill="#fff"/>
+  <text x="600" y="45" text-anchor="middle" class="t">엔터티와 속성 구분하기</text>
+  <text x="600" y="75" text-anchor="middle" class="s">모든 명사가 테이블이 되는 것은 아닙니다.</text>
+  <rect x="130" y="110" width="940" height="90" class="box q"/>
+  <text x="600" y="145" text-anchor="middle" class="b">독립적으로 여러 건을 관리하는가? · 대상 사이에서 발생한 사건인가?</text>
+  <text x="600" y="175" text-anchor="middle" class="b">특정 대상 또는 사건 한 건을 설명하는 값인가?</text>
+  <rect x="60" y="260" width="340" height="210" class="box e"/>
+  <text x="230" y="300" text-anchor="middle" class="h">일반 엔터티</text>
+  <text x="230" y="350" text-anchor="middle" class="b">회원 → members</text>
+  <text x="230" y="385" text-anchor="middle" class="b">책 → books</text>
+  <rect x="430" y="260" width="340" height="210" class="box r"/>
+  <text x="600" y="300" text-anchor="middle" class="h">사건·관계 엔터티</text>
+  <text x="600" y="350" text-anchor="middle" class="b">대여 기록 → loans</text>
+  <text x="600" y="385" text-anchor="middle" class="b">두 대상을 연결하며 날짜 속성을 가짐</text>
+  <rect x="800" y="260" width="340" height="210" class="box a"/>
+  <text x="970" y="300" text-anchor="middle" class="h">속성</text>
+  <text x="970" y="340" text-anchor="middle" class="b">회원: 이름·이메일·가입일</text>
+  <text x="970" y="375" text-anchor="middle" class="b">책: 제목·저자·ISBN</text>
+  <text x="970" y="410" text-anchor="middle" class="b">대여: 대여일·반납예정일·실제반납일</text>
+  <text x="600" y="555" text-anchor="middle" class="s">엔터티는 행을 식별하고, 속성은 그 한 건을 설명합니다.</text>
+</svg>

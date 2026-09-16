@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100%"
+   viewBox="0 0 1200 780"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg31"
+   sodipodi:docname="ch01_01_storage_options.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview31"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1183333"
+     inkscape:cx="444.85842"
+     inkscape:cy="390.31297"
+     inkscape:window-width="1440"
+     inkscape:window-height="2497"
+     inkscape:window-x="1072"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg31" />
+  <title
+     id="title">데이터 저장 방식 선택 흐름</title>
+  <desc
+     id="desc">데이터의 규모, 관리 방식, 관계와 동시 수정 필요성을 기준으로 파일, 스프레드시트, 데이터베이스 중 적절한 저장 방식을 선택하는 흐름도</desc>
+  <defs
+     id="defs7">
+    <marker
+       id="arrow"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="8"
+       markerHeight="8"
+       orient="auto">
+      <path
+         d="M0 0 L10 5 L0 10z"
+         fill="#48627f"
+         id="path1" />
+    </marker>
+    <style
+       id="style1">
+      text{font-family:&quot;Malgun Gothic&quot;,&quot;Apple SD Gothic Neo&quot;,&quot;Noto Sans KR&quot;,Arial,sans-serif;fill:#18212f}
+      .title{font-size:32px;font-weight:800;text-anchor:middle;fill:#111827}
+      .question{fill:#f8fbff;stroke:#8aa3bf;stroke-width:2.2}
+      .file-card{fill:#f5fbf6;stroke:#2f9e44;stroke-width:2.4}
+      .sheet-card{fill:#f5f9ff;stroke:#2563eb;stroke-width:2.4}
+      .db-card{fill:#fbf8ff;stroke:#7c3aed;stroke-width:2.4}
+      .branch{stroke:#48627f;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+      .q-head{font-size:20px;font-weight:800;text-anchor:middle;fill:#111827}
+      .q-body{font-size:16px;text-anchor:middle;fill:#334155}
+      .yes-green{font-size:16px;font-weight:800;fill:#15803d}
+      .yes-blue{font-size:16px;font-weight:800;fill:#1d4ed8}
+      .no-text{font-size:16px;font-weight:800;fill:#334e68}
+      .no-purple{font-size:16px;font-weight:800;fill:#6d28d9}
+      .card-title{font-size:24px;font-weight:800}
+      .file-title{fill:#15803d}
+      .sheet-title{fill:#1d4ed8}
+      .db-title{fill:#6d28d9}
+      .card-body{font-size:15px;fill:#1f2937;text-anchor:middle}
+      .chip{fill:#f6f1ff;stroke:#b99af7;stroke-width:1.5}
+      .chip-text{font-size:13px;font-weight:700;fill:#6d28d9;text-anchor:middle}
+    </style>
+    <symbol
+       id="icon-file"
+       viewBox="0 0 24 24">
+      <path
+         d="M7 3.75h7l3.75 3.75V19.5A1.5 1.5 0 0 1 16.25 21h-9.5a1.5 1.5 0 0 1-1.5-1.5v-14A1.5 1.5 0 0 1 6.75 4h.25Z"
+         stroke="currentColor"
+         stroke-width="1.6"
+         stroke-linejoin="round"
+         fill="none"
+         id="path2" />
+      <path
+         d="M14 3.75V8h4.25"
+         stroke="currentColor"
+         stroke-width="1.6"
+         stroke-linejoin="round"
+         fill="none"
+         id="path3" />
+      <path
+         d="M8.5 11h7M8.5 14h7M8.5 17h4.5"
+         stroke="currentColor"
+         stroke-width="1.6"
+         stroke-linecap="round"
+         fill="none"
+         id="path4" />
+    </symbol>
+    <symbol
+       id="icon-sheet"
+       viewBox="0 0 24 24">
+      <rect
+         x="4.25"
+         y="4.25"
+         width="15.5"
+         height="15.5"
+         rx="2"
+         stroke="currentColor"
+         stroke-width="1.6"
+         fill="none"
+         id="rect4" />
+      <path
+         d="M8 8.25v7.5M12 8.25v7.5M16 8.25v7.5M6.75 12.25h10.5M6.75 15.75h10.5"
+         stroke="currentColor"
+         stroke-width="1.6"
+         stroke-linecap="round"
+         fill="none"
+         id="path5" />
+    </symbol>
+    <symbol
+       id="icon-db"
+       viewBox="0 0 24 24">
+      <ellipse
+         cx="12"
+         cy="6.25"
+         rx="6.75"
+         ry="2.75"
+         stroke="currentColor"
+         stroke-width="1.6"
+         fill="none"
+         id="ellipse5" />
+      <path
+         d="M5.25 6.25v5.5c0 1.52 3.02 2.75 6.75 2.75s6.75-1.23 6.75-2.75v-5.5M5.25 11.75v5.5c0 1.52 3.02 2.75 6.75 2.75s6.75-1.23 6.75-2.75v-5.5"
+         stroke="currentColor"
+         stroke-width="1.6"
+         fill="none"
+         id="path6" />
+      <path
+         d="M8.5 10.1c1.05.33 2.24.52 3.5.52 1.26 0 2.45-.19 3.5-.52"
+         stroke="currentColor"
+         stroke-width="1.6"
+         stroke-linecap="round"
+         fill="none"
+         id="path7" />
+    </symbol>
+  </defs>
+  <rect
+     width="1200"
+     height="780"
+     fill="#ffffff"
+     id="rect7" />
+  <text
+     x="600"
+     y="58"
+     class="title"
+     id="text7">데이터 저장 방식 선택 흐름</text>
+  <rect
+     x="340"
+     y="90"
+     width="520"
+     height="110"
+     rx="18"
+     class="question"
+     id="rect8" />
+  <text
+     x="600"
+     y="136"
+     class="q-head"
+     id="text8">작고 단순한 데이터인가?</text>
+  <text
+     x="600"
+     y="170"
+     class="q-body"
+     id="text9">관계가 거의 없고 변경도 많지 않은가?</text>
+  <path
+     d="M600 200 V240 H260 V300"
+     class="branch"
+     id="path9" />
+  <path
+     d="M600 200 V240 H930 V300"
+     class="branch"
+     id="path10" />
+  <text
+     x="446"
+     y="228"
+     class="yes-green"
+     id="text10">예</text>
+  <text
+     x="836"
+     y="228"
+     class="no-text"
+     id="text11">아니오</text>
+  <rect
+     x="70"
+     y="300"
+     width="380"
+     height="110"
+     rx="18"
+     class="question"
+     id="rect11" />
+  <text
+     x="260"
+     y="346"
+     class="q-head"
+     id="text12">한 사람이 주로 관리하는가?</text>
+  <text
+     x="260"
+     y="380"
+     class="q-body"
+     id="text13">개인 기록이나 작은 설정값인가?</text>
+  <rect
+     x="680"
+     y="300"
+     width="500"
+     height="135"
+     rx="18"
+     class="question"
+     id="rect13" />
+  <text
+     x="930"
+     y="346"
+     class="q-head"
+     id="text14">사람이 직접 관리하는 소규모 표인가?</text>
+  <text
+     x="930"
+     y="380"
+     class="q-body"
+     id="text15">여러 사용자 · 데이터 관계 · 권한 · 동시 수정이</text>
+  <text
+     x="930"
+     y="406"
+     class="q-body"
+     id="text16">중요하지 않은가?</text>
+  <path
+     d="M175 410 V540"
+     class="branch"
+     id="path16" />
+  <text
+     x="130"
+     y="477"
+     class="yes-green"
+     id="text17">예</text>
+  <path
+     d="M345 410 V470 H540 V540"
+     class="branch"
+     id="path17" />
+  <text
+     x="385"
+     y="458"
+     class="no-text"
+     id="text18">아니오</text>
+  <path
+     d="M830 435 V470 H660 V540"
+     class="branch"
+     id="path18" />
+  <text
+     x="800"
+     y="458"
+     class="yes-blue"
+     id="text19">예</text>
+  <path
+     d="M1080 435 V515"
+     class="branch"
+     id="path19" />
+  <text
+     x="1024"
+     y="480"
+     class="no-purple"
+     id="text20">아니오</text>
+  <rect
+     x="60"
+     y="540"
+     width="280"
+     height="190"
+     rx="18"
+     class="file-card"
+     id="rect20" />
+  <use
+     href="#icon-file"
+     x="86"
+     y="574"
+     width="48"
+     height="48"
+     style="color:#16a34a"
+     id="use20" />
+  <text
+     x="210"
+     y="606"
+     class="card-title file-title"
+     id="text21">파일</text>
+  <text
+     x="200"
+     y="650"
+     class="card-body"
+     id="text22"><tspan
+       x="200"
+       dy="0"
+       id="tspan21">TXT · Markdown</tspan><tspan
+       x="200"
+       dy="22"
+       id="tspan22">JSON · CSV</tspan></text>
+  <rect
+     x="450.05872"
+     y="540.05872"
+     width="330.28494"
+     height="189.88255"
+     rx="19.817097"
+     class="sheet-card"
+     id="rect22" />
+  <use
+     href="#icon-sheet"
+     x="476"
+     y="574"
+     width="48"
+     height="48"
+     style="color:#2563eb"
+     id="use22" />
+  <text
+     x="625"
+     y="606"
+     class="card-title sheet-title"
+     id="text23">스프레드시트</text>
+  <text
+     x="600"
+     y="650"
+     class="card-body"
+     id="text24"><tspan
+       x="600"
+       dy="0"
+       id="tspan23">사람이 직접 관리하는 소규모 표</tspan><tspan
+       x="600"
+       dy="22"
+       id="tspan24">명단 · 일정 · 간단한 통계</tspan></text>
+  <rect
+     x="850.06384"
+     y="515.06384"
+     width="332.95724"
+     height="229.87231"
+     rx="19.977436"
+     class="db-card"
+     id="rect24" />
+  <use
+     href="#icon-db"
+     x="875"
+     y="548"
+     width="56"
+     height="56"
+     style="color:#7c3aed"
+     id="use24" />
+  <text
+     x="1018"
+     y="584"
+     class="card-title db-title"
+     id="text25">데이터베이스</text>
+  <text
+     x="1000"
+     y="625"
+     class="card-body"
+     id="text26"><tspan
+       x="1000"
+       dy="0"
+       id="tspan25">서비스와 여러 사용자를 위한</tspan><tspan
+       x="1000"
+       dy="22"
+       id="tspan26">구조적 저장</tspan></text>
+  <rect
+     x="870"
+     y="665"
+     width="78"
+     height="28"
+     rx="10"
+     class="chip"
+     id="rect26" />
+  <text
+     x="909"
+     y="684"
+     class="chip-text"
+     id="text27">여러 사용자</text>
+  <rect
+     x="957"
+     y="665"
+     width="78"
+     height="28"
+     rx="10"
+     class="chip"
+     id="rect27" />
+  <text
+     x="996"
+     y="684"
+     class="chip-text"
+     id="text28">데이터 관계</text>
+  <rect
+     x="1044"
+     y="665"
+     width="70"
+     height="28"
+     rx="10"
+     class="chip"
+     id="rect28" />
+  <text
+     x="1079"
+     y="684"
+     class="chip-text"
+     id="text29">정확성</text>
+  <rect
+     x="915"
+     y="700"
+     width="74"
+     height="28"
+     rx="10"
+     class="chip"
+     id="rect29" />
+  <text
+     x="952"
+     y="719"
+     class="chip-text"
+     id="text30">동시 수정</text>
+  <rect
+     x="998"
+     y="700"
+     width="112"
+     height="28"
+     rx="10"
+     class="chip"
+     id="rect30" />
+  <text
+     x="1054"
+     y="719"
+     class="chip-text"
+     id="text31">반복 검색·집계</text>
+</svg>

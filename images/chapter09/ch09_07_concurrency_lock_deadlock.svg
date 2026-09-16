@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1060" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">동시 좌석 신청: Lock 대기와 Deadlock</title>
+  <desc id="desc">서로 다른 두 연결 세션이 transaction_lab.course_inventory의 course_id 303 행을 SELECT FOR UPDATE로 잠글 때 한 세션이 잠금을 보유하고 다른 세션이 기다리는 정상 Lock 대기와, course 301과 302를 반대 순서로 잠가 서로 기다리는 Deadlock의 순환 대기를 비교하는 도식</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#475569" />
+    </marker>
+    <marker id="wait-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#b45309" />
+    </marker>
+    <marker id="dead-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#b91c1c" />
+    </marker>
+  </defs>
+
+  <style>
+    text {
+      font-family: "Malgun Gothic", "NanumSquare", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif;
+      fill: #1f2937;
+    }
+    .mono { font-family: Consolas, D2Coding, "Noto Sans Mono CJK KR", Menlo, monospace; }
+    .title { font-size: 36px; font-weight: 700; text-anchor: middle; fill: #0f2d5c; }
+    .subtitle { font-size: 19px; text-anchor: middle; fill: #475569; }
+    .section { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; rx: 18; }
+    .dead-section { fill: #fff7f7; stroke: #fecaca; stroke-width: 2; rx: 18; }
+    .section-title { font-size: 26px; font-weight: 700; fill: #0f2d5c; }
+    .lane { fill: #eef6ff; stroke: #3b82f6; stroke-width: 2; rx: 14; }
+    .lane-b { fill: #eefdf4; stroke: #22a06b; stroke-width: 2; rx: 14; }
+    .resource { fill: #fff8eb; stroke: #f59e0b; stroke-width: 2; rx: 14; }
+    .danger { fill: #fff1f2; stroke: #ef4444; stroke-width: 2; rx: 14; }
+    .note { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.6; rx: 12; }
+    .head { font-size: 22px; font-weight: 700; text-anchor: middle; }
+    .body { font-size: 18px; text-anchor: middle; fill: #334155; }
+    .small { font-size: 17px; text-anchor: middle; fill: #475569; }
+    .code { font-size: 18px; font-weight: 700; text-anchor: middle; fill: #0f172a; }
+    .label { font-size: 17px; font-weight: 700; text-anchor: middle; }
+    .line { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    .hold { stroke: #2563eb; stroke-width: 2.8; fill: none; marker-end: url(#arrow); }
+    .wait { stroke: #b45309; stroke-width: 2.6; stroke-dasharray: 8 6; fill: none; marker-end: url(#wait-arrow); }
+    .dead { stroke: #b91c1c; stroke-width: 2.7; stroke-dasharray: 8 6; fill: none; marker-end: url(#dead-arrow); }
+    .ok { fill: #e6f9ee; stroke: #15803d; stroke-width: 2; rx: 12; }
+    .warn { fill: #fff7df; stroke: #d97706; stroke-width: 2; rx: 12; }
+  </style>
+
+  <rect width="1200" height="1060" fill="#ffffff" />
+  <text x="600" y="48" class="title">동시 좌석 신청: Lock 대기와 Deadlock</text>
+  <text x="600" y="82" class="subtitle">정상 대기는 한 방향의 기다림이고, Deadlock은 서로의 행 Lock을 기다리는 순환 대기입니다.</text>
+
+  <!-- Normal lock wait -->
+  <rect x="55" y="115" width="1090" height="425" class="section" />
+  <text x="85" y="155" class="section-title">1. 정상 Lock 대기: course_inventory course_id = 303</text>
+
+  <rect x="95" y="190" width="280" height="280" class="lane" />
+  <text x="235" y="225" class="head">세션 A</text>
+  <text x="235" y="252" class="small">DBeaver SQL Editor</text>
+  <text x="235" y="292" class="code mono">BEGIN</text>
+  <text x="235" y="326" class="code mono">SELECT ... FOR UPDATE</text>
+  <text x="235" y="362" class="body">Lock 획득 · 보유 중</text>
+  <text x="235" y="402" class="body">관찰 후 명시적 종료</text>
+  <text x="235" y="430" class="code mono">COMMIT 또는 ROLLBACK</text>
+
+  <rect x="460" y="210" width="280" height="150" class="resource" />
+  <text x="600" y="248" class="head">잠금 대상 행</text>
+  <text x="600" y="282" class="code mono">course_inventory</text>
+  <text x="600" y="312" class="code mono">course_id = 303</text>
+  <text x="600" y="340" class="body">remaining_seats = 1</text>
+
+  <rect x="825" y="190" width="280" height="280" class="lane-b" />
+  <text x="965" y="225" class="head">세션 B</text>
+  <text x="965" y="252" class="small">다른 연결 세션</text>
+  <text x="965" y="292" class="code mono">BEGIN</text>
+  <text x="965" y="326" class="code mono">SELECT ... FOR UPDATE</text>
+  <text x="965" y="362" class="body">Lock 요청 · 대기</text>
+  <text x="965" y="402" class="body">A 종료 후 Lock 획득</text>
+  <text x="965" y="430" class="body">최신 값 확인 후 종료</text>
+
+  <path d="M375 310 L455 310" class="hold" />
+  <text x="415" y="292" class="label" fill="#2563eb">Lock 획득</text>
+  <path d="M825 330 L745 330" class="wait" />
+  <text x="785" y="360" class="label" fill="#b45309">Lock 요청 · 대기</text>
+  <path d="M740 392 L825 392" class="line" />
+  <text x="782" y="420" class="label" fill="#15803d">A 종료 후 획득</text>
+
+  <rect x="455" y="392" width="290" height="98" class="warn" />
+  <text x="600" y="424" class="head">선택 확장</text>
+  <text x="600" y="453" class="body">A가 1→0으로 COMMIT하면</text>
+  <text x="600" y="478" class="body">B는 좌석 0 확인 후 후속 신청을 실행하지 않음</text>
+
+  <!-- Deadlock -->
+  <rect x="55" y="575" width="1090" height="330" class="dead-section" />
+  <text x="85" y="615" class="section-title">2. Deadlock: course 301과 course 302를 반대 순서로 잠금</text>
+
+  <rect x="115" y="665" width="255" height="110" class="lane" />
+  <text x="242" y="700" class="head">트랜잭션 A</text>
+  <text x="242" y="732" class="body">course 301 Lock 보유</text>
+  <text x="242" y="760" class="body">course 302 요청·대기</text>
+
+  <rect x="830" y="665" width="255" height="110" class="lane-b" />
+  <text x="957" y="700" class="head">트랜잭션 B</text>
+  <text x="957" y="732" class="body">course 302 Lock 보유</text>
+  <text x="957" y="760" class="body">course 301 요청·대기</text>
+
+  <rect x="445" y="640" width="135" height="86" class="resource" />
+  <text x="512" y="674" class="head">course 301</text>
+  <text x="512" y="704" class="body">A가 보유</text>
+
+  <rect x="620" y="640" width="135" height="86" class="resource" />
+  <text x="687" y="674" class="head">course 302</text>
+  <text x="687" y="704" class="body">B가 보유</text>
+
+  <path d="M370 705 L440 685" class="hold" />
+  <text x="405" y="676" class="label" fill="#2563eb">보유</text>
+  <path d="M830 705 L760 685" class="hold" />
+  <text x="795" y="676" class="label" fill="#2563eb">보유</text>
+
+  <path d="M370 754 C470 820, 590 820, 620 722" class="dead" />
+  <text x="505" y="838" class="label" fill="#b91c1c">A는 302 대기</text>
+  <path d="M830 754 C730 820, 610 820, 580 722" class="dead" />
+  <text x="695" y="838" class="label" fill="#b91c1c">B는 301 대기</text>
+
+  <rect x="420" y="790" width="360" height="82" class="danger" />
+  <text x="600" y="822" class="head">PostgreSQL Deadlock 감지</text>
+  <text x="600" y="850" class="body">한 트랜잭션을 오류로 종료해 순환 대기를 끊음</text>
+
+  <!-- Summary -->
+  <rect x="85" y="930" width="1030" height="82" class="note" />
+  <text x="600" y="962" class="head">핵심 차이</text>
+  <text x="600" y="990" class="body">Lock 대기는 보유 트랜잭션이 끝나면 진행할 수 있지만, Deadlock은 서로 기다리는 순환 대기입니다.</text>
+  <text x="600" y="1018" class="small">예방 원칙: 같은 순서로 잠금 · 짧은 트랜잭션 · 필요한 행만 잠금 · 재시도 정책 검토</text>
+</svg>

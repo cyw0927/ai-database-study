@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">프로젝트 완성도의 일곱 축</title>
+  <desc id="desc">문제와 범위, 요구사항과 설계, 재현 가능한 데이터·SQL·Python, 검증과 분석 증거, 운영 계획, AI 변경 검토, 남은 한계라는 일곱 축</desc>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#111827}.t{font-size:29px;font-weight:800;text-anchor:middle}.s{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14;ry:14}.b{fill:#eff6ff;stroke:#3b82f6}.g{fill:#f0fdf4;stroke:#22c55e}.p{fill:#faf5ff;stroke:#8b5cf6}.y{fill:#fffbeb;stroke:#f59e0b}.c{fill:#ecfeff;stroke:#06b6d4}.r{fill:#fff1f2;stroke:#f43f5e}.n{fill:#f8fafc;stroke:#64748b}.num{font-size:13px;font-weight:800;text-anchor:middle;fill:#2563eb}.head{font-size:17px;font-weight:700;text-anchor:middle}.body{font-size:12.5px;text-anchor:middle;fill:#334155}
+  </style>
+  <rect width="1200" height="720" fill="#fff"/>
+  <text x="600" y="46" class="t">프로젝트 완성도의 일곱 축</text>
+  <text x="600" y="76" class="s">기능 수가 아니라 설계·실행·분석·운영 증거의 빈틈을 확인합니다.</text>
+  <rect x="420" y="105" width="360" height="70" class="card b"/><text x="600" y="136" class="head">프로젝트 완성도 판단</text><text x="600" y="158" class="body">다른 사람이 같은 절차와 기준값을 재현할 수 있는가?</text>
+
+  <rect x="40" y="230" width="260" height="125" class="card g"/><text x="170" y="256" class="num">1</text><text x="170" y="286" class="head">문제와 범위</text><text x="170" y="314" class="body">사용자·해결 문제</text><text x="170" y="336" class="body">필수·제외·선택 경계</text>
+  <rect x="325" y="230" width="260" height="125" class="card p"/><text x="455" y="256" class="num">2</text><text x="455" y="286" class="head">요구사항·설계</text><text x="455" y="314" class="body">REQ·ERD·DDL 추적</text><text x="455" y="336" class="body">근거 있는 제약조건</text>
+  <rect x="610" y="230" width="260" height="125" class="card c"/><text x="740" y="256" class="num">3</text><text x="740" y="286" class="head">데이터·SQL·Python</text><text x="740" y="314" class="body">재현 가능한 실행 순서</text><text x="740" y="336" class="body">같은 데이터와 기준값</text>
+  <rect x="895" y="230" width="260" height="125" class="card y"/><text x="1025" y="256" class="num">4</text><text x="1025" y="286" class="head">검증·분석 증거</text><text x="1025" y="314" class="body">정상·경계·오류·트랜잭션</text><text x="1025" y="336" class="body">SQL·pandas 결과 일치</text>
+
+  <rect x="180" y="440" width="260" height="125" class="card r"/><text x="310" y="466" class="num">5</text><text x="310" y="496" class="head">운영 안전성</text><text x="310" y="524" class="body">성능·권한·비밀</text><text x="310" y="546" class="body">백업·복구·RPO·RTO</text>
+  <rect x="470" y="440" width="260" height="125" class="card b"/><text x="600" y="466" class="num">6</text><text x="600" y="496" class="head">AI·문서화</text><text x="600" y="524" class="body">diff·재실행·사람 승인</text><text x="600" y="546" class="body">README·보고서 동기화</text>
+  <rect x="760" y="440" width="260" height="125" class="card n"/><text x="890" y="466" class="num">7</text><text x="890" y="496" class="head">한계와 다음 버전</text><text x="890" y="524" class="body">미실행·미확정 항목</text><text x="890" y="546" class="body">후속 검증 계획</text>
+
+  <rect x="230" y="625" width="740" height="50" class="card y"/><text x="600" y="656" class="head">완성도는 기능 개수가 아니라 추적 가능하고 검증 가능한 근거로 판단합니다.</text>
+</svg>

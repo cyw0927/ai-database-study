@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">1:N 관계와 외래키 위치</title>
+  <desc id="desc">members 한 행과 loans 여러 행의 관계에서 외래키가 N쪽 loans에 위치한다.</desc>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#1f2937}
+    .m{font-family:Consolas,D2Coding,"Courier New",monospace}
+    .t{font-size:32px;font-weight:700}
+    .s{font-size:15px;fill:#4b5563}
+    .h{font-size:18px;font-weight:700}
+    .b{font-size:14px}
+    .pk{fill:#1d4ed8;font-weight:700}.fk{fill:#c2410c;font-weight:700}
+    .box{stroke:#64748b;stroke-width:2;rx:14}
+    .e{fill:#eaf3ff}.r{fill:#f2ecff}.a{fill:#ecf9ef}
+    .line{stroke:#475569;stroke-width:2;fill:none}
+    .dash{stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;fill:none}
+  </style>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="560" fill="#fff"/>
+  <text x="600" y="45" text-anchor="middle" class="t">1:N 관계와 외래키 위치</text>
+  <text x="600" y="75" text-anchor="middle" class="s">외래키는 여러 행이 생기는 N쪽 테이블에 둡니다.</text>
+  <rect x="120" y="145" width="300" height="240" class="box e"/>
+  <text x="270" y="190" text-anchor="middle" class="h">members · 1쪽</text>
+  <text x="170" y="250" class="m b pk">PK id</text>
+  <text x="170" y="300" class="m b">name</text>
+  <rect x="780" y="125" width="300" height="280" class="box r"/>
+  <text x="930" y="170" text-anchor="middle" class="h">loans · N쪽</text>
+  <text x="830" y="230" class="m b pk">PK id</text>
+  <text x="830" y="280" class="m b fk">FK member_id</text>
+  <text x="830" y="330" class="m b">borrowed_at</text>
+  <line x1="420" y1="265" x2="780" y2="265" class="line" marker-end="url(#ar)"/>
+  <text x="470" y="240" text-anchor="middle" class="h">1</text>
+  <text x="725" y="240" text-anchor="middle" class="h">0..N</text>
+  <path d="M780 340C650 455 520 455 420 340" class="dash" marker-end="url(#ar)"/>
+  <text x="600" y="445" text-anchor="middle" class="s">loans.member_id → members.id</text>
+  <rect x="410" y="475" width="380" height="55" class="box a"/>
+  <text x="600" y="508" text-anchor="middle" class="b">같은 member_id의 반복은 관계 표현이며 정상입니다.</text>
+</svg>

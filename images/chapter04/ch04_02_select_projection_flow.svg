@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">SELECT로 필요한 열 선택하기</title>
+  <desc id="desc">students 테이블에서 SELECT name, major FROM students를 실행하면 모든 행은 유지한 채 name과 major 열만 SELECT 목록의 순서대로 조회 결과에 표시되고 원본 테이블은 변경되지 않는 과정을 보여 주는 도식</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#475569" />
+    </marker>
+    <style>
+      text {
+        font-family: "Malgun Gothic", "NanumSquare", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif;
+        fill: #172033;
+      }
+      .title { font-size: 36px; font-weight: 700; text-anchor: middle; fill: #0f2d5c; }
+      .section { font-size: 23px; font-weight: 700; text-anchor: middle; fill: #17365d; }
+      .cell { fill: #f4f6f8; stroke: #a7b1bf; stroke-width: 1.7; }
+      .chosen { fill: #e7f1ff; stroke: #3174d0; stroke-width: 2.4; }
+      .result { fill: #e7f1ff; stroke: #3174d0; stroke-width: 2.2; }
+      .muted { fill: #f8fafc; stroke: #c3ccd6; stroke-width: 1.6; }
+      .sql-box { fill: #fff8d8; stroke: #d6a600; stroke-width: 2.4; }
+      .summary { fill: #f8fafc; stroke: #64748b; stroke-width: 2; }
+      .badge { fill: #3174d0; }
+      .badge-text { font-size: 18px; font-weight: 700; text-anchor: middle; fill: #ffffff; }
+      .header { font-size: 19px; font-weight: 700; text-anchor: middle; }
+      .data { font-size: 18px; text-anchor: middle; }
+      .mono {
+        font-family: Consolas, D2Coding, "Noto Sans Mono CJK KR", Menlo, monospace;
+        font-size: 21px;
+        font-weight: 700;
+        fill: #0f2d5c;
+      }
+      .small { font-size: 18px; text-anchor: middle; fill: #475569; }
+      .note { font-size: 21px; font-weight: 700; text-anchor: middle; fill: #0f2d5c; }
+      .line { stroke: #475569; stroke-width: 2.6; fill: none; marker-end: url(#arrow); }
+      .map { stroke: #3174d0; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="780" fill="#ffffff" />
+  <text x="600" y="52" class="title">SELECT로 필요한 열 선택하기</text>
+
+  <!-- Source table -->
+  <text x="600" y="95" class="section">students 테이블 · 총 6행 중 일부</text>
+  <g transform="translate(90 120)">
+    <rect x="0" y="0" width="100" height="52" class="muted" />
+    <text x="50" y="33" class="header">id</text>
+
+    <rect x="100" y="0" width="145" height="52" class="chosen" />
+    <circle cx="122" cy="26" r="15" class="badge" />
+    <text x="122" y="32" class="badge-text">1</text>
+    <text x="178" y="33" class="header">name</text>
+
+    <rect x="245" y="0" width="210" height="52" class="muted" />
+    <text x="350" y="33" class="header">email</text>
+
+    <rect x="455" y="0" width="190" height="52" class="chosen" />
+    <circle cx="477" cy="26" r="15" class="badge" />
+    <text x="477" y="32" class="badge-text">2</text>
+    <text x="552" y="33" class="header">major</text>
+
+    <rect x="645" y="0" width="100" height="52" class="muted" />
+    <text x="695" y="33" class="header">grade</text>
+
+    <rect x="0" y="52" width="100" height="50" class="muted" />
+    <text x="50" y="83" class="data">1</text>
+    <rect x="100" y="52" width="145" height="50" class="chosen" />
+    <text x="172" y="83" class="data">김민지</text>
+    <rect x="245" y="52" width="210" height="50" class="muted" />
+    <text x="350" y="83" class="data">minji@...</text>
+    <rect x="455" y="52" width="190" height="50" class="chosen" />
+    <text x="550" y="83" class="data">컴퓨터공학</text>
+    <rect x="645" y="52" width="100" height="50" class="muted" />
+    <text x="695" y="83" class="data">2</text>
+
+    <rect x="0" y="102" width="100" height="50" class="muted" />
+    <text x="50" y="133" class="data">2</text>
+    <rect x="100" y="102" width="145" height="50" class="chosen" />
+    <text x="172" y="133" class="data">이준호</text>
+    <rect x="245" y="102" width="210" height="50" class="muted" />
+    <text x="350" y="133" class="data">junho@...</text>
+    <rect x="455" y="102" width="190" height="50" class="chosen" />
+    <text x="550" y="133" class="data">데이터사이언스</text>
+    <rect x="645" y="102" width="100" height="50" class="muted" />
+    <text x="695" y="133" class="data">3</text>
+
+    <rect x="0" y="152" width="745" height="46" class="muted" />
+    <text x="372" y="181" class="small">… 나머지 4행</text>
+  </g>
+
+  <!-- SQL and concept summary -->
+  <g transform="translate(410 350)">
+    <rect x="0" y="0" width="380" height="96" rx="14" class="sql-box" />
+    <text x="34" y="39" class="mono">SELECT name, major</text>
+    <text x="34" y="70" class="mono">FROM students;</text>
+  </g>
+  <path d="M600 318 V348" class="line" />
+
+  <g transform="translate(835 350)">
+    <rect x="0" y="0" width="275" height="96" rx="12" class="summary" />
+    <text x="138" y="35" class="small">SELECT 목록 → 결과 열 결정</text>
+    <text x="138" y="64" class="small">WHERE 없음 → 행 유지</text>
+  </g>
+
+  <g transform="translate(118 350)">
+    <rect x="0" y="0" width="255" height="96" rx="12" class="summary" />
+    <text x="128" y="36" class="small">열: 5개 → 2개</text>
+    <text x="128" y="66" class="small">행: 6개 → 6개</text>
+  </g>
+
+  <!-- The 1 and 2 badges connect source headers to result headers. -->
+  <path d="M600 446 V500" class="line" />
+
+  <!-- Result table -->
+  <text x="600" y="500" class="section">조회 결과 · 총 6행 중 일부</text>
+  <g transform="translate(390 522)">
+    <rect x="0" y="0" width="200" height="54" class="result" />
+    <circle cx="24" cy="27" r="15" class="badge" />
+    <text x="24" y="33" class="badge-text">1</text>
+    <text x="100" y="35" class="header">name</text>
+
+    <rect x="200" y="0" width="250" height="54" class="result" />
+    <circle cx="224" cy="27" r="15" class="badge" />
+    <text x="224" y="33" class="badge-text">2</text>
+    <text x="325" y="35" class="header">major</text>
+
+    <rect x="0" y="54" width="200" height="48" class="result" />
+    <text x="100" y="84" class="data">김민지</text>
+    <rect x="200" y="54" width="250" height="48" class="result" />
+    <text x="325" y="84" class="data">컴퓨터공학</text>
+
+    <rect x="0" y="102" width="200" height="48" class="result" />
+    <text x="100" y="132" class="data">이준호</text>
+    <rect x="200" y="102" width="250" height="48" class="result" />
+    <text x="325" y="132" class="data">데이터사이언스</text>
+
+    <rect x="0" y="150" width="450" height="44" class="result" />
+    <text x="225" y="178" class="small">… 나머지 4행</text>
+  </g>
+
+  <text x="600" y="742" class="note">SELECT 목록은 결과의 열과 열 순서를 정하고, WHERE가 없으면 행은 제외되지 않는다.</text>
+  <text x="600" y="768" class="note">SELECT는 원본 테이블을 변경하지 않는다.</text>
+</svg>

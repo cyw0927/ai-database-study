@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">기본키와 외래키로 테이블 연결하기</title>
+  <desc id="desc">loans 테이블의 member_id와 book_id가 각각 members.id와 books.id를 참조하는 방향을 보여 주는 관계도</desc>
+  <style>
+    text {font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#1f2937}
+    .m {font-family:Consolas,D2Coding,"Courier New",monospace}
+    .t {font-size:32px;font-weight:700}
+    .s {font-size:15px;fill:#4b5563}
+    .h {font-size:18px;font-weight:700}
+    .b {font-size:14px}
+    .pk {fill:#1d4ed8;font-weight:700}
+    .fk {fill:#c2410c;font-weight:700}
+    .box {stroke:#64748b;stroke-width:2;rx:14;ry:14}
+    .e {fill:#eaf3ff}.r {fill:#f2ecff}.n {fill:#fff6d8}
+    .line {stroke:#475569;stroke-width:2;fill:none}
+    .dash {stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;fill:none}
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="45" text-anchor="middle" class="t">기본키와 외래키로 테이블 연결하기</text>
+  <text x="600" y="75" text-anchor="middle" class="s">PK는 자기 행을 식별하고, FK는 다른 테이블의 기존 행을 참조합니다.</text>
+  <rect x="70" y="150" width="270" height="220" class="box e"/>
+  <text x="205" y="195" text-anchor="middle" class="h">members</text>
+  <text x="110" y="250" class="m b pk">PK id</text>
+  <text x="110" y="295" class="m b">name</text>
+  <rect x="465" y="125" width="270" height="280" class="box r"/>
+  <text x="600" y="170" text-anchor="middle" class="h">loans</text>
+  <text x="505" y="225" class="m b pk">PK id</text>
+  <text x="505" y="270" class="m b fk">FK member_id</text>
+  <text x="505" y="315" class="m b fk">FK book_id</text>
+  <text x="505" y="360" class="m b">borrowed_at</text>
+  <rect x="860" y="150" width="270" height="220" class="box e"/>
+  <text x="995" y="195" text-anchor="middle" class="h">books</text>
+  <text x="900" y="250" class="m b pk">PK id</text>
+  <text x="900" y="295" class="m b">title</text>
+  <path d="M465 270 H395 V250 H340" class="dash" marker-end="url(#arrow)"/>
+  <text x="402" y="232" text-anchor="middle" class="s">member_id → id</text>
+  <path d="M735 315 H805 V250 H860" class="dash" marker-end="url(#arrow)"/>
+  <text x="798" y="232" text-anchor="middle" class="s">book_id → id</text>
+  <rect x="120" y="480" width="960" height="85" class="box n"/>
+  <text x="600" y="515" text-anchor="middle" class="b">loans.id는 대여 기록 자체를 식별합니다.</text>
+  <text x="600" y="545" text-anchor="middle" class="b">member_id와 book_id는 회원과 도서를 참조하며, 존재하지 않는 ID는 FK 오류가 발생합니다.</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">SQL DML 명령어와 CRUD 대응</title>
+  <desc id="desc">INSERT, SELECT, UPDATE, DELETE가 CRUD의 Create, Read, Update, Delete와 어떻게 연결되고 students 테이블에 어떤 영향을 주는지 보여 주는 도식</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .panel{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}
+      .create{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}.read{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .update{fill:#fff5df;stroke:#d89424;stroke-width:2}.delete{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+      .table{fill:#fff;stroke:#64748b;stroke-width:2}.warn{fill:#fffceb;stroke:#d6a600;stroke-width:2}
+      .name{font-size:19px;font-weight:700;text-anchor:middle}.sql{font-size:17px;font-weight:700;text-anchor:middle;font-family:Consolas,D2Coding,"Courier New",monospace;fill:#0f2d5c}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}.line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#fff"/>
+  <text x="600" y="48" class="title">SQL DML 명령어와 CRUD 대응</text>
+  <rect x="130" y="90" width="940" height="210" rx="18" class="panel"/>
+  <text x="600" y="128" class="name">테이블 데이터 처리 · DML</text>
+
+  <rect x="165" y="160" width="195" height="100" rx="14" class="create"/><text x="263" y="190" class="name">Create</text><text x="263" y="218" class="sql">INSERT</text><text x="263" y="243" class="sub">행 추가</text>
+  <rect x="390" y="160" width="195" height="100" rx="14" class="read"/><text x="488" y="190" class="name">Read</text><text x="488" y="218" class="sql">SELECT</text><text x="488" y="243" class="sub">행 조회</text>
+  <rect x="615" y="160" width="195" height="100" rx="14" class="update"/><text x="713" y="190" class="name">Update</text><text x="713" y="218" class="sql">UPDATE</text><text x="713" y="243" class="sub">값 수정</text>
+  <rect x="840" y="160" width="195" height="100" rx="14" class="delete"/><text x="938" y="190" class="name">Delete</text><text x="938" y="218" class="sql">DELETE</text><text x="938" y="243" class="sub">행 삭제</text>
+
+  <path d="M600 300V350" class="line"/>
+  <rect x="390" y="355" width="420" height="96" rx="14" class="table"/>
+  <text x="600" y="388" class="name">students 테이블</text>
+  <text x="600" y="414" class="sub">INSERT는 행 수 증가 · SELECT는 저장 상태 변경 없음</text>
+  <text x="600" y="436" class="sub">UPDATE/DELETE는 선택된 행 변경</text>
+
+  <rect x="235" y="495" width="730" height="66" rx="18" class="warn"/>
+  <text x="600" y="523" class="note">UPDATE와 DELETE는 같은 WHERE 조건으로 먼저 SELECT하여 대상 행을 확인한다.</text>
+  <text x="600" y="548" class="sub">CRUD Create는 INSERT이며, CREATE TABLE은 테이블 구조를 만드는 DDL이다.</text>
+</svg>

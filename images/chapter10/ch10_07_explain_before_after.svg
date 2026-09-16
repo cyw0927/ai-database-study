@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">인덱스 전후 실행 계획 비교</title>
+  <desc id="desc">같은 SQL과 조건을 유지한 채 인덱스 전 계획을 기록하고 인덱스를 생성한 뒤 통계를 갱신해 인덱스 후 계획을 비교하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .sub{font-size:15px;fill:#475569;text-anchor:middle}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;text-anchor:middle;fill:#334155}
+      .small{font-size:13px;text-anchor:middle;fill:#475569}
+      .card{stroke-width:2;rx:14;ry:14}
+      .box{fill:#ffffff;stroke:#7fb3f5}
+      .scan{fill:#fff7ed;stroke:#f97316}
+      .index{fill:#ecfdf5;stroke:#22c55e}
+      .candidate{fill:#eff6ff;stroke:#2563eb}
+      .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:14;ry:14}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect width="1200" height="500" fill="#ffffff"/>
+  <text x="600" y="48" class="title">인덱스 전후 실행 계획 비교</text>
+  <text x="600" y="78" class="sub">같은 SQL을 같은 조건으로 실행해 전후 계획을 비교합니다.</text>
+
+  <rect x="60" y="155" width="180" height="105" class="card candidate"/>
+  <text x="150" y="194" class="head">같은 SELECT</text>
+  <text x="150" y="226" class="body">SQL과 조건 고정</text>
+
+  <rect x="285" y="155" width="180" height="105" class="card scan"/>
+  <text x="375" y="194" class="head">인덱스 전</text>
+  <text x="375" y="226" class="body">계획과 결과 기록</text>
+
+  <rect x="510" y="155" width="180" height="105" class="card index"/>
+  <text x="600" y="194" class="head">CREATE INDEX</text>
+  <text x="600" y="226" class="body">후보 인덱스 생성</text>
+
+  <rect x="735" y="155" width="180" height="105" class="card box"/>
+  <text x="825" y="194" class="head">ANALYZE</text>
+  <text x="825" y="226" class="body">통계 정보 갱신</text>
+
+  <rect x="960" y="155" width="180" height="105" class="card index"/>
+  <text x="1050" y="194" class="head">인덱스 후</text>
+  <text x="1050" y="226" class="body">계획과 결과 비교</text>
+
+  <path d="M240 207.5H285" class="arrow"/>
+  <path d="M465 207.5H510" class="arrow"/>
+  <path d="M690 207.5H735" class="arrow"/>
+  <path d="M915 207.5H960" class="arrow"/>
+
+  <rect x="235" y="345" width="730" height="82" class="note"/>
+  <text x="600" y="376" class="head">계획 노드 · actual rows · Buffers · 실행 시간을 함께 봅니다.</text>
+  <text x="600" y="407" class="body">결과가 같은지 확인하고 한 번의 실행 시간만으로 결론을 내리지 않습니다.</text>
+</svg>

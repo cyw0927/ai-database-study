@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">통합 데이터베이스 프로젝트 완성 흐름</title>
+  <desc id="desc">문제 정의부터 설계, SQL 검증, 분석 데이터셋, Python 분석, AI 검토와 완료 게이트를 거쳐 필요한 경우 웹, NoSQL 또는 배포를 선택하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#111827}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14;ry:14}.b{fill:#eff6ff;stroke:#3b82f6}.g{fill:#f0fdf4;stroke:#22c55e}.p{fill:#faf5ff;stroke:#8b5cf6}.y{fill:#fffbeb;stroke:#f59e0b}.c{fill:#ecfeff;stroke:#06b6d4}.n{fill:#f8fafc;stroke:#64748b}.head{font-size:16px;font-weight:700;text-anchor:middle}.body{font-size:12.5px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.3;fill:none;marker-end:url(#arrow)}.bus{stroke:#94a3b8;stroke-width:2;fill:none}.tag{font-size:12px;font-weight:700;fill:#475569}
+    </style>
+  </defs>
+  <rect width="1200" height="820" fill="#fff"/>
+  <text x="600" y="46" class="title">통합 데이터베이스 프로젝트 완성 흐름</text>
+  <text x="600" y="76" class="sub">설계·구현·분석·검증을 하나의 재현 가능한 프로젝트로 연결합니다.</text>
+
+  <rect x="30" y="130" width="170" height="110" class="card b"/><text x="115" y="164" class="head">1. 문제·사용자·범위</text><text x="115" y="198" class="body">필수·제외·선택 경계</text>
+  <rect x="220" y="130" width="170" height="110" class="card b"/><text x="305" y="164" class="head">2. 요구사항·정책</text><text x="305" y="198" class="body">확정·미확정 분리</text>
+  <rect x="410" y="130" width="170" height="110" class="card g"/><text x="495" y="164" class="head">3. ERD·DDL</text><text x="495" y="198" class="body">관계·제약조건 추적</text>
+  <rect x="600" y="130" width="170" height="110" class="card p"/><text x="685" y="164" class="head">4. 스키마 구현</text><text x="685" y="198" class="body">01_schema.sql</text>
+  <rect x="790" y="130" width="170" height="110" class="card p"/><text x="875" y="164" class="head">5. 기준 데이터</text><text x="875" y="198" class="body">02_seed.sql</text>
+  <rect x="980" y="130" width="170" height="110" class="card y"/><text x="1065" y="164" class="head">6. DB 검증</text><text x="1065" y="192" class="body">03~08 SQL</text><text x="1065" y="214" class="body">정합성·성능·운영</text>
+  <path d="M200 185 H220" class="line"/><path d="M390 185 H410" class="line"/><path d="M580 185 H600" class="line"/><path d="M770 185 H790" class="line"/><path d="M960 185 H980" class="line"/>
+  <path d="M1065 240 V320" class="line"/>
+
+  <rect x="980" y="320" width="170" height="110" class="card c"/><text x="1065" y="354" class="head">7. 분석 VIEW</text><text x="1065" y="388" class="body">09_analysis_dataset.sql</text>
+  <rect x="790" y="320" width="170" height="110" class="card c"/><text x="875" y="354" class="head">8. Python 분석</text><text x="875" y="388" class="body">pandas 집계</text>
+  <rect x="600" y="320" width="170" height="110" class="card y"/><text x="685" y="354" class="head">9. 교차 검증</text><text x="685" y="388" class="body">SQL ↔ Python</text>
+  <rect x="410" y="320" width="170" height="110" class="card p"/><text x="495" y="354" class="head">10. AI 검토</text><text x="495" y="388" class="body">diff·실행 증거·승인</text>
+  <rect x="220" y="320" width="170" height="110" class="card g"/><text x="305" y="354" class="head">11. 완료 게이트</text><text x="305" y="388" class="body">10_completion_gate.sql</text>
+  <rect x="30" y="320" width="170" height="110" class="card g"/><text x="115" y="354" class="head">12. 최종 보고</text><text x="115" y="388" class="body">결과·한계·다음 버전</text>
+  <path d="M980 375 H960" class="line"/><path d="M790 375 H770" class="line"/><path d="M600 375 H580" class="line"/><path d="M410 375 H390" class="line"/><path d="M220 375 H200" class="line"/>
+
+  <polygon points="115,485 205,555 115,625 25,555" class="card y"/>
+  <text x="115" y="540" class="head">선택 확장이</text><text x="115" y="566" class="head">필요한가?</text><text x="115" y="592" class="body">실제 요구사항 기준</text>
+  <path d="M115 430 V485" class="line"/>
+
+  <rect x="25" y="680" width="230" height="80" class="card n"/><text x="140" y="712" class="head">필수 프로젝트 완료</text><text x="140" y="740" class="body">현재 상태 유지</text>
+  <path d="M75 615 V655 H140 V680" class="line"/><text x="42" y="650" class="tag">아니요</text>
+
+  <path d="M155 615 V650 H1010" class="bus"/><text x="235" y="642" class="tag">예 · 필요한 항목만 선택</text>
+  <rect x="350" y="680" width="220" height="80" class="card b"/><text x="460" y="712" class="head">웹 CRUD/API</text><text x="460" y="740" class="body">입력·조회 흐름 검증</text>
+  <rect x="620" y="680" width="220" height="80" class="card p"/><text x="730" y="712" class="head">NoSQL</text><text x="730" y="740" class="body">별도 조회 패턴</text>
+  <rect x="890" y="680" width="220" height="80" class="card n"/><text x="1000" y="712" class="head">배포</text><text x="1000" y="740" class="body">외부 환경 검증</text>
+  <path d="M460 650 V680" class="line"/><path d="M730 650 V680" class="line"/><path d="M1000 650 V680" class="line"/>
+</svg>

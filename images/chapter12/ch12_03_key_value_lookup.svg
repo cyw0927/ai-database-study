@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="100%" height="680" viewBox="0 0 1200 680">
+  <title id="title">Key-Value 조회와 캐시 미스</title>
+  <desc id="desc">키로 조회하고, 없거나 만료되면 원본에서 읽어 캐시를 갱신합니다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker>
+    <style>
+      text{font-family:'Pretendard','Noto Sans KR','Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',Arial,sans-serif;fill:#0f172a}
+      .title{font-size:32px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:15px;text-anchor:middle;fill:#475569}
+      .card{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2;rx:18}
+      .blue{fill:#eff6ff;stroke:#3b82f6}
+      .green{fill:#f0fdf4;stroke:#22c55e}
+      .yellow{fill:#fffbeb;stroke:#f59e0b}
+      .purple{fill:#faf5ff;stroke:#8b5cf6}
+      .cyan{fill:#ecfeff;stroke:#06b6d4}
+      .label{font-size:20px;font-weight:700;text-anchor:middle}
+      .small{font-size:15px;text-anchor:middle;fill:#334155}
+      .tiny{font-size:13px;text-anchor:middle;fill:#475569}
+      .code{font-family:Consolas,'Pretendard','Noto Sans KR','Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',Arial,sans-serif;font-size:14px;text-anchor:middle;fill:#1d4ed8;font-weight:700}
+      .line{stroke:#475569;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="680" fill="#ffffff"/>
+  <text x="600" y="52" class="title">Key-Value 조회와 캐시 미스</text>
+  <text x="600" y="80" class="subtitle">키로 조회하고, 없거나 만료되면 원본에서 읽어 캐시를 갱신합니다.</text>
+  <rect x="70" y="150" width="230" height="115" class="card blue"/>
+  <text x="185" y="184" class="label">Cache Key</text>
+  <text x="185" y="218" class="small">student:1001:session</text>
+  <rect x="365" y="150" width="220" height="115" class="card yellow"/>
+  <text x="475" y="184" class="label">Cache Hit?</text>
+  <text x="475" y="218" class="small">있으면 바로 반환</text>
+  <rect x="660" y="150" width="230" height="115" class="card green"/>
+  <text x="775" y="184" class="label">Return Value</text>
+  <text x="775" y="218" class="small">세션 · 인기 강의</text>
+  <rect x="365" y="380" width="220" height="115" class="card purple"/>
+  <text x="475" y="414" class="label">Cache Miss</text>
+  <text x="475" y="448" class="small">원본 RDBMS 조회</text>
+  <rect x="660" y="380" width="230" height="115" class="card cyan"/>
+  <text x="775" y="414" class="label">Refresh Cache</text>
+  <text x="775" y="448" class="small">만료 시간 갱신</text>
+  <line x1="300" y1="208" x2="365" y2="208" class="line"/>
+  <line x1="585" y1="208" x2="660" y2="208" class="line"/>
+  <line x1="475" y1="265" x2="475" y2="380" class="line"/>
+  <line x1="585" y1="438" x2="660" y2="438" class="line"/>
+  <line x1="775" y1="380" x2="775" y2="265" class="line"/>
+  <text x="600" y="580" class="small">캐시는 원본이 아니라 빠른 응답을 위한 파생 데이터입니다.</text>
+</svg>

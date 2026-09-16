@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">WHERE 조건에서 인덱스 후보 판단하기</title>
+  <desc id="desc">WHERE 컬럼에 기존 PK 또는 UNIQUE 인덱스가 있는지 확인하고, 없으면 실행 빈도와 선택도를 검토한 뒤 인덱스 후보를 실행 계획으로 비교하거나 보류하는 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .sub{font-size:15px;fill:#475569;text-anchor:middle}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;text-anchor:middle;fill:#334155}
+      .small{font-size:13px;text-anchor:middle;fill:#475569}
+      .tag{font-size:14px;font-weight:700;fill:#2563eb;text-anchor:middle}
+      .card{stroke-width:2;rx:14;ry:14}
+      .box{fill:#ffffff;stroke:#7fb3f5}
+      .candidate{fill:#eff6ff;stroke:#2563eb}
+      .index{fill:#ecfdf5;stroke:#22c55e}
+      .warn{fill:#fdf2f8;stroke:#db2777}
+      .hold{fill:#fff7ed;stroke:#f97316}
+      .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:14;ry:14}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="600" y="48" class="title">WHERE 조건에서 인덱스 후보 판단하기</text>
+  <text x="600" y="78" class="sub">기존 인덱스, 실행 빈도, 선택도와 실행 계획을 순서대로 확인합니다.</text>
+
+  <rect x="40" y="200" width="190" height="110" class="card candidate"/>
+  <text x="135" y="238" class="head">WHERE 컬럼</text>
+  <text x="135" y="269" class="body">반복되는 검색 조건</text>
+  <text x="135" y="294" class="small">예: students.email</text>
+
+  <polygon points="380,165 510,255 380,345 250,255" class="card candidate"/>
+  <text x="380" y="240" class="head">자동 인덱스가</text>
+  <text x="380" y="268" class="head">이미 있는가?</text>
+  <text x="380" y="300" class="small">PK · UNIQUE</text>
+
+  <rect x="570" y="200" width="230" height="110" class="card warn"/>
+  <text x="685" y="238" class="head">중복 생성 안 함</text>
+  <text x="685" y="269" class="body">기존 인덱스 확인</text>
+  <text x="685" y="294" class="small">같은 목적의 인덱스 추가 금지</text>
+
+  <polygon points="380,365 510,455 380,545 250,455" class="card candidate"/>
+  <text x="380" y="440" class="head">자주 실행되고</text>
+  <text x="380" y="468" class="head">선택도가 높은가?</text>
+  <text x="380" y="500" class="small">빈도 · 결과 행 비율</text>
+
+  <rect x="570" y="400" width="230" height="110" class="card candidate"/>
+  <text x="685" y="438" class="head">인덱스 후보</text>
+  <text x="685" y="471" class="body">DDL 초안 작성</text>
+  <text x="685" y="496" class="small">실행 계획 비교 준비</text>
+
+  <rect x="855" y="395" width="260" height="120" class="card index"/>
+  <text x="985" y="434" class="head">실행 계획 비교</text>
+  <text x="985" y="467" class="body">적용 전·후 비용 확인</text>
+  <text x="985" y="494" class="small">효과가 없으면 보류</text>
+
+  <rect x="265" y="575" width="230" height="85" class="card hold"/>
+  <text x="380" y="608" class="head">보류</text>
+  <text x="380" y="638" class="body">읽기 이득보다 쓰기 비용 우려</text>
+
+  <rect x="555" y="555" width="560" height="105" class="note"/>
+  <text x="835" y="590" class="head">판단 원칙</text>
+  <text x="835" y="620" class="body">모든 WHERE 컬럼이 인덱스 대상은 아닙니다.</text>
+  <text x="835" y="646" class="small">후보 선정 뒤 반드시 실행 계획과 실제 조회 패턴으로 검증합니다.</text>
+
+  <path d="M230 255H250" class="arrow"/>
+  <path d="M510 255H570" class="arrow"/>
+  <text x="540" y="238" class="tag">예</text>
+  <path d="M380 345V365" class="arrow"/>
+  <text x="420" y="360" class="tag">아니요</text>
+  <path d="M510 455H570" class="arrow"/>
+  <text x="540" y="438" class="tag">예</text>
+  <path d="M800 455H855" class="arrow"/>
+  <path d="M380 545V575" class="arrow"/>
+  <text x="422" y="565" class="tag">아니요</text>
+</svg>

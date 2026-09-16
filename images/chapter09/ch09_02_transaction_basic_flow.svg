@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">BEGIN부터 COMMIT·ROLLBACK까지</title>
+  <desc id="desc">변경 전 확인부터 COMMIT 전 검증, 성공 시 COMMIT과 실패 시 ROLLBACK으로 분기하는 흐름을 보여 준다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b91c1c"/>
+    </marker>
+    <style>.ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+.mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+.title { font-size: 28px; font-weight: 700; }
+.subtitle { font-size: 15px; fill: #4b5563; }
+.box-title { font-size: 18px; font-weight: 700; }
+.body { font-size: 14px; }
+.small { font-size: 12.5px; fill: #4b5563; }
+.card { stroke: #64748b; stroke-width: 1.8; rx: 14; ry: 14; }
+.start { fill: #eaf3ff; }
+.work { fill: #eef5ff; }
+.review { fill: #fff6d8; }
+.ok { fill: #eaf8ee; }
+.fail { fill: #ffeaea; }
+.rule { fill: #f2ecff; }
+.lock { fill: #fff0d9; }
+.line { stroke: #475569; stroke-width: 2.2; fill: none; }
+.dash { stroke: #b45309; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }
+.retry { stroke: #b91c1c; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }</style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="ko title">
+    <tspan x="600" dy="0">BEGIN부터 COMMIT·ROLLBACK까지</tspan>
+  </text>
+  <text x="600" y="70" text-anchor="middle" class="ko subtitle">
+    <tspan x="600" dy="0">COMMIT은 결과를 확인한 뒤 실행합니다.</tspan>
+  </text>
+  <rect x="30" y="145" width="190" height="82" rx="14" ry="14" class="card work"/>
+  <text x="125" y="194" text-anchor="middle" class="ko box-title">
+    <tspan x="125" dy="0">변경 전 SELECT</tspan>
+  </text>
+  <rect x="250" y="145" width="190" height="82" rx="14" ry="14" class="card work"/>
+  <text x="345" y="194" text-anchor="middle" class="ko box-title">
+    <tspan x="345" dy="0">BEGIN</tspan>
+  </text>
+  <rect x="470" y="145" width="190" height="82" rx="14" ry="14" class="card work"/>
+  <text x="565" y="194" text-anchor="middle" class="ko box-title">
+    <tspan x="565" dy="0">여러 변경 SQL</tspan>
+  </text>
+  <rect x="700" y="145" width="190" height="82" rx="14" ry="14" class="card work"/>
+  <text x="795" y="194" text-anchor="middle" class="ko box-title">
+    <tspan x="795" dy="0">COMMIT 전 SELECT</tspan>
+  </text>
+  <line x1="220" y1="186" x2="250" y2="186" class="line" marker-end="url(#arrow)"/>
+  <line x1="440" y1="186" x2="470" y2="186" class="line" marker-end="url(#arrow)"/>
+  <line x1="660" y1="186" x2="700" y2="186" class="line" marker-end="url(#arrow)"/>
+  <rect x="940" y="125" width="230" height="122" rx="14" ry="14" class="card review"/>
+  <text x="1055" y="170" text-anchor="middle" class="ko box-title">
+    <tspan x="1055" dy="0">예상 결과와</tspan>
+    <tspan x="1055" dy="25">일치하는가?</tspan>
+  </text>
+  <line x1="890" y1="186" x2="940" y2="186" class="line" marker-end="url(#arrow)"/>
+  <rect x="730" y="350" width="220" height="90" rx="14" ry="14" class="card ok"/>
+  <text x="840" y="385" text-anchor="middle" class="ko box-title">
+    <tspan x="840" dy="0">성공</tspan>
+  </text>
+  <text x="840" y="415" text-anchor="middle" class="ko body">
+    <tspan x="840" dy="0">COMMIT · 변경 확정</tspan>
+  </text>
+  <rect x="970" y="350" width="200" height="90" rx="14" ry="14" class="card fail"/>
+  <text x="1070" y="385" text-anchor="middle" class="ko box-title">
+    <tspan x="1070" dy="0">실패</tspan>
+  </text>
+  <text x="1070" y="415" text-anchor="middle" class="ko body">
+    <tspan x="1070" dy="0">ROLLBACK · 변경 취소</tspan>
+  </text>
+  <path d="M 1010 247 V 300 H 840 V 350" class="line" marker-end="url(#arrow)"/>
+  <path d="M 1100 247 V 350" class="line" marker-end="url(#arrow)"/>
+  <text x="900" y="292" text-anchor="middle" class="ko small">
+    <tspan x="900" dy="0">예</tspan>
+  </text>
+  <text x="1120" y="292" text-anchor="middle" class="ko small">
+    <tspan x="1120" dy="0">아니요</tspan>
+  </text>
+  <rect x="310" y="505" width="580" height="58" rx="14" ry="14" class="card rule"/>
+  <text x="600" y="540" text-anchor="middle" class="ko body">
+    <tspan x="600" dy="0">COMMIT 후에는 같은 트랜잭션의 ROLLBACK으로 취소할 수 없습니다.</tspan>
+  </text>
+</svg>

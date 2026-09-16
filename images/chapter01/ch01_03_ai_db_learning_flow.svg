@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">AI 시대의 데이터베이스 작업 흐름</title>
+  <desc id="desc">요구사항 정리, 데이터 모델링, AI와 Codex를 활용한 구현 초안 작성, PostgreSQL 실행, DBeaver 확인, 수정, GitHub 기록으로 이어지는 전체 작업 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .step{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .ai{fill:#e7fbf6;stroke:#1aa382;stroke-width:2}
+      .exec{fill:#eef5ff;stroke:#3b82f6;stroke-width:2}
+      .check{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2}
+      .fix{fill:#fff7e6;stroke:#d97706;stroke-width:2}
+      .done{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14.5px;text-anchor:middle;fill:#334155}
+      .line{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .note{fill:#eef5ff;stroke:#4d86d7;stroke-width:2}
+      .note-text{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+    <symbol id="actor-ai-icon" viewBox="0 0 24 24">
+      <rect x="5" y="7" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 4v3M9.5 4h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="9.5" cy="12" r="1.2" fill="currentColor"/>
+      <circle cx="14.5" cy="12" r="1.2" fill="currentColor"/>
+      <path d="M9 15h6M5 11H3.5M20.5 11H19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="actor-human-icon" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M5.5 19c.9-3.7 3-5.5 6.5-5.5s5.6 1.8 6.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+  <rect width="1200" height="540" fill="#fff"/>
+  <text x="600" y="46" class="title">AI 시대의 데이터베이스 작업 흐름</text>
+
+  <rect x="60" y="100" width="150" height="82" rx="15" class="step"/>
+  <text x="135" y="132" class="head">요구사항 정리</text>
+  <text x="135" y="158" class="body">업무 규칙 파악</text>
+
+  <line x1="210" y1="141" x2="255" y2="141" class="line"/>
+  <rect x="255" y="100" width="150" height="82" rx="15" class="step"/>
+  <text x="330" y="132" class="head">데이터 모델링</text>
+  <text x="330" y="158" class="body">엔터티·관계</text>
+
+  <line x1="405" y1="141" x2="450" y2="141" class="line"/>
+  <rect x="450" y="100" width="190" height="82" rx="15" class="ai"/>
+  <text x="545" y="132" class="head">AI·Codex 초안</text>
+  <text x="545" y="158" class="body">DDL · SQL · 코드</text>
+
+  <line x1="640" y1="141" x2="685" y2="141" class="line"/>
+  <rect x="685" y="100" width="150" height="82" rx="15" class="exec"/>
+  <text x="760" y="132" class="head">PostgreSQL</text>
+  <text x="760" y="158" class="body">테스트 실행</text>
+
+  <line x1="835" y1="141" x2="880" y2="141" class="line"/>
+  <rect x="880" y="100" width="150" height="82" rx="15" class="check"/>
+  <text x="955" y="132" class="head">DBeaver 확인</text>
+  <text x="955" y="158" class="body">구조·데이터 검토</text>
+
+  <line x1="955" y1="182" x2="955" y2="232" class="line"/>
+  <rect x="840" y="232" width="230" height="82" rx="15" class="fix"/>
+  <text x="955" y="264" class="head">수정</text>
+  <text x="955" y="290" class="body">문제 발견 시 보완</text>
+
+  <line x1="840" y1="273" x2="685" y2="273" class="line"/>
+  <rect x="500" y="232" width="185" height="82" rx="15" class="done"/>
+  <text x="592" y="264" class="head">GitHub 기록</text>
+  <text x="592" y="290" class="body">변경 내용과 근거</text>
+
+  <rect x="165" y="390" width="870" height="50" rx="18" class="note"/>
+  <text x="600" y="421" class="note-text">AI는 초안 생성을 돕고, 사람은 요구사항 판단과 결과 검증을 책임진다.</text>
+
+  <!-- 실행 주체 범례: 기존 흐름은 변경하지 않음 -->
+  <g id="actor-legend" aria-label="실행 주체 범례">
+    <rect x="945" y="10" width="235" height="70" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.6"/>
+    <text x="1062.5" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#475569">실행 주체</text>
+    <g transform="translate(962 39)">
+      <rect width="28" height="28" rx="9" fill="#dff8f1" stroke="#0f9f7a" stroke-width="1.4"/>
+      <use href="#actor-ai-icon" x="4" y="4" width="20" height="20" style="color:#0f766e"/>
+    </g>
+    <text x="1000" y="59" font-size="14" font-weight="700" fill="#0f766e">AI</text>
+    <g transform="translate(1050 39)">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+    <text x="1088" y="59" font-size="14" font-weight="700" fill="#475569">사람</text>
+  </g>
+
+  <!-- 각 단계 실행 주체 아이콘 -->
+  <g id="actor-badges" aria-label="각 단계의 실행 주체">
+    <g transform="translate(48 88)" aria-label="사람 실행">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+    <g transform="translate(243 88)" aria-label="사람 실행">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+    <g transform="translate(438 88)" aria-label="AI 실행">
+      <rect width="28" height="28" rx="9" fill="#dff8f1" stroke="#0f9f7a" stroke-width="1.4"/>
+      <use href="#actor-ai-icon" x="4" y="4" width="20" height="20" style="color:#0f766e"/>
+    </g>
+    <g transform="translate(673 88)" aria-label="사람 실행">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+    <g transform="translate(868 88)" aria-label="사람 실행">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+    <g transform="translate(828 220)" aria-label="사람 실행">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+    <g transform="translate(488 220)" aria-label="사람 실행">
+      <rect width="28" height="28" rx="9" fill="#f1f5f9" stroke="#64748b" stroke-width="1.4"/>
+      <use href="#actor-human-icon" x="4" y="4" width="20" height="20" style="color:#475569"/>
+    </g>
+  </g>
+</svg>

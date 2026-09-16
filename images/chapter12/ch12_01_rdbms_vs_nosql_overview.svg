@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">RDBMS와 NoSQL 역할 나누기</title>
+  <desc id="desc">온라인 강의 서비스의 데이터를 RDBMS와 NoSQL 중 어디에 저장할지 데이터 역할, 조회 패턴, 일관성 범위, 확장성과 운영 책임을 기준으로 비교하는 3열 도식</desc>
+  <defs>
+    <style>
+      text{font-family:"Pretendard","Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:30px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:14px;text-anchor:middle;fill:#475569}
+      .head{font-size:20px;font-weight:800;text-anchor:middle}
+      .section{font-size:15px;font-weight:700;text-anchor:middle}
+      .body{font-size:13.5px;text-anchor:middle;fill:#334155}
+      .small{font-size:12px;text-anchor:middle;fill:#475569}
+      .card{stroke-width:2;rx:18;ry:18}
+      .principle{fill:#f8fafc;stroke:#94a3b8}
+      .rdbms{fill:#eff6ff;stroke:#3b82f6}
+      .criteria{fill:#f8fafc;stroke:#64748b}
+      .nosql{fill:#f0fdf4;stroke:#22c55e}
+      .row{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.4;rx:12;ry:12}
+      .note{fill:#fffbeb;stroke:#f59e0b}
+      .label-blue{fill:#1d4ed8}
+      .label-green{fill:#15803d}
+      .label-gray{fill:#334155}
+      .divider{stroke:#cbd5e1;stroke-width:1.4;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="820" fill="#ffffff"/>
+  <text x="600" y="46" class="title">RDBMS와 NoSQL 역할 나누기</text>
+  <text x="600" y="74" class="subtitle">저장소 이름보다 데이터 역할·조회 패턴·일관성 범위·운영 책임을 먼저 정의합니다.</text>
+
+  <rect x="80" y="100" width="1040" height="66" class="card principle"/>
+  <text x="600" y="126" class="section">핵심 원칙</text>
+  <text x="600" y="150" class="body">RDBMS와 NoSQL은 우열 관계가 아니라 서로 다른 요구사항을 해결하는 저장 모델입니다.</text>
+
+  <!-- RDBMS column -->
+  <rect x="40" y="205" width="355" height="455" class="card rdbms"/>
+  <text x="217.5" y="239" class="head label-blue">RDBMS가 자연스러운 경우</text>
+  <text x="217.5" y="265" class="small">관계·무결성·트랜잭션이 핵심인 데이터</text>
+  <line x1="70" y1="285" x2="365" y2="285" class="divider"/>
+
+  <rect x="70" y="305" width="295" height="58" class="row"/>
+  <text x="217.5" y="328" class="section">데이터 모델</text>
+  <text x="217.5" y="350" class="body">테이블·컬럼·관계가 비교적 명확</text>
+
+  <rect x="70" y="378" width="295" height="58" class="row"/>
+  <text x="217.5" y="401" class="section">무결성과 트랜잭션</text>
+  <text x="217.5" y="423" class="body">PK·FK·UNIQUE·CHECK · 다중 테이블 원자성</text>
+
+  <rect x="70" y="451" width="295" height="58" class="row"/>
+  <text x="217.5" y="474" class="section">주요 조회</text>
+  <text x="217.5" y="496" class="body">JOIN·집계·다양한 조건 질의</text>
+
+  <rect x="70" y="524" width="295" height="105" class="row"/>
+  <text x="217.5" y="549" class="section">온라인 강의 예</text>
+  <text x="217.5" y="575" class="mono body">students · courses</text>
+  <text x="217.5" y="597" class="mono body">enrollments · payments</text>
+  <text x="217.5" y="618" class="small">수강신청·결제처럼 원본 판단이 중요한 데이터</text>
+
+  <!-- Criteria column -->
+  <rect x="422.5" y="205" width="355" height="455" class="card criteria"/>
+  <text x="600" y="239" class="head label-gray">같은 판단 기준으로 비교</text>
+  <text x="600" y="265" class="small">제품명이 아니라 시스템 요구사항에서 출발</text>
+  <line x1="452.5" y1="285" x2="747.5" y2="285" class="divider"/>
+
+  <rect x="452.5" y="305" width="295" height="58" class="row"/>
+  <text x="600" y="328" class="section">1. 시스템 역할</text>
+  <text x="600" y="350" class="body">원본 · 캐시 · 메타데이터 · 이벤트 · 관계 인덱스</text>
+
+  <rect x="452.5" y="378" width="295" height="58" class="row"/>
+  <text x="600" y="401" class="section">2. 읽기·쓰기 패턴</text>
+  <text x="600" y="423" class="body">키 조회 · 범위 조회 · JOIN · 집계 · 관계 탐색</text>
+
+  <rect x="452.5" y="451" width="295" height="58" class="row"/>
+  <text x="600" y="474" class="section">3. 일관성 범위</text>
+  <text x="600" y="496" class="body">허용 가능한 불일치 · 트랜잭션 단위</text>
+
+  <rect x="452.5" y="524" width="295" height="58" class="row"/>
+  <text x="600" y="547" class="section">4. 확장과 운영</text>
+  <text x="600" y="569" class="body">분산·핫스팟·모니터링·보안·비용</text>
+
+  <rect x="452.5" y="597" width="295" height="42" class="row"/>
+  <text x="600" y="623" class="body">장애 시 복구 기준과 재생성 가능 여부까지 확인</text>
+
+  <!-- NoSQL column -->
+  <rect x="805" y="205" width="355" height="455" class="card nosql"/>
+  <text x="982.5" y="239" class="head label-green">NoSQL을 검토할 수 있는 경우</text>
+  <text x="982.5" y="265" class="small">특정 접근 패턴에 맞춘 키·문서·파티션·그래프 모델</text>
+  <line x1="835" y1="285" x2="1130" y2="285" class="divider"/>
+
+  <rect x="835" y="305" width="295" height="58" class="row"/>
+  <text x="982.5" y="328" class="section">데이터 모델</text>
+  <text x="982.5" y="350" class="body">Key-Value · Document · Column-Family · Graph</text>
+
+  <rect x="835" y="378" width="295" height="58" class="row"/>
+  <text x="982.5" y="401" class="section">규칙과 트랜잭션</text>
+  <text x="982.5" y="423" class="body">제품·모델·키 또는 문서 범위에 따라 다름</text>
+
+  <rect x="835" y="451" width="295" height="58" class="row"/>
+  <text x="982.5" y="474" class="section">주요 조회</text>
+  <text x="982.5" y="496" class="body">정확한 키 · 문서 · 파티션 범위 · 다단계 관계</text>
+
+  <rect x="835" y="524" width="295" height="105" class="row"/>
+  <text x="982.5" y="549" class="section">온라인 강의 예</text>
+  <text x="982.5" y="575" class="body">로그인 세션 · 인기 강의 캐시 · 강의 메타데이터</text>
+  <text x="982.5" y="597" class="body">학습 이벤트 · 추천 관계 인덱스</text>
+  <text x="982.5" y="618" class="small">NoSQL 하나가 모든 유형을 대표하지 않음</text>
+
+  <!-- Combined-use note -->
+  <rect x="120" y="695" width="960" height="88" class="card note"/>
+  <text x="600" y="725" class="head">한 서비스에서 함께 사용할 수 있습니다.</text>
+  <text x="600" y="752" class="body">다만 저장소가 늘수록 데이터 동기화·권한·백업·복구·장애 대응 책임도 함께 증가합니다.</text>
+  <text x="600" y="774" class="small">작은 검증 실험과 운영 근거 없이 저장소 종류부터 늘리지 않습니다.</text>
+
+  <text x="600" y="810" class="small">핵심: 반드시 보존해야 할 원본과 가장 중요한 조회 패턴을 먼저 정의한 뒤 저장 모델을 선택합니다.</text>
+</svg>

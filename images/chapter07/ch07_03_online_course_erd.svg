@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="100%"
+  viewBox="0 0 1200 680"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">온라인 강의 수강신청 핵심 ERD</title>
+  <desc id="desc">students, instructors, courses, enrollments 네 테이블의 기본키, 외래키, 일대다 관계와 학생과 강의의 다대다 관계 해소 구조를 보여 준다.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#334155" />
+    </marker>
+    <style>
+      text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .title { font-size: 28px; font-weight: 700; text-anchor: middle; }
+      .sub { font-size: 14px; fill: #475569; text-anchor: middle; }
+      .table-box { fill: #ffffff; stroke: #8bbcf6; stroke-width: 2; }
+      .course-box { fill: #fff8eb; stroke: #f59e0b; stroke-width: 2; }
+      .enrollment-box { fill: #f2fff8; stroke: #22a06b; stroke-width: 2; }
+      .table-title { font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .field { font-size: 13.5px; text-anchor: start; fill: #334155; }
+      .badge-text { font-size: 11.5px; font-weight: 700; text-anchor: middle; }
+      .pk-badge { fill: #dbeafe; stroke: #2563eb; stroke-width: 1.4; }
+      .fk-badge { fill: #ffedd5; stroke: #f97316; stroke-width: 1.4; }
+      .relation-line { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .relation-tag { font-size: 12px; font-weight: 700; fill: #2563eb; text-anchor: middle; }
+      .note { font-size: 17px; font-weight: 700; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="680" fill="#ffffff" />
+  <text x="600" y="48" class="title">온라인 강의 수강신청 핵심 ERD</text>
+  <text x="600" y="76" class="sub">네 테이블의 PK, FK, 1:N 관계와 N:M 해소 구조를 확인한다</text>
+
+  <rect x="70" y="130" width="260" height="200" rx="14" class="table-box" />
+  <text x="200" y="162" class="table-title">students</text>
+  <rect x="92" y="180" width="42" height="22" rx="8" class="pk-badge" />
+  <text x="113" y="196" class="badge-text">PK</text>
+  <text x="154" y="196" class="field">id</text>
+  <text x="154" y="228" class="field">email UNIQUE</text>
+  <text x="154" y="260" class="field">joined_at</text>
+
+  <rect x="70" y="370" width="260" height="200" rx="14" class="table-box" />
+  <text x="200" y="402" class="table-title">instructors</text>
+  <rect x="92" y="420" width="42" height="22" rx="8" class="pk-badge" />
+  <text x="113" y="436" class="badge-text">PK</text>
+  <text x="154" y="436" class="field">id</text>
+  <text x="154" y="468" class="field">email UNIQUE</text>
+  <text x="154" y="500" class="field">specialty</text>
+
+  <rect x="455" y="370" width="295" height="200" rx="14" class="course-box" />
+  <text x="602.5" y="402" class="table-title">courses</text>
+  <rect x="480" y="420" width="42" height="22" rx="8" class="pk-badge" />
+  <text x="501" y="436" class="badge-text">PK</text>
+  <text x="545" y="436" class="field">id</text>
+  <rect x="480" y="452" width="42" height="22" rx="8" class="fk-badge" />
+  <text x="501" y="468" class="badge-text">FK</text>
+  <text x="545" y="468" class="field">instructor_id</text>
+  <text x="545" y="500" class="field">title</text>
+  <text x="545" y="532" class="field">price NUMERIC</text>
+
+  <rect x="835" y="130" width="300" height="220" rx="14" class="enrollment-box" />
+  <text x="985" y="162" class="table-title">enrollments</text>
+  <rect x="860" y="180" width="42" height="22" rx="8" class="pk-badge" />
+  <text x="881" y="196" class="badge-text">PK</text>
+  <text x="925" y="196" class="field">id</text>
+  <rect x="860" y="212" width="42" height="22" rx="8" class="fk-badge" />
+  <text x="881" y="228" class="badge-text">FK</text>
+  <text x="925" y="228" class="field">student_id</text>
+  <rect x="860" y="244" width="42" height="22" rx="8" class="fk-badge" />
+  <text x="881" y="260" class="badge-text">FK</text>
+  <text x="925" y="260" class="field">course_id</text>
+  <text x="925" y="292" class="field">status</text>
+  <text x="925" y="324" class="field">recorded_amount</text>
+
+  <path d="M330 228 H835" class="relation-line" />
+  <text x="582" y="210" class="relation-tag">1:N</text>
+  <path d="M330 468 H455" class="relation-line" />
+  <text x="392" y="450" class="relation-tag">1:N</text>
+  <path d="M750 436 H795 V260 H835" class="relation-line" />
+  <text x="812" y="348" class="relation-tag">1:N</text>
+
+  <text x="600" y="625" class="note">courses.price는 현재 기준 가격, enrollments.recorded_amount는 신청 시 기록 금액</text>
+</svg>

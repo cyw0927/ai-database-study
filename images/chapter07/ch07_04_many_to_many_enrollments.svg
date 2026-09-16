@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+<title id="title">enrollments로 학생-강의 N:M 관계 해소</title>
+<desc id="desc">관계 자체의 정보는 연결 테이블에 둔다</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker><style>
+text{font-family:"Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;fill:#0f172a} .title{font-size:28px;font-weight:700;text-anchor:middle} .sub{font-size:14px;fill:#475569;text-anchor:middle} .box{fill:#fff;stroke:#8bbcf6;stroke-width:2;rx:14} .green{stroke:#22a06b;fill:#f2fff8} .head{font-size:18px;font-weight:700;text-anchor:middle} .body{font-size:13.5px;text-anchor:middle;fill:#334155} .code{font-family:Consolas, D2Coding, "Courier New", monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8} .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)} .tag{font-size:12px;font-weight:700;fill:#2563eb;text-anchor:middle} .note{fill:#eefdf4;stroke:#22c55e;stroke-width:1.5;rx:12}
+</style></defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+<text x="600" y="48" class="title">enrollments로 학생-강의 N:M 관계 해소</text>
+<text x="600" y="76" class="sub">관계 자체의 정보는 연결 테이블에 둔다</text>
+<rect x="90" y="165" width="230" height="150" class="box"/>
+<text x="205" y="197" class="head">students</text>
+<text x="205" y="223" class="body">id PK</text>
+<text x="205" y="245" class="body">name · email</text>
+<rect x="485" y="140" width="230" height="200" class="green"/>
+<text x="600" y="172" class="head">enrollments</text>
+<text x="600" y="198" class="body">id PK</text>
+<text x="600" y="220" class="code">student_id FK</text>
+<text x="600" y="242" class="code">course_id FK</text>
+<text x="600" y="264" class="body">status</text>
+<text x="600" y="286" class="code">recorded_amount</text>
+<rect x="880" y="165" width="230" height="150" class="box"/>
+<text x="995" y="197" class="head">courses</text>
+<text x="995" y="223" class="body">id PK</text>
+<text x="995" y="245" class="body">title · price</text>
+<path d="M320 240 L485 240" class="arrow"/>
+<path d="M880 240 L715 240" class="arrow"/>
+<text x="395" y="220" class="tag">1:N</text><text x="805" y="220" class="tag">N:1</text>
+<rect x="320" y="385" width="560" height="52" class="note"/>
+<text x="600" y="418" class="head">학생-강의 N:M 관계는 enrollments 두 개의 1:N 관계로 해소한다</text>
+</svg>

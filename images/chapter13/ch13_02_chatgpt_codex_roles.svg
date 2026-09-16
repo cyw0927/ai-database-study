@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 730" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">ChatGPT·Codex·사람의 권장 역할 분담과 검토 흐름</title>
+  <desc id="desc">ChatGPT가 요구사항과 검토 기준을 정리하고, Codex가 저장소 파일과 SQL을 수정하고 테스트하며, 사람이 업무 규칙과 위험을 검토해 최종 승인하는 수평 협업 흐름이다.</desc>
+  <style>
+    .ko { font-family: "NanumSquare", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: "Noto Sans Mono CJK KR", "NanumSquare", Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .subtitle { font-size: 14px; fill: #4b5563; }
+    .head { font-size: 18px; font-weight: 700; }
+    .body { font-size: 14px; }
+    .small { font-size: 12px; fill: #475569; }
+    .label { font-size: 12px; font-weight: 700; fill: #2563eb; }
+    .step { font-size: 12px; font-weight: 700; fill: #ffffff; }
+    .box { stroke: #64748b; stroke-width: 1.8; rx: 14; ry: 14; }
+    .ai { fill: #f3edff; stroke: #8b5cf6; }
+    .codex { fill: #fff0dc; stroke: #f59e0b; }
+    .human { fill: #fff6d8; stroke: #ca8a04; }
+    .meta { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.4; }
+    .principle { fill: #eaf3ff; stroke: #2563eb; }
+    .ok { fill: #eaf8ee; stroke: #16a34a; }
+    .note { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.4; }
+    .line { stroke: #475569; stroke-width: 2.2; fill: none; marker-end: url(#arrow); stroke-linejoin: round; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="730" fill="#ffffff"/>
+  <text x="600" y="45" text-anchor="middle" class="ko title">ChatGPT·Codex·사람의 권장 역할 분담</text>
+  <text x="600" y="73" text-anchor="middle" class="ko subtitle">기능의 절대적 경계가 아니라, 검토 가능한 산출물을 단계별로 인계하는 권장 흐름입니다.</text>
+
+  <rect x="120" y="98" width="960" height="48" class="box note"/>
+  <text x="600" y="127" text-anchor="middle" class="ko body">요구사항과 기준 → 저장소 변경과 실행 근거 → 정책 판단과 최종 승인</text>
+
+  <!-- ChatGPT -->
+  <rect x="45" y="175" width="330" height="365" class="box ai"/>
+  <circle cx="78" cy="207" r="16" fill="#8b5cf6"/>
+  <text x="78" y="212" text-anchor="middle" class="ko step">1</text>
+  <text x="210" y="214" text-anchor="middle" class="ko head">ChatGPT 중심 작업</text>
+  <text x="210" y="242" text-anchor="middle" class="ko small">대화와 비교를 통해 기준을 구조화</text>
+
+  <rect x="75" y="270" width="270" height="50" class="box meta"/>
+  <text x="210" y="301" text-anchor="middle" class="ko body">요구사항·제약조건 대화</text>
+  <rect x="75" y="335" width="270" height="50" class="box meta"/>
+  <text x="210" y="366" text-anchor="middle" class="ko body">설계 대안과 장단점 비교</text>
+  <rect x="75" y="400" width="270" height="50" class="box meta"/>
+  <text x="210" y="431" text-anchor="middle" class="ko body">검토 기준·체크리스트 정리</text>
+  <rect x="75" y="465" width="270" height="50" class="box meta"/>
+  <text x="210" y="496" text-anchor="middle" class="ko body">설명·보고서 초안 작성</text>
+
+  <!-- Codex -->
+  <rect x="435" y="175" width="330" height="365" class="box codex"/>
+  <circle cx="468" cy="207" r="16" fill="#f59e0b"/>
+  <text x="468" y="212" text-anchor="middle" class="ko step">2</text>
+  <text x="600" y="214" text-anchor="middle" class="ko head">Codex 중심 작업</text>
+  <text x="600" y="242" text-anchor="middle" class="ko small">저장소에서 변경하고 실행 결과를 남김</text>
+
+  <rect x="465" y="270" width="270" height="50" class="box meta"/>
+  <text x="600" y="301" text-anchor="middle" class="ko body">저장소 파일·의존관계 확인</text>
+  <rect x="465" y="335" width="270" height="50" class="box meta"/>
+  <text x="600" y="366" text-anchor="middle" class="mono body">SQL·코드 생성 및 수정</text>
+  <rect x="465" y="400" width="270" height="50" class="box meta"/>
+  <text x="600" y="431" text-anchor="middle" class="ko body">오류 재현·명령 실행</text>
+  <rect x="465" y="465" width="270" height="50" class="box meta"/>
+  <text x="600" y="496" text-anchor="middle" class="mono body">테스트·diff·실행 로그 확인</text>
+
+  <!-- Human -->
+  <rect x="825" y="175" width="330" height="365" class="box human"/>
+  <circle cx="858" cy="207" r="16" fill="#ca8a04"/>
+  <text x="858" y="212" text-anchor="middle" class="ko step">3</text>
+  <text x="990" y="214" text-anchor="middle" class="ko head">사람의 책임</text>
+  <text x="990" y="242" text-anchor="middle" class="ko small">정책·위험·운영 영향을 판단하고 승인</text>
+
+  <rect x="855" y="270" width="270" height="50" class="box meta"/>
+  <text x="990" y="301" text-anchor="middle" class="ko body">업무 규칙과 우선순위 결정</text>
+  <rect x="855" y="335" width="270" height="50" class="box meta"/>
+  <text x="990" y="366" text-anchor="middle" class="ko body">접근 범위·권한 결정</text>
+  <rect x="855" y="400" width="270" height="50" class="box meta"/>
+  <text x="990" y="431" text-anchor="middle" class="ko body">비밀정보·안전·운영 위험 검토</text>
+  <rect x="855" y="465" width="270" height="50" class="box meta"/>
+  <text x="990" y="496" text-anchor="middle" class="ko body">변경 검토·최종 승인</text>
+
+  <!-- Straight handoffs -->
+  <path d="M375 355 H435" class="line"/>
+  <text x="405" y="337" text-anchor="middle" class="ko label">기준 전달</text>
+
+  <path d="M765 355 H825" class="line"/>
+  <text x="795" y="337" text-anchor="middle" class="ko label">근거 전달</text>
+
+  <!-- Shared principles -->
+  <rect x="180" y="580" width="840" height="60" class="box principle"/>
+  <text x="600" y="606" text-anchor="middle" class="ko head">협업 원칙</text>
+  <text x="600" y="629" text-anchor="middle" class="ko body">기능은 일부 겹칠 수 있지만, 단계별 주 역할과 검토 가능한 산출물을 구분합니다.</text>
+
+  <rect x="315" y="665" width="570" height="45" class="box ok"/>
+  <text x="600" y="693" text-anchor="middle" class="ko head">정책 판단과 운영 반영의 최종 책임은 사람에게 있습니다.</text>
+  <path d="M600 640 V665" class="line"/>
+</svg>

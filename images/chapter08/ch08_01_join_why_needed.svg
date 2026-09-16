@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">정규화된 테이블에 JOIN이 필요한 이유</title>
+  <desc id="desc">수강신청 한 건의 외래키를 따라 학생, 강의, 강사 정보를 조회하고 수강 상태와 결제 금액을 하나의 결과 행으로 만드는 JOIN 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:28px;font-weight:700}.subtitle{font-size:15px;fill:#475569}
+      .box{stroke:#334155;stroke-width:2;rx:16;ry:16}
+      .base{fill:#dbeafe}.lookup{fill:#ede9fe}.result{fill:#dcfce7}.note-box{fill:#f8fafc}
+      .label{font-size:17px;font-weight:700}.text{font-size:14px}.small{font-size:12.5px;fill:#475569}
+      .note{font-size:14px;fill:#334155}.fk-line{stroke:#64748b;stroke-width:2.2;stroke-dasharray:7 6;fill:none;marker-end:url(#arrow)}
+      .result-line{stroke:#475569;stroke-width:2.3;fill:none;marker-end:url(#arrow)}
+      .route-label{font-size:12px;font-weight:700;fill:#475569}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="#fff"/>
+  <text x="600" y="42" text-anchor="middle" class="title">정규화된 테이블에 JOIN이 필요한 이유</text>
+  <text x="600" y="72" text-anchor="middle" class="subtitle">수강신청을 기준으로 외래키 경로를 따라 필요한 값을 조회해 하나의 결과 행을 만듭니다.</text>
+
+  <rect x="45" y="190" width="250" height="220" class="box base"/>
+  <text x="170" y="228" text-anchor="middle" class="label">수강신청 한 건</text>
+  <text x="170" y="260" text-anchor="middle" class="text mono">enrollments</text>
+  <text x="170" y="298" text-anchor="middle" class="text mono">student_id</text>
+  <text x="170" y="330" text-anchor="middle" class="text mono">course_id</text>
+  <text x="170" y="368" text-anchor="middle" class="text">status · recorded_amount</text>
+  <text x="170" y="394" text-anchor="middle" class="small">결과의 기준 행</text>
+
+  <rect x="390" y="110" width="235" height="100" class="box lookup"/>
+  <text x="507.5" y="146" text-anchor="middle" class="label mono">students.id</text>
+  <text x="507.5" y="180" text-anchor="middle" class="text">학생 이름</text>
+
+  <rect x="390" y="260" width="235" height="130" class="box lookup"/>
+  <text x="507.5" y="296" text-anchor="middle" class="label mono">courses.id</text>
+  <text x="507.5" y="330" text-anchor="middle" class="text">강의 제목</text>
+  <text x="507.5" y="364" text-anchor="middle" class="text mono">FK instructor_id</text>
+
+  <rect x="390" y="450" width="235" height="100" class="box lookup"/>
+  <text x="507.5" y="486" text-anchor="middle" class="label mono">instructors.id</text>
+  <text x="507.5" y="520" text-anchor="middle" class="text">강사 이름</text>
+
+  <rect x="865" y="205" width="285" height="220" class="box result"/>
+  <text x="1007.5" y="243" text-anchor="middle" class="label">수강신청 현황 한 행</text>
+  <text x="1007.5" y="285" text-anchor="middle" class="text">학생 이름</text>
+  <text x="1007.5" y="317" text-anchor="middle" class="text">강의 제목 · 강사 이름</text>
+  <text x="1007.5" y="355" text-anchor="middle" class="text">상태 · 기록 금액</text>
+  <text x="1007.5" y="395" text-anchor="middle" class="small">기준 행 = 수강신청 한 건</text>
+
+  <!-- FK relationships -->
+  <path d="M295 298 H340 V160 H390" class="fk-line"/>
+  <text x="320" y="218" text-anchor="middle" class="route-label">FK 참조</text>
+
+  <path d="M295 330 H390" class="fk-line"/>
+  <text x="342.5" y="316" text-anchor="middle" class="route-label">FK 참조</text>
+
+  <path d="M507.5 390 V450" class="fk-line"/>
+  <text x="555" y="424" text-anchor="start" class="route-label">FK 참조</text>
+
+  <!-- Project selected values into one result row -->
+  <path d="M625 160 H760 V275 H865" class="result-line"/>
+  <text x="710" y="145" text-anchor="middle" class="route-label">학생 이름</text>
+
+  <path d="M625 325 H865" class="result-line"/>
+  <text x="745" y="309" text-anchor="middle" class="route-label">강의 제목</text>
+
+  <path d="M625 500 H795 V345 H865" class="result-line"/>
+  <text x="710" y="485" text-anchor="middle" class="route-label">강사 이름</text>
+
+  <path d="M170 410 V585 H1007.5 V425" class="result-line"/>
+  <text x="600" y="575" text-anchor="middle" class="route-label">enrollments의 status · recorded_amount</text>
+
+  <rect x="100" y="615" width="1000" height="65" class="box note-box"/>
+  <text x="600" y="643" text-anchor="middle" class="label">정규화는 사실을 나누어 저장하고, JOIN은 관계를 따라 필요한 결과를 만듭니다.</text>
+  <text x="600" y="668" text-anchor="middle" class="note">테이블을 합쳐 저장하는 것이 아니라 PK와 FK를 기준으로 값을 조회합니다.</text>
+</svg>

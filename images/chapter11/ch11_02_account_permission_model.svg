@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+<title id="title">PostgreSQL 역할과 객체 권한 구조</title>
+<desc id="desc">LOGIN 역할은 접속, NOLOGIN 역할은 권한 묶음으로 사용할 수 있다</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker><style>
+text{font-family:"Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;fill:#0f172a} .title{font-size:28px;font-weight:700;text-anchor:middle} .sub{font-size:14px;fill:#475569;text-anchor:middle} .box{fill:#fff;stroke:#7fb3f5;stroke-width:2;rx:14} .safe{fill:#ecfdf5;stroke:#22c55e;stroke-width:2;rx:14} .warn{fill:#fff7ed;stroke:#f97316;stroke-width:2;rx:14} .risk{fill:#fdf2f8;stroke:#db2777;stroke-width:2;rx:14} .ai{fill:#f5f3ff;stroke:#8b5cf6;stroke-width:2;rx:14} .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.5;rx:12} .head{font-size:18px;font-weight:700;text-anchor:middle} .body{font-size:13.5px;text-anchor:middle;fill:#334155} .small{font-size:12.5px;text-anchor:middle;fill:#334155} .code{font-family:Consolas, D2Coding, "Courier New", monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8} .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)} .dash{stroke:#db2777;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)} .tag{font-size:12px;font-weight:700;fill:#2563eb;text-anchor:middle}
+</style></defs>
+<rect width="1200" height="580" fill="#ffffff"/>
+<text x="600" y="48" class="title">PostgreSQL 역할과 객체 권한 구조</text>
+<text x="600" y="76" class="sub">LOGIN 역할은 접속, NOLOGIN 역할은 권한 묶음으로 사용할 수 있다</text>
+<rect x="90" y="145" width="230" height="130" class="box"/>
+<text x="205.0" y="177" class="head">로그인 역할</text>
+<text x="205.0" y="203" class="body">readonly_user</text>
+<text x="205.0" y="225" class="code">LOGIN</text>
+<rect x="90" y="340" width="230" height="130" class="box"/>
+<text x="205.0" y="372" class="head">로그인 역할</text>
+<text x="205.0" y="398" class="body">app_enrollment_user</text>
+<text x="205.0" y="420" class="code">LOGIN</text>
+<rect x="465" y="145" width="240" height="130" class="safe"/>
+<text x="585.0" y="177" class="head">권한 역할</text>
+<text x="585.0" y="203" class="body">role_report_reader</text>
+<text x="585.0" y="225" class="code">NOLOGIN</text>
+<rect x="465" y="340" width="240" height="130" class="safe"/>
+<text x="585.0" y="372" class="head">권한 역할</text>
+<text x="585.0" y="398" class="body">role_enrollment_app</text>
+<text x="585.0" y="420" class="code">NOLOGIN</text>
+<rect x="860" y="120" width="240" height="155" class="warn"/>
+<text x="980.0" y="152" class="head">객체 권한</text>
+<text x="980.0" y="178" class="body">DB CONNECT</text>
+<text x="980.0" y="200" class="body">SCHEMA USAGE</text>
+<text x="980.0" y="222" class="code">TABLE SELECT</text>
+<rect x="860" y="330" width="240" height="155" class="warn"/>
+<text x="980.0" y="362" class="head">서비스 권한</text>
+<text x="980.0" y="388" class="body">INSERT · UPDATE</text>
+<text x="980.0" y="410" class="body">SEQUENCE USAGE</text>
+<path d="M320 210 L465 210" class="arrow"/>
+<path d="M320 405 L465 405" class="arrow"/>
+<path d="M705 210 L860 198" class="arrow"/>
+<path d="M705 405 L860 407" class="arrow"/>
+<text x="600" y="535" class="head">접속 계정과 권한 묶음을 분리하면 최소 권한 관리가 쉬워진다</text>
+</svg>

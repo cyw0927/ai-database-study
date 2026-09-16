@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">2정규형: 복합키 일부 의존 분리</title>
+  <desc id="desc">복합키 student_id와 course_id에서 학생 이름과 과목 이름이 일부 키에만 의존하고 성적은 전체 키에 의존하므로 students, courses, enrollments로 분리하는 구조를 보여 준다.</desc>
+
+  <style>
+    .ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .sub { font-size: 15px; fill: #4b5563; }
+    .h { font-size: 18px; font-weight: 700; }
+    .b { font-size: 14px; }
+    .s { font-size: 12.5px; }
+    .box { stroke: #64748b; stroke-width: 1.7; rx: 14; ry: 14; }
+    .problem { fill: #fff1f1; }
+    .insert { fill: #fff6d8; }
+    .update { fill: #ffeaea; }
+    .delete { fill: #f3edff; }
+    .nf1 { fill: #eaf3ff; }
+    .nf2 { fill: #fff0df; }
+    .nf3 { fill: #f2ecff; }
+    .good { fill: #eaf8ee; }
+    .review { fill: #eaf3ff; }
+    .ai { fill: #f2ecff; }
+    .note { fill: #fff6d8; }
+    .pk { fill: #1d4ed8; font-weight: 700; }
+    .fk { fill: #c2410c; font-weight: 700; }
+    .line { stroke: #475569; stroke-width: 2; fill: none; }
+    .dash { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; }
+    .hot { fill: #b91c1c; font-weight: 700; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="700" fill="#ffffff"/>
+  <text x="600" y="44" text-anchor="middle" class="ko title">2정규형: 복합키 일부 의존 분리</text>
+
+  <text x="600" y="72" text-anchor="middle" class="ko sub">전제: 먼저 1NF를 만족하며, 복합 후보키가 있을 때 일부 키 의존을 확인합니다.</text>
+  <rect x="60" y="110" width="1080" height="150" class="box problem"/>
+  <text x="600" y="145" text-anchor="middle" class="ko h">enrollments_before · 복합키 (student_id, course_id)</text>
+  <text x="145" y="205" class="mono b">student_id</text><text x="325" y="205" class="mono b">course_id</text><text x="515" y="205" class="mono b">student_name</text><text x="735" y="205" class="mono b">course_name</text><text x="1000" y="205" class="mono b">grade</text>
+  <rect x="80" y="300" width="300" height="125" class="box nf1"/>
+  <text x="230" y="335" text-anchor="middle" class="mono h">student_id → student_name</text><text x="230" y="375" text-anchor="middle" class="ko b">학생 키 일부에만 의존</text>
+  <rect x="450" y="300" width="300" height="125" class="box nf2"/>
+  <text x="600" y="335" text-anchor="middle" class="mono h">course_id → course_name</text><text x="600" y="375" text-anchor="middle" class="ko b">과목 키 일부에만 의존</text>
+  <rect x="820" y="300" width="300" height="125" class="box good"/>
+  <text x="970" y="335" text-anchor="middle" class="mono h">student_id + course_id → grade</text><text x="970" y="375" text-anchor="middle" class="ko b">복합키 전체에 의존</text>
+  <line x1="230" y1="425" x2="230" y2="500" class="line" marker-end="url(#arrow)"/><line x1="600" y1="425" x2="600" y2="500" class="line" marker-end="url(#arrow)"/><line x1="970" y1="425" x2="970" y2="500" class="line" marker-end="url(#arrow)"/>
+  <rect x="80" y="510" width="300" height="120" class="box nf1"/>
+  <text x="230" y="545" text-anchor="middle" class="mono h">students</text><text x="230" y="585" text-anchor="middle" class="mono b"><tspan class="pk">id PK</tspan> · name</text>
+  <rect x="450" y="510" width="300" height="120" class="box nf2"/>
+  <text x="600" y="545" text-anchor="middle" class="mono h">courses</text><text x="600" y="585" text-anchor="middle" class="mono b"><tspan class="pk">id PK</tspan> · name</text>
+  <rect x="820" y="490" width="300" height="160" class="box good"/>
+  <text x="970" y="525" text-anchor="middle" class="mono h">enrollments</text><text x="970" y="565" text-anchor="middle" class="mono b"><tspan class="pk">student_id PK</tspan> · <tspan class="fk">FK</tspan></text><text x="970" y="595" text-anchor="middle" class="mono b"><tspan class="pk">course_id PK</tspan> · <tspan class="fk">FK</tspan></text><text x="970" y="625" text-anchor="middle" class="mono b">grade</text>
+  <text x="600" y="680" text-anchor="middle" class="ko h">관계 정보인 grade만 enrollments에 남습니다.</text>
+</svg>

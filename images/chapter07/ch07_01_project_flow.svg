@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">온라인 강의 DB 프로젝트 핵심 흐름</title>
+  <desc id="desc">온라인 강의 수강신청 데이터베이스 프로젝트에서 범위와 요구사항을 정리하고 ERD와 무결성을 설계한 뒤, 전용 스키마 구현, 샘플 데이터, 변경 시나리오, 최종 검증과 오류 테스트를 수행하고 요구사항과 결과가 일치하면 Chapter 08용 기준선을 확정하는 흐름</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#334155" />
+    </marker>
+  </defs>
+
+  <style>
+    text {
+      font-family: "Malgun Gothic", "NanumSquare", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif;
+      fill: #0f172a;
+    }
+    .code { font-family: Consolas, D2Coding, "Noto Sans Mono CJK KR", Menlo, monospace; }
+    .title { font-size: 36px; font-weight: 700; text-anchor: middle; fill: #0f2d5c; }
+    .subtitle { font-size: 19px; text-anchor: middle; fill: #475569; }
+    .step { stroke-width: 2.2; rx: 14; }
+    .req { fill: #eef6ff; stroke: #3b82f6; }
+    .design { fill: #f5f0ff; stroke: #8b5cf6; }
+    .build { fill: #eefdf4; stroke: #22a06b; }
+    .verify { fill: #fff8eb; stroke: #f59e0b; }
+    .record { fill: #f8fafc; stroke: #64748b; }
+    .baseline { fill: #e6f9ee; stroke: #15803d; }
+    .fix { fill: #fff1f2; stroke: #ef4444; }
+    .head { font-size: 21px; font-weight: 700; text-anchor: middle; }
+    .body { font-size: 17px; text-anchor: middle; fill: #334155; }
+    .file { font-size: 16px; font-weight: 700; text-anchor: middle; fill: #1d4ed8; }
+    .num { font-size: 17px; font-weight: 700; text-anchor: middle; fill: #ffffff; }
+    .num-bg { fill: #2563eb; }
+    .arrow { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+    .return { stroke: #ef4444; stroke-width: 2.4; fill: none; stroke-dasharray: 8 6; marker-end: url(#arrow); }
+    .decision { fill: #fff7df; stroke: #d97706; stroke-width: 2.3; }
+    .label { font-size: 19px; font-weight: 700; text-anchor: middle; fill: #0f172a; }
+    .return-label { font-size: 18px; font-weight: 700; text-anchor: middle; fill: #b91c1c; }
+    .small { font-size: 18px; text-anchor: middle; fill: #334155; }
+  </style>
+
+  <rect width="1200" height="820" fill="#ffffff" />
+  <text x="600" y="50" class="title">온라인 강의 DB 프로젝트 핵심 흐름</text>
+  <text x="600" y="82" class="subtitle">단계별 SQL 실행과 검증 결과를 기준으로 Chapter 08용 기준선을 확정합니다.</text>
+
+  <!-- Row 1: scope and design -->
+  <g transform="translate(60 130)">
+    <rect width="220" height="120" class="step req" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">1</text>
+    <text x="110" y="43" class="head">범위·가정</text>
+    <text x="110" y="76" class="body">4개 테이블</text>
+    <text x="110" y="101" class="body">포함·제외 기능</text>
+  </g>
+
+  <g transform="translate(335 130)">
+    <rect width="220" height="120" class="step req" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">2</text>
+    <text x="110" y="43" class="head">요구사항·질문</text>
+    <text x="110" y="76" class="body">확정 규칙</text>
+    <text x="110" y="101" class="body">미확정 정책</text>
+  </g>
+
+  <g transform="translate(610 130)">
+    <rect width="220" height="120" class="step design" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">3</text>
+    <text x="110" y="43" class="head">관계·ERD</text>
+    <text x="110" y="76" class="body">관계 문장</text>
+    <text x="110" y="101" class="body">PK·FK·카디널리티</text>
+  </g>
+
+  <g transform="translate(885 130)">
+    <rect width="220" height="120" class="step design" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">4</text>
+    <text x="110" y="43" class="head">정규화·무결성</text>
+    <text x="110" y="76" class="body">현재·신청 당시 정보</text>
+    <text x="110" y="101" class="body">제약조건 검토</text>
+  </g>
+
+  <path d="M280 190 L330 190" class="arrow" />
+  <path d="M555 190 L605 190" class="arrow" />
+  <path d="M830 190 L880 190" class="arrow" />
+
+  <!-- Row 2: implementation and validation -->
+  <g transform="translate(60 340)">
+    <rect width="220" height="120" class="step build" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">5</text>
+    <text x="110" y="43" class="head">구현</text>
+    <text x="110" y="75" class="file code">01 DDL</text>
+    <text x="110" y="101" class="body">스키마·테이블</text>
+  </g>
+
+  <g transform="translate(335 340)">
+    <rect width="220" height="120" class="step build" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">6</text>
+    <text x="110" y="43" class="head">데이터·변경</text>
+    <text x="110" y="75" class="file code">02 Seed · 03 Changes</text>
+    <text x="110" y="101" class="body">신청·완료·취소</text>
+  </g>
+
+  <g transform="translate(610 340)">
+    <rect width="220" height="120" class="step verify" />
+    <circle cx="26" cy="30" r="17" class="num-bg" />
+    <text x="26" y="36" class="num">7</text>
+    <text x="122" y="43" class="head">검증·오류 테스트</text>
+    <text x="110" y="75" class="file code">04 Validation · 05 Integrity</text>
+    <text x="110" y="101" class="body">최종 상태·관계·도메인</text>
+  </g>
+
+  <g transform="translate(885 340)">
+    <rect width="220" height="120" class="step record" />
+    <circle cx="30" cy="30" r="17" class="num-bg" />
+    <text x="30" y="36" class="num">8</text>
+    <text x="110" y="43" class="head">결정 기록</text>
+    <text x="110" y="75" class="file code">PROJECT_DECISIONS</text>
+    <text x="110" y="101" class="body">가정·대안·검증 결과</text>
+  </g>
+
+  <path d="M995 250 L995 300 L170 300 L170 335" class="arrow" />
+  <path d="M280 400 L330 400" class="arrow" />
+  <path d="M555 400 L605 400" class="arrow" />
+  <path d="M830 400 L880 400" class="arrow" />
+
+  <!-- Decision and baseline -->
+  <path d="M600 530 L755 610 L600 690 L445 610 Z" class="decision" />
+  <text x="600" y="600" class="head">요구사항과 결과가</text>
+  <text x="600" y="628" class="head">일치하는가?</text>
+
+  <g transform="translate(835 550)">
+    <rect width="255" height="136" class="step baseline" />
+    <circle cx="34" cy="30" r="17" fill="#15803d" />
+    <text x="34" y="36" class="num">9</text>
+    <text x="134" y="43" class="head">기준선 확정</text>
+    <text x="134" y="75" class="body">학생 3 · 강사 2</text>
+    <text x="134" y="100" class="body">강의 3 · 신청 5</text>
+    <text x="134" y="126" class="small">Chapter 08에서 사용</text>
+  </g>
+
+  <g transform="translate(80 560)">
+    <rect width="260" height="95" class="step fix" />
+    <text x="130" y="38" class="head">설계로 복귀</text>
+    <text x="130" y="66" class="body">ERD·제약조건</text>
+    <text x="130" y="88" class="body">데이터 수정 후 재검증</text>
+  </g>
+
+  <path d="M995 460 L995 500 L600 500 L600 530" class="arrow" />
+  <path d="M755 610 L830 610" class="arrow" />
+  <text x="795" y="590" class="label">예</text>
+  <path d="M445 610 L345 610" class="return" />
+  <text x="395" y="590" class="return-label">아니요</text>
+  <path d="M210 560 L210 510 L585 510 L585 280 L720 280 L720 255" class="return" />
+  <text x="420" y="494" class="return-label">설계 수정</text>
+</svg>

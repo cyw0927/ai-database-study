@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">SQL과 Python의 분석 역할 구분</title>
+  <desc id="desc">PostgreSQL 원본 데이터에서 SQL로 필터와 JOIN, 집계를 수행하고 분석용 VIEW를 통해 Python과 pandas로 확장한 뒤 SQL 기준값으로 검증하는 구조</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.panel{stroke-width:2;rx:18}.sql{fill:#eff6ff;stroke:#3b82f6}.dataset{fill:#ecfeff;stroke:#06b6d4}.python{fill:#faf5ff;stroke:#8b5cf6}.verify{fill:#ecfdf5;stroke:#16a34a}.head{font-size:20px;font-weight:800;text-anchor:middle}.body{font-size:14px;text-anchor:middle;fill:#334155}.small{font-size:12.5px;text-anchor:middle;fill:#475569}.line{stroke:#475569;stroke-width:2.6;fill:none;marker-end:url(#arrow)}.note{fill:#fff7ed;stroke:#f97316;stroke-width:1.7;rx:12}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="#fff"/>
+  <text x="600" y="48" class="title">SQL과 Python의 분석 역할 구분</text>
+  <text x="600" y="76" class="sub">SQL은 데이터베이스에서 범위와 관계를 확정하고 Python은 그 결과를 확장합니다.</text>
+
+  <rect x="55" y="145" width="315" height="340" class="panel sql"/>
+  <text x="212.5" y="188" class="head">SQL · PostgreSQL</text>
+  <text x="212.5" y="232" class="body">필요한 행과 열 선택</text>
+  <text x="212.5" y="270" class="body">PK·FK 기준 JOIN</text>
+  <text x="212.5" y="308" class="body">WHERE · GROUP BY · HAVING</text>
+  <text x="212.5" y="346" class="body">대규모 필터와 집계</text>
+  <text x="212.5" y="384" class="body">분석 행 단위 확정</text>
+  <text x="212.5" y="438" class="small">원본 전체를 불필요하게 전송하지 않음</text>
+
+  <rect x="455" y="205" width="290" height="220" class="panel dataset"/>
+  <text x="600" y="248" class="head">분석용 데이터셋</text>
+  <text x="600" y="292" class="body">수강신청 1건 = 1행</text>
+  <text x="600" y="330" class="body">VIEW 또는 검증된 SELECT</text>
+  <text x="600" y="368" class="body">CSV · DB 연결로 전달</text>
+  <text x="600" y="401" class="small">행 수·PK 중복·자료형 확인</text>
+
+  <rect x="830" y="145" width="315" height="340" class="panel python"/>
+  <text x="987.5" y="188" class="head">Python · pandas</text>
+  <text x="987.5" y="232" class="body">추가 데이터 가공</text>
+  <text x="987.5" y="270" class="body">groupby · agg</text>
+  <text x="987.5" y="308" class="body">pivot_table · 재구조화</text>
+  <text x="987.5" y="346" class="body">시각화와 후속 분석</text>
+  <text x="987.5" y="384" class="body">자동 결과 비교</text>
+  <text x="987.5" y="438" class="small">SQL 기준값과 같은 결과인지 검증</text>
+
+  <path d="M370 315 H455" class="line"/>
+  <path d="M745 315 H830" class="line"/>
+
+  <rect x="420" y="540" width="360" height="82" class="panel verify"/>
+  <text x="600" y="573" class="head">검증</text>
+  <text x="600" y="603" class="body">행 수 · 건수 · 합계 · 평균이 같은가?</text>
+  <path d="M987.5 485 V510 H600 V540" class="line"/>
+
+  <rect x="235" y="645" width="730" height="40" class="note"/>
+  <text x="600" y="671" class="body">SQL과 Python 중 하나를 고르는 것이 아니라 각 도구가 잘하는 작업을 연결합니다.</text>
+</svg>

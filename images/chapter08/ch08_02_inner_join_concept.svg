@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="100%" viewBox="0 0 1200 520">
+  <title id="title">INNER JOIN은 일치하는 행만 포함한다</title>
+  <desc id="desc">학생별 수강신청 일치 건수를 기준으로 INNER JOIN 결과가 총 5행이 되고 수강신청이 없는 최현우는 제외됨을 보여 주는 도식이다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title { font: 700 28px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .box { stroke: #334155; stroke-width: 2; rx: 16; ry: 16; }
+      .label { font: 600 17px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+      .text { font: 14px 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',Arial,sans-serif; fill: #0f172a; }
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="title">INNER JOIN은 일치하는 행만 포함한다</text>
+  <rect x="90" y="105" width="290" height="250" class="box" fill="#dbeafe"/>
+  <text x="235" y="140" text-anchor="middle" class="label">students</text>
+  <text x="235" y="180" text-anchor="middle" class="text">김민지 · 신청 2건</text>
+  <text x="235" y="215" text-anchor="middle" class="text">이준호 · 신청 2건</text>
+  <text x="235" y="250" text-anchor="middle" class="text">박서연 · 신청 1건</text>
+  <text x="235" y="285" text-anchor="middle" class="text">최현우 · 신청 0건</text>
+  <rect x="450" y="160" width="260" height="95" class="box" fill="#ede9fe"/>
+  <text x="580" y="195" text-anchor="middle" class="label">JOIN 조건</text>
+  <text x="580" y="228" text-anchor="middle" class="text">students.id = enrollments.student_id</text>
+  <rect x="780" y="105" width="320" height="250" class="box" fill="#dcfce7"/>
+  <text x="940" y="140" text-anchor="middle" class="label">INNER JOIN 결과</text>
+  <text x="940" y="180" text-anchor="middle" class="text">김민지 2행</text>
+  <text x="940" y="215" text-anchor="middle" class="text">이준호 2행</text>
+  <text x="940" y="250" text-anchor="middle" class="text">박서연 1행</text>
+  <text x="940" y="285" text-anchor="middle" class="text">최현우 제외</text>
+  <text x="940" y="320" text-anchor="middle" class="text">총 5행</text>
+  <line x1="380" y1="210" x2="450" y2="210" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="710" y1="210" x2="780" y2="210" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="130" y="400" width="940" height="70" class="box" fill="#f8fafc"/>
+  <text x="600" y="430" text-anchor="middle" class="label">일치하는 행만 결과에 포함되고, 한 학생에 일치 행이 여러 개면 결과도 여러 행이 된다</text>
+  <text x="600" y="455" text-anchor="middle" class="text">수강신청이 없는 최현우는 결과에서 제외된다</text>
+</svg>

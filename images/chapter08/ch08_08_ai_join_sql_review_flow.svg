@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="100%"
+  viewBox="0 0 1200 740"
+  role="img"
+  aria-labelledby="title desc"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <title id="title">AI 생성 JOIN·집계 SQL 검토 흐름</title>
+  <desc id="desc">업무 질문과 예상 결과를 먼저 정하고, AI가 만든 SQL을 JOIN 경로, 기준 행, JOIN 종류, GROUP BY, 집계 대상, NULL과 중복 계산 기준으로 검토한 뒤 PostgreSQL에서 실행하고 결과가 맞지 않으면 수정해 다시 실행하는 흐름</desc>
+
+  <defs>
+    <marker
+      id="arrow"
+      viewBox="0 0 10 10"
+      refX="9"
+      refY="5"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto"
+    >
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569" />
+    </marker>
+    <style>
+      text {
+        font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+        fill: #0f172a;
+      }
+      .title {
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .subtitle {
+        font-size: 15px;
+        fill: #475569;
+      }
+      .box {
+        stroke: #334155;
+        stroke-width: 2;
+        rx: 16;
+        ry: 16;
+      }
+      .question {
+        fill: #dbeafe;
+      }
+      .ai {
+        fill: #ede9fe;
+      }
+      .review {
+        fill: #fef3c7;
+      }
+      .run {
+        fill: #dcfce7;
+      }
+      .retry {
+        fill: #fee2e2;
+      }
+      .done {
+        fill: #dbeafe;
+      }
+      .head {
+        font-size: 17px;
+        font-weight: 700;
+      }
+      .text {
+        font-size: 14px;
+      }
+      .small {
+        font-size: 12.5px;
+        fill: #475569;
+      }
+      .line {
+        stroke: #475569;
+        stroke-width: 2.4;
+        fill: none;
+        marker-end: url(#arrow);
+      }
+      .feedback {
+        stroke: #dc2626;
+        stroke-width: 2.4;
+        stroke-dasharray: 7 6;
+        fill: none;
+        marker-end: url(#arrow);
+      }
+      .branch-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        fill: #475569;
+      }
+      .feedback-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        fill: #b91c1c;
+      }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="740" fill="#ffffff" />
+
+  <!-- Title -->
+  <text x="600" y="42" text-anchor="middle" class="title">
+    AI 생성 JOIN·집계 SQL 검토 흐름
+  </text>
+  <text x="600" y="70" text-anchor="middle" class="subtitle">
+    예상 결과를 먼저 정하고, SQL 구조와 실제 실행 결과를 차례로 검증합니다.
+  </text>
+
+  <!-- 1. Question and expected result -->
+  <rect x="390" y="90" width="420" height="68" class="box question" />
+  <text x="600" y="120" text-anchor="middle" class="head">
+    1. 업무 질문과 예상 결과 정의
+  </text>
+  <text x="600" y="145" text-anchor="middle" class="text">
+    예상 행 수·합계·포함 대상을 먼저 정한다
+  </text>
+
+  <!-- 2. AI draft -->
+  <rect x="390" y="190" width="420" height="68" class="box ai" />
+  <text x="600" y="220" text-anchor="middle" class="head">
+    2. AI 생성 SQL
+  </text>
+  <text x="600" y="245" text-anchor="middle" class="text">
+    AI SQL은 검토가 필요한 초안이다
+  </text>
+
+  <!-- Review sequence -->
+  <rect x="70" y="310" width="250" height="82" class="box review" />
+  <text x="195" y="340" text-anchor="middle" class="head">
+    3. JOIN 경로와 ON 조건
+  </text>
+  <text x="195" y="369" text-anchor="middle" class="text">
+    실제 PK·FK 경로인지 확인
+  </text>
+
+  <rect x="475" y="310" width="250" height="82" class="box review" />
+  <text x="600" y="340" text-anchor="middle" class="head">
+    4. 기준 행과 JOIN 종류
+  </text>
+  <text x="600" y="369" text-anchor="middle" class="text">
+    INNER·LEFT 선택과 기준 행 확인
+  </text>
+
+  <rect x="880" y="310" width="250" height="82" class="box review" />
+  <text x="1005" y="340" text-anchor="middle" class="head">
+    5. GROUP BY와 집계 대상
+  </text>
+  <text x="1005" y="369" text-anchor="middle" class="text">
+    그룹 기준과 집계 열 확인
+  </text>
+
+  <rect x="880" y="440" width="250" height="82" class="box review" />
+  <text x="1005" y="470" text-anchor="middle" class="head">
+    6. 집계 계산 검토
+  </text>
+  <text x="1005" y="499" text-anchor="middle" class="text">
+    COUNT·SUM·NULL·중복 확인
+  </text>
+
+  <!-- 7. Execute -->
+  <rect x="475" y="440" width="250" height="82" class="box run" />
+  <text x="600" y="470" text-anchor="middle" class="head">
+    7. PostgreSQL에서 실행
+  </text>
+  <text x="600" y="499" text-anchor="middle" class="text">
+    원본 건수와 수동 계산으로 검산
+  </text>
+
+  <!-- Decision -->
+  <polygon
+    points="600,565 745,620 600,675 455,620"
+    fill="#fef3c7"
+    stroke="#334155"
+    stroke-width="2"
+  />
+  <text x="600" y="613" text-anchor="middle" class="head">
+    원본 건수와 합계에
+  </text>
+  <text x="600" y="638" text-anchor="middle" class="head">
+    맞는가?
+  </text>
+
+  <!-- Outcomes -->
+  <rect x="70" y="585" width="260" height="72" class="box retry" />
+  <text x="200" y="614" text-anchor="middle" class="head">아니요</text>
+  <text x="200" y="642" text-anchor="middle" class="text">
+    SQL 또는 요구사항 수정
+  </text>
+
+  <rect x="870" y="585" width="260" height="72" class="box done" />
+  <text x="1000" y="614" text-anchor="middle" class="head">예</text>
+  <text x="1000" y="642" text-anchor="middle" class="text">
+    검토된 SQL과 근거 기록
+  </text>
+
+  <!-- Main flow -->
+  <path d="M600 158 V190" class="line" />
+  <path d="M600 258 V282 H195 V310" class="line" />
+  <path d="M320 351 H475" class="line" />
+  <path d="M725 351 H880" class="line" />
+  <path d="M1005 392 V440" class="line" />
+  <path d="M880 481 H725" class="line" />
+  <path d="M600 522 V565" class="line" />
+
+  <!-- Decision branches -->
+  <path d="M455 620 H330" class="line" />
+  <text x="392" y="603" text-anchor="middle" class="branch-label">아니요</text>
+
+  <path d="M745 620 H870" class="line" />
+  <text x="808" y="603" text-anchor="middle" class="branch-label">예</text>
+
+  <!-- Feedback loop: outside all cards -->
+  <path d="M200 585 V545 H28 V224 H390" class="feedback" />
+  <text x="45" y="525" class="feedback-label">수정 후 재실행</text>
+</svg>

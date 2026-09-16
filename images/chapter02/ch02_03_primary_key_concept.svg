@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">기본키가 행을 구분하는 방식</title>
+  <desc id="desc">같은 이름을 가진 두 학생 행을 서로 다른 id 기본키로 구분하고, 중복 기본키 입력은 저장 거부되는 과정을 보여 주는 도식</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .cell{fill:#fff;stroke:#64748b;stroke-width:1.5}
+      .head{fill:#e9f2fe;font-weight:700}
+      .pk{fill:#e8f2ff;stroke:#1f5fb8;stroke-width:2}
+      .same{fill:#fff4e5;stroke:#d97706;stroke-width:2}
+      .bad{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+      .ok{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .label{font-size:16px;font-weight:700;text-anchor:middle}
+      .t{font-size:16px;text-anchor:middle}
+      .small{font-size:14px;text-anchor:middle;fill:#475569}
+      .line{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .note{font-size:17px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="640" fill="#fff"/>
+  <text x="600" y="48" class="title">기본키가 행을 구분하는 방식</text>
+
+  <text x="600" y="92" class="label">students</text>
+  <rect x="260" y="115" width="180" height="58" class="cell head"/><text x="350" y="151" class="label">id (PK)</text>
+  <rect x="440" y="115" width="220" height="58" class="cell head"/><text x="550" y="151" class="label">name</text>
+  <rect x="660" y="115" width="280" height="58" class="cell head"/><text x="800" y="151" class="label">email</text>
+
+  <rect x="260" y="173" width="180" height="74" class="pk"/><text x="350" y="217" class="label">1</text>
+  <rect x="440" y="173" width="220" height="74" class="same"/><text x="550" y="217" class="t">김민지</text>
+  <rect x="660" y="173" width="280" height="74" class="cell"/><text x="800" y="217" class="t">minji@example.com</text>
+
+  <rect x="260" y="247" width="180" height="74" class="pk"/><text x="350" y="291" class="label">2</text>
+  <rect x="440" y="247" width="220" height="74" class="same"/><text x="550" y="291" class="t">김민지</text>
+  <rect x="660" y="247" width="280" height="74" class="cell"/><text x="800" y="291" class="t">minji2@example.com</text>
+
+  <rect x="65" y="175" width="150" height="66" rx="12" class="ok"/><text x="140" y="204" class="label">학생 A</text><text x="140" y="226" class="small">id = 1</text>
+  <path d="M215 208H260" class="line"/>
+  <rect x="985" y="250" width="150" height="66" rx="12" class="ok"/><text x="1060" y="279" class="label">학생 B</text><text x="1060" y="301" class="small">id = 2</text>
+  <path d="M985 284H940" class="line"/>
+
+  <rect x="210" y="390" width="260" height="84" rx="12" class="bad"/>
+  <text x="340" y="423" class="label">id = 1인 새 행 추가</text>
+  <text x="340" y="449" class="small">기존 기본키와 중복</text>
+  <path d="M470 432H570" class="line"/>
+  <rect x="570" y="390" width="220" height="84" rx="12" class="bad"/>
+  <text x="680" y="423" class="label">PRIMARY KEY 중복</text>
+  <text x="680" y="449" class="small">규칙 위반</text>
+  <path d="M790 432H890" class="line"/>
+  <rect x="890" y="390" width="170" height="84" rx="12" class="bad"/>
+  <text x="975" y="423" class="label">저장 거부</text>
+  <text x="975" y="449" class="small">오류 반환</text>
+
+  <text x="600" y="555" class="note">기본키는 각 행을 고유하게 식별하며 중복과 NULL을 허용하지 않는다.</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">ORDER BY로 조회 결과 정렬하기</title>
+  <desc id="desc">ORDER BY grade가 조회 결과의 표시 순서를 ASC 또는 DESC 방향으로 정렬하며 저장 데이터를 변경하지 않는다는 점을 보여 주는 도식</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}.title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    .input{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}.order{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2}.asc{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}.desc{fill:#fff5df;stroke:#d89424;stroke-width:2}
+    .flow{fill:#eef5ff;stroke:#3174d0;stroke-width:2}.name{font-size:19px;font-weight:700;text-anchor:middle}.num{font-size:24px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    .sub{font-size:14px;text-anchor:middle;fill:#475569}.line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+  </style></defs>
+  <rect width="1200" height="640" fill="#fff"/><text x="600" y="48" class="title">ORDER BY로 조회 결과 정렬하기</text>
+  <rect x="390" y="90" width="420" height="82" rx="14" class="input"/><text x="600" y="120" class="name">정렬 전 grade 값</text><text x="600" y="155" class="num">3 · 1 · 4 · 2</text>
+  <path d="M600 172V220" class="line"/>
+  <rect x="430" y="225" width="340" height="62" rx="14" class="order"/><text x="600" y="264" class="name">ORDER BY grade</text>
+  <path d="M520 287L350 350" class="line"/><path d="M680 287L850 350" class="line"/>
+  <rect x="170" y="355" width="360" height="112" rx="14" class="asc"/><text x="350" y="388" class="name">ASC</text><text x="350" y="425" class="num">1 → 2 → 3 → 4</text><text x="350" y="452" class="sub">작은 값부터</text>
+  <rect x="670" y="355" width="360" height="112" rx="14" class="desc"/><text x="850" y="388" class="name">DESC</text><text x="850" y="425" class="num">4 → 3 → 2 → 1</text><text x="850" y="452" class="sub">큰 값부터</text>
+  <rect x="260" y="520" width="680" height="52" rx="18" class="flow"/><text x="600" y="552" class="name">FROM → WHERE로 행 선택 → ORDER BY로 결과 순서 결정 → 결과 반환</text>
+  <text x="600" y="612" class="note">ORDER BY는 조회 결과의 표시 순서를 정하며, 테이블의 저장 데이터를 변경하지 않는다.</text>
+</svg>

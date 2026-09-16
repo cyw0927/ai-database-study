@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1160" role="img" aria-labelledby="title desc">
+  <title id="title">INSERT로 새 행 추가하기</title>
+  <desc id="desc">완성된 INSERT 문에서 명시한 열과 VALUES 값이 같은 위치끼리 대응하고, 생략한 id와 created_at의 자동값이 결정된 뒤 문법, 열 이름, 데이터 타입과 제약조건 검사를 통과하면 students 테이블에 새 행이 추가되며, 실패하면 행이 추가되지 않는 흐름을 보여 주는 도식</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#475569"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2f9a58"/></marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d64545"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .mono{font-family:Consolas,D2Coding,"Noto Sans Mono CJK KR",Menlo,monospace}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .section{font-size:20px;font-weight:700;text-anchor:middle}
+      .label{font-size:18px;font-weight:700;text-anchor:middle}
+      .sql{font-size:16px;font-weight:700;text-anchor:middle}
+      .code{font-size:16px;font-weight:700}
+      .celltext{font-size:14px;font-weight:700;text-anchor:middle}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}
+      .note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .branch{font-size:16px;font-weight:700;text-anchor:middle}
+      .pass{fill:#166534}.fail{fill:#b42323}
+      .insert{fill:#eef9f1;stroke:#2f9a58;stroke-width:2.4}
+      .check{fill:#fff7d9;stroke:#d8aa34;stroke-width:2.4}
+      .ok{fill:#eef9f1;stroke:#2f9a58;stroke-width:2.4}
+      .bad{fill:#fff1f1;stroke:#d64545;stroke-width:2.4}
+      .neutral{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.8}
+      .line{stroke:#475569;stroke-width:2.6;fill:none;marker-end:url(#arrow)}
+      .ghost{stroke:#94a3b8;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .success-line{stroke:#2f9a58;stroke-width:2.8;fill:none;marker-end:url(#arrow-green)}
+      .fail-line{stroke:#d64545;stroke-width:2.8;fill:none;marker-end:url(#arrow-red)}
+    </style>
+  </defs>
+  <rect width="1200" height="1160" fill="#fff"/>
+  <text x="600" y="56" class="title">INSERT로 새 행 추가하기</text>
+
+  <rect x="90" y="90" width="1020" height="350" rx="20" class="insert"/>
+  <text x="600" y="120" class="mono sql">INSERT INTO students (name, email, major, grade)</text>
+  <text x="600" y="145" class="mono sql">VALUES ('김민지', 'minji@example.com', '컴퓨터공학', 2)</text>
+  <text x="600" y="170" class="mono sql">RETURNING id, name, created_at;</text>
+  <text x="360" y="199" class="label">열 목록</text>
+  <text x="840" y="199" class="label">값 목록</text>
+
+  <rect x="170" y="214" width="320" height="42" rx="10" class="neutral"/>
+  <rect x="710" y="214" width="320" height="42" rx="10" class="neutral"/>
+  <text x="194" y="241" class="mono code">name</text>
+  <text x="734" y="241" class="mono code">'김민지'</text>
+  <path d="M500 235H700" class="ghost"/>
+
+  <rect x="170" y="260" width="320" height="42" rx="10" class="neutral"/>
+  <rect x="710" y="260" width="320" height="42" rx="10" class="neutral"/>
+  <text x="194" y="287" class="mono code">email</text>
+  <text x="734" y="287" class="mono code">'minji@example.com'</text>
+  <path d="M500 281H700" class="ghost"/>
+
+  <rect x="170" y="306" width="320" height="42" rx="10" class="neutral"/>
+  <rect x="710" y="306" width="320" height="42" rx="10" class="neutral"/>
+  <text x="194" y="333" class="mono code">major</text>
+  <text x="734" y="333" class="mono code">'컴퓨터공학'</text>
+  <path d="M500 327H700" class="ghost"/>
+
+  <rect x="170" y="352" width="320" height="42" rx="10" class="neutral"/>
+  <rect x="710" y="352" width="320" height="42" rx="10" class="neutral"/>
+  <text x="194" y="379" class="mono code">grade</text>
+  <text x="734" y="379" class="mono code">2</text>
+  <path d="M500 373H700" class="ghost"/>
+
+  <text x="600" y="405" class="sub">RETURNING은 추가된 행의 id, name, created_at을 즉시 반환한다</text>
+  <text x="600" y="424" class="sub">문자열은 작은따옴표를 사용하고 숫자는 따옴표 없이 입력한다</text>
+
+  <path d="M600 440V462" class="line"/>
+
+  <rect x="230" y="472" width="740" height="110" rx="18" class="check"/>
+  <text x="600" y="512" class="section">열 목록과 값 목록 대응</text>
+  <text x="600" y="542" class="sub">열과 값의 개수가 같고 같은 위치끼리 대응해야 한다</text>
+  <text x="600" y="568" class="sub">열 목록의 순서는 바꿀 수 있지만, 각 값은 같은 위치의 열에 저장된다</text>
+
+  <path d="M600 582V616" class="line"/>
+
+  <rect x="220" y="626" width="760" height="132" rx="18" class="check"/>
+  <text x="600" y="666" class="section">생략된 열의 값 결정</text>
+  <rect x="280" y="682" width="280" height="46" rx="10" class="neutral"/>
+  <rect x="640" y="682" width="280" height="46" rx="10" class="neutral"/>
+  <text x="420" y="701" class="mono celltext">id → IDENTITY</text>
+  <text x="420" y="719" class="mono celltext">자동 생성</text>
+  <text x="780" y="701" class="mono celltext">created_at → DEFAULT</text>
+  <text x="780" y="719" class="mono celltext">CURRENT_TIMESTAMP 적용</text>
+  <text x="600" y="741" class="sub">생략한 열에 DEFAULT가 없고 NULL을 허용하면 NULL이 저장될 수 있다</text>
+
+  <path d="M600 758V780" class="line"/>
+
+  <rect x="250" y="790" width="700" height="90" rx="18" class="check"/>
+  <text x="600" y="826" class="section">문법·열 이름·데이터 타입·제약조건 검사</text>
+  <text x="600" y="858" class="sub">PRIMARY KEY · NOT NULL · UNIQUE</text>
+
+  <path d="M600 880V900" class="line"/>
+
+  <path d="M600 900 L740 972 L600 1044 L460 972 Z" class="check"/>
+  <text x="600" y="968" class="section">검사를 통과했는가?</text>
+  <text x="600" y="996" class="sub">성공과 실패 경로를 분리해 판단한다</text>
+
+  <path d="M740 972H770" class="success-line"/>
+  <text x="755" y="956" class="branch pass">예</text>
+  <rect x="770" y="924" width="340" height="88" rx="18" class="ok"/>
+  <text x="940" y="960" class="section">students 테이블에 새 행 추가</text>
+  <text x="940" y="990" class="sub">기존 행은 유지되고 행 수가 1 증가</text>
+
+  <path d="M460 972H400" class="fail-line"/>
+  <text x="430" y="956" class="branch fail">아니요</text>
+  <rect x="80" y="924" width="320" height="88" rx="18" class="bad"/>
+  <text x="240" y="960" class="section">INSERT 거부</text>
+  <text x="240" y="990" class="sub">students 테이블에는 새 행이 추가되지 않음</text>
+
+  <path d="M940 1012V1030" class="success-line"/>
+  <rect x="680" y="1030" width="430" height="96" rx="18" class="ok"/>
+  <text x="895" y="1062" class="section">RETURNING 결과</text>
+  <text x="895" y="1090" class="sub">id: 자동 생성값 · name: 김민지 · created_at: 현재 시각</text>
+  <text x="895" y="1110" class="sub">필요하면 SELECT로 테이블 전체 상태를 다시 확인한다</text>
+
+  <text x="600" y="1148" class="note">성공하면 반환 결과를 확인하고, 실패하면 오류 메시지에서 원인을 확인한다.</text>
+</svg>

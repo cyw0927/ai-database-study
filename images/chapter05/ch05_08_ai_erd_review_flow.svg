@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">AI 생성 ERD 검토 흐름</title>
+  <desc id="desc">원문 요구사항, AI 초안, 사람 검토, PostgreSQL DDL, 샘플 데이터와 JOIN 검증을 반복한다.</desc>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#1f2937}
+    .t{font-size:32px;font-weight:700}
+    .s{font-size:15px;fill:#4b5563}
+    .h{font-size:18px;font-weight:700}
+    .b{font-size:14px}
+    .box{stroke:#64748b;stroke-width:2;rx:14}
+    .e{fill:#eaf3ff}.r{fill:#f2ecff}.a{fill:#ecf9ef}.q{fill:#fff6d8}.bad{fill:#ffeaea}.ok{fill:#eaf8ee}
+    .line{stroke:#475569;stroke-width:2;fill:none}
+    .dash{stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;fill:none}
+  </style>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="700" fill="#fff"/>
+  <text x="600" y="45" text-anchor="middle" class="t">AI 생성 ERD 검토 흐름</text>
+  <text x="600" y="75" text-anchor="middle" class="s">AI 결과는 완성된 정답이 아니라 검증해야 할 설계 초안입니다.</text>
+  <rect x="30" y="130" width="190" height="90" class="box e"/>
+  <text x="125" y="183" text-anchor="middle" class="h">1. 원문 요구사항</text>
+  <rect x="260" y="130" width="190" height="90" class="box r"/>
+  <text x="355" y="183" text-anchor="middle" class="h">2. AI ERD 초안</text>
+  <rect x="490" y="105" width="240" height="140" class="box e"/>
+  <text x="610" y="150" text-anchor="middle" class="h">3. 사람이 구조 검토</text>
+  <text x="610" y="185" text-anchor="middle" class="b">엔터티·속성·PK/FK</text>
+  <text x="610" y="215" text-anchor="middle" class="b">관계·중복·NULL 허용</text>
+  <rect x="770" y="130" width="190" height="90" class="box a"/>
+  <text x="865" y="183" text-anchor="middle" class="h">4. PostgreSQL DDL</text>
+  <rect x="1000" y="130" width="170" height="90" class="box a"/>
+  <text x="1085" y="170" text-anchor="middle" class="h">5. 데이터·JOIN</text>
+  <text x="1085" y="198" text-anchor="middle" class="b">검증</text>
+  <line x1="220" y1="175" x2="260" y2="175" class="line" marker-end="url(#ar)"/>
+  <line x1="450" y1="175" x2="490" y2="175" class="line" marker-end="url(#ar)"/>
+  <line x1="730" y1="175" x2="770" y2="175" class="line" marker-end="url(#ar)"/>
+  <line x1="960" y1="175" x2="1000" y2="175" class="line" marker-end="url(#ar)"/>
+  <rect x="430" y="330" width="340" height="110" class="box q"/>
+  <text x="600" y="373" text-anchor="middle" class="h">요구사항을 올바르게</text>
+  <text x="600" y="405" text-anchor="middle" class="h">표현하는가?</text>
+  <line x1="1085" y1="220" x2="720" y2="330" class="line" marker-end="url(#ar)"/>
+  <rect x="850" y="500" width="260" height="95" class="box ok"/>
+  <text x="980" y="538" text-anchor="middle" class="b">예 → 설계 초안 채택</text>
+  <text x="980" y="568" text-anchor="middle" class="b">판단 근거 기록</text>
+  <line x1="770" y1="385" x2="850" y2="540" class="line" marker-end="url(#ar)"/>
+  <rect x="90" y="500" width="320" height="95" class="box bad"/>
+  <text x="250" y="538" text-anchor="middle" class="b">아니요 → 누락·과잉·관계 오류 수정</text>
+  <text x="250" y="568" text-anchor="middle" class="b">AI 요청 또는 ERD 수정</text>
+  <path d="M430 385C330 420 300 470 300 500" class="line" marker-end="url(#ar)"/>
+  <path d="M250 500C250 390 355 330 355 220" class="dash" marker-end="url(#ar)"/>
+  <rect x="380" y="630" width="440" height="45" class="box q"/>
+  <text x="600" y="659" text-anchor="middle" class="b">최종 판단은 사람이 수행합니다.</text>
+</svg>

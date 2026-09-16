@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 965" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">Graph DB 다단계 관계 탐색과 추천 후보 검증</title>
+  <desc id="desc">학생 101에서 관심 주제, 관련 강의, 해당 강의를 수강한 다른 학생과 그 학생의 다른 강의를 차례로 탐색한다. 저장된 관계 방향과 역방향 탐색을 구분하고, 탐색된 강의를 기존 수강 여부와 운영 규칙으로 검증한 뒤 추천 후보로 확정하는 흐름을 보여준다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Pretendard","Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:30px;font-weight:800;text-anchor:middle}
+      .subtitle{font-size:14px;text-anchor:middle;fill:#475569}
+      .head{font-size:18px;font-weight:800;text-anchor:middle}
+      .section{font-size:15px;font-weight:700;text-anchor:middle}
+      .body{font-size:13px;text-anchor:middle;fill:#334155}
+      .small{font-size:11.8px;text-anchor:middle;fill:#475569}
+      .step{font-size:10.5px;font-weight:700;text-anchor:middle;fill:#ffffff}
+      .edge-label{font-size:10.8px;font-weight:700;text-anchor:middle;fill:#334155}
+      .card{stroke-width:2;rx:16;ry:16}
+      .principle{fill:#f8fafc;stroke:#94a3b8}
+      .student{fill:#eff6ff;stroke:#3b82f6;stroke-width:2}
+      .topic{fill:#fffbeb;stroke:#f59e0b;stroke-width:2}
+      .course{fill:#f0fdf4;stroke:#22c55e;stroke-width:2}
+      .direction{fill:#f8fafc;stroke:#64748b}
+      .validate{fill:#faf5ff;stroke:#8b5cf6}
+      .candidate{fill:#ecfeff;stroke:#06b6d4}
+      .simple{fill:#f8fafc;stroke:#64748b}
+      .graph{fill:#faf5ff;stroke:#8b5cf6}
+      .note{fill:#fff7ed;stroke:#f97316}
+      .line{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.4;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="965" fill="#ffffff"/>
+  <text x="600" y="46" class="title">Graph DB 다단계 관계 탐색</text>
+  <text x="600" y="74" class="subtitle">탐색 경로와 관계 방향을 확인하고, 탐색 결과는 운영 규칙으로 검증한 뒤 추천 후보로 사용합니다.</text>
+
+  <rect x="100" y="100" width="1000" height="70" class="card principle"/>
+  <text x="600" y="128" class="section">추천 질문</text>
+  <text x="600" y="153" class="body">학생 101의 관심 주제와 수강 관계를 따라 추천할 다른 강의를 찾는다.</text>
+
+  <text x="600" y="215" class="head">다단계 관계 탐색 경로</text>
+  <line x1="70" y1="235" x2="1130" y2="235" class="divider"/>
+
+  <circle cx="100" cy="335" r="62" class="student"/>
+  <circle cx="100" cy="289" r="14" fill="#3b82f6"/>
+  <text x="100" y="293" class="step">시작</text>
+  <text x="100" y="328" class="section">Student</text>
+  <text x="100" y="352" class="mono body">101</text>
+  <text x="100" y="375" class="small">추천 대상 학생</text>
+
+  <circle cx="350" cy="335" r="62" class="topic"/>
+  <circle cx="350" cy="289" r="14" fill="#f59e0b"/>
+  <text x="350" y="293" class="step">1-hop</text>
+  <text x="350" y="328" class="section">Topic</text>
+  <text x="350" y="352" class="mono body">Database</text>
+  <text x="350" y="375" class="small">관심 주제</text>
+
+  <circle cx="600" cy="335" r="62" class="course"/>
+  <circle cx="600" cy="289" r="14" fill="#22c55e"/>
+  <text x="600" y="293" class="step">2-hop</text>
+  <text x="600" y="328" class="section">Course</text>
+  <text x="600" y="352" class="mono body">DB-201</text>
+  <text x="600" y="375" class="small">주제와 관련된 강의</text>
+
+  <circle cx="850" cy="335" r="62" class="student"/>
+  <circle cx="850" cy="289" r="14" fill="#3b82f6"/>
+  <text x="850" y="293" class="step">3-hop</text>
+  <text x="850" y="328" class="section">Student</text>
+  <text x="850" y="352" class="mono body">205</text>
+  <text x="850" y="375" class="small">DB-201 수강 학생</text>
+
+  <circle cx="1100" cy="335" r="62" class="course"/>
+  <circle cx="1100" cy="289" r="14" fill="#22c55e"/>
+  <text x="1100" y="293" class="step">4-hop</text>
+  <text x="1100" y="328" class="section">Course</text>
+  <text x="1100" y="352" class="mono body">AI-301</text>
+  <text x="1100" y="375" class="small">다른 수강 강의</text>
+
+  <path d="M162 335 H288" class="line"/>
+  <text x="225" y="312" class="edge-label mono">INTERESTED_IN</text>
+
+  <path d="M412 335 H538" class="line"/>
+  <text x="475" y="312" class="edge-label mono">RELATED_TO</text>
+
+  <path d="M662 335 H788" class="line"/>
+  <text x="725" y="302" class="edge-label mono">ENROLLED 역방향</text>
+  <text x="725" y="318" class="small">저장 방향: Student → Course</text>
+
+  <path d="M912 335 H1038" class="line"/>
+  <text x="975" y="312" class="edge-label mono">ENROLLED</text>
+
+  <rect x="60" y="435" width="650" height="130" class="card direction"/>
+  <text x="385" y="466" class="head">관계 방향 읽기</text>
+  <text x="385" y="495" class="body">저장된 관계는 Student → Course 방향의 ENROLLED입니다.</text>
+  <text x="385" y="520" class="body">Course에서 Student로 이동하는 구간은 같은 관계를 역방향으로 탐색한 것입니다.</text>
+  <text x="385" y="546" class="small">탐색 화살표의 방향과 저장된 관계의 방향을 구분해 읽습니다.</text>
+
+  <path d="M1100 397 V415 H955 V435" class="line"/>
+  <rect x="770" y="435" width="370" height="130" class="card validate"/>
+  <text x="955" y="466" class="head">추천 후보 검증</text>
+  <text x="955" y="495" class="body">학생 101이 이미 수강·완료한 강의 제외</text>
+  <text x="955" y="520" class="body">공개 여부·선수조건·중복 후보 확인</text>
+  <text x="955" y="546" class="small">관계 가중치와 최신성은 별도 추천 기준으로 평가</text>
+
+  <path d="M955 565 V585" class="line"/>
+  <rect x="810" y="585" width="290" height="70" class="card candidate"/>
+  <text x="955" y="613" class="head">추천 후보 확정</text>
+  <text x="955" y="639" class="body">Course AI-301을 학생 101에게 제안</text>
+
+  <text x="600" y="700" class="head">어떤 경우에 Graph DB를 검토할까?</text>
+  <line x1="100" y1="720" x2="1100" y2="720" class="divider"/>
+
+  <rect x="90" y="745" width="480" height="115" class="card simple"/>
+  <text x="330" y="776" class="head">RDBMS JOIN으로 충분할 수 있는 경우</text>
+  <text x="330" y="805" class="body">관계 깊이가 짧고 조회 경로가 정형화되어 있음</text>
+  <text x="330" y="830" class="small">강의별 수강 학생 목록은 FK·JOIN·인덱스로 먼저 검토</text>
+
+  <rect x="630" y="745" width="480" height="115" class="card graph"/>
+  <text x="870" y="776" class="head">Graph DB를 검토할 수 있는 경우</text>
+  <text x="870" y="805" class="body">여러 단계 관계를 반복 탐색하는 것이 질문의 핵심</text>
+  <text x="870" y="830" class="small">경로·연결 패턴과 탐색 깊이가 주요 질의 비용을 결정</text>
+
+  <rect x="145" y="885" width="910" height="50" class="card note"/>
+  <text x="600" y="906" class="section">운영 원칙</text>
+  <text x="600" y="927" class="small">추천 그래프가 파생 관계 인덱스라면 원본 저장소, 갱신 지연 허용 범위와 재구축 절차를 함께 설계합니다.</text>
+
+  <text x="600" y="956" class="small">핵심: Graph 탐색 결과를 자동 정답으로 보지 말고 관계 방향, 후보 제외 규칙과 운영 책임까지 함께 검증합니다.</text>
+</svg>

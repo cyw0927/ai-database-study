@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">데이터 정합성이 깨지는 예</title>
+  <desc id="desc">수강신청과 결제 및 좌석 사이에서 발생할 수 있는 네 가지 업무 규칙 불일치 사례를 보여 준다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b91c1c"/>
+    </marker>
+    <style>.ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+.mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+.title { font-size: 28px; font-weight: 700; }
+.subtitle { font-size: 15px; fill: #4b5563; }
+.box-title { font-size: 18px; font-weight: 700; }
+.body { font-size: 14px; }
+.small { font-size: 12.5px; fill: #4b5563; }
+.card { stroke: #64748b; stroke-width: 1.8; rx: 14; ry: 14; }
+.start { fill: #eaf3ff; }
+.work { fill: #eef5ff; }
+.review { fill: #fff6d8; }
+.ok { fill: #eaf8ee; }
+.fail { fill: #ffeaea; }
+.rule { fill: #f2ecff; }
+.lock { fill: #fff0d9; }
+.line { stroke: #475569; stroke-width: 2.2; fill: none; }
+.dash { stroke: #b45309; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }
+.retry { stroke: #b91c1c; stroke-width: 2.2; stroke-dasharray: 7 6; fill: none; }</style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="560" fill="#ffffff"/>
+  <text x="600" y="42" text-anchor="middle" class="ko title">
+    <tspan x="600" dy="0">데이터 정합성이 깨지는 예</tspan>
+  </text>
+  <text x="600" y="70" text-anchor="middle" class="ko subtitle">
+    <tspan x="600" dy="0">SQL 실행 성공과 업무상 정합성은 서로 다릅니다.</tspan>
+  </text>
+  <rect x="30" y="145" width="270" height="150" rx="14" ry="14" class="card fail"/>
+  <text x="165" y="195" text-anchor="middle" class="ko box-title">
+    <tspan x="165" dy="0">신청은 있으나</tspan>
+    <tspan x="165" dy="28">결제 기록 없음</tspan>
+  </text>
+  <text x="165" y="270" text-anchor="middle" class="ko small">
+    <tspan x="165" dy="0">업무 규칙 불일치</tspan>
+  </text>
+  <rect x="320" y="145" width="270" height="150" rx="14" ry="14" class="card fail"/>
+  <text x="455" y="195" text-anchor="middle" class="ko box-title">
+    <tspan x="455" dy="0">결제는 있으나</tspan>
+    <tspan x="455" dy="28">연결된 신청 없음</tspan>
+  </text>
+  <text x="455" y="270" text-anchor="middle" class="ko small">
+    <tspan x="455" dy="0">업무 규칙 불일치</tspan>
+  </text>
+  <rect x="610" y="145" width="270" height="150" rx="14" ry="14" class="card fail"/>
+  <text x="745" y="195" text-anchor="middle" class="ko box-title">
+    <tspan x="745" dy="0">수강중인데</tspan>
+    <tspan x="745" dy="28">결제금액 불일치</tspan>
+  </text>
+  <text x="745" y="270" text-anchor="middle" class="ko small">
+    <tspan x="745" dy="0">업무 규칙 불일치</tspan>
+  </text>
+  <rect x="900" y="145" width="270" height="150" rx="14" ry="14" class="card review"/>
+  <text x="1035" y="195" text-anchor="middle" class="ko box-title">
+    <tspan x="1035" dy="0">잔여 좌석</tspan>
+    <tspan x="1035" dy="28">remaining_seats &lt; 0</tspan>
+  </text>
+  <text x="1035" y="270" text-anchor="middle" class="ko small">
+    <tspan x="1035" dy="0">업무 규칙 불일치</tspan>
+  </text>
+  <rect x="350" y="390" width="500" height="85" rx="14" ry="14" class="card rule"/>
+  <text x="600" y="425" text-anchor="middle" class="ko box-title">
+    <tspan x="600" dy="0">정합성 검증</tspan>
+  </text>
+  <text x="600" y="455" text-anchor="middle" class="ko body">
+    <tspan x="600" dy="0">제약조건 + 트랜잭션 + 결과 SELECT</tspan>
+  </text>
+  <path d="M 165 295 V 345 H 600 V 390" class="line" marker-end="url(#arrow)"/>
+  <path d="M 455 295 V 345 H 600 V 390" class="line" marker-end="url(#arrow)"/>
+  <path d="M 745 295 V 345 H 600 V 390" class="line" marker-end="url(#arrow)"/>
+  <path d="M 1035 295 V 345 H 600 V 390" class="line" marker-end="url(#arrow)"/>
+  <text x="600" y="520" text-anchor="middle" class="ko small">
+    <tspan x="600" dy="0">상태가 신청인 0원 행은 허용될 수 있으므로 관련 상태와 결제를 함께 확인합니다.</tspan>
+  </text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">저장 방식 선택과 확장 흐름</title>
+  <desc id="desc">파일, 스프레드시트, 관계형 DB 중 기본 저장소를 먼저 선택하고, 세션·캐시나 의미 검색 같은 특수 기능이 필요할 때 Key-Value DB나 벡터 검색 계층을 추가 검토하는 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .stage{fill:#f8fafc;stroke:#64748b;stroke-width:2}
+      .file{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .sheet{fill:#eef5ff;stroke:#3b82f6;stroke-width:2}
+      .db{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2}
+      .special{fill:#fff7e6;stroke:#d97706;stroke-width:2}
+      .done{fill:#eef5ff;stroke:#4d86d7;stroke-width:2}
+      .head{font-size:21px;font-weight:700;text-anchor:middle}
+      .body{font-size:15.5px;text-anchor:middle;fill:#334155}
+      .small{font-size:14px;text-anchor:middle;fill:#334155}
+      .line{stroke:#475569;stroke-width:2.2;fill:none;stroke-linecap:round;marker-end:url(#arrow)}
+      .plain{stroke:#475569;stroke-width:2.2;fill:none;stroke-linecap:round}
+      .note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="640" fill="#fff"/>
+  <text x="600" y="48" class="title">저장 방식 선택과 확장 흐름</text>
+
+  <rect x="420" y="82" width="360" height="64" rx="16" class="stage"/>
+  <text x="600" y="122" class="head">① 기본 저장소 선택</text>
+  <line x1="600" y1="146" x2="600" y2="182" class="plain"/>
+  <line x1="250" y1="182" x2="950" y2="182" class="plain"/>
+  <line x1="250" y1="182" x2="250" y2="220" class="line"/>
+  <line x1="600" y1="182" x2="600" y2="220" class="line"/>
+  <line x1="950" y1="182" x2="950" y2="220" class="line"/>
+
+  <rect x="110" y="220" width="280" height="88" rx="18" class="file"/>
+  <text x="250" y="255" class="head">파일</text><text x="250" y="282" class="body">문서·설정값·단순 기록</text>
+  <rect x="460" y="220" width="280" height="88" rx="18" class="sheet"/>
+  <text x="600" y="255" class="head">스프레드시트</text><text x="600" y="282" class="body">사람이 편집하는 소규모 표</text>
+  <rect x="810" y="220" width="280" height="88" rx="18" class="db"/>
+  <text x="950" y="255" class="head">관계형 DB</text><text x="950" y="282" class="body">지속적 업무 데이터</text>
+
+  <line x1="600" y1="308" x2="600" y2="360" class="line"/>
+  <rect x="350" y="360" width="500" height="70" rx="18" class="stage"/>
+  <text x="600" y="389" class="head">② 특수 기능이 필요한가?</text>
+  <text x="600" y="414" class="body">기본 저장소와 보조 계층을 구분해 검토한다.</text>
+
+  <line x1="600" y1="430" x2="600" y2="460" class="plain"/>
+  <line x1="360" y1="460" x2="840" y2="460" class="plain"/>
+  <line x1="360" y1="460" x2="360" y2="492" class="line"/>
+  <line x1="840" y1="460" x2="840" y2="492" class="line"/>
+
+  <rect x="190" y="492" width="340" height="78" rx="18" class="special"/>
+  <text x="360" y="523" class="head">세션·캐시</text><text x="360" y="548" class="body">Key-Value DB 추가 검토</text>
+  <rect x="670" y="492" width="340" height="78" rx="18" class="special"/>
+  <text x="840" y="523" class="head">의미 검색</text><text x="840" y="548" class="body">벡터 검색 계층 추가 검토</text>
+
+  <rect x="190" y="592" width="820" height="34" rx="16" class="done"/>
+  <text x="600" y="614" class="note">③ 운영 중 사용자, 기능, 데이터 증가에 따라 저장 방식을 다시 평가한다.</text>
+</svg>

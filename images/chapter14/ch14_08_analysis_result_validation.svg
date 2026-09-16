@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">SQL 결과와 Python 결과 교차 검증</title>
+  <desc id="desc">SQL 기준 결과와 Python 분석 결과를 행 수, 건수, 합계, 평균으로 비교하고 일치하면 기록하며 불일치하면 기간, JOIN, NULL, 중복, 자료형을 확인해 재실행하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <marker id="retryArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#dc2626"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14}.sql{fill:#eff6ff;stroke:#3b82f6}.python{fill:#faf5ff;stroke:#8b5cf6}.decision{fill:#fff7ed;stroke:#f97316;stroke-width:2.2}.ok{fill:#ecfdf5;stroke:#16a34a}.retrybox{fill:#fff1f2;stroke:#f43f5e}.head{font-size:17px;font-weight:700;text-anchor:middle}.body{font-size:13px;text-anchor:middle;fill:#334155}.small{font-size:12px;text-anchor:middle;fill:#475569}.line{stroke:#475569;stroke-width:2.5;fill:none;marker-end:url(#arrow)}.retry{stroke:#dc2626;stroke-width:2.3;fill:none;stroke-dasharray:7 6;marker-end:url(#retryArrow)}.tag{font-size:12px;font-weight:700;fill:#475569}.note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.5;rx:12}
+    </style>
+  </defs>
+  <rect width="1200" height="720" fill="#fff"/>
+  <text x="600" y="48" class="title">SQL 결과와 Python 결과 교차 검증</text>
+  <text x="600" y="76" class="sub">같은 분석 질문과 데이터 범위를 사용했는지 수치로 확인합니다.</text>
+
+  <rect x="90" y="150" width="300" height="190" class="card sql"/>
+  <text x="240" y="192" class="head">SQL 기준 결과</text>
+  <text x="240" y="232" class="body">전체 행 수 24</text>
+  <text x="240" y="262" class="body">상태별 12 · 5 · 4 · 3</text>
+  <text x="240" y="292" class="body">결제금액 3,210,000</text>
+  <text x="240" y="320" class="small">독립 검산 쿼리</text>
+
+  <rect x="810" y="150" width="300" height="190" class="card python"/>
+  <text x="960" y="192" class="head">Python·pandas 결과</text>
+  <text x="960" y="232" class="body">DataFrame 행 수</text>
+  <text x="960" y="262" class="body">groupby · pivot 집계</text>
+  <text x="960" y="292" class="body">완료 평균 25일</text>
+  <text x="960" y="320" class="small">자동 assertion</text>
+
+  <polygon points="600,135 740,245 600,355 460,245" class="decision"/>
+  <text x="600" y="224" class="head">결과가</text>
+  <text x="600" y="252" class="head">같은가?</text>
+  <text x="600" y="281" class="small">행 수 · 건수 · 합계 · 평균</text>
+
+  <path d="M390 245 H460" class="line"/>
+  <path d="M810 245 H740" class="line"/>
+
+  <rect x="770" y="430" width="330" height="110" class="card ok"/>
+  <text x="935" y="470" class="head">예 · 검증 통과</text>
+  <text x="935" y="503" class="body">분석 결과 · 해석 · 한계 기록</text>
+  <path d="M680 330 V390 H935 V430" class="line"/>
+  <text x="710" y="379" class="tag">예</text>
+
+  <rect x="100" y="420" width="390" height="130" class="card retrybox"/>
+  <text x="295" y="460" class="head">아니요 · 불일치 원인 확인</text>
+  <text x="295" y="493" class="body">기간 · JOIN · NULL · 중복 · 자료형</text>
+  <text x="295" y="520" class="small">실행 시점과 취소 포함 기준도 확인</text>
+  <path d="M520 330 V380 H295 V420" class="retry"/>
+  <text x="450" y="369" class="tag">아니요</text>
+
+  <rect x="170" y="590" width="250" height="82" class="card retrybox"/>
+  <text x="295" y="623" class="head">수정 후 재실행</text>
+  <text x="295" y="650" class="body">SQL 또는 Python</text>
+  <path d="M295 550 V590" class="retry"/>
+  <path d="M170 631 H55 V245 H90" class="retry"/>
+  <path d="M420 631 H1145 V245 H1110" class="retry"/>
+
+  <rect x="505" y="600" width="545" height="58" class="note"/>
+  <text x="777.5" y="626" class="head">불일치할 때 기대값을 실제값으로 바꾸지 않습니다.</text>
+  <text x="777.5" y="650" class="body">원인을 설명하고 같은 기준으로 다시 실행합니다.</text>
+</svg>

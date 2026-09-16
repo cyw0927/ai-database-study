@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+<title id="title">보안 통제와 복구 준비</title>
+<desc id="desc">인증, 권한, 기록, 백업, 복구 검증을 하나의 흐름으로 본다</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker><style>
+text{font-family:"Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;fill:#0f172a} .title{font-size:28px;font-weight:700;text-anchor:middle} .sub{font-size:14px;fill:#475569;text-anchor:middle} .box{fill:#fff;stroke:#7fb3f5;stroke-width:2;rx:14} .safe{fill:#ecfdf5;stroke:#22c55e;stroke-width:2;rx:14} .warn{fill:#fff7ed;stroke:#f97316;stroke-width:2;rx:14} .risk{fill:#fdf2f8;stroke:#db2777;stroke-width:2;rx:14} .ai{fill:#f5f3ff;stroke:#8b5cf6;stroke-width:2;rx:14} .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.5;rx:12} .head{font-size:18px;font-weight:700;text-anchor:middle} .body{font-size:13.5px;text-anchor:middle;fill:#334155} .small{font-size:12.5px;text-anchor:middle;fill:#334155} .code{font-family:Consolas, D2Coding, "Courier New", monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8} .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)} .dash{stroke:#db2777;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)} .tag{font-size:12px;font-weight:700;fill:#2563eb;text-anchor:middle}
+</style></defs>
+<rect width="1200" height="500" fill="#ffffff"/>
+<text x="600" y="48" class="title">보안 통제와 복구 준비</text>
+<text x="600" y="76" class="sub">인증, 권한, 기록, 백업, 복구 검증을 하나의 흐름으로 본다</text>
+<rect x="55" y="170" width="130" height="110" class="box"/>
+<text x="120.0" y="202" class="head">위협 파악</text>
+<text x="120.0" y="228" class="body">보호 대상</text>
+<rect x="220" y="170" width="130" height="110" class="box"/>
+<text x="285.0" y="202" class="head">인증</text>
+<text x="285.0" y="228" class="body">누구인가</text>
+<rect x="385" y="170" width="130" height="110" class="box"/>
+<text x="450.0" y="202" class="head">권한</text>
+<text x="450.0" y="228" class="body">무엇 가능</text>
+<rect x="550" y="170" width="130" height="110" class="box"/>
+<text x="615.0" y="202" class="head">기록</text>
+<text x="615.0" y="228" class="body">누가 했나</text>
+<rect x="715" y="170" width="130" height="110" class="box"/>
+<text x="780.0" y="202" class="head">백업</text>
+<text x="780.0" y="228" class="body">사본 보호</text>
+<rect x="880" y="170" width="130" height="110" class="safe"/>
+<text x="945.0" y="202" class="head">복구</text>
+<text x="945.0" y="228" class="body">되돌림 검증</text>
+<rect x="1045" y="170" width="130" height="110" class="safe"/>
+<text x="1110.0" y="202" class="head">보완</text>
+<text x="1110.0" y="228" class="body">기준 갱신</text>
+<path d="M185 225 L220 225" class="arrow"/>
+<path d="M350 225 L385 225" class="arrow"/>
+<path d="M515 225 L550 225" class="arrow"/>
+<path d="M680 225 L715 225" class="arrow"/>
+<path d="M845 225 L880 225" class="arrow"/>
+<path d="M1010 225 L1045 225" class="arrow"/>
+<rect x="300" y="370" width="600" height="58" class="note"/>
+<text x="600" y="404" class="head">보안은 접근 통제와 복구 준비가 함께 작동해야 한다</text>
+</svg>

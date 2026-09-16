@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 790" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">복합 인덱스의 선두 컬럼과 쿼리 조건</title>
+  <desc id="desc">복합 인덱스 course_id와 status의 컬럼 순서를 기준으로 course_id 단독, course_id와 status 조합, status 단독 조건의 활용 가능성을 비교하고 실행 계획 검증을 안내한다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .sub{font-size:15px;fill:#475569;text-anchor:middle}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;text-anchor:middle;fill:#334155}
+      .small{font-size:13px;text-anchor:middle;fill:#475569}
+      .code{font-family:Consolas,D2Coding,"Courier New",monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8}
+      .section{font-size:16px;font-weight:700;text-anchor:middle;fill:#334155}
+      .card{stroke-width:2;rx:14;ry:14}
+      .index{fill:#f5f3ff;stroke:#8b5cf6}
+      .principle{fill:#eff6ff;stroke:#2563eb}
+      .condition{fill:#ffffff;stroke:#7fb3f5}
+      .good{fill:#ecfdf5;stroke:#22c55e}
+      .best{fill:#dcfce7;stroke:#16a34a}
+      .warn{fill:#fff7ed;stroke:#f97316}
+      .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:14;ry:14}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.5;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="790" fill="#ffffff"/>
+  <text x="600" y="48" class="title">복합 인덱스의 선두 컬럼과 쿼리 조건</text>
+  <text x="600" y="78" class="sub">컬럼 순서는 같아 보여도 조회 조건에 따라 활용 가능성이 달라집니다.</text>
+
+  <rect x="90" y="115" width="390" height="145" class="card index"/>
+  <text x="285" y="151" class="head">복합 인덱스</text>
+  <text x="285" y="184" class="code">idx_enrollments_course_status</text>
+  <text x="285" y="216" class="code">(course_id, status)</text>
+  <text x="285" y="242" class="small">course_id가 선두 컬럼</text>
+
+  <rect x="560" y="115" width="550" height="145" class="card principle"/>
+  <text x="835" y="151" class="head">선두 컬럼 원칙</text>
+  <text x="835" y="185" class="body">왼쪽 컬럼부터 조건에 포함될수록</text>
+  <text x="835" y="213" class="body">복합 인덱스를 활용할 가능성이 높습니다.</text>
+  <text x="835" y="241" class="small">실제 선택 여부는 데이터 분포와 실행 계획에 따라 달라짐</text>
+
+  <path d="M480 187H560" class="arrow"/>
+  <path d="M835 260V300" class="arrow"/>
+  <text x="600" y="318" class="section">쿼리 조건별 비교</text>
+  <line x1="90" y1="337" x2="1110" y2="337" class="divider"/>
+
+  <rect x="110" y="365" width="410" height="100" class="card condition"/>
+  <text x="315" y="402" class="head">course_id 단독 조건</text>
+  <text x="315" y="435" class="code">WHERE course_id = ?</text>
+
+  <rect x="670" y="365" width="420" height="100" class="card good"/>
+  <text x="880" y="402" class="head">활용 가능성 있음</text>
+  <text x="880" y="435" class="body">선두 컬럼이 조건에 포함됨</text>
+  <path d="M520 415H670" class="arrow"/>
+
+  <rect x="110" y="490" width="410" height="100" class="card condition"/>
+  <text x="315" y="527" class="head">course_id + status 조건</text>
+  <text x="315" y="560" class="code">WHERE course_id = ? AND status = ?</text>
+
+  <rect x="670" y="490" width="420" height="100" class="card best"/>
+  <text x="880" y="525" class="head">가장 잘 맞는 조건</text>
+  <text x="880" y="556" class="body">선두 컬럼부터 두 컬럼 모두 일치</text>
+  <text x="880" y="580" class="small">범위와 데이터 분포는 별도 확인</text>
+  <path d="M520 540H670" class="arrow"/>
+
+  <rect x="110" y="615" width="410" height="100" class="card condition"/>
+  <text x="315" y="652" class="head">status 단독 조건</text>
+  <text x="315" y="685" class="code">WHERE status = ?</text>
+
+  <rect x="670" y="615" width="420" height="100" class="card warn"/>
+  <text x="880" y="652" class="head">활용이 제한될 수 있음</text>
+  <text x="880" y="685" class="body">선두 컬럼 course_id가 조건에 없음</text>
+  <path d="M520 665H670" class="arrow"/>
+
+  <rect x="170" y="735" width="860" height="48" class="note"/>
+  <text x="600" y="765" class="body">(course_id, status) ≠ (status, course_id) · 최종 판단은 EXPLAIN과 실제 조회 패턴으로 확인합니다.</text>
+</svg>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 610" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">삽입·수정·삭제 이상 현상</title>
+  <desc id="desc">대여되지 않은 책 등록, 반복 이메일 수정, 마지막 대여 삭제 사례를 통해 삽입, 수정, 삭제 이상의 차이와 정규화 후 관리 위치를 비교한다.</desc>
+
+  <style>
+    .ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .sub { font-size: 15px; fill: #4b5563; }
+    .h { font-size: 18px; font-weight: 700; }
+    .b { font-size: 14px; }
+    .s { font-size: 12.5px; }
+    .box { stroke: #64748b; stroke-width: 1.7; rx: 14; ry: 14; }
+    .problem { fill: #fff1f1; }
+    .insert { fill: #fff6d8; }
+    .update { fill: #ffeaea; }
+    .delete { fill: #f3edff; }
+    .nf1 { fill: #eaf3ff; }
+    .nf2 { fill: #fff0df; }
+    .nf3 { fill: #f2ecff; }
+    .good { fill: #eaf8ee; }
+    .review { fill: #eaf3ff; }
+    .ai { fill: #f2ecff; }
+    .note { fill: #fff6d8; }
+    .pk { fill: #1d4ed8; font-weight: 700; }
+    .fk { fill: #c2410c; font-weight: 700; }
+    .line { stroke: #475569; stroke-width: 2; fill: none; }
+    .dash { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; }
+    .hot { fill: #b91c1c; font-weight: 700; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="610" fill="#ffffff"/>
+  <text x="600" y="44" text-anchor="middle" class="ko title">삽입·수정·삭제 이상 현상</text>
+
+  <text x="600" y="72" text-anchor="middle" class="ko sub">이상 현상은 SQL 문법 오류가 아니라 서로 다른 사실을 한 테이블에 섞은 설계 문제입니다.</text>
+  <rect x="55" y="115" width="340" height="390" class="box insert"/>
+  <text x="225" y="155" text-anchor="middle" class="ko h">삽입 이상</text>
+  <text x="225" y="205" text-anchor="middle" class="ko b">하려는 작업</text><text x="225" y="232" text-anchor="middle" class="ko b">대여되지 않은 새 책 등록</text>
+  <text x="225" y="292" text-anchor="middle" class="ko b hot">문제</text><text x="225" y="322" text-anchor="middle" class="ko b">회원과 대여일이 없으면</text><text x="225" y="347" text-anchor="middle" class="ko b">library_records에 넣기 어려움</text>
+  <rect x="95" y="405" width="260" height="65" class="box good"/>
+  <text x="225" y="433" text-anchor="middle" class="ko b">정규화 후</text><text x="225" y="458" text-anchor="middle" class="mono b">books에 독립 등록</text>
+  <rect x="430" y="115" width="340" height="390" class="box update"/>
+  <text x="600" y="155" text-anchor="middle" class="ko h">수정 이상</text>
+  <text x="600" y="205" text-anchor="middle" class="ko b">하려는 작업</text><text x="600" y="232" text-anchor="middle" class="ko b">김민지 이메일 변경</text>
+  <text x="600" y="292" text-anchor="middle" class="ko b hot">문제</text><text x="600" y="322" text-anchor="middle" class="ko b">여러 대여 행을 모두 수정</text><text x="600" y="347" text-anchor="middle" class="ko b">일부 누락 시 값 불일치</text>
+  <rect x="470" y="405" width="260" height="65" class="box good"/>
+  <text x="600" y="433" text-anchor="middle" class="ko b">정규화 후</text><text x="600" y="458" text-anchor="middle" class="mono b">members 한 행만 수정</text>
+  <rect x="805" y="115" width="340" height="390" class="box delete"/>
+  <text x="975" y="155" text-anchor="middle" class="ko h">삭제 이상</text>
+  <text x="975" y="205" text-anchor="middle" class="ko b">하려는 작업</text><text x="975" y="232" text-anchor="middle" class="ko b">마지막 대여 기록 삭제</text>
+  <text x="975" y="292" text-anchor="middle" class="ko b hot">문제</text><text x="975" y="322" text-anchor="middle" class="ko b">유일하게 남은 책 정보도</text><text x="975" y="347" text-anchor="middle" class="ko b">함께 사라질 수 있음</text>
+  <rect x="845" y="405" width="260" height="65" class="box good"/>
+  <text x="975" y="433" text-anchor="middle" class="ko b">정규화 후</text><text x="975" y="458" text-anchor="middle" class="mono b">loans만 삭제, books 유지</text>
+  <rect x="190" y="535" width="820" height="45" class="box note"/>
+  <text x="600" y="563" text-anchor="middle" class="ko b">공통 원인: 서로 다른 수명과 변경 이유를 가진 사실을 한 테이블에 함께 저장했기 때문</text>
+</svg>

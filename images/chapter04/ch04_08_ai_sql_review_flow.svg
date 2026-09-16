@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">AI 생성 SQL 검토 흐름</title>
+  <desc id="desc">AI가 만든 SQL을 실행하기 전에 요청 목적, 명령어, 대상 테이블과 컬럼, WHERE와 영향 범위를 검토하고 실습 DB에서 한 문장씩 실행해 결과를 확인하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .ai{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2}
+      .human{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .decision{fill:#fffceb;stroke:#d6a600;stroke-width:2}
+      .change{fill:#fff5df;stroke:#d89424;stroke-width:2}
+      .ok{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .bad{fill:#fff1f1;stroke:#d64545;stroke-width:2}
+      .name{font-size:18px;font-weight:700;text-anchor:middle}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}
+      .tag{font-size:14px;font-weight:700;text-anchor:middle;fill:#334155}
+      .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .loop{stroke:#d64545;stroke-width:2.3;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+      .label{font-size:16px;font-weight:700;text-anchor:middle}
+      .note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="800" fill="#fff"/>
+  <text x="600" y="48" class="title">AI 생성 SQL 검토 흐름</text>
+
+  <rect x="420" y="78" width="360" height="58" rx="14" class="human"/>
+  <text x="600" y="103" class="name">1. 요청 목적 확인</text>
+  <text x="600" y="125" class="sub">조회 · 추가 · 수정 · 삭제</text>
+  <path d="M600 136V166" class="line"/>
+
+  <rect x="420" y="171" width="360" height="62" rx="14" class="ai"/>
+  <text x="600" y="198" class="name">2. AI 생성 SQL 읽기</text>
+  <text x="600" y="221" class="sub">명령어 · 테이블 · 컬럼</text>
+  <path d="M600 233V263" class="line"/>
+
+  <rect x="420" y="268" width="360" height="56" rx="14" class="human"/>
+  <text x="600" y="302" class="name">3. 실제 테이블 구조와 비교</text>
+  <path d="M600 324V354" class="line"/>
+
+  <rect x="420" y="359" width="360" height="64" rx="14" class="decision"/>
+  <text x="600" y="386" class="name">4. WHERE와 영향 범위 확인</text>
+  <text x="600" y="410" class="tag">WHERE · 영향 행 수 · 실행 전 SELECT</text>
+  <path d="M600 423V453" class="line"/>
+
+  <rect x="420" y="458" width="360" height="62" rx="14" class="decision"/>
+  <text x="600" y="484" class="name">데이터를 변경하는 SQL인가?</text>
+  <text x="600" y="507" class="sub">SELECT인지, INSERT/UPDATE/DELETE인지 구분</text>
+
+  <rect x="110" y="570" width="285" height="68" rx="14" class="human"/>
+  <text x="252" y="598" class="name">SELECT</text>
+  <text x="252" y="622" class="sub">필요한 컬럼과 조건 확인</text>
+
+  <rect x="805" y="570" width="285" height="68" rx="14" class="change"/>
+  <text x="948" y="598" class="name">INSERT/UPDATE/DELETE</text>
+  <text x="948" y="622" class="sub">변경 대상 확인</text>
+
+  <rect x="805" y="665" width="285" height="54" rx="14" class="human"/>
+  <text x="948" y="698" class="name">UPDATE/DELETE는 먼저 SELECT</text>
+
+  <path d="M505 520L318 570" class="line"/>
+  <text x="398" y="552" class="label" fill="#166534">아니요</text>
+  <path d="M695 520L882 570" class="line"/>
+  <text x="802" y="552" class="label" fill="#92400e">예</text>
+  <path d="M948 638V665" class="line"/>
+
+  <rect x="485" y="590" width="230" height="58" rx="14" class="ok"/>
+  <text x="600" y="614" class="name">한 문장씩 실행</text>
+  <text x="600" y="635" class="sub">실습 DB에서 확인</text>
+  <path d="M395 604H485" class="line"/>
+  <path d="M805 692H715" class="line"/>
+  <path d="M600 648V680" class="line"/>
+
+  <rect x="450" y="685" width="300" height="48" rx="14" class="ok"/>
+  <text x="600" y="715" class="name">결과 검증 후 근거 기록</text>
+  <path d="M450 709H75V107H420" class="loop"/>
+  <text x="205" y="695" class="label" fill="#b42323">불일치하면 수정</text>
+
+  <text x="600" y="775" class="note">AI SQL은 초안이며, 문법이 맞아도 실행해도 안전하다는 뜻은 아니다.</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+  <title id="title">AI 제안을 검토된 설계로 바꾸기</title>
+  <desc id="desc">AI 제안을 요구사항, ERD, SQL 실행 결과로 검증하고 근거가 부족하면 요구사항 대조 단계로 돌아가는 흐름</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#334155"/>
+    </marker>
+    <style>
+      text { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #0f172a; }
+      .title { font-size: 28px; font-weight: 700; text-anchor: middle; }
+      .sub { font-size: 14px; fill: #475569; text-anchor: middle; }
+      .box { fill: #ffffff; stroke: #8bbcf6; stroke-width: 2; rx: 14; }
+      .green { stroke: #22a06b; fill: #f2fff8; stroke-width: 2; rx: 14; }
+      .purple { stroke: #8b5cf6; fill: #f7f3ff; stroke-width: 2; rx: 14; }
+      .head { font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .body { font-size: 13.5px; text-anchor: middle; fill: #334155; }
+      .arrow { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #ef4444; stroke-width: 2; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+      .tag { font-size: 12px; font-weight: 700; fill: #b91c1c; text-anchor: middle; }
+      .note { fill: #eefdf4; stroke: #22c55e; stroke-width: 1.5; rx: 12; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="460" fill="#ffffff"/>
+
+  <text x="600" y="48" class="title">AI 제안을 검토된 설계로 바꾸기</text>
+  <text x="600" y="76" class="sub">AI 제안을 요구사항, ERD, SQL 실행 결과로 검증한다</text>
+
+  <rect x="80" y="145" width="165" height="135" class="purple"/>
+  <text x="162.5" y="177" class="head">AI 초안</text>
+  <text x="162.5" y="203" class="body">빠른 구조 제안</text>
+
+  <rect x="300" y="145" width="165" height="135" class="box"/>
+  <text x="382.5" y="177" class="head">요구사항 대조</text>
+  <text x="382.5" y="203" class="body">범위 누락 확인</text>
+
+  <rect x="520" y="145" width="165" height="135" class="box"/>
+  <text x="602.5" y="177" class="head">ERD 검토</text>
+  <text x="602.5" y="203" class="body">PK · FK · 관계</text>
+
+  <rect x="740" y="145" width="165" height="135" class="green"/>
+  <text x="822.5" y="177" class="head">SQL 검증</text>
+  <text x="822.5" y="203" class="body">직접 실행</text>
+
+  <rect x="960" y="145" width="165" height="135" class="green"/>
+  <text x="1042.5" y="177" class="head">최종 반영</text>
+  <text x="1042.5" y="203" class="body">사람이 판단</text>
+
+  <!-- Main flow -->
+  <path d="M245 212 H300" class="arrow"/>
+  <path d="M465 212 H520" class="arrow"/>
+  <path d="M685 212 H740" class="arrow"/>
+  <path d="M905 212 H960" class="arrow"/>
+
+  <!-- Feedback loop: SQL validation back to requirements review -->
+  <path d="M822.5 280 V305 H382.5 V280" class="dash"/>
+  <text x="602.5" y="327" class="tag">근거 부족 시 요구사항 대조로 돌아감</text>
+
+  <rect x="360" y="350" width="480" height="58" class="note"/>
+  <text x="600" y="384" class="head">AI 결과는 초안이며 최종 설계는 실행 결과로 검증한다</text>
+</svg>

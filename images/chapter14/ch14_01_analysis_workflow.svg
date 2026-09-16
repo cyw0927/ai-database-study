@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">SQL에서 Python으로 확장되는 데이터 분석 흐름</title>
+  <desc id="desc">분석 질문, 데이터 품질, SQL 분석, 분석 데이터셋, Python과 pandas 확장, 결과 교차 검증, 해석과 기록으로 이어지는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <marker id="retryArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#dc2626"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}.title{font-size:29px;font-weight:800;text-anchor:middle}.sub{font-size:15px;text-anchor:middle;fill:#475569}.card{stroke-width:2;rx:14;ry:14}.blue{fill:#eff6ff;stroke:#3b82f6}.yellow{fill:#fffbeb;stroke:#f59e0b}.green{fill:#f0fdf4;stroke:#22c55e}.cyan{fill:#ecfeff;stroke:#06b6d4}.purple{fill:#faf5ff;stroke:#8b5cf6}.ok{fill:#ecfdf5;stroke:#16a34a}.note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:12}.head{font-size:16px;font-weight:700;text-anchor:middle}.body{font-size:12.5px;text-anchor:middle;fill:#334155}.line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.retry{stroke:#dc2626;stroke-width:2.2;fill:none;stroke-dasharray:7 6;marker-end:url(#retryArrow)}.tag{font-size:12px;font-weight:700;fill:#b91c1c}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="#fff"/>
+  <text x="600" y="48" class="title">SQL에서 Python으로 확장되는 데이터 분석 흐름</text>
+  <text x="600" y="76" class="sub">데이터베이스에서 범위와 기준을 확정하고 Python으로 확장한 뒤 같은 결과인지 검증합니다.</text>
+
+  <rect x="30" y="170" width="160" height="135" class="card blue"/>
+  <text x="110" y="205" class="head">1. 분석 질문</text>
+  <text x="110" y="238" class="body">대상 · 기간 · 행 단위</text>
+  <text x="110" y="263" class="body">기대 결과 정의</text>
+
+  <rect x="225" y="170" width="160" height="135" class="card yellow"/>
+  <text x="305" y="205" class="head">2. 데이터 품질</text>
+  <text x="305" y="238" class="body">행 수 · NULL · 중복</text>
+  <text x="305" y="263" class="body">FK · 업무 규칙</text>
+
+  <rect x="420" y="170" width="160" height="135" class="card green"/>
+  <text x="500" y="205" class="head">3. SQL 분석</text>
+  <text x="500" y="238" class="body">필터 · JOIN</text>
+  <text x="500" y="263" class="body">GROUP BY · 검산</text>
+
+  <rect x="615" y="170" width="160" height="135" class="card cyan"/>
+  <text x="695" y="205" class="head">4. 분석 데이터셋</text>
+  <text x="695" y="238" class="body">수강신청 1건 = 1행</text>
+  <text x="695" y="263" class="body">VIEW · CSV</text>
+
+  <rect x="810" y="170" width="160" height="135" class="card purple"/>
+  <text x="890" y="205" class="head">5. Python·pandas</text>
+  <text x="890" y="238" class="body">가공 · 피벗</text>
+  <text x="890" y="263" class="body">시각화 · 확장</text>
+
+  <rect x="1005" y="170" width="160" height="135" class="card ok"/>
+  <text x="1085" y="205" class="head">6. 교차 검증</text>
+  <text x="1085" y="238" class="body">행 수 · 건수</text>
+  <text x="1085" y="263" class="body">합계 · 평균 비교</text>
+
+  <path d="M190 237.5 H225" class="line"/>
+  <path d="M385 237.5 H420" class="line"/>
+  <path d="M580 237.5 H615" class="line"/>
+  <path d="M775 237.5 H810" class="line"/>
+  <path d="M970 237.5 H1005" class="line"/>
+
+  <rect x="430" y="410" width="340" height="105" class="card blue"/>
+  <text x="600" y="447" class="head">7. 해석과 기록</text>
+  <text x="600" y="478" class="body">관찰 · 해석 · 한계 · 다음 분석 질문</text>
+  <path d="M1085 305 V360 H600 V410" class="line"/>
+
+  <path d="M1005 255 H985 V565 H110 V305" class="retry"/>
+  <text x="870" y="552" class="tag">결과 불일치 → 범위·JOIN·NULL·자료형 재검토</text>
+
+  <rect x="260" y="605" width="680" height="52" class="note"/>
+  <text x="600" y="637" class="head">그래프보다 분석 질문과 SQL·Python 기준값의 일치를 먼저 확인합니다.</text>
+</svg>

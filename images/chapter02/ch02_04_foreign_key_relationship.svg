@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc" shape-rendering="geometricPrecision">
+  <title id="title">외래키로 연결되는 학생·강의·수강신청 관계</title>
+  <desc id="desc">enrollments.student_id가 students.id를 참조하고, enrollments.course_id가 courses.id를 참조하여 학생과 강의의 수강신청 관계를 만드는 구조를 보여 주는 도식</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#6d43b5"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .card-outline{fill:#ffffff;stroke:#64748b;stroke-width:2}
+      .bridge-outline{fill:#ffffff;stroke:#6d43b5;stroke-width:2.2}
+      .entity-head{fill:#e8f2ff}
+      .bridge-head{fill:#eee7fb}
+      .divider{stroke:#cbd5e1;stroke-width:1.2}
+      .name{font-size:20px;font-weight:700;text-anchor:middle;fill:#172033}
+      .type{font-size:16px;font-weight:600;text-anchor:middle;fill:#475569}
+      .field{font-size:18px;font-weight:600;fill:#334155}
+      .badge-text{font-size:14px;font-weight:700;text-anchor:middle;dominant-baseline:middle;fill:#ffffff}
+      .pk-badge{fill:#2f6fad}
+      .fk-badge{fill:#6d43b5}
+      .ref{stroke:#6d43b5;stroke-width:3;fill:none;marker-end:url(#arrow);stroke-linecap:round;stroke-linejoin:round}
+      .ref-label{font-size:16px;font-weight:700;text-anchor:middle;fill:#563596}
+      .cardinality{font-size:18px;font-weight:700;text-anchor:middle;dominant-baseline:middle;fill:#563596}
+      .cardinality-box{fill:#ffffff;stroke:#9d83cf;stroke-width:1.5}
+      .bridge-note{font-size:17px;font-weight:700;text-anchor:middle;fill:#563596}
+      .direction-note{font-size:15px;font-weight:600;text-anchor:middle;fill:#475569}
+      .bottom-note{font-size:17px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="600" y="52" class="title">외래키로 연결되는 학생·강의·수강신청 관계</text>
+
+  <!-- students -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="150" width="280" height="170" rx="14" class="card-outline"/>
+    <path d="M60 164 Q60 150 74 150 H326 Q340 150 340 164 V210 H60 Z" class="entity-head"/>
+    <line x1="60" y1="210" x2="340" y2="210" class="divider"/>
+    <line x1="60" y1="265" x2="340" y2="265" class="divider"/>
+  </g>
+  <text x="200" y="182" class="name">students</text>
+  <text x="200" y="204" class="type">학생</text>
+  <rect x="84" y="224" width="42" height="28" rx="8" class="pk-badge"/>
+  <text x="105" y="238" class="badge-text">PK</text>
+  <text x="146" y="245" class="field">id</text>
+  <text x="146" y="300" class="field">name</text>
+
+  <!-- enrollments -->
+  <g filter="url(#shadow)">
+    <rect x="460" y="110" width="280" height="290" rx="14" class="bridge-outline"/>
+    <path d="M460 124 Q460 110 474 110 H726 Q740 110 740 124 V180 H460 Z" class="bridge-head"/>
+    <line x1="460" y1="180" x2="740" y2="180" class="divider"/>
+    <line x1="460" y1="235" x2="740" y2="235" class="divider"/>
+    <line x1="460" y1="290" x2="740" y2="290" class="divider"/>
+    <line x1="460" y1="345" x2="740" y2="345" class="divider"/>
+  </g>
+  <text x="600" y="142" class="name">enrollments</text>
+  <text x="600" y="166" class="type">수강신청 연결 테이블</text>
+  <rect x="484" y="194" width="42" height="28" rx="8" class="pk-badge"/>
+  <text x="505" y="208" class="badge-text">PK</text>
+  <text x="546" y="215" class="field">id</text>
+  <rect x="484" y="249" width="42" height="28" rx="8" class="fk-badge"/>
+  <text x="505" y="263" class="badge-text">FK</text>
+  <text x="546" y="270" class="field">student_id</text>
+  <rect x="484" y="304" width="42" height="28" rx="8" class="fk-badge"/>
+  <text x="505" y="318" class="badge-text">FK</text>
+  <text x="546" y="325" class="field">course_id</text>
+  <text x="546" y="380" class="field">status</text>
+
+  <!-- courses -->
+  <g filter="url(#shadow)">
+    <rect x="860" y="150" width="280" height="170" rx="14" class="card-outline"/>
+    <path d="M860 164 Q860 150 874 150 H1126 Q1140 150 1140 164 V210 H860 Z" class="entity-head"/>
+    <line x1="860" y1="210" x2="1140" y2="210" class="divider"/>
+    <line x1="860" y1="265" x2="1140" y2="265" class="divider"/>
+  </g>
+  <text x="1000" y="182" class="name">courses</text>
+  <text x="1000" y="204" class="type">강의</text>
+  <rect x="884" y="224" width="42" height="28" rx="8" class="pk-badge"/>
+  <text x="905" y="238" class="badge-text">PK</text>
+  <text x="946" y="245" class="field">id</text>
+  <text x="946" y="300" class="field">title</text>
+
+  <!-- One line per relationship: FK -> referenced PK -->
+  <path d="M460 262.5 H404 V237.5 H340" class="ref"/>
+  <rect x="346" y="218" width="28" height="28" rx="8" class="cardinality-box"/>
+  <text x="360" y="232" class="cardinality">1</text>
+  <rect x="426" y="270" width="28" height="28" rx="8" class="cardinality-box"/>
+  <text x="440" y="284" class="cardinality">N</text>
+  <text x="400" y="326" class="ref-label">student_id</text>
+  <text x="400" y="350" class="ref-label">→ students.id</text>
+
+  <path d="M740 317.5 H796 V237.5 H860" class="ref"/>
+  <rect x="746" y="325" width="28" height="28" rx="8" class="cardinality-box"/>
+  <text x="760" y="339" class="cardinality">N</text>
+  <rect x="826" y="218" width="28" height="28" rx="8" class="cardinality-box"/>
+  <text x="840" y="232" class="cardinality">1</text>
+  <text x="800" y="366" class="ref-label">course_id</text>
+  <text x="800" y="390" class="ref-label">→ courses.id</text>
+
+  <rect x="346" y="424" width="508" height="46" rx="12" fill="#f5f0ff" stroke="#9d83cf" stroke-width="1.5"/>
+  <text x="600" y="453" class="bridge-note">enrollments 한 행 = 학생 한 명의 강의 신청 한 건</text>
+
+  <text x="600" y="505" class="direction-note">화살표는 외래키가 참조하는 기본키 방향을 나타낸다.</text>
+  <text x="600" y="554" class="bottom-note">기본키는 자신의 테이블에서 행을 식별하고,</text>
+  <text x="600" y="584" class="bottom-note">외래키는 다른 테이블의 기본키를 참조하여 관계를 만든다.</text>
+</svg>

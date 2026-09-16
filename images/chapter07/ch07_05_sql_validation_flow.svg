@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+<title id="title">샘플 데이터와 JOIN으로 설계 검증</title>
+<desc id="desc">건수와 JOIN 결과로 ERD가 요구사항을 설명하는지 확인한다</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker><style>
+text{font-family:"Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;fill:#0f172a} .title{font-size:28px;font-weight:700;text-anchor:middle} .sub{font-size:14px;fill:#475569;text-anchor:middle} .box{fill:#fff;stroke:#8bbcf6;stroke-width:2;rx:14} .green{stroke:#22a06b;fill:#f2fff8} .orange{stroke:#f59e0b;fill:#fff8eb} .purple{stroke:#8b5cf6;fill:#f7f3ff} .head{font-size:18px;font-weight:700;text-anchor:middle} .body{font-size:13.5px;text-anchor:middle;fill:#334155} .code{font-family:Consolas, D2Coding, "Courier New", monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8} .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)} .dash{stroke:#ef4444;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)} .tag{font-size:12px;font-weight:700;fill:#2563eb;text-anchor:middle} .pk{fill:#dbeafe;stroke:#2563eb;stroke-width:1.4} .fk{fill:#ffedd5;stroke:#f97316;stroke-width:1.4} .note{fill:#eefdf4;stroke:#22c55e;stroke-width:1.5;rx:12} .small{font-size:12.5px;text-anchor:middle;fill:#334155}
+</style></defs>
+<rect width="1200" height="460" fill="#ffffff"/>
+<text x="600" y="48" class="title">샘플 데이터와 JOIN으로 설계 검증</text>
+<text x="600" y="76" class="sub">건수와 JOIN 결과로 ERD가 요구사항을 설명하는지 확인한다</text>
+<rect x="70" y="145" width="170" height="135" class="box"/>
+<text x="155.0" y="177" class="head">테이블 생성</text>
+<text x="155.0" y="203" class="body">DROP · CREATE</text>
+<text x="155.0" y="225" class="body">제약조건</text>
+<rect x="275" y="145" width="170" height="135" class="box"/>
+<text x="360.0" y="177" class="head">기본 샘플</text>
+<text x="360.0" y="203" class="body">3 · 2 · 3 · 4</text>
+<text x="360.0" y="225" class="body">enrollments 4건</text>
+<rect x="480" y="145" width="170" height="135" class="orange"/>
+<text x="565.0" y="177" class="head">첫 JOIN</text>
+<text x="565.0" y="203" class="body">결과 4행</text>
+<text x="565.0" y="225" class="body">관계 확인</text>
+<rect x="685" y="145" width="170" height="135" class="orange"/>
+<text x="770.0" y="177" class="head">CRUD</text>
+<text x="770.0" y="203" class="body">신청 추가</text>
+<text x="770.0" y="225" class="body">상태 변경</text>
+<rect x="890" y="145" width="170" height="135" class="green"/>
+<text x="975.0" y="177" class="head">최종 확인</text>
+<text x="975.0" y="203" class="body">enrollments 5건</text>
+<text x="975.0" y="225" class="body">Chapter 08 기준</text>
+<path d="M240 212 L275 212" class="arrow"/>
+<path d="M445 212 L480 212" class="arrow"/>
+<path d="M650 212 L685 212" class="arrow"/>
+<path d="M855 212 L890 212" class="arrow"/>
+<rect x="335" y="340" width="530" height="58" class="note"/>
+<text x="600" y="374" class="head">첫 JOIN은 4행, 전체 SQL 실행 후 최종 JOIN은 5행이다</text>
+</svg>

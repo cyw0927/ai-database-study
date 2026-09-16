@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1160" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">다중 테이블 JOIN 경로와 결과 행 검산</title>
+  <desc id="desc">수강신청 한 건을 결과 한 행의 기준으로 정하고 enrollments에서 students와 courses로, courses에서 instructors로 이어지는 N대1 PK·FK 관계를 따라 JOIN하는 논리적 경로를 보여 준다. 모든 필수 외래키가 유효하고 각 외래키가 하나의 기본키를 참조할 때 원본 신청 5행이 INNER JOIN 뒤에도 5행으로 유지되는 이유와, 행 증가·감소 원인을 구분해 검산하는 방법을 설명한다.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .subtitle{font-size:15px;text-anchor:middle;fill:#475569}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .section{font-size:16px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;text-anchor:middle;fill:#334155}
+      .small{font-size:13px;text-anchor:middle;fill:#475569}
+      .tag{font-size:14px;font-weight:700;text-anchor:middle;fill:#ffffff}
+      .card{stroke-width:2;rx:14;ry:14}
+      .grain{fill:#fff7ed;stroke:#f97316}
+      .student{fill:#eff6ff;stroke:#3b82f6}
+      .enrollment{fill:#faf5ff;stroke:#8b5cf6}
+      .course{fill:#f0fdf4;stroke:#22c55e}
+      .instructor{fill:#ecfeff;stroke:#06b6d4}
+      .relation{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.6;rx:12;ry:12}
+      .source{fill:#f8fafc;stroke:#64748b}
+      .check{fill:#ecfdf5;stroke:#22c55e}
+      .increase{fill:#fff1f2;stroke:#e11d48}
+      .decrease{fill:#fff7ed;stroke:#f97316}
+      .note{fill:#fffbeb;stroke:#f59e0b}
+      .pk{fill:#1d4ed8;font-weight:700}
+      .fk{fill:#7c3aed;font-weight:700}
+      .line{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .connector{stroke:#94a3b8;stroke-width:1.8;fill:none;stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.3;stroke-dasharray:6 6}
+      .cardinality{font-size:14px;font-weight:700;text-anchor:middle;fill:#334155}
+    </style>
+  </defs>
+
+  <rect width="1200" height="1160" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="48" class="title">다중 테이블 JOIN 경로와 결과 행 검산</text>
+  <text x="600" y="78" class="subtitle">JOIN 문법보다 먼저 결과 한 행의 의미와 실제 PK·FK 관계를 고정합니다.</text>
+
+  <!-- Result grain and row-count premise -->
+  <rect x="90" y="102" width="1020" height="112" class="card grain"/>
+  <text x="600" y="135" class="head">결과 한 행의 기준: 수강신청 한 건</text>
+  <text x="600" y="165" class="body"><tspan class="mono">enrollments</tspan> 한 행에 학생·강의·강사 정보를 붙여도 결과 행의 의미는 바뀌지 않습니다.</text>
+  <text x="600" y="193" class="body">모든 필수 FK가 유효하고 각 FK가 하나의 PK를 참조하면 원본 5행 → INNER JOIN 결과 5행</text>
+
+  <!-- Logical relationship path -->
+  <text x="600" y="260" class="head">논리적 PK·FK JOIN 관계 경로</text>
+  <line x1="35" y1="280" x2="1165" y2="280" class="divider"/>
+
+  <rect x="35" y="315" width="220" height="180" class="card student"/>
+  <text x="145" y="350" class="head">students s</text>
+  <text x="145" y="385" class="mono section pk">PK id</text>
+  <text x="145" y="420" class="mono body">name</text>
+  <text x="145" y="460" class="small">학생 정보</text>
+
+  <rect x="305" y="295" width="285" height="220" class="card enrollment"/>
+  <circle cx="337" cy="327" r="17" fill="#8b5cf6"/>
+  <text x="337" y="332" class="tag">기준</text>
+  <text x="447.5" y="350" class="head">enrollments e</text>
+  <text x="447.5" y="385" class="mono section pk">PK id</text>
+  <text x="447.5" y="420" class="mono section fk">FK student_id</text>
+  <text x="447.5" y="452" class="mono section fk">FK course_id</text>
+  <text x="447.5" y="480" class="mono body">status · recorded_amount</text>
+  <text x="447.5" y="505" class="mono body">enrolled_at</text>
+
+  <rect x="640" y="315" width="220" height="180" class="card course"/>
+  <text x="750" y="350" class="head">courses c</text>
+  <text x="750" y="385" class="mono section pk">PK id</text>
+  <text x="750" y="420" class="mono section fk">FK instructor_id</text>
+  <text x="750" y="455" class="mono body">title</text>
+
+  <rect x="910" y="315" width="255" height="180" class="card instructor"/>
+  <text x="1037.5" y="350" class="head">instructors i</text>
+  <text x="1037.5" y="385" class="mono section pk">PK id</text>
+  <text x="1037.5" y="420" class="mono body">name</text>
+  <text x="1037.5" y="460" class="small">강사 정보</text>
+
+  <!-- N:1 logical links; numbers removed to avoid execution-order confusion -->
+  <path d="M305 418 H255" class="line"/>
+  <text x="280" y="394" class="cardinality">N → 1</text>
+  <text x="280" y="445" class="small">FK → PK</text>
+
+  <path d="M590 452 H640" class="line"/>
+  <text x="615" y="428" class="cardinality">N → 1</text>
+  <text x="615" y="479" class="small">FK → PK</text>
+
+  <path d="M860 418 H910" class="line"/>
+  <text x="885" y="394" class="cardinality">N → 1</text>
+  <text x="885" y="445" class="small">FK → PK</text>
+
+  <!-- Exact join predicates -->
+  <rect x="35" y="545" width="350" height="78" class="relation"/>
+  <text x="210" y="575" class="mono section"><tspan class="fk">e.student_id</tspan> = <tspan class="pk">s.id</tspan></text>
+  <text x="210" y="602" class="small">수강신청 N건이 학생 1명씩 참조</text>
+
+  <rect x="425" y="545" width="350" height="78" class="relation"/>
+  <text x="600" y="575" class="mono section"><tspan class="fk">e.course_id</tspan> = <tspan class="pk">c.id</tspan></text>
+  <text x="600" y="602" class="small">수강신청 N건이 강의 1개씩 참조</text>
+
+  <rect x="815" y="545" width="350" height="78" class="relation"/>
+  <text x="990" y="575" class="mono section"><tspan class="fk">c.instructor_id</tspan> = <tspan class="pk">i.id</tspan></text>
+  <text x="990" y="602" class="small">강의 N개가 강사 1명씩 참조</text>
+
+  <!-- Output-column provenance -->
+  <path d="M600 623 V655" class="connector"/>
+  <text x="600" y="685" class="head">SELECT 결과 컬럼의 출처</text>
+  <line x1="35" y1="705" x2="1165" y2="705" class="divider"/>
+
+  <rect x="35" y="725" width="260" height="116" class="card source"/>
+  <text x="165" y="758" class="head">enrollments</text>
+  <text x="165" y="789" class="mono body">enrollment_id · status</text>
+  <text x="165" y="816" class="mono body">recorded_amount · enrolled_at</text>
+
+  <rect x="325" y="725" width="260" height="116" class="card source"/>
+  <text x="455" y="758" class="head">students</text>
+  <text x="455" y="792" class="mono body">student_name</text>
+  <text x="455" y="818" class="small">같은 학생이 여러 신청에서 반복 가능</text>
+
+  <rect x="615" y="725" width="260" height="116" class="card source"/>
+  <text x="745" y="758" class="head">courses</text>
+  <text x="745" y="792" class="mono body">course_title</text>
+  <text x="745" y="818" class="small">신청이 참조한 강의 정보</text>
+
+  <rect x="905" y="725" width="260" height="116" class="card source"/>
+  <text x="1035" y="758" class="head">instructors</text>
+  <text x="1035" y="792" class="mono body">instructor_name</text>
+  <text x="1035" y="818" class="small">courses를 거쳐 연결된 강사 정보</text>
+
+  <!-- Validation: normal, increase, decrease -->
+  <text x="600" y="890" class="head">JOIN 결과 행 수 검산</text>
+  <line x1="35" y1="910" x2="1165" y2="910" class="divider"/>
+
+  <rect x="35" y="930" width="350" height="142" class="card check"/>
+  <text x="210" y="964" class="head">정상 결과</text>
+  <text x="210" y="994" class="mono body">enrollments 5행 → JOIN 결과 5행</text>
+  <text x="210" y="1022" class="body">같은 학생의 반복은 여러 신청을 가진 정상적인 1:N 결과</text>
+  <text x="210" y="1050" class="small">결과 한 행이 여전히 수강신청 한 건인지 확인</text>
+
+  <rect x="425" y="930" width="350" height="142" class="card increase"/>
+  <text x="600" y="964" class="head">행 수가 증가하면</text>
+  <text x="600" y="994" class="body">잘못된 JOIN 조건 · 고유하지 않은 컬럼 연결</text>
+  <text x="600" y="1022" class="body">의도하지 않은 N:M 관계 또는 키 중복 확인</text>
+  <text x="600" y="1050" class="small">원인을 모른 채 <tspan class="mono">DISTINCT</tspan>로 숨기지 않음</text>
+
+  <rect x="815" y="930" width="350" height="142" class="card decrease"/>
+  <text x="990" y="964" class="head">행 수가 감소하면</text>
+  <text x="990" y="994" class="body">INNER JOIN에서 연결되지 않은 행이 제외되었는지 확인</text>
+  <text x="990" y="1022" class="body">JOIN 조건·필터·NULL·누락된 참조 점검</text>
+  <text x="990" y="1050" class="small">원본 기준 행이 어느 단계에서 사라졌는지 추적</text>
+
+  <!-- Logical versus physical order note -->
+  <rect x="120" y="1095" width="960" height="52" class="card note"/>
+  <text x="600" y="1127" class="body">주의: 화살표는 SQL 작성의 논리적 관계 경로이며, 실제 물리적 JOIN 순서는 DBMS 실행 계획이 결정합니다.</text>
+</svg>

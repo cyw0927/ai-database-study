@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+  <title id="title">로컬 PostgreSQL과 클라우드 PostgreSQL 연결 구조</title>
+  <desc id="desc">사용자 컴퓨터 안에서 PostgreSQL 서버가 실행되는 로컬 환경과 인터넷을 통해 관리형 PostgreSQL 서버에 연결하는 클라우드 환경의 차이</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .panel{fill:#f8fafc;stroke:#94a3b8;stroke-width:2}
+      .pc{fill:#fff;stroke:#64748b;stroke-width:2}
+      .dbeaver{fill:#eef5ff;stroke:#3174d0;stroke-width:2}
+      .pg{fill:#eef9f1;stroke:#2f9a58;stroke-width:2}
+      .cloud{fill:#f5f0ff;stroke:#7c4dcb;stroke-width:2}
+      .name{font-size:20px;font-weight:700;text-anchor:middle}
+      .sub{font-size:14px;text-anchor:middle;fill:#475569}
+      .mono{font-size:15px;font-weight:700;text-anchor:middle;font-family:Consolas,D2Coding,"Courier New",monospace;fill:#0f2d5c}
+      .line{stroke:#475569;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .note{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="660" fill="#fff"/>
+  <text x="600" y="48" class="title">로컬 PostgreSQL과 클라우드 PostgreSQL 연결 구조</text>
+
+  <rect x="70" y="95" width="500" height="395" rx="18" class="panel"/>
+  <text x="320" y="132" class="name">로컬 환경</text>
+  <rect x="145" y="165" width="350" height="230" rx="16" class="pc"/>
+  <text x="320" y="198" class="name">사용자 컴퓨터</text>
+  <rect x="185" y="235" width="270" height="58" rx="12" class="dbeaver"/>
+  <text x="320" y="271" class="name">DBeaver</text>
+  <rect x="185" y="322" width="270" height="58" rx="12" class="pg"/>
+  <text x="320" y="358" class="name">PostgreSQL 서버</text>
+  <path d="M320 293V322" class="line"/>
+  <text x="320" y="440" class="mono">localhost : 5432</text>
+
+  <rect x="630" y="95" width="500" height="395" rx="18" class="panel"/>
+  <text x="880" y="132" class="name">클라우드 환경</text>
+  <rect x="690" y="165" width="220" height="135" rx="16" class="pc"/>
+  <text x="800" y="198" class="name">사용자 컴퓨터</text>
+  <rect x="720" y="232" width="160" height="52" rx="12" class="dbeaver"/>
+  <text x="800" y="265" class="name">DBeaver</text>
+  <rect x="945" y="220" width="145" height="80" rx="12" class="cloud"/>
+  <text x="1018" y="250" class="name">관리형</text>
+  <text x="1018" y="275" class="name">PostgreSQL</text>
+  <path d="M880 258H945" class="line"/>
+  <text x="912" y="214" class="sub">인터넷·SSL</text>
+  <text x="880" y="440" class="sub">서비스에서 제공한 Host와 계정 사용</text>
+
+  <rect x="160" y="535" width="880" height="56" rx="18" fill="#fffceb" stroke="#d6a600" stroke-width="2"/>
+  <text x="600" y="558" class="note">SQL과 관계형 DB 개념은 동일하며, 서버가 실행되는 위치와 연결 정보가 다르다.</text>
+  <text x="600" y="582" class="sub">설치 권한·오프라인 학습은 로컬, 여러 기기·원격 서비스 연결은 클라우드를 검토한다.</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 680" role="img" aria-labelledby="title desc">
+<title id="title">PostgreSQL 기본 계층</title><desc id="desc">PostgreSQL 서버 안에 데이터베이스, 그 안에 스키마, 데이터베이스 객체, 테이블, 행과 열이 포함되는 여섯 단계 계층</desc>
+<style>text{font-family:"Malgun Gothic",sans-serif;fill:#172033}.title{font-size:34px;font-weight:800;text-anchor:middle}.box{stroke-width:4;rx:16}.name{font-size:25px;font-weight:800}.note{font-size:17px;fill:#526171}.n{font-size:18px;font-weight:800;fill:#fff;text-anchor:middle;dominant-baseline:middle}.line{stroke:#526171;stroke-width:3;stroke-dasharray:8 6}.table{fill:#fff7e8;stroke:#d97706}</style>
+<rect width="1400" height="680" fill="#fff"/><text x="700" y="48" class="title">PostgreSQL 서버에서 행과 열까지</text>
+<rect x="55" y="85" width="1290" height="535" fill="#eef5ff" stroke="#155eef" class="box"/><circle cx="85" cy="115" r="19" fill="#155eef"/><text x="85" y="115" class="n">1</text><text x="115" y="123" class="name">PostgreSQL 서버</text>
+<rect x="120" y="150" width="1160" height="420" fill="#f5f8fc" stroke="#4d86d7" class="box"/><circle cx="150" cy="180" r="19" fill="#315f9d"/><text x="150" y="180" class="n">2</text><text x="180" y="188" class="name">데이터베이스</text>
+<rect x="190" y="215" width="1020" height="305" fill="#f6f0ff" stroke="#7950b7" class="box"/><circle cx="220" cy="245" r="19" fill="#7950b7"/><text x="220" y="245" class="n">3</text><text x="250" y="253" class="name">스키마</text>
+<rect x="270" y="280" width="860" height="190" fill="#fff" stroke="#64748b" class="box"/><circle cx="300" cy="310" r="19" fill="#475569"/><text x="300" y="310" class="n">4</text><text x="330" y="318" class="name">데이터베이스 객체</text><text x="560" y="318" class="note">테이블 · 뷰 · 시퀀스 · 함수</text>
+<rect x="360" y="345" width="390" height="85" class="box table"/><circle cx="390" cy="375" r="19" fill="#d97706"/><text x="390" y="375" class="n">5</text><text x="420" y="386" class="name">테이블</text><text x="565" y="386" class="note">이번 장의 중심 객체</text>
+<rect x="800" y="345" width="270" height="85" fill="#effaf3" stroke="#16834a" class="box"/><circle cx="830" cy="375" r="19" fill="#16834a"/><text x="830" y="375" class="n">6</text><text x="865" y="386" class="name">행과 열</text>
+<path d="M750 387H800" class="line"/><text x="700" y="660" class="title" style="font-size:25px">현재 어느 서버·데이터베이스·스키마의 어떤 객체를 보는지 확인합니다.</text>
+</svg>

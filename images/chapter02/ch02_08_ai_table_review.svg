@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 650" role="img" aria-labelledby="title desc">
+<title id="title">AI 테이블 구조 검토 다섯 질문</title><desc id="desc">AI가 만든 테이블을 사람이 한 행의 의미, 기본키, 참조, 데이터 혼합, 타입과 필수 여부 순서로 검토하는 다섯 질문</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#155eef"/></marker><style>text{font-family:"Malgun Gothic",sans-serif;fill:#172033}.title{font-size:34px;font-weight:800;text-anchor:middle}.box{fill:#fff;stroke:#94a3b8;stroke-width:3}.current{fill:#fff7e8;stroke:#d97706}.name{font-size:22px;font-weight:800;text-anchor:middle}.sub{font-size:16px;text-anchor:middle;fill:#526171}.line{stroke:#155eef;stroke-width:4;fill:none;marker-end:url(#a)}.num{fill:#155eef}.nt{fill:#fff;font-size:20px;font-weight:800;text-anchor:middle;dominant-baseline:middle}.note{font-size:23px;font-weight:800;text-anchor:middle;fill:#0f2d5c}</style></defs>
+<rect width="1400" height="650" fill="#fff"/><text x="700" y="55" class="title">AI가 만든 구조는 다섯 질문으로 먼저 검토합니다</text>
+<g><rect x="35" y="170" width="240" height="190" rx="14" class="box current"/><circle cx="155" cy="150" r="27" class="num"/><text x="155" y="150" class="nt">1</text><text x="155" y="225" class="name">한 행의 의미</text><text x="155" y="270" class="sub">이 테이블의 한 행은</text><text x="155" y="298" class="sub">무엇을 나타내는가?</text></g>
+<path d="M275 265H310" class="line"/>
+<g><rect x="315" y="170" width="240" height="190" rx="14" class="box"/><circle cx="435" cy="150" r="27" class="num"/><text x="435" y="150" class="nt">2</text><text x="435" y="225" class="name">기본키</text><text x="435" y="270" class="sub">각 행을 구분할</text><text x="435" y="298" class="sub">기본키가 있는가?</text></g>
+<path d="M555 265H590" class="line"/>
+<g><rect x="595" y="170" width="240" height="190" rx="14" class="box"/><circle cx="715" cy="150" r="27" class="num"/><text x="715" y="150" class="nt">3</text><text x="715" y="225" class="name">다른 행 참조</text><text x="715" y="270" class="sub">다른 테이블을 참조할</text><text x="715" y="298" class="sub">값은 무엇인가?</text></g>
+<path d="M835 265H870" class="line"/>
+<g><rect x="875" y="170" width="240" height="190" rx="14" class="box"/><circle cx="995" cy="150" r="27" class="num"/><text x="995" y="150" class="nt">4</text><text x="995" y="225" class="name">데이터 혼합</text><text x="995" y="270" class="sub">서로 다른 성격이</text><text x="995" y="298" class="sub">섞이지 않았는가?</text></g>
+<path d="M1115 265H1150" class="line"/>
+<g><rect x="1155" y="170" width="210" height="190" rx="14" class="box"/><circle cx="1260" cy="150" r="27" class="num"/><text x="1260" y="150" class="nt">5</text><text x="1260" y="225" class="name">타입과 필수 여부</text><text x="1260" y="270" class="sub">값의 의미와 규칙에</text><text x="1260" y="298" class="sub">맞는가?</text></g>
+<rect x="190" y="430" width="1020" height="100" rx="14" fill="#e8f0ff" stroke="#155eef" stroke-width="3"/><text x="700" y="475" class="note">문법적으로 실행되어도 구조가 올바르다는 뜻은 아닙니다.</text><text x="700" y="510" class="sub" style="font-size:19px">AI는 초안을 만들고, 사람은 업무 의미와 연결 규칙을 검증합니다.</text>
+</svg>

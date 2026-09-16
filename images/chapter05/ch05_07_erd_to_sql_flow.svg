@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">ERD를 PostgreSQL 테이블로 변환하기</title>
+  <desc id="desc">ERD 요소를 PostgreSQL DDL 후보로 바꾸고, 확정된 규칙만 제약조건으로 적용하며, 부모 테이블부터 생성한 뒤 샘플 데이터와 JOIN으로 검증한다.</desc>
+  <style>
+    text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#1f2937}
+    .t{font-size:32px;font-weight:700}.s{font-size:15px;fill:#4b5563}.h{font-size:18px;font-weight:700}.b{font-size:14px}
+    .box{stroke:#64748b;stroke-width:2;rx:14}.e{fill:#eaf3ff}.r{fill:#f2ecff}.a{fill:#ecf9ef}.q{fill:#fff6d8}
+    .line{stroke:#475569;stroke-width:2;fill:none}
+  </style>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>
+  <rect width="1200" height="600" fill="#fff"/>
+  <text x="600" y="45" text-anchor="middle" class="t">ERD를 PostgreSQL 테이블로 변환하기</text>
+  <text x="600" y="75" text-anchor="middle" class="s">관계는 FOREIGN KEY 후보가 되고, 확정된 업무 규칙만 제약조건으로 적용합니다.</text>
+  <rect x="40" y="145" width="230" height="300" class="box e"/>
+  <text x="155" y="190" text-anchor="middle" class="h">ERD</text>
+  <text x="155" y="250" text-anchor="middle" class="b">members 1 ─ N loans</text>
+  <text x="155" y="290" text-anchor="middle" class="b">loans N ─ 1 books</text>
+  <rect x="315" y="125" width="310" height="340" class="box r"/>
+  <text x="470" y="170" text-anchor="middle" class="h">요소 변환</text>
+  <text x="470" y="220" text-anchor="middle" class="b">엔터티 → CREATE TABLE 후보</text>
+  <text x="470" y="255" text-anchor="middle" class="b">속성 → 열 + 타입</text>
+  <text x="470" y="290" text-anchor="middle" class="b">식별자 → PRIMARY KEY</text>
+  <text x="470" y="325" text-anchor="middle" class="b">관계 → FOREIGN KEY</text>
+  <text x="470" y="360" text-anchor="middle" class="b">필수값 → NOT NULL 후보</text>
+  <text x="470" y="395" text-anchor="middle" class="b">확정된 고유값 → UNIQUE 후보</text>
+  <rect x="690" y="145" width="210" height="300" class="box a"/>
+  <text x="795" y="190" text-anchor="middle" class="h">생성 순서</text>
+  <text x="795" y="250" text-anchor="middle" class="b">1. public.members</text>
+  <text x="795" y="290" text-anchor="middle" class="b">2. public.books</text>
+  <text x="795" y="330" text-anchor="middle" class="b">3. public.loans</text>
+  <rect x="960" y="175" width="190" height="240" class="box q"/>
+  <text x="1055" y="220" text-anchor="middle" class="h">검증</text>
+  <text x="1055" y="275" text-anchor="middle" class="b">샘플 데이터</text>
+  <text x="1055" y="315" text-anchor="middle" class="b">JOIN 결과</text>
+  <text x="1055" y="355" text-anchor="middle" class="b">요구사항 추적</text>
+  <line x1="270" y1="295" x2="315" y2="295" class="line" marker-end="url(#ar)"/>
+  <line x1="625" y1="295" x2="690" y2="295" class="line" marker-end="url(#ar)"/>
+  <line x1="900" y1="295" x2="960" y2="295" class="line" marker-end="url(#ar)"/>
+  <rect x="260" y="515" width="680" height="50" class="box a"/>
+  <text x="600" y="546" text-anchor="middle" class="b">SQL 실행 성공 후에도 미확정 정책과 샘플 상태가 요구사항에 맞는지 다시 확인합니다.</text>
+</svg>

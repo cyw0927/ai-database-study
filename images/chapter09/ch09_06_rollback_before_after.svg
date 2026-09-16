@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">ROLLBACK 전후 상태 비교</title>
+  <desc id="desc">transaction_lab에서 course 302의 잔여 좌석과 enrollment 9002, payment 9902를 트랜잭션 내부에서 임시 변경한 뒤, 외부 결제 승인 실패를 가정하여 ROLLBACK하면 좌석은 1로 돌아가고 9002와 9902는 저장되지 않으며 이전에 COMMIT된 데이터는 유지되는 과정을 보여 주는 도식</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#475569" />
+    </marker>
+  </defs>
+
+  <style>
+    text {
+      font-family: "Malgun Gothic", "NanumSquare", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Noto Sans KR", "UnDotum", Arial, sans-serif;
+      fill: #1f2937;
+    }
+    .mono {
+      font-family: Consolas, D2Coding, "Noto Sans Mono CJK KR", Menlo, monospace;
+    }
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      text-anchor: middle;
+      fill: #0f2d5c;
+    }
+    .subtitle {
+      font-size: 19px;
+      text-anchor: middle;
+      fill: #4b5563;
+    }
+    .card {
+      stroke-width: 2.2;
+      rx: 16;
+      ry: 16;
+    }
+    .start {
+      fill: #eaf3ff;
+      stroke: #3b82f6;
+    }
+    .inside {
+      fill: #fff6d8;
+      stroke: #f59e0b;
+    }
+    .after {
+      fill: #eaf8ee;
+      stroke: #22a06b;
+    }
+    .failure {
+      fill: #fff1f2;
+      stroke: #ef4444;
+      stroke-width: 2;
+      rx: 12;
+    }
+    .check {
+      fill: #f8fafc;
+      stroke: #64748b;
+      stroke-width: 2;
+      rx: 12;
+    }
+    .head {
+      font-size: 24px;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+    .badge {
+      font-size: 17px;
+      font-weight: 700;
+      text-anchor: middle;
+      fill: #ffffff;
+    }
+    .badge-bg {
+      fill: #f97316;
+      rx: 8;
+    }
+    .label {
+      font-size: 18px;
+      fill: #334155;
+    }
+    .value {
+      font-size: 21px;
+      font-weight: 700;
+      text-anchor: end;
+      fill: #0f172a;
+    }
+    .row-line {
+      stroke: #cbd5e1;
+      stroke-width: 1.3;
+    }
+    .arrow {
+      stroke: #475569;
+      stroke-width: 2.6;
+      fill: none;
+      marker-end: url(#arrow);
+    }
+    .flow-label {
+      font-size: 18px;
+      font-weight: 700;
+      text-anchor: middle;
+      fill: #0f172a;
+    }
+    .flow-small {
+      font-size: 17px;
+      text-anchor: middle;
+      fill: #475569;
+    }
+    .bottom {
+      font-size: 21px;
+      font-weight: 700;
+      text-anchor: middle;
+      fill: #0f2d5c;
+    }
+    .bottom-small {
+      font-size: 18px;
+      text-anchor: middle;
+      fill: #334155;
+    }
+  </style>
+
+  <rect width="1200" height="820" fill="#ffffff" />
+  <text x="600" y="48" class="title">ROLLBACK 전후 상태 비교</text>
+  <text x="600" y="82" class="subtitle">transaction_lab 대상 변경 비교 · 같은 SQL Editor와 같은 연결 세션에서 실행</text>
+
+  <!-- Before transaction -->
+  <g transform="translate(45 145)">
+    <rect width="340" height="320" class="card start" />
+    <text x="170" y="45" class="head">트랜잭션 시작 전</text>
+    <text x="170" y="76" class="flow-small">변경 전 SELECT 확인</text>
+
+    <line x1="26" y1="102" x2="314" y2="102" class="row-line" />
+    <text x="34" y="138" class="label mono">course 302</text>
+    <text x="34" y="162" class="label mono">remaining_seats</text>
+    <text x="300" y="154" class="value">1</text>
+
+    <line x1="26" y1="190" x2="314" y2="190" class="row-line" />
+    <text x="34" y="232" class="label mono">enrollment 9002</text>
+    <text x="300" y="232" class="value">없음</text>
+
+    <line x1="26" y1="260" x2="314" y2="260" class="row-line" />
+    <text x="34" y="302" class="label mono">payment 9902</text>
+    <text x="300" y="302" class="value">없음</text>
+  </g>
+
+  <!-- In transaction -->
+  <g transform="translate(430 145)">
+    <rect width="340" height="340" class="card inside" />
+    <text x="170" y="42" class="head">트랜잭션 내부</text>
+    <text x="170" y="70" class="flow-small">같은 세션에서 보이는 미확정 상태</text>
+    <rect x="90" y="86" width="160" height="30" class="badge-bg" />
+    <text x="170" y="108" class="badge">미확정 · COMMIT 전</text>
+
+    <line x1="26" y1="126" x2="314" y2="126" class="row-line" />
+    <text x="34" y="162" class="label mono">course 302</text>
+    <text x="34" y="186" class="label mono">remaining_seats</text>
+    <text x="300" y="178" class="value">0</text>
+
+    <line x1="26" y1="214" x2="314" y2="214" class="row-line" />
+    <text x="34" y="256" class="label mono">enrollment 9002</text>
+    <text x="300" y="256" class="value">임시 존재</text>
+
+    <line x1="26" y1="284" x2="314" y2="284" class="row-line" />
+    <text x="34" y="326" class="label mono">payment 9902</text>
+    <text x="300" y="326" class="value">임시 존재</text>
+  </g>
+
+  <!-- After rollback -->
+  <g transform="translate(815 145)">
+    <rect width="340" height="320" class="card after" />
+    <text x="170" y="45" class="head">ROLLBACK 후</text>
+    <text x="170" y="76" class="flow-small">원상 복구 확인</text>
+
+    <line x1="26" y1="102" x2="314" y2="102" class="row-line" />
+    <text x="34" y="138" class="label mono">course 302</text>
+    <text x="34" y="162" class="label mono">remaining_seats</text>
+    <text x="300" y="154" class="value">1</text>
+
+    <line x1="26" y1="190" x2="314" y2="190" class="row-line" />
+    <text x="34" y="232" class="label mono">enrollment 9002</text>
+    <text x="300" y="232" class="value">없음</text>
+
+    <line x1="26" y1="260" x2="314" y2="260" class="row-line" />
+    <text x="34" y="302" class="label mono">payment 9902</text>
+    <text x="300" y="302" class="value">없음</text>
+  </g>
+
+  <!-- Flow labels -->
+  <path d="M385 305 L425 305" class="arrow" />
+  <text x="405" y="254" class="flow-label">BEGIN</text>
+  <text x="405" y="278" class="flow-small">변경 SQL 실행</text>
+
+  <path d="M770 305 L810 305" class="arrow" />
+  <rect x="690" y="485" width="260" height="58" class="failure" />
+  <text x="820" y="508" class="flow-label">외부 결제 승인 실패 가정</text>
+  <text x="820" y="532" class="flow-label mono">명시적 ROLLBACK;</text>
+
+  <!-- Verification -->
+  <g>
+    <rect x="150" y="585" width="900" height="84" class="check" />
+    <text x="600" y="616" class="bottom">ROLLBACK 후 SELECT 확인: 좌석 1 · 신청 9002 없음 · 결제 9902 없음</text>
+    <text x="600" y="646" class="bottom-small">SELECT는 ROLLBACK 후 상태를 검증하며, ROLLBACK을 수행하는 명령이 아니다.</text>
+  </g>
+
+  <text x="600" y="725" class="bottom">현재 트랜잭션의 9002·9902와 좌석 변경만 취소된다.</text>
+  <text x="600" y="757" class="bottom-small">이전에 COMMIT된 enrollment 9001과 payment 9901은 그대로 유지된다.</text>
+</svg>

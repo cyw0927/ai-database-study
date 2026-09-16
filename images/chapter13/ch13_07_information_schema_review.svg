@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">예상 설계와 실제 메타데이터 비교</title>
+  <desc id="desc">예상 설계 기준을 정리하고 실습 데이터베이스를 생성한 뒤 information_schema와 pg_indexes에서 테이블, 컬럼, 제약조건과 인덱스를 조회해 항목별로 비교하고 검증 완료 또는 DDL 수정과 재생성으로 결정하는 직각 흐름도</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      text{font-family:"NanumSquare","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR","UnDotum",Arial,sans-serif;fill:#1f2937}
+      .mono{font-family:"Noto Sans Mono CJK KR","NanumSquare",Consolas,D2Coding,"Courier New",monospace}
+      .title{font-size:28px;font-weight:700;text-anchor:middle}
+      .subtitle{font-size:14px;fill:#4b5563;text-anchor:middle}
+      .head{font-size:17px;font-weight:700;text-anchor:middle}
+      .body{font-size:13.5px;text-anchor:middle;fill:#334155}
+      .small{font-size:12px;text-anchor:middle;fill:#475569}
+      .source{font-size:11.5px;text-anchor:middle;fill:#1d4ed8}
+      .step{font-size:12px;font-weight:700;fill:#ffffff;text-anchor:middle}
+      .label{font-size:12px;font-weight:700;text-anchor:middle}
+      .yes{fill:#15803d}
+      .no{fill:#b45309}
+      .box{stroke-width:1.8;rx:14;ry:14}
+      .plan{fill:#eaf3ff;stroke:#2563eb}
+      .build{fill:#fff0dc;stroke:#f59e0b}
+      .query{fill:#f3edff;stroke:#8b5cf6}
+      .compare{fill:#eaf8ee;stroke:#16a34a}
+      .group{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.5;rx:16;ry:16}
+      .source-box{fill:#ffffff;stroke:#94a3b8;stroke-width:1.4;rx:10;ry:10}
+      .decision{fill:#ffffff;stroke:#2563eb}
+      .success{fill:#eaf8ee;stroke:#16a34a}
+      .revise{fill:#fff7ed;stroke:#f97316}
+      .note{fill:#fff6d8;stroke:#ca8a04;stroke-width:1.5;rx:14;ry:14}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow);stroke-linejoin:round}
+      .connector{stroke:#475569;stroke-width:2;fill:none;stroke-linejoin:round}
+      .divider{stroke:#cbd5e1;stroke-width:1.4;stroke-dasharray:6 6}
+    </style>
+  </defs>
+
+  <rect width="1200" height="900" fill="#ffffff"/>
+  <text x="600" y="45" class="title">예상 설계와 실제 메타데이터 비교</text>
+  <text x="600" y="72" class="subtitle">SQL 파일의 의도와 실제로 생성된 데이터베이스 구조를 같은 항목으로 비교합니다.</text>
+
+  <!-- Horizontal workflow -->
+  <rect x="35" y="110" width="250" height="110" class="box plan"/>
+  <circle cx="65" cy="140" r="15" fill="#2563eb"/>
+  <text x="65" y="145" class="step">1</text>
+  <text x="160" y="146" class="head">예상 설계 기준 정리</text>
+  <text x="160" y="177" class="body">테이블·컬럼·타입·NULL 허용</text>
+  <text x="160" y="201" class="small">PK·FK·UNIQUE·CHECK·인덱스</text>
+
+  <rect x="325" y="110" width="250" height="110" class="box build"/>
+  <circle cx="355" cy="140" r="15" fill="#f59e0b"/>
+  <text x="355" y="145" class="step">2</text>
+  <text x="450" y="146" class="head">실습 DB 생성</text>
+  <text x="450" y="177" class="body">DDL 실행 또는 DB 초기화</text>
+  <text x="450" y="201" class="small">동일한 실행 순서와 환경 사용</text>
+
+  <rect x="615" y="110" width="250" height="110" class="box query"/>
+  <circle cx="645" cy="140" r="15" fill="#8b5cf6"/>
+  <text x="645" y="145" class="step">3</text>
+  <text x="740" y="146" class="head">실제 메타데이터 조회</text>
+  <text x="740" y="177" class="mono body">information_schema</text>
+  <text x="740" y="201" class="mono small">+ pg_indexes</text>
+
+  <rect x="905" y="110" width="250" height="110" class="box compare"/>
+  <circle cx="935" cy="140" r="15" fill="#16a34a"/>
+  <text x="935" y="145" class="step">4</text>
+  <text x="1030" y="146" class="head">항목별 비교</text>
+  <text x="1030" y="177" class="body">예상값과 실제 조회 결과 대조</text>
+  <text x="1030" y="201" class="small">누락·타입·정의·순서 확인</text>
+
+  <path d="M285 165 H325" class="line"/>
+  <path d="M575 165 H615" class="line"/>
+  <path d="M865 165 H905" class="line"/>
+
+  <!-- Review matrix -->
+  <text x="600" y="270" class="head">검토 항목과 증거 조회 위치</text>
+  <line x1="35" y1="288" x2="1165" y2="288" class="divider"/>
+
+  <rect x="35" y="310" width="270" height="250" class="group"/>
+  <text x="170" y="347" class="head">테이블</text>
+  <text x="170" y="379" class="body">이름·스키마·개수</text>
+  <text x="170" y="405" class="small">예상 테이블이 모두 생성됐는가?</text>
+  <rect x="60" y="440" width="220" height="76" class="source-box"/>
+  <text x="170" y="468" class="source mono">information_schema.tables</text>
+  <text x="170" y="495" class="small">table_schema · table_name</text>
+  <text x="170" y="540" class="small">존재 여부만으로 전체 검증을 끝내지 않음</text>
+
+  <rect x="325" y="310" width="270" height="250" class="group"/>
+  <text x="460" y="347" class="head">컬럼</text>
+  <text x="460" y="379" class="body">이름·타입·NULL 허용·기본값</text>
+  <text x="460" y="405" class="small">DDL 의도와 실제 속성이 같은가?</text>
+  <rect x="350" y="440" width="220" height="76" class="source-box"/>
+  <text x="460" y="468" class="source mono">information_schema.columns</text>
+  <text x="460" y="495" class="small">data_type · is_nullable · default</text>
+  <text x="460" y="540" class="small">문자 길이와 identity 속성도 함께 확인</text>
+
+  <rect x="615" y="310" width="270" height="250" class="group"/>
+  <text x="750" y="347" class="head">제약조건</text>
+  <text x="750" y="379" class="body">PK·FK·UNIQUE·CHECK</text>
+  <text x="750" y="405" class="small">이름·대상 컬럼·참조·조건식 확인</text>
+  <rect x="640" y="432" width="220" height="92" class="source-box"/>
+  <text x="750" y="458" class="source mono">table_constraints</text>
+  <text x="750" y="480" class="source mono">key_column_usage</text>
+  <text x="750" y="502" class="source mono">check_constraints</text>
+  <text x="750" y="540" class="small">FK 참조 대상과 CHECK 정의까지 대조</text>
+
+  <rect x="905" y="310" width="260" height="250" class="group"/>
+  <text x="1035" y="347" class="head">인덱스</text>
+  <text x="1035" y="379" class="body">이름·컬럼 순서·조건·정의</text>
+  <text x="1035" y="405" class="small">자동·수동 인덱스가 의도와 같은가?</text>
+  <rect x="930" y="440" width="210" height="76" class="source-box"/>
+  <text x="1035" y="468" class="source mono">pg_indexes</text>
+  <text x="1035" y="495" class="small">indexname · indexdef</text>
+  <text x="1035" y="540" class="small">복합 인덱스 순서와 부분 조건 확인</text>
+
+  <!-- Decision and outcomes -->
+  <path d="M600 560 V600" class="line"/>
+  <rect x="270" y="600" width="660" height="86" class="box decision"/>
+  <text x="600" y="634" class="head">예상 설계와 실제 구조가</text>
+  <text x="600" y="662" class="head">모든 검토 항목에서 일치하는가?</text>
+
+  <path d="M600 686 V715" class="connector"/>
+  <path d="M600 715 H275 V740" class="line"/>
+  <path d="M600 715 H925 V740" class="line"/>
+  <text x="420" y="708" class="label no">불일치</text>
+  <text x="780" y="708" class="label yes">일치</text>
+
+  <rect x="60" y="740" width="430" height="78" class="box revise"/>
+  <text x="275" y="771" class="head">DDL 수정·DB 재생성</text>
+  <text x="275" y="799" class="body">같은 메타데이터 조회 SQL로 다시 비교</text>
+
+  <rect x="710" y="740" width="430" height="78" class="box success"/>
+  <text x="925" y="771" class="head">검증 완료</text>
+  <text x="925" y="799" class="body">조회 SQL·결과·판단 근거를 증거로 기록</text>
+
+  <rect x="170" y="840" width="860" height="42" class="note"/>
+  <text x="600" y="866" class="small">핵심: 테이블 존재뿐 아니라 컬럼 타입, NULL 허용, 제약조건 정의와 인덱스까지 실제 메타데이터로 검증합니다.</text>
+</svg>

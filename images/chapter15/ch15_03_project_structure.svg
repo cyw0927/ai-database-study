@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 1040" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">재현 가능한 프로젝트 파일 구조와 완료 증거</title>
+  <desc id="desc">문서, 01부터 10까지의 데이터베이스 실행, 공통 검증 모듈을 사용하는 Python 분석, 11 복원 검증, 보고서와 초기화 파일의 관계를 보여 주는 도식</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#475569"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#111827}
+      .mono{font-family:Consolas,D2Coding,"Courier New",monospace}
+      .t{font-size:29px;font-weight:800;text-anchor:middle}
+      .s{font-size:15px;text-anchor:middle;fill:#475569}
+      .panel{stroke-width:2;rx:16;ry:16}
+      .docs{fill:#eff6ff;stroke:#60a5fa}.sql{fill:#f0fdf4;stroke:#22c55e}
+      .python{fill:#ecfeff;stroke:#06b6d4}.restore{fill:#fff7ed;stroke:#f59e0b}
+      .report{fill:#faf5ff;stroke:#8b5cf6}.support{fill:#fff1f2;stroke:#f43f5e}
+      .card{fill:#fff;stroke-width:1.7;rx:10;ry:10}.dc{stroke:#60a5fa}.sc{stroke:#22c55e}.pc{stroke:#06b6d4}.rc{stroke:#f59e0b}.xc{stroke:#f43f5e}
+      .ph{font-size:19px;font-weight:800;text-anchor:middle}.file{font-size:13.5px;font-weight:700;text-anchor:middle}.role{font-size:11px;text-anchor:middle;fill:#475569}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="1040" fill="#fff"/>
+  <text x="600" y="44" class="t">재현 가능한 프로젝트 파일 구조와 완료 증거</text>
+  <text x="600" y="74" class="s">01→10 DB 게이트, Python 직접 비교, 11 별도 DB 복원과 보고서를 서로 다른 증거로 관리합니다.</text>
+
+  <rect x="350" y="98" width="500" height="70" class="panel docs"/>
+  <text x="600" y="130" class="ph mono">code/chapter15/templates/</text>
+  <text x="600" y="154" class="role">요구사항·SQL·Python·복구·보고서가 같은 P15 기준을 사용</text>
+
+  <rect x="30" y="195" width="235" height="285" class="panel docs"/>
+  <text x="147" y="228" class="ph">프로젝트 문서</text>
+  <rect x="53" y="255" width="189" height="55" class="card dc"/><text x="147" y="279" class="file mono">README.md</text><text x="147" y="298" class="role">실행 순서·완료 단계</text>
+  <rect x="53" y="325" width="189" height="55" class="card dc"/><text x="147" y="349" class="file mono">requirements.md</text><text x="147" y="368" class="role">P15 요구사항·정책</text>
+  <rect x="53" y="395" width="189" height="55" class="card dc"/><text x="147" y="419" class="file mono">erd.md</text><text x="147" y="438" class="role">관계·시간·분석 단위</text>
+
+  <rect x="290" y="195" width="575" height="660" class="panel sql"/>
+  <text x="577" y="228" class="ph">DB 필수 실행 순서</text>
+  <g>
+    <rect x="325" y="250" width="505" height="43" class="card sc"/><text x="577" y="277" class="file mono">01_schema.sql · DB 보호·원자적 구조</text>
+    <rect x="325" y="304" width="505" height="43" class="card sc"/><text x="577" y="331" class="file mono">02_seed.sql · 기준 데이터·IDENTITY</text>
+    <rect x="325" y="358" width="505" height="43" class="card sc"/><text x="577" y="385" class="file mono">03_metadata_validation.sql · 정확한 구조</text>
+    <rect x="325" y="412" width="505" height="43" class="card sc"/><text x="577" y="439" class="file mono">04_requirement_queries.sql · 업무·시간</text>
+    <rect x="325" y="466" width="505" height="43" class="card sc"/><text x="577" y="493" class="file mono">05_transaction_checks.sql · 정상·실패·ROLLBACK</text>
+    <rect x="325" y="520" width="505" height="43" class="card sc"/><text x="577" y="547" class="file mono">06_negative_tests.sql · 23개 반례·경계값</text>
+    <rect x="325" y="574" width="505" height="43" class="card sc"/><text x="577" y="601" class="file mono">07_performance_checks.sql · 인덱스 후보</text>
+    <rect x="325" y="628" width="505" height="43" class="card sc"/><text x="577" y="655" class="file mono">08_operations_checks.sql · PUBLIC·ACL·보안</text>
+    <rect x="325" y="682" width="505" height="43" class="card pc"/><text x="577" y="709" class="file mono">09_analysis_dataset.sql · 4개 VIEW·date spine</text>
+    <rect x="325" y="736" width="505" height="43" class="card sc"/><text x="577" y="763" class="file mono">10_completion_gate.sql · 예외 기반 DB 게이트</text>
+  </g>
+  <path d="M577 293 V304" class="line"/><path d="M577 347 V358" class="line"/><path d="M577 401 V412" class="line"/><path d="M577 455 V466" class="line"/><path d="M577 509 V520" class="line"/><path d="M577 563 V574" class="line"/><path d="M577 617 V628" class="line"/><path d="M577 671 V682" class="line"/><path d="M577 725 V736" class="line"/>
+
+  <rect x="895" y="195" width="275" height="355" class="panel python"/>
+  <text x="1032" y="228" class="ph">Python 분석·직접 비교</text>
+  <rect x="920" y="255" width="225" height="58" class="card pc"/><text x="1032" y="279" class="file mono">validation_utils.py</text><text x="1032" y="299" class="role">read only·자료형·SQL 기준</text>
+  <rect x="920" y="328" width="225" height="58" class="card pc"/><text x="1032" y="352" class="file mono">01_load_postgresql.py</text><text x="1032" y="372" class="role">질문 VIEW 엄격 검증</text>
+  <rect x="920" y="401" width="225" height="58" class="card pc"/><text x="1032" y="425" class="file mono">02_pandas_analysis.py</text><text x="1032" y="445" class="role">상태·월·학생·튜터·응답</text>
+  <rect x="920" y="474" width="225" height="58" class="card pc"/><text x="1032" y="498" class="file mono">03_result_validation.py</text><text x="1032" y="518" class="role">실제 SQL과 assert_frame_equal</text>
+  <path d="M1032 313 V328" class="line"/><path d="M1032 386 V401" class="line"/><path d="M1032 459 V474" class="line"/>
+  <path d="M830 758 H875 V357 H920" class="line"/>
+
+  <rect x="895" y="580" width="275" height="190" class="panel restore"/>
+  <text x="1032" y="613" class="ph">백업·별도 DB 복원</text>
+  <rect x="920" y="638" width="225" height="52" class="card rc"/><text x="1032" y="661" class="file mono">OPERATIONS_RUNBOOK.md</text><text x="1032" y="680" class="role">버전·권한·원자적 복원</text>
+  <rect x="920" y="704" width="225" height="52" class="card rc"/><text x="1032" y="727" class="file mono">11_restore_validation.sql</text><text x="1032" y="746" class="role">복원 DB 전용 완료 증거</text>
+  <path d="M1032 690 V704" class="line"/>
+
+  <rect x="30" y="885" width="835" height="100" class="panel report"/>
+  <text x="447" y="917" class="ph">검토·보고·최종 판단</text>
+  <text x="447" y="945" class="file mono">ai_review_report.md · analysis_report.md · final_report.md</text>
+  <text x="447" y="969" class="role">DB 게이트·Python·복원·Role·사람 승인을 분리해 기록</text>
+
+  <rect x="895" y="805" width="275" height="180" class="panel support"/>
+  <text x="1032" y="837" class="ph">필요 시 실행</text>
+  <rect x="920" y="860" width="225" height="55" class="card xc"/><text x="1032" y="883" class="file mono">reset_tutor_project.sql</text><text x="1032" y="903" class="role">DB 보호 후 전용 스키마 초기화</text>
+  <text x="1032" y="945" class="role">schema.sql · seed.sql · queries.sql</text><text x="1032" y="965" class="role">기존 링크 호환 안내</text>
+
+  <path d="M1032 532 V565 H860 V935 H865" class="line"/>
+  <path d="M1032 756 V790 H875 V935 H865" class="line"/>
+</svg>

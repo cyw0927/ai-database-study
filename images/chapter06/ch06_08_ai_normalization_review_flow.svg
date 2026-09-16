@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">AI 생성 테이블 구조 정규화 검토</title>
+  <desc id="desc">원문 요구사항부터 AI 초안, 행 의미와 컬럼 소유자, 이상 현상, 정규형, 테이블과 키 재설계, PostgreSQL 검증을 거쳐 실패 시 다시 검토하는 반복 흐름을 보여 준다.</desc>
+
+  <style>
+    .ko { font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif; fill: #1f2937; }
+    .mono { font-family: Consolas, D2Coding, "Courier New", monospace; fill: #1f2937; }
+    .title { font-size: 28px; font-weight: 700; }
+    .sub { font-size: 15px; fill: #4b5563; }
+    .h { font-size: 18px; font-weight: 700; }
+    .b { font-size: 14px; }
+    .s { font-size: 12.5px; }
+    .box { stroke: #64748b; stroke-width: 1.7; rx: 14; ry: 14; }
+    .problem { fill: #fff1f1; }
+    .insert { fill: #fff6d8; }
+    .update { fill: #ffeaea; }
+    .delete { fill: #f3edff; }
+    .nf1 { fill: #eaf3ff; }
+    .nf2 { fill: #fff0df; }
+    .nf3 { fill: #f2ecff; }
+    .good { fill: #eaf8ee; }
+    .review { fill: #eaf3ff; }
+    .ai { fill: #f2ecff; }
+    .note { fill: #fff6d8; }
+    .pk { fill: #1d4ed8; font-weight: 700; }
+    .fk { fill: #c2410c; font-weight: 700; }
+    .line { stroke: #475569; stroke-width: 2; fill: none; }
+    .dash { stroke: #64748b; stroke-width: 2; stroke-dasharray: 7 6; fill: none; }
+    .hot { fill: #b91c1c; font-weight: 700; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="44" text-anchor="middle" class="ko title">AI 생성 테이블 구조 정규화 검토</text>
+
+  <text x="600" y="72" text-anchor="middle" class="ko sub">AI 제안은 검증되지 않은 초안이며, 최종 판단과 채택 근거 기록은 사람이 수행합니다.</text>
+  <rect x="45" y="115" width="175" height="90" class="box review"/><text x="132" y="150" text-anchor="middle" class="ko h">1. 원문 요구사항</text>
+  <rect x="260" y="115" width="175" height="90" class="box ai"/><text x="347" y="150" text-anchor="middle" class="ko h">2. AI 테이블 초안</text>
+  <rect x="475" y="100" width="250" height="120" class="box review"/><text x="600" y="138" text-anchor="middle" class="ko h">3. 행 의미·컬럼 소유자</text><text x="600" y="175" text-anchor="middle" class="ko b">회원·책·대여 중 누구의 사실인가?</text>
+  <rect x="765" y="100" width="200" height="120" class="box note"/><text x="865" y="138" text-anchor="middle" class="ko h">4. 이상 현상</text><text x="865" y="170" text-anchor="middle" class="ko b">독립 INSERT?</text><text x="865" y="195" text-anchor="middle" class="ko b">한 곳 UPDATE? 안전한 DELETE?</text>
+  <rect x="1005" y="100" width="150" height="120" class="box nf3"/><text x="1080" y="138" text-anchor="middle" class="ko h">5. 정규형 판단</text><text x="1080" y="170" text-anchor="middle" class="ko b">1NF · 2NF · 3NF</text>
+  <line x1="220" y1="160" x2="260" y2="160" class="line" marker-end="url(#arrow)"/><line x1="435" y1="160" x2="475" y2="160" class="line" marker-end="url(#arrow)"/><line x1="725" y1="160" x2="765" y2="160" class="line" marker-end="url(#arrow)"/><line x1="965" y1="160" x2="1005" y2="160" class="line" marker-end="url(#arrow)"/>
+  <rect x="245" y="310" width="300" height="120" class="box good"/><text x="395" y="350" text-anchor="middle" class="ko h">6. 테이블·PK·FK 재설계</text><text x="395" y="390" text-anchor="middle" class="ko b">과도하게 분리되지 않았는지도 확인</text>
+  <rect x="655" y="310" width="300" height="120" class="box good"/><text x="805" y="350" text-anchor="middle" class="ko h">7. PostgreSQL로 검증</text><text x="805" y="390" text-anchor="middle" class="ko b">샘플 데이터 · 오류 사례 · JOIN 결과</text>
+  <path d="M1080 220 C1080 270, 395 250, 395 310" class="line" marker-end="url(#arrow)"/><line x1="545" y1="370" x2="655" y2="370" class="line" marker-end="url(#arrow)"/>
+  <rect x="420" y="515" width="360" height="110" class="box note"/><text x="600" y="555" text-anchor="middle" class="ko h">요구사항을 올바르게 표현하는가?</text><text x="600" y="592" text-anchor="middle" class="ko b">컬럼 수가 아니라 의미·의존·실행 결과로 판단</text>
+  <line x1="805" y1="430" x2="690" y2="515" class="line" marker-end="url(#arrow)"/>
+  <rect x="860" y="650" width="260" height="65" class="box good"/><text x="990" y="678" text-anchor="middle" class="ko b">예 → 검토된 설계 채택</text><text x="990" y="700" text-anchor="middle" class="ko s">판단 근거 기록</text>
+  <line x1="780" y1="570" x2="860" y2="680" class="line" marker-end="url(#arrow)"/>
+  <rect x="80" y="650" width="300" height="65" class="box problem"/><text x="230" y="678" text-anchor="middle" class="ko b">아니요 → AI 요청 또는 설계 수정</text><text x="230" y="700" text-anchor="middle" class="ko s">다시 검증</text>
+  <path d="M420 570 C300 590, 230 610, 230 650" class="line" marker-end="url(#arrow)"/><path d="M230 650 C230 500, 600 470, 600 220" class="dash" marker-end="url(#arrow)"/>
+</svg>

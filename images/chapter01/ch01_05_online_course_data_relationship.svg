@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">온라인 강의 서비스 데이터 관계</title>
+  <desc id="desc">회원, 강사, 강의, 수강신청, 결제 엔터티의 핵심 키와 관계를 보여 주는 단순 ERD</desc>
+  <defs>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#172033}
+      .title{font-size:30px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .entity{fill:#f8fafc;stroke:#475569;stroke-width:2}
+      .head{fill:#e9f2fe;stroke:#3174d0;stroke-width:2}
+      .name{font-size:20px;font-weight:700;text-anchor:middle}
+      .type{font-size:13px;font-weight:700;text-anchor:middle;fill:#475569}
+      .pk{font-size:15px;font-weight:700;fill:#1f5fb8}
+      .fk{font-size:15px;font-weight:700;fill:#7c4dcb}
+      .field{font-size:15px;fill:#475569}
+      .rel{stroke:#475569;stroke-width:2.3;fill:none;stroke-linecap:round}
+      .card{font-size:17px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .label{font-size:15px;font-weight:700;text-anchor:middle;fill:#334155}
+      .note{fill:#eef5ff;stroke:#4d86d7;stroke-width:2}
+      .note-text{font-size:16px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+    </style>
+  </defs>
+  <rect width="1200" height="680" fill="#fff"/>
+  <text x="600" y="48" class="title">온라인 강의 서비스 데이터 관계</text>
+
+  <rect x="70" y="100" width="260" height="122" rx="12" class="entity"/>
+  <rect x="70" y="100" width="260" height="48" rx="12" class="head"/>
+  <text x="200" y="122" class="name">회원</text>
+  <text x="200" y="141" class="type">MEMBER</text>
+  <text x="95" y="176" class="pk">member_id (PK)</text>
+  <text x="95" y="202" class="field">name · email · status</text>
+
+  <rect x="470" y="100" width="280" height="122" rx="12" class="entity"/>
+  <rect x="470" y="100" width="280" height="48" rx="12" class="head"/>
+  <text x="610" y="122" class="name">강사</text>
+  <text x="610" y="141" class="type">INSTRUCTOR</text>
+  <text x="495" y="176" class="pk">instructor_id (PK)</text>
+  <text x="495" y="202" class="field">name · email</text>
+
+  <rect x="470" y="320" width="280" height="138" rx="12" class="entity"/>
+  <rect x="470" y="320" width="280" height="48" rx="12" class="head"/>
+  <text x="610" y="342" class="name">강의</text>
+  <text x="610" y="361" class="type">COURSE</text>
+  <text x="495" y="393" class="pk">course_id (PK)</text>
+  <text x="495" y="419" class="fk">instructor_id (FK)</text>
+  <text x="495" y="445" class="field">title · price</text>
+
+  <rect x="70" y="455" width="310" height="132" rx="12" class="entity"/>
+  <rect x="70" y="455" width="310" height="48" rx="12" class="head"/>
+  <text x="225" y="477" class="name">수강신청</text>
+  <text x="225" y="496" class="type">ENROLLMENT</text>
+  <text x="95" y="528" class="pk">enrollment_id (PK)</text>
+  <text x="95" y="553" class="fk">member_id · course_id (FK)</text>
+  <text x="95" y="578" class="field">status · enrolled_at</text>
+
+  <rect x="850" y="455" width="280" height="132" rx="12" class="entity"/>
+  <rect x="850" y="455" width="280" height="48" rx="12" class="head"/>
+  <text x="990" y="477" class="name">결제</text>
+  <text x="990" y="496" class="type">PAYMENT</text>
+  <text x="875" y="528" class="pk">payment_id (PK)</text>
+  <text x="875" y="553" class="fk">enrollment_id (FK)</text>
+  <text x="875" y="578" class="field">amount · status · paid_at</text>
+
+  <line x1="610" y1="222" x2="610" y2="320" class="rel"/>
+  <text x="590" y="250" class="card">1</text>
+  <text x="590" y="307" class="card">N</text>
+  <text x="710" y="278" class="label">강사-강의</text>
+
+  <path d="M200 222 V392 H225 V455" class="rel"/>
+  <text x="180" y="250" class="card">1</text>
+  <text x="205" y="440" class="card">N</text>
+  <text x="330" y="386" class="label">회원-수강신청</text>
+
+  <path d="M470 405 H410 V430 H330 V455" class="rel"/>
+  <text x="448" y="397" class="card">1</text>
+  <text x="354" y="446" class="card">N</text>
+  <text x="390" y="420" class="label">강의-수강신청</text>
+
+  <line x1="380" y1="522" x2="850" y2="522" class="rel"/>
+  <text x="408" y="512" class="card">1</text>
+  <text x="822" y="512" class="card">N</text>
+  <text x="615" y="502" class="label">결제 이력 연결</text>
+
+  <rect x="150" y="620" width="900" height="36" rx="16" class="note"/>
+  <text x="600" y="643" class="note-text">회원과 강의의 N:M 관계는 수강신청으로 풀고, 결제는 수강신청 이력에 연결한다.</text>
+</svg>

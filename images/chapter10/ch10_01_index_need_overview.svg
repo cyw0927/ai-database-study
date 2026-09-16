@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid meet">
+  <title id="title">데이터 증가와 인덱스 검토</title>
+  <desc id="desc">데이터와 반복 조회가 증가하면 후보를 판단하고 실행 계획을 비교해 인덱스의 적용, 보류 또는 제거를 결정하는 흐름</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      text{font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",Arial,sans-serif;fill:#0f172a}
+      .title{font-size:32px;font-weight:700;text-anchor:middle;fill:#0f2d5c}
+      .sub{font-size:15px;fill:#475569;text-anchor:middle}
+      .head{font-size:18px;font-weight:700;text-anchor:middle}
+      .body{font-size:14px;text-anchor:middle;fill:#334155}
+      .small{font-size:13px;text-anchor:middle;fill:#475569}
+      .code{font-family:Consolas,D2Coding,"Courier New",monospace;font-size:13px;font-weight:700;text-anchor:middle;fill:#1d4ed8}
+      .card{stroke-width:2;rx:14;ry:14}
+      .box{fill:#ffffff;stroke:#7fb3f5}
+      .candidate{fill:#eff6ff;stroke:#2563eb}
+      .index{fill:#ecfdf5;stroke:#22c55e}
+      .note{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.6;rx:14;ry:14}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect width="1200" height="460" fill="#ffffff"/>
+  <text x="600" y="48" class="title">데이터 증가와 인덱스 검토</text>
+  <text x="600" y="78" class="sub">데이터가 늘면 자주 쓰는 조회 경로를 실행 계획으로 확인합니다.</text>
+
+  <rect x="60" y="145" width="180" height="120" class="card box"/>
+  <text x="150" y="181" class="head">데이터 증가</text>
+  <text x="150" y="215" class="body">10만 건 이상</text>
+  <text x="150" y="243" class="body">읽기 비용 증가</text>
+
+  <rect x="285" y="145" width="180" height="120" class="card candidate"/>
+  <text x="375" y="181" class="head">조회 조건 반복</text>
+  <text x="375" y="215" class="body">WHERE</text>
+  <text x="375" y="243" class="body">JOIN · ORDER BY</text>
+
+  <rect x="510" y="145" width="180" height="120" class="card candidate"/>
+  <text x="600" y="181" class="head">후보 판단</text>
+  <text x="600" y="215" class="body">자주 실행되는가?</text>
+  <text x="600" y="243" class="body">선택도가 있는가?</text>
+
+  <rect x="735" y="145" width="180" height="120" class="card index"/>
+  <text x="825" y="181" class="head">계획 비교</text>
+  <text x="825" y="215" class="code">EXPLAIN</text>
+  <text x="825" y="243" class="body">ANALYZE</text>
+
+  <rect x="960" y="145" width="180" height="120" class="card index"/>
+  <text x="1050" y="181" class="head">결정</text>
+  <text x="1050" y="215" class="body">적용</text>
+  <text x="1050" y="243" class="body">보류 · 제거</text>
+
+  <path d="M240 205H285" class="arrow"/>
+  <path d="M465 205H510" class="arrow"/>
+  <path d="M690 205H735" class="arrow"/>
+  <path d="M915 205H960" class="arrow"/>
+
+  <rect x="260" y="335" width="680" height="72" class="note"/>
+  <text x="600" y="365" class="head">인덱스는 선택 사항입니다.</text>
+  <text x="600" y="393" class="body">데이터 규모와 반복 쿼리를 확인하고 실행 계획으로 효과를 검증한 뒤 결정합니다.</text>
+</svg>
