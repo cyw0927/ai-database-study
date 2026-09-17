@@ -690,111 +690,48 @@ assignments/chapter08/images/step11_validation.png
 
 # 12. 개인 프로젝트 업무 질문 3개 만들기
 
-Chapter 01~04에서 정한 개인 프로젝트 **개인 예산관리 시스템**을 사용한다.
-
-```text
-지금까지 실제 PostgreSQL에 만든 테이블: expenses (지출 한 건 = 한 행, user_id/category/amount/spent_at)
-아직 실제로 만들지 않은 테이블: users, budgets
-```
-
-이번 확장에서는 `users`(사용자)와 `budgets`(카테고리별 월 예산 한도)를 개념적으로 추가했다고 가정하고 업무 질문을 만든다. 두 테이블을 실제 PostgreSQL에 아직 구현하지 않았으므로 **SQL 초안 + 예상 결과 + 검산 방법 + 미실행 표시**까지만 작성한다.
-
-```text
-users(id, name) — 사용자 한 명
-budgets(category, monthly_limit) — 카테고리 한 개의 월 한도
-expenses(expense_id, user_id, category, amount, spent_at) — 지출 한 건
-```
+Chapter 07에서 작성한 개인 프로젝트를 사용한다.
 
 | 질문 ID | 업무 질문 | 결과 한 행 | 포함/제외 범위 | JOIN 경로 | 집계 대상 | 검산 방법 |
 | --- | --- | --- | --- | --- | --- | --- |
-| P08-Q01 | 사용자별 이번 달 총 지출액은 얼마인가? | 사용자 한 명 | 2026-04-01~2026-04-30 지출 전체, 지출 0건 사용자도 표시 | users LEFT JOIN expenses (ON user_id, 기간 조건 포함) | COUNT(expense_id), SUM(amount) | 사용자별 상세 지출 행을 직접 조회해 건수·합계 재계산 후 비교 |
-| P08-Q02 | 카테고리별 이번 달 지출 건수와 합계는 얼마인가? (예산은 있지만 지출이 없는 카테고리도 표시) | 카테고리 한 개 | 예산이 설정된 카테고리 전체, 2026-04 지출만 포함 | budgets LEFT JOIN expenses (ON category, 기간 조건 포함) | COUNT(expense_id), SUM(amount) | 카테고리별 상세 지출 행 합계와 GROUP BY 집계값 비교 |
-| P08-Q03 | 이번 달 예산 한도를 초과한 카테고리는 어디인가? | 카테고리 한 개 | 예산이 설정된 카테고리만 (한도 비교가 필요하므로 예산 없는 지출은 제외) | budgets INNER JOIN expenses ON category (기간 조건 포함) | SUM(amount), monthly_limit과 비교 (HAVING) | 초과로 표시된 카테고리의 상세 지출 행을 직접 합산해 한도 초과 여부 재확인 |
+| P08-Q01 |  |  |  |  |  |  |
+| P08-Q02 |  |  |  |  |  |  |
+| P08-Q03 |  |  |  |  |  |  |
 
-## 12-1. 질문 1 SQL — 사용자별 이번 달 총 지출액
-
-```text
-미실행 (users 테이블 미구현) — 아래는 SQL 초안이다.
-```
+## 12-1. 질문 1 SQL
 
 ```sql
-SELECT
-    u.id AS user_id,
-    u.name AS user_name,
-    COUNT(e.expense_id) AS expense_count,
-    COALESCE(SUM(e.amount), 0) AS total_amount
-FROM users AS u
-LEFT JOIN expenses AS e
-    ON u.id = e.user_id
-   AND e.spent_at >= '2026-04-01'
-   AND e.spent_at <  '2026-05-01'
-GROUP BY u.id, u.name
-ORDER BY u.id;
+
 ```
 
 ```text
-예상 결과: 지출이 없는 사용자도 0건 / 0원으로 남아야 한다 (LEFT JOIN이므로).
-실제 결과: 미실행
-검산 방법: WHERE u.id = <특정 사용자> AND spent_at 조건으로 상세 지출 행을 조회한 뒤
-           행 수와 SUM(amount)을 위 GROUP BY 결과와 비교한다.
+예상 결과:
+실제 결과:
+검산 결과:
 ```
 
-## 12-2. 질문 2 SQL — 카테고리별 이번 달 지출 건수·합계
-
-```text
-미실행 (budgets 테이블 미구현) — 아래는 SQL 초안이다.
-```
+## 12-2. 질문 2 SQL
 
 ```sql
-SELECT
-    b.category,
-    b.monthly_limit,
-    COUNT(e.expense_id) AS expense_count,
-    COALESCE(SUM(e.amount), 0) AS total_amount
-FROM budgets AS b
-LEFT JOIN expenses AS e
-    ON b.category = e.category
-   AND e.spent_at >= '2026-04-01'
-   AND e.spent_at <  '2026-05-01'
-GROUP BY b.category, b.monthly_limit
-ORDER BY b.category;
+
 ```
 
 ```text
-예상 결과: 예산은 있지만 이번 달 지출이 없는 카테고리도 0건 / 0원으로 표시되어야 한다.
-실제 결과: 미실행
-검산 방법: 카테고리 하나를 골라 expenses를 category와 기간으로 직접 필터링한 뒤
-           행 수·합계를 COUNT/SUM 결과와 비교한다.
+예상 결과:
+실제 결과:
+검산 결과:
 ```
 
-## 12-3. 질문 3 SQL — 이번 달 예산 초과 카테고리
-
-```text
-미실행 (budgets 테이블 미구현) — 아래는 SQL 초안이다.
-```
+## 12-3. 질문 3 SQL
 
 ```sql
-SELECT
-    b.category,
-    b.monthly_limit,
-    SUM(e.amount) AS total_amount
-FROM budgets AS b
-JOIN expenses AS e
-    ON b.category = e.category
-   AND e.spent_at >= '2026-04-01'
-   AND e.spent_at <  '2026-05-01'
-GROUP BY b.category, b.monthly_limit
-HAVING SUM(e.amount) > b.monthly_limit
-ORDER BY b.category;
+
 ```
 
 ```text
-예상 결과: 카테고리별 합계가 monthly_limit을 넘는 행만 남는다.
-실제 결과: 미실행
-검산 방법: HAVING으로 걸러진 카테고리마다 상세 지출 행을 직접 합산해
-           monthly_limit 대비 실제로 초과했는지 재확인한다.
-과대 집계 주의: 여기서는 카테고리 단위 집계이므로 budgets·expenses 외에 users처럼
-           또 다른 1:N 관계까지 JOIN하면 지출 행이 중복 반복되어 SUM이 부풀 수 있다.
+예상 결과:
+실제 결과:
+검산 결과:
 ```
 
 ---
@@ -878,7 +815,7 @@ SQL은 문법적으로 정상 실행되어도 질문과 다른 행 단위로 집
 - [x] 과대 집계 오류와 수정 결과를 직접 실행해 비교했다.
 - [x] 상세 결과와 집계 결과를 직접 실행해 교차 검산했다.
 - [x] `03_join_aggregation_validation.sql`이 통과했다.
-- [x] 개인 프로젝트 업무 질문 3개를 작성했다. (users/budgets 미구현으로 초안 SQL)
+- [ ] 개인 프로젝트 업무 질문 3개를 작성했다. — 아직 미작성
 - [x] AI SQL을 실행 성공 여부가 아니라 의미와 검산 관점에서 평가했다.
 - [ ] 핵심 캡처는 3~4장 정도만 사용했다. — step09/step11 캡처 추가 필요
 - [x] 비밀번호·개인정보·비밀정보가 없다.
