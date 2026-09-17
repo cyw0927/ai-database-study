@@ -224,6 +224,9 @@ course_project 스키마 아래에 students, instructors, courses, enrollments 4
 assignments/chapter07/images/step05_schema.png
 ```
 
+![STEP 01 스키마 생성 결과](./images/step05_schema.png)
+![STEP 01 스키마 생성 결과 2](./images/step05_schema2.png)
+
 ---
 
 # 6. STEP 02 — Seed 데이터 입력
@@ -331,6 +334,8 @@ code/chapter07/03_course_project_changes.sql
 assignments/chapter07/images/step07_changes.png
 ```
 
+![STEP 03 변경 시나리오 실행 결과](./images/step07_changes.png)
+
 ---
 
 # 8. STEP 04 — 최종 완료 게이트 실행
@@ -372,6 +377,8 @@ code/chapter07/04_course_project_validation.sql
 ```text
 assignments/chapter07/images/step08_validation.png
 ```
+
+![STEP 04 최종 검증 결과](./images/step08_validation.png)
 
 ---
 
@@ -453,6 +460,10 @@ VALUES (
 ```text
 assignments/chapter07/images/step09_integrity.png
 ```
+
+![무결성 테스트 결과 1](./images/step09_integrity.png)
+![무결성 테스트 결과 2](./images/step09_integrity2.png)
+![무결성 테스트 결과 3](./images/step09_integrit3.png)
 
 ---
 
