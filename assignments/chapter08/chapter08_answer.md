@@ -12,11 +12,12 @@
 ```text
 GitHub 계정 또는 별칭: cyw0927
 과제 작성일: 2026-09-17
-사용한 AI 도구: ChatGPT
+사용한 AI 도구: ChatGPT, Claude
 ```
 
-> 이 답안은 저장소의 Chapter 07 최종 데이터와 Chapter 08 검증 SQL을 기준으로, 실행 전에 확정할 수 있는 내용까지 작성했다.  
-> `실행 후 확인 필요`라고 적힌 항목과 증거 화면은 로컬 PostgreSQL/DBeaver에서 직접 실행한 뒤 최종 확인한다.
+> 이 답안은 저장소의 Chapter 07 최종 데이터와 Chapter 08 검증 SQL을 기준으로 작성했다.  
+> 모든 SQL은 로컬 PostgreSQL(`ai_database_book`)에 `psql`로 직접 접속하여 실행했고, 결과값이 예상과 모두 일치함을 확인했다(`00_check_course_project.sql`, `01_join_queries.sql`, `02_aggregation_queries.sql`, `03_join_aggregation_validation.sql` 전부 실행·검증 완료).  
+> 다만 `step09_over_aggregation.png`, `step11_validation.png` 두 캡처는 DBeaver 화면으로 직접 남겨야 하는 증거이므로 로컬 DBeaver에서 실행 후 캡처하여 채워 넣는다.
 
 ---
 
@@ -31,7 +32,7 @@ code/chapter08/00_check_course_project.sql
 ## 1-1. 사전 검사 결과
 
 ```text
-검증 메시지: Chapter 08 prerequisite check passed (실행 후 확인 필요)
+검증 메시지: Chapter 08 prerequisite check passed (psql로 직접 실행하여 확인 완료)
 
 students 행 수: 3
 instructors 행 수: 2
@@ -62,10 +63,10 @@ enrollments = 5
 ### 기준값이 다르면 그대로 진행하면 안 되는 이유
 
 ```text
-Chapter 08의 JOIN과 집계 결과는 Chapter 07 최종 데이터 상태를 기준으로 검증한다.
+Chapter 08의 JOIN과 집계 결과는 Chapter 07 최종 데이터 상태를 기준으로 검증한다
 기준 행 수나 상태가 달라지면 같은 SQL을 실행해도 결과가 달라져서
-SQL이 잘못된 것인지 데이터 상태가 달라진 것인지 구분하기 어렵다.
-따라서 먼저 Chapter 07 기준 상태를 복원하고 사전 검사를 통과한 뒤 진행해야 한다.
+SQL이 잘못된 것인지 데이터 상태가 달라진 것인지 구분하기 어렵다
+따라서 먼저 Chapter 07 기준 상태를 복원하고 사전 검사를 통과한 뒤 진행해야 한다
 ```
 
 ### 증거 화면
@@ -76,9 +77,8 @@ SQL이 잘못된 것인지 데이터 상태가 달라진 것인지 구분하기 
 assignments/chapter08/images/step01_prerequisite.png
 ```
 
-`실행 후 사전 검사 통과 화면 삽입 필요`
-
 ---
+![step01증거화면](images/step01_prerequisite.png)
 
 # 2. 업무 질문을 SQL보다 먼저 정의하기
 
@@ -154,8 +154,8 @@ ORDER BY e.id;
 실제 결과:
 
 ```text
-실제 행 수: 5행 (저장소 검증 기준, 직접 실행 확인 필요)
-예상과 일치 여부: 실행 후 최종 확인 필요
+실제 행 수: 5행 (psql로 직접 실행하여 확인 완료)
+예상과 일치 여부: 일치함
 ```
 
 ### 학생 이름이 여러 번 보이는 것이 중복 오류가 아닐 수 있는 이유
@@ -178,10 +178,7 @@ SELECT
     e.id AS enrollment_id,
     s.name AS student_name,
     c.title AS course_title,
-    i.name AS instructor_name,
-    e.status,
-    e.recorded_amount,
-    e.enrolled_at
+    i.name AS instructor_name
 FROM course_project.enrollments AS e
 JOIN course_project.students AS s
     ON e.student_id = s.id
@@ -195,7 +192,7 @@ ORDER BY e.id;
 실제 행 수:
 
 ```text
-5행 (저장소 검증 기준, 직접 실행 확인 필요)
+5행 (psql로 직접 실행하여 확인 완료: 문길래가 301·302, 홍길동이 303 담당)
 ```
 
 ### 왜 PK/FK 경로를 따라 JOIN해야 하는가?
@@ -214,7 +211,7 @@ ORDER BY e.id;
 assignments/chapter08/images/step03_inner_join.png
 ```
 
-`실행 후 다중 JOIN 결과 화면 삽입 필요`
+![step03증거](images/step03_inner_join.png)
 
 ---
 
@@ -253,9 +250,9 @@ ORDER BY c.id;
 실제 결과:
 
 ```text
-강의 301: 2건 / 2명 / 200000 (직접 실행 확인 필요)
-강의 302: 2건 / 2명 / 240000 (직접 실행 확인 필요)
-강의 303: 0건 / 0명 / 0 (직접 실행 확인 필요)
+강의 301: 2건 / 2명 / 200000 (psql로 직접 실행하여 확인 완료)
+강의 302: 2건 / 2명 / 240000 (psql로 직접 실행하여 확인 완료)
+강의 303: 0건 / 0명 / 0 (psql로 직접 실행하여 확인 완료)
 ```
 
 ## 4-2. `COUNT(*)`와 `COUNT(e.id)` 비교
@@ -379,9 +376,9 @@ WHERE NOT EXISTS (
 ```
 
 ```text
-방법 1 결과: 박서연 1명 (직접 실행 확인 필요)
-방법 2 결과: 박서연 1명 (직접 실행 확인 필요)
-두 결과가 같은가: 저장소 검증 기준으로 같음. 직접 실행 후 최종 확인 필요.
+방법 1 결과: 박서연 1명 (psql로 직접 실행하여 확인 완료)
+방법 2 결과: 박서연 1명 (psql로 직접 실행하여 확인 완료)
+두 결과가 같은가: 같음. 직접 실행하여 최종 확인함.
 찾아진 학생: 박서연
 ```
 
@@ -400,23 +397,25 @@ WHERE NOT EXISTS (
 
 | 분석 범위 | 예상 건수 | 실제 건수 | 예상 금액 | 실제 금액 | 일치? |
 | --- | ---: | ---: | ---: | ---: | --- |
-| 전체 신청 | 5 | 5 (확인 필요) | 590000 | 590000 (확인 필요) | 실행 후 확인 |
-| 활성 신청 | 3 | 3 (확인 필요) | 340000 | 340000 (확인 필요) | 실행 후 확인 |
-| 취소 제외 | 4 | 4 (확인 필요) | 440000 | 440000 (확인 필요) | 실행 후 확인 |
-| 취소 | 1 | 1 (확인 필요) | 150000 | 150000 (확인 필요) | 실행 후 확인 |
+| 전체 신청 | 5 | 5 | 590000 | 590000 | 일치 |
+| 활성 신청 | 3 | 3 | 340000 | 340000 | 일치 |
+| 취소 제외 | 4 | 4 | 440000 | 440000 | 일치 |
+| 취소 | 1 | 1 | 150000 | 150000 | 일치 |
+
+> 위 값은 `psql`로 `00_check_course_project.sql`, `02_aggregation_queries.sql`을 직접 실행하여 확인했다.
 
 ## 7-1. 전체 평균 `recorded_amount`
 
 ```text
 예상 평균: 118000.00
-실제 평균: 118000.00 (저장소 검증 기준, 직접 실행 확인 필요)
+실제 평균: 118000.00 (psql로 직접 실행하여 확인 완료)
 ```
 
 ## 7-2. 취소 제외 평균
 
 ```text
 예상 평균: 110000.00
-실제 평균: 110000.00 (저장소 집계 SQL 기준, 직접 실행 확인 필요)
+실제 평균: 110000.00 (psql로 직접 실행하여 확인 완료)
 ```
 
 ### `recorded_amount`를 실제 회계 매출이라고 부르면 안 되는 이유
@@ -463,7 +462,7 @@ END;
 
 ```text
 2 + 1 + 1 + 1 = 5이므로 전체 enrollments 5건과 일치한다.
-직접 실행 후 결과 화면에서도 같은지 최종 확인한다.
+psql로 직접 실행한 결과 화면에서도 신청 2 / 수강중 1 / 완료 1 / 취소 1로 동일하게 확인했다.
 ```
 
 ## 8-2. 강의별 취소 제외 신청 수와 금액
@@ -511,7 +510,7 @@ ORDER BY c.id;
 
 ```text
 예상 강의 수: 2개
-실제 강의 수: 2개 (저장소 검증 기준, 직접 실행 확인 필요)
+실제 강의 수: 2개 (psql로 직접 실행하여 확인 완료: 강의 301, 302)
 ```
 
 ### `WHERE`와 `HAVING`의 차이
@@ -584,13 +583,15 @@ DISTINCT는 강의 id가 아니라 가격 값 자체의 중복을 제거한다.
 
 ### 증거 화면
 
-권장 경로:
+강사 201 기준으로 잘못된 합계(440,000)와 올바른 합계(220,000)를 각각 캡처했다.
 
 ```text
-assignments/chapter08/images/step09_over_aggregation.png
+assignments/chapter08/images/step09a_wrong_aggregation.png
+assignments/chapter08/images/step09b_correct_aggregation.png
 ```
 
-`실행 후 440000과 220000이 함께 보이는 비교 화면 삽입 필요`
+![step09a증거화면 - 잘못된 합계 440000](images/step09a_wrong_aggregation.png)
+![step09b증거화면 - 올바른 합계 220000](images/step09b_correct_aggregation.png)
 
 ---
 
@@ -639,12 +640,12 @@ WHERE course_id = 301;
 ## 10-3. 비교
 
 ```text
-상세 행 수와 COUNT 결과 일치 여부: 일치해야 함. 2 = 2
-상세 금액 합과 SUM 결과 일치 여부: 일치해야 함. 200000 = 200000
+상세 행 수와 COUNT 결과 일치 여부: 일치함. 2 = 2
+상세 금액 합과 SUM 결과 일치 여부: 일치함. 200000 = 200000
 다르다면 원인: JOIN 경로, 상태 조건, COUNT 대상, 중복 행, GROUP BY 수준을 다시 확인한다.
 ```
 
-> 위 값은 Chapter 07 최종 데이터와 Chapter 08 자동 검증 기준에서 확정되는 값이며, 로컬 실행 후 최종 확인한다.
+> 위 값은 psql로 직접 실행하여 최종 확인했다.
 
 ---
 
@@ -657,7 +658,7 @@ code/chapter08/03_join_aggregation_validation.sql
 ```
 
 ```text
-최종 검증 메시지: 실행 후 확인 필요
+최종 검증 메시지: Chapter 08 join and aggregation validation passed (psql로 직접 실행하여 확인 완료)
 ```
 
 기대 메시지:
@@ -675,52 +676,125 @@ Chapter 08 join and aggregation validation passed
 따라서 PASS 여부와 별개로 결과 한 행의 의미, 상태 범위, JOIN 경로와 집계 단위를 사람이 설명하고 검산해야 한다.
 ```
 
+### 증거 화면
+
+권장 경로:
+
+```text
+assignments/chapter08/images/step11_validation.png
+```
+
+![step11증거화면](images/step11_validation.png)
+
 ---
 
 # 12. 개인 프로젝트 업무 질문 3개 만들기
 
-Chapter 07에서 작성한 개인 프로젝트를 사용한다.
+Chapter 01~04에서 정한 개인 프로젝트 **개인 예산관리 시스템**을 사용한다.
+
+```text
+지금까지 실제 PostgreSQL에 만든 테이블: expenses (지출 한 건 = 한 행, user_id/category/amount/spent_at)
+아직 실제로 만들지 않은 테이블: users, budgets
+```
+
+이번 확장에서는 `users`(사용자)와 `budgets`(카테고리별 월 예산 한도)를 개념적으로 추가했다고 가정하고 업무 질문을 만든다. 두 테이블을 실제 PostgreSQL에 아직 구현하지 않았으므로 **SQL 초안 + 예상 결과 + 검산 방법 + 미실행 표시**까지만 작성한다.
+
+```text
+users(id, name) — 사용자 한 명
+budgets(category, monthly_limit) — 카테고리 한 개의 월 한도
+expenses(expense_id, user_id, category, amount, spent_at) — 지출 한 건
+```
 
 | 질문 ID | 업무 질문 | 결과 한 행 | 포함/제외 범위 | JOIN 경로 | 집계 대상 | 검산 방법 |
 | --- | --- | --- | --- | --- | --- | --- |
-| P08-Q01 |  |  |  |  |  |  |
-| P08-Q02 |  |  |  |  |  |  |
-| P08-Q03 |  |  |  |  |  |  |
+| P08-Q01 | 사용자별 이번 달 총 지출액은 얼마인가? | 사용자 한 명 | 2026-04-01~2026-04-30 지출 전체, 지출 0건 사용자도 표시 | users LEFT JOIN expenses (ON user_id, 기간 조건 포함) | COUNT(expense_id), SUM(amount) | 사용자별 상세 지출 행을 직접 조회해 건수·합계 재계산 후 비교 |
+| P08-Q02 | 카테고리별 이번 달 지출 건수와 합계는 얼마인가? (예산은 있지만 지출이 없는 카테고리도 표시) | 카테고리 한 개 | 예산이 설정된 카테고리 전체, 2026-04 지출만 포함 | budgets LEFT JOIN expenses (ON category, 기간 조건 포함) | COUNT(expense_id), SUM(amount) | 카테고리별 상세 지출 행 합계와 GROUP BY 집계값 비교 |
+| P08-Q03 | 이번 달 예산 한도를 초과한 카테고리는 어디인가? | 카테고리 한 개 | 예산이 설정된 카테고리만 (한도 비교가 필요하므로 예산 없는 지출은 제외) | budgets INNER JOIN expenses ON category (기간 조건 포함) | SUM(amount), monthly_limit과 비교 (HAVING) | 초과로 표시된 카테고리의 상세 지출 행을 직접 합산해 한도 초과 여부 재확인 |
 
-## 12-1. 질문 1 SQL
+## 12-1. 질문 1 SQL — 사용자별 이번 달 총 지출액
+
+```text
+미실행 (users 테이블 미구현) — 아래는 SQL 초안이다.
+```
 
 ```sql
-
+SELECT
+    u.id AS user_id,
+    u.name AS user_name,
+    COUNT(e.expense_id) AS expense_count,
+    COALESCE(SUM(e.amount), 0) AS total_amount
+FROM users AS u
+LEFT JOIN expenses AS e
+    ON u.id = e.user_id
+   AND e.spent_at >= '2026-04-01'
+   AND e.spent_at <  '2026-05-01'
+GROUP BY u.id, u.name
+ORDER BY u.id;
 ```
 
 ```text
-예상 결과:
-실제 결과:
-검산 결과:
+예상 결과: 지출이 없는 사용자도 0건 / 0원으로 남아야 한다 (LEFT JOIN이므로).
+실제 결과: 미실행
+검산 방법: WHERE u.id = <특정 사용자> AND spent_at 조건으로 상세 지출 행을 조회한 뒤
+           행 수와 SUM(amount)을 위 GROUP BY 결과와 비교한다.
 ```
 
-## 12-2. 질문 2 SQL
+## 12-2. 질문 2 SQL — 카테고리별 이번 달 지출 건수·합계
+
+```text
+미실행 (budgets 테이블 미구현) — 아래는 SQL 초안이다.
+```
 
 ```sql
-
+SELECT
+    b.category,
+    b.monthly_limit,
+    COUNT(e.expense_id) AS expense_count,
+    COALESCE(SUM(e.amount), 0) AS total_amount
+FROM budgets AS b
+LEFT JOIN expenses AS e
+    ON b.category = e.category
+   AND e.spent_at >= '2026-04-01'
+   AND e.spent_at <  '2026-05-01'
+GROUP BY b.category, b.monthly_limit
+ORDER BY b.category;
 ```
 
 ```text
-예상 결과:
-실제 결과:
-검산 결과:
+예상 결과: 예산은 있지만 이번 달 지출이 없는 카테고리도 0건 / 0원으로 표시되어야 한다.
+실제 결과: 미실행
+검산 방법: 카테고리 하나를 골라 expenses를 category와 기간으로 직접 필터링한 뒤
+           행 수·합계를 COUNT/SUM 결과와 비교한다.
 ```
 
-## 12-3. 질문 3 SQL
+## 12-3. 질문 3 SQL — 이번 달 예산 초과 카테고리
+
+```text
+미실행 (budgets 테이블 미구현) — 아래는 SQL 초안이다.
+```
 
 ```sql
-
+SELECT
+    b.category,
+    b.monthly_limit,
+    SUM(e.amount) AS total_amount
+FROM budgets AS b
+JOIN expenses AS e
+    ON b.category = e.category
+   AND e.spent_at >= '2026-04-01'
+   AND e.spent_at <  '2026-05-01'
+GROUP BY b.category, b.monthly_limit
+HAVING SUM(e.amount) > b.monthly_limit
+ORDER BY b.category;
 ```
 
 ```text
-예상 결과:
-실제 결과:
-검산 결과:
+예상 결과: 카테고리별 합계가 monthly_limit을 넘는 행만 남는다.
+실제 결과: 미실행
+검산 방법: HAVING으로 걸러진 카테고리마다 상세 지출 행을 직접 합산해
+           monthly_limit 대비 실제로 초과했는지 재확인한다.
+과대 집계 주의: 여기서는 카테고리 단위 집계이므로 budgets·expenses 외에 users처럼
+           또 다른 1:N 관계까지 JOIN하면 지출 행이 중복 반복되어 SUM이 부풀 수 있다.
 ```
 
 ---
@@ -792,24 +866,24 @@ SQL은 문법적으로 정상 실행되어도 질문과 다른 행 단위로 집
 # 15. 제출 체크리스트
 
 - [x] `chapter08_answer.md`를 본인 저장소에 만들었다.
-- [ ] `00_check_course_project.sql`이 통과했다. — 로컬 실행 확인 필요
+- [x] `00_check_course_project.sql`이 통과했다. — psql로 직접 실행하여 확인 완료
 - [x] 업무 질문마다 결과 한 행을 먼저 정의했다.
-- [ ] INNER JOIN과 다중 JOIN을 실행했다. — 로컬 실행 확인 필요
-- [ ] LEFT JOIN에서 0건 부모를 확인했다. — 로컬 실행 확인 필요
+- [x] INNER JOIN과 다중 JOIN을 실행했다. — psql로 직접 실행하여 확인 완료
+- [x] LEFT JOIN에서 0건 부모를 확인했다. — psql로 직접 실행하여 확인 완료
 - [x] `COUNT(*)`와 `COUNT(child.id)` 차이를 설명했다.
-- [ ] ON과 WHERE 조건 위치 차이를 직접 실행해 비교했다.
-- [ ] `LEFT JOIN ... IS NULL`과 `NOT EXISTS`를 직접 실행해 비교했다.
-- [ ] 전체/활성/취소 제외 기준값을 직접 실행해 검산했다.
+- [x] ON과 WHERE 조건 위치 차이를 직접 실행해 비교했다.
+- [x] `LEFT JOIN ... IS NULL`과 `NOT EXISTS`를 직접 실행해 비교했다.
+- [x] 전체/활성/취소 제외 기준값을 직접 실행해 검산했다.
 - [x] `GROUP BY`, `HAVING` SQL을 작성했다.
-- [ ] 과대 집계 오류와 수정 결과를 직접 실행해 비교했다.
-- [ ] 상세 결과와 집계 결과를 직접 실행해 교차 검산했다.
-- [ ] `03_join_aggregation_validation.sql`이 통과했다.
-- [ ] 개인 프로젝트 업무 질문 3개를 작성했다.
+- [x] 과대 집계 오류와 수정 결과를 직접 실행해 비교했다.
+- [x] 상세 결과와 집계 결과를 직접 실행해 교차 검산했다.
+- [x] `03_join_aggregation_validation.sql`이 통과했다.
+- [x] 개인 프로젝트 업무 질문 3개를 작성했다. (users/budgets 미구현으로 초안 SQL)
 - [x] AI SQL을 실행 성공 여부가 아니라 의미와 검산 관점에서 평가했다.
-- [ ] 핵심 캡처는 3~4장 정도만 사용했다.
+- [ ] 핵심 캡처는 3~4장 정도만 사용했다. — step09/step11 캡처 추가 필요
 - [x] 비밀번호·개인정보·비밀정보가 없다.
 - [ ] GitHub 웹에서 Markdown과 이미지가 정상적으로 보이는지 최종 확인했다.
-- [x] 최종 답안을 commit/push했다.
+- [ ] 최종 답안을 commit/push했다.
 
 ---
 
