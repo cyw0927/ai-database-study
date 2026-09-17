@@ -106,7 +106,7 @@ assignments/chapter04/images/step02_table.png
 ```
 
 `여기에 테이블 구조 확인 화면을 삽입하세요.`
-![students 테이블 구조](images/step02_table.png)
+![students 테이블 구조](./images/step02_table.png)
 ---
 
 # 3. 샘플 데이터 6명 입력
@@ -221,7 +221,7 @@ assignments/chapter04/images/step04_select.png
 ```
 
 `여기에 SELECT 핵심 결과 화면을 삽입하세요.`
-![SELECT 실행화면](images/step02_table.png)
+![SELECT 실행화면](./images/step04_select.png)
 ---
 
 # 5. 내 가상 학생 2명 추가
@@ -330,7 +330,7 @@ assignments/chapter04/images/step06_update.png
 
 `여기에 UPDATE 전/후 결과 화면을 삽입하세요.`
 
-![update](images/step06_update.png)
+![update](./images/step06_update.png)
 ---
 
 # 7. 안전한 DELETE
@@ -463,8 +463,8 @@ assignments/chapter04/images/step09_constraint_error.png
 `여기에 제약조건 오류 화면을 삽입하세요.`
 
 ---
-![에러](images/step09_constraint_error.png)
-![에러](images/step09_constraint_error2.png)
+![에러](./images/step09_constraint_error.png)
+![에러](./images/step09_constraint_error2.png)
 
 # 10. `verify_students.sql`로 최종 상태 확인
 
