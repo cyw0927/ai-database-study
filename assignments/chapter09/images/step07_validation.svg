@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="480" viewBox="0 0 1100 480">
+  <rect width="1100" height="480" rx="24" fill="#f8fafc"/>
+  <text x="550" y="56" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="30" font-weight="700" fill="#172554">COMMIT 전·후 완료 게이트</text>
+  <rect x="65" y="115" width="300" height="130" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="3"/>
+  <text x="215" y="158" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700" fill="#334155">변경 전 기준 확인</text>
+  <text x="215" y="199" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" fill="#475569">DB · 좌석 · 기존 데이터</text>
+  <path d="M380 180 H455" stroke="#475569" stroke-width="4" marker-end="url(#b)"/>
+  <rect x="470" y="115" width="300" height="130" rx="16" fill="#fff" stroke="#60a5fa" stroke-width="3"/>
+  <text x="620" y="158" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700" fill="#1e40af">영향 행 수 확인</text>
+  <text x="620" y="199" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" fill="#475569">좌석 1 · 신청 1 · 결제 1</text>
+  <path d="M785 180 H860" stroke="#475569" stroke-width="4" marker-end="url(#b)"/>
+  <rect x="875" y="115" width="170" height="130" rx="16" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+  <text x="960" y="158" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="21" font-weight="700" fill="#6d28d9">정합성</text>
+  <text x="960" y="199" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="18" fill="#475569">JOIN·금액</text>
+  <path d="M550 270 V310 H330" fill="none" stroke="#16a34a" stroke-width="4" marker-end="url(#b)"/>
+  <path d="M700 270 V310 H770" fill="none" stroke="#dc2626" stroke-width="4" marker-end="url(#b)"/>
+  <rect x="145" y="330" width="300" height="85" rx="16" fill="#dcfce7"/><text x="295" y="383" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#166534">모두 맞으면 COMMIT</text>
+  <rect x="655" y="330" width="300" height="85" rx="16" fill="#fee2e2"/><text x="805" y="383" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#991b1b">아니면 ROLLBACK</text>
+  <defs><marker id="b" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#475569"/></marker></defs>
+</svg>
