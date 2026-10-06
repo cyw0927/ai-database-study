@@ -21,7 +21,7 @@ PostgreSQL 버전: PostgreSQL 18.4 (x86_64-windows)
 
 > **작성 상태 안내**
 > - 01~07번 SQL 실행 결과는 로컬 PostgreSQL(`ai_database_book`)에서 `psql`로 직접 실행해 확인한 값입니다.
-> - 증거 이미지(`step04`, `step11`)는 DBeaver 화면 캡처가 아니라, `psql`로 실행한 실제 출력 텍스트를 이미지로 옮긴 것입니다. 이미지 맨 위에도 같은 표시를 넣었습니다. DBeaver에서 직접 캡처한 화면으로 바꾸고 싶다면 같은 파일 이름으로 교체하면 됩니다.
+> - 증거 이미지(`step04`, `step04b`, `step11`)는 DBeaver에서 SQL을 실제로 실행한 화면입니다. DBeaver에서의 실행과 화면 캡처는 Claude Code가 PC 자동화로 진행했습니다.
 > - 개인 프로젝트 부분(12~14장, 15장의 개인 프로젝트 리뷰, 16장 4번)은 아직 진행하지 않아 비워 두었습니다.
 
 ---
@@ -174,9 +174,13 @@ ORDER BY d.source_course_id;
 assignments/chapter12/images/step04_nosql_lab.png
 ```
 
-![step04 nosql_lab 기준 상태 (psql 출력 이미지)](images/step04_nosql_lab.png)
+![step04 nosql_lab 행 수 확인 (DBeaver)](images/step04_nosql_lab.png)
 
-> 이 이미지는 위 두 SELECT를 `psql`로 실행한 실제 출력을 옮긴 것이며 DBeaver 화면 캡처가 아닙니다. 행 수 3/4/6과 세 강의의 원본 일치(`t`)를 보여 줍니다.
+> 4-1 행 수를 확인하는 SELECT를 DBeaver에서 실행한 화면이다. `course_documents` 3, `key_value_cache_examples` 4, `storage_choice_cases` 6이 기준과 같다.
+
+![step04b 원본 매핑 확인 (DBeaver)](images/step04b_source_mapping.png)
+
+> 4-2 원본 매핑 SELECT를 DBeaver에서 실행한 화면이다. 301·302·303 문서의 제목과 난이도가 `course_project.courses` 원본과 같아서 `matches_source`가 모두 `[v]`(true)이다.
 
 ---
 
@@ -613,9 +617,9 @@ JSONB 인덱스 정의
 assignments/chapter12/images/step11_validation.png
 ```
 
-![step11 최종 검증 통과 (psql 출력 이미지)](images/step11_validation.png)
+![step11 최종 검증 통과 (DBeaver)](images/step11_validation.png)
 
-> 이 이미지는 `07_nosql_lab_validation.sql`을 `psql`로 실행한 실제 출력을 옮긴 것이며 DBeaver 화면 캡처가 아닙니다. 폭이 넓은 인덱스 정의 표(6줄)만 생략했고 나머지는 원문 그대로입니다. 맨 아래에 `Chapter 12 nosql_lab validation passed`가 보입니다.
+> `07_nosql_lab_validation.sql` 전체를 DBeaver에서 스크립트로 실행한 화면이다. 아래 Output 탭에 `Chapter 12 nosql_lab validation passed`가 표시되었고, 위 편집기에는 이 메시지를 내는 `RAISE NOTICE` 문이 보인다.
 
 ---
 
@@ -763,11 +767,12 @@ Source of Truth:
 권장 3~4장만 사용합니다.
 
 ```text
-assignments/chapter12/images/step04_nosql_lab.png    (4장: 행 수와 원본 매핑 확인)  - psql 출력 이미지
-assignments/chapter12/images/step11_validation.png   (11장: 최종 검증 통과)        - psql 출력 이미지
+assignments/chapter12/images/step04_nosql_lab.png        (4장: 행 수 3/4/6 확인)
+assignments/chapter12/images/step04b_source_mapping.png  (4장: 원본 매핑 확인)
+assignments/chapter12/images/step11_validation.png       (11장: 최종 검증 통과)
 ```
 
-두 이미지는 모두 DBeaver 캡처가 아니라 `psql` 실제 출력을 옮긴 이미지입니다. (`step05_jsonb.png`, `step06_cache.png`는 선택 항목이라 만들지 않았습니다.)  
+세 이미지는 모두 DBeaver에서 실제로 실행한 화면입니다. (`step05_jsonb.png`, `step06_cache.png`는 선택 항목이라 만들지 않았습니다.)  
 각 결과의 의미는 위 본문에 Markdown으로 설명했습니다.
 
 ---
@@ -819,6 +824,6 @@ https://github.com/cyw0927/ai-database-study/blob/main/assignments/chapter12/cha
 - [ ] NoSQL이 필요 없다면 그 이유도 설명했다. — 개인 프로젝트 미작성
 - [ ] PoC 성공 기준을 작성했다. — 개인 프로젝트 미작성
 - [ ] AI 제안을 수용/수정/보류/거절로 판단했다. — 개인 프로젝트 미작성으로 보류
-- [x] 핵심 캡처를 3~4장 이내로 정리했다. — step04, step11 (psql 출력 이미지, DBeaver 캡처 아님)
+- [x] 핵심 캡처를 3~4장 이내로 정리했다. — step04, step04b, step11 (DBeaver 실행 화면)
 - [ ] GitHub 웹에서 Markdown과 이미지를 최종 확인했다.
 - [ ] LMS에는 본인 `chapter12_answer.md` URL을 제출한다.
