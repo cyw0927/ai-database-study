@@ -297,7 +297,8 @@ BEGIN
     SELECT COUNT(*)
     INTO v_constraint_count
     FROM pg_constraint
-    WHERE connamespace = 'nosql_lab'::regnamespace;
+    WHERE connamespace = 'nosql_lab'::regnamespace
+      AND contype <> 'n'; -- PostgreSQL 18+: NOT NULL도 pg_constraint에 저장되므로 제외 (아래 not_null 개수로 따로 검증)
 
     SELECT COUNT(*)
     INTO v_not_null_count
